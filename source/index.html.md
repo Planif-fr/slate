@@ -253,8 +253,10 @@ Here is an example of a session object
 
 ```json
 {
+  "id": 123456789,
   "sport": "RUNNING",
-  "deleted" : ":("
+  "title" : "Painful threshold",
+  "description" : "A hard threshold session with long intervals"
 }
 ```
 
