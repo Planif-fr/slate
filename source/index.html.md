@@ -254,9 +254,29 @@ Here is an example of a session object
 ```json
 {
   "id": 123456789,
-  "sport": "RUNNING",
-  "title" : "Painful threshold",
-  "description" : "A hard threshold session with long intervals"
+  "sport": "CYCLING",
+  "title": "1232132",
+  "description": null,
+  "steps": [
+      {
+          "stepType": "WARMUP",
+          "targetType": "OPEN",
+          "durationType": "TIME",
+          "durationValue": 1200
+      },
+      {
+          "stepType": "INTERVAL",
+          "targetType": "OPEN",
+          "durationType": "TIME",
+          "durationValue": 37200
+      },
+      {
+          "stepType": "COOLDOWN",
+          "targetType": "OPEN",
+          "durationType": "TIME",
+          "durationValue": 0
+      }
+  ]
 }
 ```
 
