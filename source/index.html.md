@@ -1,14 +1,14 @@
 ---
 title: API Reference
 
-language_tabs: # must be one of https://git.io/vQNgJ
-  - shell
-  - ruby
-  - python
-  - javascript
+# language_tabs: # must be one of https://git.io/vQNgJ
+#   - shell
+#   - ruby
+#   - python
+#   - javascript
 
 toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
+  # - <a href='#'>Sign Up for a Developer Key</a>
   - <a href='https://github.com/slatedocs/slate'>Documentation Powered by Slate</a>
 
 includes:
@@ -25,13 +25,15 @@ meta:
 
 # Introduction
 
-Welcome to the Planif API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
+Welcome to the Planif API!
 
-We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+<!-- You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database. -->
+
+<!-- We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right. -->
 
 This example API documentation page was created with [Slate](https://github.com/slatedocs/slate). Feel free to edit it and use it as a base for your own API's documentation.
 
-# Authentication
+<!-- # Authentication 
 
 > To authorize, use this code:
 
@@ -242,46 +244,243 @@ This endpoint deletes a specific kitten.
 Parameter | Description
 --------- | -----------
 ID | The ID of the kitten to delete
+-->
+# Sessions
 
-# Trainings
+## Built session
 
-## Session object
+Here is an example of a built session object with Planif session builder. This examples contains 3 differents variants of the session.
 
-Here is an example of a session object
+Property | Description
+--------- | -----------
+_id | The ID of the session (ObjectId)
+sport | instance of sport of the session (string)
+title | title of the session (string)
+description | description of the session (string)
+steps | list of steps of the session, null if variants(Array of steps)
+variants | list of variants of the session, empty if only one variant (Array of variants)
 
 > JSON structured like this:
 
 ```json
 {
-  "id": 123456789,
-  "sport": "CYCLING",
-  "title": "1232132",
-  "description": null,
-  "steps": [
-      {
-          "stepType": "WARMUP",
-          "targetType": "OPEN",
-          "durationType": "TIME",
-          "durationValue": 1200
-      },
-      {
-          "stepType": "INTERVAL",
-          "targetType": "OPEN",
-          "durationType": "TIME",
-          "durationValue": 37200
-      },
-      {
-          "stepType": "COOLDOWN",
-          "targetType": "OPEN",
-          "durationType": "TIME",
-          "durationValue": 0
-      }
-  ]
+  "_id":{
+    "$oid":"6225e150d19fffa18fa4139f"
+  },
+  "sport":"RUNNING",
+  "title":"30/30",
+  "description":"Session 30/30 for beginners, intermediates, experts",
+  "steps":null,
+  "variants":[
+    {
+      "name":"Beginner",
+      "steps":[
+        {
+          "intensity":"WARMUP",
+          "targetType":"OPEN",
+          "durationType":"TIME",
+          "durationValue":{
+            "$numberInt":"1200"
+          }
+        },
+        {
+          "repeatType":"REPEAT_UNTIL_STEPS_CMPLT",
+          "repeatValue":{
+            "$numberInt":"2"
+          },
+          "steps":[
+            {
+              "repeatType":"REPEAT_UNTIL_STEPS_CMPLT",
+              "repeatValue":{
+                "$numberInt":"6"
+              },
+              "steps":[
+                {
+                  "intensity":"INTERVAL",
+                  "targetType":"SPEED_LAP",
+                  "durationType":"TIME",
+                  "durationValue":{
+                    "$numberInt":"30"
+                  },
+                  "targetValue":"5"
+                },
+                {
+                  "intensity":"RECOVERY",
+                  "targetType":"OPEN",
+                  "durationType":"TIME",
+                  "durationValue":{
+                    "$numberInt":"30"
+                  }
+                }
+              ]
+            },
+            {
+              "intensity":"COOLDOWN",
+              "targetType":"OPEN",
+              "durationType":"TIME",
+              "durationValue":{
+                "$numberInt":"240"
+              }
+            }
+          ]
+        },
+        {
+          "intensity":"COOLDOWN",
+          "targetType":"OPEN",
+          "durationType":"TIME",
+          "durationValue":{
+            "$numberInt":"360"
+          }
+        }
+      ]
+    },
+    {
+      "name":"Intermediate",
+      "steps":[
+        {
+          "intensity":"WARMUP",
+          "targetType":"OPEN",
+          "durationType":"TIME",
+          "durationValue":{
+            "$numberInt":"1200"
+          }
+        },
+        {
+          "repeatType":"REPEAT_UNTIL_STEPS_CMPLT",
+          "repeatValue":{
+            "$numberInt":"2"
+          },
+          "steps":[
+            {
+              "repeatType":"REPEAT_UNTIL_STEPS_CMPLT",
+              "repeatValue":{
+                "$numberInt":"8"
+              },
+              "steps":[
+                {
+                  "intensity":"INTERVAL",
+                  "targetType":"SPEED_LAP",
+                  "durationType":"TIME",
+                  "durationValue":{
+                    "$numberInt":"30"
+                  },
+                  "targetValue":"5"
+                },
+                {
+                  "intensity":"RECOVERY",
+                  "targetType":"OPEN",
+                  "durationType":"TIME",
+                  "durationValue":{
+                    "$numberInt":"30"
+                  }
+                }
+              ]
+            },
+            {
+              "intensity":"COOLDOWN",
+              "targetType":"OPEN",
+              "durationType":"TIME",
+              "durationValue":{
+                "$numberInt":"240"
+              }
+            }
+          ]
+        },
+        {
+          "intensity":"COOLDOWN",
+          "targetType":"OPEN",
+          "durationType":"TIME",
+          "durationValue":{
+            "$numberInt":"360"
+          }
+        }
+      ]
+    },
+    {
+      "name":"Expert",
+      "steps":[
+        {
+          "intensity":"WARMUP",
+          "targetType":"OPEN",
+          "durationType":"TIME",
+          "durationValue":{
+            "$numberInt":"1800"
+          }
+        },
+        {
+          "repeatType":"REPEAT_UNTIL_STEPS_CMPLT",
+          "repeatValue":{
+            "$numberInt":"2"
+          },
+          "steps":[
+            {
+              "repeatType":"REPEAT_UNTIL_STEPS_CMPLT",
+              "repeatValue":{
+                "$numberInt":"8"
+              },
+              "steps":[
+                {
+                  "intensity":"INTERVAL",
+                  "targetType":"SPEED_LAP",
+                  "durationType":"TIME",
+                  "durationValue":{
+                    "$numberInt":"30"
+                  },
+                  "targetValue":"5"
+                },
+                {
+                  "intensity":"RECOVERY",
+                  "targetType":"OPEN",
+                  "durationType":"TIME",
+                  "durationValue":{
+                    "$numberInt":"30"
+                  }
+                }
+              ]
+            },
+            {
+              "intensity":"COOLDOWN",
+              "targetType":"OPEN",
+              "durationType":"TIME",
+              "durationValue":{
+                "$numberInt":"240"
+              }
+            }
+          ]
+        },
+        {
+          "intensity":"COOLDOWN",
+          "targetType":"OPEN",
+          "durationType":"TIME",
+          "durationValue":{
+            "$numberInt":"360"
+          }
+        }
+      ]
+    }
+  ],
+  "coach_id":{
+    "$numberInt":"4"
+  }
 }
 ```
+
+## Text & Image session
+
+Text and image session object
+
+Property | Description
+--------- | -----------
+id | The ID of the session (int)
+coach | Coach creator ID (int or Coach model instance)
+title | title of the session (string)
+description | description of the session (string)
+session | content of the session produced by timyMce (html string)
+
+
 
 ## Session builder
 
 
-# Plan
+<!-- # Plan -->
 
