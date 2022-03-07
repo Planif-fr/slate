@@ -560,7 +560,7 @@ Parameter | Description
 ID | The ID of the kitten to delete
 -->
 <h1 id='sessions'>Sessions</h1><h2 id='built-session'>Built session</h2>
-<p>Here is an example of a built session object with Planif session builder. This examples contains 3 differents variants of the session.</p>
+<p>Here is an example of a built session object with Planif session builder. This example contains 3 differents variants of the session.</p>
 
 <table><thead>
 <tr>
@@ -792,6 +792,41 @@ ID | The ID of the kitten to delete
         </span><span class="p">}</span><span class="w">
       </span><span class="p">]</span><span class="w">
     </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"coach_id"</span><span class="p">:{</span><span class="w">
+    </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="s2">"4"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Simple example with tags</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"_id"</span><span class="p">:{</span><span class="w">
+    </span><span class="nl">"$oid"</span><span class="p">:</span><span class="s2">"62261a8b4f3f8e0b136791c7"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"sport"</span><span class="p">:</span><span class="s2">"LAP_SWIMMING"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"title"</span><span class="p">:</span><span class="s2">"Swim open water example"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"description"</span><span class="p">:</span><span class="s2">"Example with tags"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"tags"</span><span class="p">:[</span><span class="w">
+    </span><span class="s2">"easy swim"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"beginner"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"intermediate"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"open water"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"steps"</span><span class="p">:[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"intensity"</span><span class="p">:</span><span class="s2">"INTERVAL"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"targetType"</span><span class="p">:</span><span class="s2">"OPEN"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"durationType"</span><span class="p">:</span><span class="s2">"DISTANCE"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"durationValue"</span><span class="p">:{</span><span class="w">
+        </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="s2">"5"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nl">"durationValueType"</span><span class="p">:</span><span class="s2">"KM"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"variants"</span><span class="p">:[</span><span class="w">
+
   </span><span class="p">],</span><span class="w">
   </span><span class="nl">"coach_id"</span><span class="p">:{</span><span class="w">
     </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="s2">"4"</span><span class="w">
