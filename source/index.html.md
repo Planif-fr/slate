@@ -249,7 +249,7 @@ ID | The ID of the kitten to delete
 
 ## Built session
 
-Here is an example of a built session object with Planif session builder. This examples contains 3 differents variants of the session.
+Here is an example of a built session object with Planif session builder. This example contains 3 differents variants of the session.
 
 Property | Description
 --------- | -----------
@@ -458,6 +458,42 @@ variants | list of variants of the session, empty if only one variant (Array of 
         }
       ]
     }
+  ],
+  "coach_id":{
+    "$numberInt":"4"
+  }
+}
+```
+
+> Simple example with tags
+
+```json
+{
+  "_id":{
+    "$oid":"62261a8b4f3f8e0b136791c7"
+  },
+  "sport":"LAP_SWIMMING",
+  "title":"Swim open water example",
+  "description":"Example with tags",
+  "tags":[
+    "easy swim",
+    "beginner",
+    "intermediate",
+    "open water"
+  ],
+  "steps":[
+    {
+      "intensity":"INTERVAL",
+      "targetType":"OPEN",
+      "durationType":"DISTANCE",
+      "durationValue":{
+        "$numberInt":"5"
+      },
+      "durationValueType":"KM"
+    }
+  ],
+  "variants":[
+    
   ],
   "coach_id":{
     "$numberInt":"4"
