@@ -257,7 +257,8 @@ _id | The ID of the session (ObjectId)
 sport | instance of sport of the session (string)
 title | title of the session (string)
 description | description of the session (string)
-steps | list of steps of the session, null if variants(Array of steps)
+tags | list of tags choose by the creator (Array of string)
+steps | list of steps of the session, null if variants (Array of steps)
 variants | list of variants of the session, empty if only one variant (Array of variants)
 
 > JSON structured like this:
@@ -511,6 +512,7 @@ id | The ID of the session (int)
 coach | Coach creator ID (int or Coach model instance)
 title | title of the session (string)
 description | description of the session (string)
+tags | list of tags choose by the creator (Array of string)
 session | content of the session produced by timyMce (html string)
 
 
