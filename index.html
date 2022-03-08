@@ -328,6 +328,26 @@
               </ul>
           </li>
           <li>
+            <a href="#coach" class="toc-h1 toc-link" data-title="Coach">Coach</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#athletes" class="toc-h2 toc-link" data-title="Athletes">Athletes</a>
+                  </li>
+                  <li>
+                    <a href="#text-session" class="toc-h2 toc-link" data-title="Text Session">Text Session</a>
+                  </li>
+                  <li>
+                    <a href="#profile" class="toc-h2 toc-link" data-title="Profile">Profile</a>
+                  </li>
+                  <li>
+                    <a href="#profile-picture" class="toc-h2 toc-link" data-title="Profile picture">Profile picture</a>
+                  </li>
+                  <li>
+                    <a href="#tags" class="toc-h2 toc-link" data-title="Tags">Tags</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
           </li>
       </ul>
@@ -872,6 +892,380 @@ ID | The ID of the kitten to delete
 </tbody></table>
 <h2 id='session-builder'>Session builder</h2>
 <!-- # Plan -->
+<h1 id='coach'>Coach</h1>
+<aside class="notice">For all the next endpoints, you will need to be authenticated as a Coach and sending a CRSF Token containing a <code>Coach</code> instance.</aside>
+<h2 id='athletes'>Athletes</h2>
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>athlete_id</td>
+<td>The ID of the athlete</td>
+</tr>
+<tr>
+<td>first_name</td>
+<td>(string)</td>
+</tr>
+<tr>
+<td>last_name</td>
+<td>(string)</td>
+</tr>
+<tr>
+<td>email</td>
+<td>(string)</td>
+</tr>
+<tr>
+<td>profile_picture</td>
+<td>upload_id of the profile picture created by filepond_drf, null if no profile picture (string)</td>
+</tr>
+</tbody></table>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code></code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"athlete_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Lucas"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Damalix"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"lucas.damalix@planif.fr"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"profile_picture"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4hK2NvuZJD34oWmvnBSeKo"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint retrieves or delete a coach profile.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>GET /api/athletes/</code></p>
+<h2 id='text-session'>Text Session</h2>
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>The ID of the text session</td>
+</tr>
+<tr>
+<td>coach</td>
+<td>The ID of the coach who created the session</td>
+</tr>
+<tr>
+<td>title</td>
+<td>(string)</td>
+</tr>
+<tr>
+<td>description</td>
+<td>(string)</td>
+</tr>
+<tr>
+<td>tags</td>
+<td>array of tags (Array of string)</td>
+</tr>
+<tr>
+<td>session</td>
+<td>HTML markup coming from tinyMce (string)</td>
+</tr>
+</tbody></table>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code></code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="w">    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jogging"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A simple workout"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"easy"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"run"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"jogging"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nl">"session"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;p&gt;1 hour easy jogging&lt;/p&gt;"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"coach"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='http-request-2'>HTTP Request</h3>
+<p><code>GET /api/sessions-text/</code></p>
+
+<p>Retrieves all the text sessions of the coach</p>
+<h3 id='http-request-3'>HTTP Request</h3>
+<p><code>GET /api/sessions-text/&lt;id&gt;</code>
+<code>DELETE /api/sessions-text/&lt;id&gt;</code></p>
+
+<p>Retrieves or deletes a the text session</p>
+<h3 id='query-parameters'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>True</td>
+<td>ID of the text session</td>
+</tr>
+</tbody></table>
+<h3 id='http-request-4'>HTTP Request</h3>
+<p><code>POST /api/sessions-text/</code></p>
+
+<p>Creates a the text session</p>
+<h3 id='query-parameters-2'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>title</td>
+<td>True</td>
+<td>(string)</td>
+</tr>
+<tr>
+<td>description</td>
+<td>False</td>
+<td>(string)</td>
+</tr>
+<tr>
+<td>tags</td>
+<td>False</td>
+<td>array of tags (Array of string)</td>
+</tr>
+<tr>
+<td>session</td>
+<td>True</td>
+<td>HTML markup coming from tinyMce (string)</td>
+</tr>
+</tbody></table>
+<h3 id='http-request-5'>HTTP Request</h3>
+<p><code>POST /api/sessions-text/&lt;id&gt;</code></p>
+
+<p>Updates a the text session</p>
+<h3 id='query-parameters-3'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>title</td>
+<td>True</td>
+<td>(string)</td>
+</tr>
+<tr>
+<td>description</td>
+<td>False</td>
+<td>(string)</td>
+</tr>
+<tr>
+<td>tags</td>
+<td>False</td>
+<td>array of tags (Array of string)</td>
+</tr>
+<tr>
+<td>session</td>
+<td>True</td>
+<td>HTML markup coming from tinyMce (string)</td>
+</tr>
+</tbody></table>
+<h2 id='profile'>Profile</h2>
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>coach_id</td>
+<td>The ID of the coach</td>
+</tr>
+<tr>
+<td>first_name</td>
+<td>(string)</td>
+</tr>
+<tr>
+<td>last_name</td>
+<td>(string)</td>
+</tr>
+<tr>
+<td>profile_picture</td>
+<td>upload_id of the profile picture created by filepond_drf, null if no profile picture (string)</td>
+</tr>
+</tbody></table>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code></code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Lucas"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Damalix"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"profile_picture"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4hK2NvuZJD34oWmvnBSeKo"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint retrieves or delete a coach profile.</p>
+<h3 id='http-request-6'>HTTP Request</h3>
+<p><code>GET /api/profile-coach/&lt;id&gt;</code>
+<code>DELETE /api/profile-coach/&lt;id&gt;</code></p>
+<h3 id='query-parameters-4'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>True</td>
+<td>ID of the coach</td>
+</tr>
+</tbody></table>
+<h3 id='http-request-7'>HTTP Request</h3>
+<p><code>PUT /api/profile-coach/&lt;id&gt;</code></p>
+<h3 id='query-parameters-5'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>True</td>
+<td>ID of the coach</td>
+</tr>
+<tr>
+<td>first_name</td>
+<td>False</td>
+<td>(string)</td>
+</tr>
+<tr>
+<td>last_name</td>
+<td>False</td>
+<td>(string)</td>
+</tr>
+<tr>
+<td>profile_picture</td>
+<td>False</td>
+<td>upload_id of the profile picture created by filepond_drf, null if no profile picture (string)</td>
+</tr>
+</tbody></table>
+<h2 id='profile-picture'>Profile picture</h2>
+<table><thead>
+<tr>
+<th>HTTP Code</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>201</td>
+<td>Created -- Your picture has been successfully uploaded.</td>
+</tr>
+<tr>
+<td>204</td>
+<td>No content -- Your picture has been delete.</td>
+</tr>
+<tr>
+<td>400</td>
+<td>Bad request -- Bad format or type error.</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Not Found -- Your temporary picture or uploaded could not be found.</td>
+</tr>
+</tbody></table>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code></code></pre></div><h3 id='http-request-8'>HTTP Request</h3>
+<p><code>POST /api/profile_picture/</code>
+<code>DELETE /api/profile_picture/</code></p>
+<h3 id='query-parameters-6'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>True</td>
+<td>upload_id assigned by filepond_drf</td>
+</tr>
+</tbody></table>
+<h2 id='tags'>Tags</h2>
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>The ID of the tag</td>
+</tr>
+<tr>
+<td>metadata</td>
+<td>text content of the tag (string)</td>
+</tr>
+</tbody></table>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code></code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">329</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A nice tag !"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint retrieves, creates ou deletes tags</p>
+<h3 id='http-request-9'>HTTP Request</h3>
+<p><code>GET /api/tag-coach/</code></p>
+
+<p>Get all coach tags, if metadata parameter is set, filter the tags case-insensitive</p>
+<h3 id='query-parameters-7'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>metadata</td>
+<td>False</td>
+<td>usr to filter the result (string)</td>
+</tr>
+</tbody></table>
+<h3 id='http-request-10'>HTTP Request</h3>
+<p><code>POST /api/tag-coach/</code></p>
+
+<p>Creates a tag assigned to the logged coach</p>
+<h3 id='query-parameters-8'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>metadata</td>
+<td>True</td>
+<td>string</td>
+</tr>
+</tbody></table>
+
+<aside class="success">
+Remember — a happy coach is an authenticated coach!
+</aside>
 <h1 id='errors'>Errors</h1>
 <!-- <aside class="notice">
 This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.
