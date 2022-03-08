@@ -522,3 +522,252 @@ session | content of the session produced by timyMce (html string)
 
 <!-- # Plan -->
 
+# Coach
+
+<aside class="notice">For all the next endpoints, you will need to be authenticated as a Coach and sending a CRSF Token containing a <code>Coach</code> instance.</aside>
+
+## Athletes
+
+Property | Description
+--------- | -----------
+athlete_id | The ID of the athlete
+first_name | (string)
+last_name | (string)
+email | (string)
+profile_picture | upload_id of the profile picture created by filepond_drf, null if no profile picture (string)
+
+
+```javascript
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+    "athlete_id": 1,
+    "first_name": "Lucas",
+    "last_name": "Damalix",
+    "email": "lucas.damalix@planif.fr",
+    "profile_picture": "4hK2NvuZJD34oWmvnBSeKo"
+}
+```
+
+This endpoint retrieves or delete a coach profile.
+
+### HTTP Request
+
+`GET /api/athletes/`
+
+## Text Session
+
+Property | Description
+--------- | -----------
+id | The ID of the text session
+coach | The ID of the coach who created the session
+title | (string)
+description | (string)
+tags | array of tags (Array of string)
+session | HTML markup coming from tinyMce (string)
+
+
+```javascript
+```
+
+> The above command returns JSON structured like this:
+
+```json
+    {
+        "id": 8,
+        "title": "Jogging",
+        "description": "A simple workout",
+        "tags": [
+            "easy",
+            "run",
+            "jogging"
+        ],
+        "session": "<p>1 hour easy jogging</p>",
+        "coach": 4
+    }
+```
+
+
+### HTTP Request
+
+`GET /api/sessions-text/`
+
+Retrieves all the text sessions of the coach
+
+### HTTP Request
+
+`GET /api/sessions-text/<id>`
+`DELETE /api/sessions-text/<id>`
+
+Retrieves or deletes a the text session
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+id | True | ID of the text session
+
+### HTTP Request
+
+`POST /api/sessions-text/`
+
+Creates a the text session
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+title | True | (string)
+description | False | (string)
+tags | False | array of tags (Array of string)
+session | True | HTML markup coming from tinyMce (string)
+
+### HTTP Request
+
+`POST /api/sessions-text/<id>`
+
+Updates a the text session
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+title | True | (string)
+description | False | (string)
+tags | False | array of tags (Array of string)
+session | True | HTML markup coming from tinyMce (string)
+
+## Profile
+
+Property | Description
+--------- | -----------
+coach_id | The ID of the coach
+first_name | (string)
+last_name | (string)
+profile_picture | upload_id of the profile picture created by filepond_drf, null if no profile picture (string)
+
+
+```javascript
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+    "first_name": "Lucas",
+    "last_name": "Damalix",
+    "profile_picture": "4hK2NvuZJD34oWmvnBSeKo"
+}
+```
+
+This endpoint retrieves or delete a coach profile.
+
+### HTTP Request
+
+`GET /api/profile-coach/<id>`
+`DELETE /api/profile-coach/<id>`
+
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+id | True | ID of the coach
+
+### HTTP Request
+
+`PUT /api/profile-coach/<id>`
+
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+id | True | ID of the coach
+first_name | False | (string)
+last_name | False | (string)
+profile_picture | False | upload_id of the profile picture created by filepond_drf, null if no profile picture (string)
+
+## Profile picture
+
+HTTP Code | Meaning
+---------- | -------
+201 | Created -- Your picture has been successfully uploaded.
+204 | No content -- Your picture has been delete.
+400 | Bad request -- Bad format or type error.
+404 | Not Found -- Your temporary picture or uploaded could not be found.
+
+
+```javascript
+```
+
+### HTTP Request
+
+`POST /api/profile_picture/`
+`DELETE /api/profile_picture/`
+
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+id | True | upload_id assigned by filepond_drf
+
+
+## Tags
+
+Property | Description
+--------- | -----------
+id | The ID of the tag
+metadata | text content of the tag (string)
+
+
+```javascript
+```
+
+> The above command returns JSON structured like this:
+
+```json
+[
+    {
+        "id": 329,
+        "metadata": "A nice tag !"
+    }
+]
+```
+
+This endpoint retrieves, creates ou deletes tags
+
+### HTTP Request
+
+`GET /api/tag-coach/`
+
+Get all coach tags, if metadata parameter is set, filter the tags case-insensitive
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+metadata | False | usr to filter the result (string)
+
+### HTTP Request
+
+`POST /api/tag-coach/`
+
+Creates a tag assigned to the logged coach
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+metadata | True | string
+
+
+<aside class="success">
+Remember — a happy coach is an authenticated coach!
+</aside>
+
+
