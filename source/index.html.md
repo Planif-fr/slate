@@ -501,6 +501,86 @@ variants | list of variants of the session, empty if only one variant (Array of 
   }
 }
 ```
+> Example ramp
+
+```json
+{
+  "_id":{
+    "$oid":"6228c63e06b096526738dae8"
+  },
+  "sport":"CYCLING",
+  "title":"Cycling ramp",
+  "description":null,
+  "tags":[
+    "cycling"
+  ],
+  "steps":[
+    {
+      "intensity":"WARMUP",
+      "targetType":"OPEN",
+      "durationType":"TIME",
+      "durationValue":{
+        "$numberInt":"1200"
+      }
+    },
+    {
+      "repeatValue":{
+        "$numberInt":"4"
+      },
+      "uuid-Comment":"a0612b3ef9024151b3947a5e6ac5da7b",
+      "steps":[
+        {
+          "intensity":"INTERVAL",
+          "targetType":"OPEN",
+          "durationType":"TIME",
+          "durationValue":{
+            "$numberInt":"60"
+          }
+        },
+        {
+          "intensity":"INTERVAL",
+          "targetType":"OPEN",
+          "durationType":"TIME",
+          "durationValue":{
+            "$numberInt":"60"
+          }
+        },
+        {
+          "intensity":"INTERVAL",
+          "targetType":"OPEN",
+          "durationType":"DISTANCE",
+          "durationValueType":"KM",
+          "durationValue":{
+            "$numberInt":"12"
+          }
+        },
+        {
+          "intensity":"INTERVAL",
+          "targetType":"OPEN",
+          "durationType":"TIME",
+          "durationValue":{
+            "$numberInt":"10"
+          }
+        }
+      ]
+    },
+    {
+      "intensity":"COOLDOWN",
+      "targetType":"OPEN",
+      "durationType":"TIME",
+      "durationValue":{
+        "$numberInt":"600"
+      }
+    }
+  ],
+  "variants":[
+    
+  ],
+  "coach_id":{
+    "$numberInt":"4"
+  }
+}
+```
 
 ## Text & Image session
 
