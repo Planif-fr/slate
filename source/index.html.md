@@ -599,14 +599,173 @@ session | content of the session produced by timyMce (html string)
 
 ## Session builder
 
+<!-- ****** -->
+<!-- SHARED -->
+<!-- ****** -->
+
+# Shared REST API
+
+## Profile
+
+`reverse URL shared_rest:profile-coach`
+
+Property | Description
+--------- | -----------
+athlete_id / coach_id / club_id | The ID of the profile
+first_name | (string)
+last_name | (string)
+profile_picture | upload_id of the profile picture created by filepond_drf, null if no profile picture (string)
+
+
+```javascript
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+    "first_name": "Lucas",
+    "last_name": "Damalix",
+    "profile_picture": "4hK2NvuZJD34oWmvnBSeKo"
+}
+```
+
+
+### HTTP Request
+
+`GET /api-shared/profile-coach/`
+
+This endpoint retrieves the coach profile.
+
+### HTTP Request
+
+`PUT /api-shared/profile-coach/`
+
+This endpoint update the coach profile.
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+id | True | ID of the profile
+first_name | False | (string)
+last_name | False | (string)
+profile_picture | False | upload_id of the profile picture created by filepond_drf, null if no profile picture (string)
+
+
+
+## Profile picture
+
+`reverse URL shared_rest:profile-picture`
+
+HTTP Code | Meaning
+---------- | -------
+201 | Created -- Your picture has been successfully uploaded.
+204 | No content -- Your picture has been delete.
+400 | Bad request -- Bad format or type error.
+404 | Not Found -- Your temporary picture or uploaded could not be found.
+
+
+```javascript
+```
+
+### HTTP Request
+
+`POST /api-shared/profile-picture/`
+
+Store a temporary uploaded object and update the profile picture filed in the database
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+id | True | upload_id assigned by filepond_drf
+
+`DELETE /api-share/profile_picture/`
+
+Delete the profile picture and set the field to default in database
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+id | True | upload_id assigned by filepond_drf
+
 
 <!-- # Plan -->
 
-# Coach
+# Coach REST API
 
 <aside class="notice">For all the next endpoints, you will need to be authenticated as a Coach and sending a CRSF Token containing a <code>Coach</code> instance.</aside>
 
+## Training Planned
+
+`reverse URL coach_rest:training-planned`
+
+This endpoint is used to retrieve, create, update training planned 
+
+
+```javascript
+```
+
+### HTTP Request
+
+`GET /api-coach/training-planned/?id=`
+
+Used to retrieve a training planned
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+id | True | ID of the training planned (Integer)
+
+### HTTP Request
+
+`POST /api-coach/training-planned/`
+
+Used to creates a training planned by sending data as a json like
+
+> Data shoud be a json like this:
+
+```json
+[
+  {
+    "title": "title_training",
+    "description": "description_training",
+    "sport": "triathlon",
+    "date": "2022-03-12",
+    "duration": 3300,
+    "is_morning": true,
+    "athletes": [1, 2, 3],
+    "sessions": [1, 2, 3],
+  }
+]
+```
+
+### HTTP Request
+
+`PATCH /api-coach/training-planned/`
+
+Used to update a training planned, data should be send as json with an ID field, data could be partial
+
+> Data shoud be a json like this:
+
+```json
+[
+  {
+    "id": 12,
+    "description": "new_description_training",
+    "sport": "running",
+    "sessions": [5, 4],
+  }
+]
+```
+
+
 ## Athletes
+
+`reverse URL coach_rest:list-athletes-coach`
 
 Property | Description
 --------- | -----------
@@ -624,7 +783,7 @@ profile_picture | upload_id of the profile picture created by filepond_drf, null
 
 ```json
 {
-    "athlete_id": 1,
+  "athlete_id": 1,
     "first_name": "Lucas",
     "last_name": "Damalix",
     "email": "lucas.damalix@planif.fr",
@@ -632,13 +791,16 @@ profile_picture | upload_id of the profile picture created by filepond_drf, null
 }
 ```
 
-This endpoint retrieves or delete a coach profile.
 
 ### HTTP Request
 
-`GET /api/athletes/`
+`GET /api-coach/list-athletes-coach/`
+
+This endpoint retrieves the athletes of a coach.
 
 ## Text Session
+
+`reverse URL coach_rest:sessions-text`
 
 Property | Description
 --------- | -----------
@@ -673,16 +835,19 @@ session | HTML markup coming from tinyMce (string)
 
 ### HTTP Request
 
-`GET /api/sessions-text/`
+`GET /api-coach/sessions-text/`
 
-Retrieves all the text sessions of the coach
+Retrieve all the text sessions of the coach
 
 ### HTTP Request
 
-`GET /api/sessions-text/<id>`
-`DELETE /api/sessions-text/<id>`
+`GET /api-coach/sessions-text/<id>`
 
-Retrieves or deletes a the text session
+Retrieve the text session
+
+`DELETE /api-coach/sessions-text/<id>`
+
+Delete the text session
 
 ### Query Parameters
 
@@ -694,7 +859,7 @@ id | True | ID of the text session
 
 `POST /api/sessions-text/`
 
-Creates a the text session
+Create a the text session
 
 ### Query Parameters
 
@@ -720,84 +885,12 @@ description | False | (string)
 tags | False | array of tags (Array of string)
 session | True | HTML markup coming from tinyMce (string)
 
-## Profile
-
-Property | Description
---------- | -----------
-coach_id | The ID of the coach
-first_name | (string)
-last_name | (string)
-profile_picture | upload_id of the profile picture created by filepond_drf, null if no profile picture (string)
-
-
-```javascript
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-    "first_name": "Lucas",
-    "last_name": "Damalix",
-    "profile_picture": "4hK2NvuZJD34oWmvnBSeKo"
-}
-```
-
-This endpoint retrieves or delete a coach profile.
-
-### HTTP Request
-
-`GET /api/profile-coach/<id>`
-`DELETE /api/profile-coach/<id>`
-
-
-### Query Parameters
-
-Parameter | Required | Description
---------- | ------- | -----------
-id | True | ID of the coach
-
-### HTTP Request
-
-`PUT /api/profile-coach/<id>`
-
-
-### Query Parameters
-
-Parameter | Required | Description
---------- | ------- | -----------
-id | True | ID of the coach
-first_name | False | (string)
-last_name | False | (string)
-profile_picture | False | upload_id of the profile picture created by filepond_drf, null if no profile picture (string)
-
-## Profile picture
-
-HTTP Code | Meaning
----------- | -------
-201 | Created -- Your picture has been successfully uploaded.
-204 | No content -- Your picture has been delete.
-400 | Bad request -- Bad format or type error.
-404 | Not Found -- Your temporary picture or uploaded could not be found.
-
-
-```javascript
-```
-
-### HTTP Request
-
-`POST /api/profile_picture/`
-`DELETE /api/profile_picture/`
-
-
-### Query Parameters
-
-Parameter | Required | Description
---------- | ------- | -----------
-id | True | upload_id assigned by filepond_drf
-
 
 ## Tags
+
+`reverse URL coach_rest:tag-coach`
+
+Endpoint used to retrieve the tags of a coach, filtered or not, and create new ones.
 
 Property | Description
 --------- | -----------
@@ -823,7 +916,7 @@ This endpoint retrieves, creates ou deletes tags
 
 ### HTTP Request
 
-`GET /api/tag-coach/`
+`GET /api-coach/tag-coach/?metadata=`
 
 Get all coach tags, if metadata parameter is set, filter the tags case-insensitive
 
@@ -831,11 +924,11 @@ Get all coach tags, if metadata parameter is set, filter the tags case-insensiti
 
 Parameter | Required | Description
 --------- | ------- | -----------
-metadata | False | usr to filter the result (string)
+metadata | False | use to filter the result (string)
 
 ### HTTP Request
 
-`POST /api/tag-coach/`
+`POST /api-coach/tag-coach/`
 
 Creates a tag assigned to the logged coach
 
@@ -851,3 +944,49 @@ Remember — a happy coach is an authenticated coach!
 </aside>
 
 
+
+
+
+<!-- 
+
+TEMPLATE
+
+## NAME_ENDPOINT
+
+`reverse URL namespace:name`
+
+Endpoint_description
+
+Property | Description
+--------- | -----------
+id | The ID of the tag
+metadata | text content of the tag (string)
+
+
+```javascript
+```
+
+> The above command returns JSON structured like this:
+
+```json
+[
+    {
+        "id": 329,
+        "metadata": "A nice tag !"
+    }
+]
+```
+
+### HTTP Request
+
+`GET /api-coach/tag-coach/?metadata=`
+
+Request_description
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+metadata | False | use to filter the result (string)
+
+ -->
