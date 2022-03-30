@@ -1,11 +1,11 @@
 ---
 title: API Reference
 
-# language_tabs: # must be one of https://git.io/vQNgJ
-#   - shell
-#   - ruby
-#   - python
-#   - javascript
+language_tabs: # must be one of https://git.io/vQNgJ
+  - shell: cURL
+  # - ruby
+  # - python
+  # - javascript
 
 toc_footers:
   # - <a href='#'>Sign Up for a Developer Key</a>
@@ -26,6 +26,8 @@ meta:
 # Introduction
 
 Welcome to the Planif API!
+
+Base url : `http://localhost:8000/`
 
 <!-- You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database. -->
 
@@ -245,6 +247,53 @@ Parameter | Description
 --------- | -----------
 ID | The ID of the kitten to delete
 -->
+
+# Authentification
+
+## How it works
+
+> An authoriation header should be like that
+
+```
+Authorization: Token <your_token>
+```
+
+```shell
+curl -v \
+	-H "Authorization: Token <your_token>"
+```
+
+To access all ressources that need authentification, you need to pass an authorization header.
+
+This header is composed of a token associated with each user. You first need to retrieve the token. To do so, you must send a POST request to the login endpoint
+
+## Login endpoint
+
+```shell
+curl -v \
+	-X POST \
+	-d "password=password&username=username" \
+	"http://localhost:8000/api-shared/api-token-auth/"
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+"token": "23d8f0bed20b838474b782454f68ba4f1195b476"
+}
+```
+
+Use this endpoint to retrieve the authorization token by sending the credentials as POST parameters
+
+`POST api-shared/api-token-auth/`
+
+Property | Description
+--------- | -----------
+username | required (string)
+password | required (string)
+
+
 # Sessions
 
 ## Built session
@@ -609,27 +658,38 @@ session | content of the session produced by timyMce (html string)
 
 `reverse URL shared_rest:profile-coach`
 
-Property | Description
---------- | -----------
-athlete_id / coach_id / club_id | The ID of the profile
-first_name | (string)
-last_name | (string)
-profile_picture | upload_id of the profile picture created by filepond_drf, null if no profile picture (string)
+Property | Description | Type
+--------- | ----------- | -----------
+first_name | First name  | String
+last_name | Last name  | String
+birth_date | Birth date in a MM/DD/YYYY format  | String
+phone_number | Full phone number with the country code prepended  | String
+height | Height in meters | Float
+weight | Weight in grams | Float
+address | Full address | String
+profile_picture | Relative url of the profile picture, or the default picture if none. It is relative to the base url | String
 
-
-```javascript
+```shell
+curl -v \
+	-X GET \
+	-H "Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476" \
+	"http://localhost:8000/api-shared/profile-coach/?password=6673boss&username=coach"
 ```
 
 > The above command returns JSON structured like this:
 
 ```json
 {
-    "first_name": "Lucas",
-    "last_name": "Damalix",
-    "profile_picture": "4hK2NvuZJD34oWmvnBSeKo"
+"first_name": "John",
+"last_name": "Doe",
+"birth_date": "12/28/1998",
+"phone_number": "+33123456789",
+"height": 1.8,
+"weight": 75000,
+"address": "17 Chemin de la Capuche, Grenoble, France",
+"profile_picture": "/mediafiles/1/4ujo5kXS4AjWufTY88YdgV/43336475_054_ea9e.jpg"
 }
 ```
-
 
 ### HTTP Request
 
