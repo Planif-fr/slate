@@ -27,7 +27,7 @@ meta:
 
 Welcome to the Planif API!
 
-Base url : `http://localhost:8000/`
+Base url : `https://dev.planif.fr/`
 
 <!-- You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database. -->
 
