@@ -1105,10 +1105,16 @@ ID | The ID of the kitten to delete
 </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John"</span><span class="p">,</span><span class="w">
 </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Doe"</span><span class="p">,</span><span class="w">
 </span><span class="nl">"birth_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12/28/1998"</span><span class="p">,</span><span class="w">
-</span><span class="nl">"phone_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+33123456789"</span><span class="p">,</span><span class="w">
-</span><span class="nl">"height"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.8</span><span class="p">,</span><span class="w">
-</span><span class="nl">"weight"</span><span class="p">:</span><span class="w"> </span><span class="mi">75000</span><span class="p">,</span><span class="w">
-</span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"17 Chemin de la Capuche, Grenoble, France"</span><span class="p">,</span><span class="w">
+</span><span class="nl">"height"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"m"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="p">},</span><span class="w">
+</span><span class="nl">"weight"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"g"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">90718.4</span><span class="w">
+</span><span class="p">},</span><span class="w">
+</span><span class="nl">"phone_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+33751515151"</span><span class="p">,</span><span class="w">
+</span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12 Jean Jaures, 38000 Grenoble"</span><span class="p">,</span><span class="w">
 </span><span class="nl">"profile_picture"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/mediafiles/1/4ujo5kXS4AjWufTY88YdgV/43336475_054_ea9e.jpg"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='http-request'>HTTP Request</h3>
@@ -1116,38 +1122,91 @@ ID | The ID of the kitten to delete
 
 <p>This endpoint retrieves the coach profile.</p>
 <h3 id='http-request-2'>HTTP Request</h3>
-<p><code>PUT /api-shared/profile-coach/</code></p>
+<p><code>PATCH /api-shared/profile-coach/</code></p>
 
-<p>This endpoint update the coach profile.</p>
-<h3 id='query-parameters'>Query Parameters</h3>
+<p>This endpoint patch (update partially) the coach profile. You can pass one or more query parameters to update the profile.</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-v</span> <span class="se">\</span>
+    <span class="nt">-X</span> PATCH <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s2">"Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476"</span> <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s2">"Content-Type: application/x-www-form-urlencoded; charset=utf-8"</span> <span class="se">\</span>
+    <span class="nt">-d</span> <span class="s2">"address=12%20Jean%20Jaures%2C%2038000%20Grenoble&amp;height_unit=cm&amp;height_value=200&amp;phone_number=%2B33751515151"</span> <span class="se">\</span>
+    <span class="s2">"http://localhost:8000/api-shared/profile-coach/"</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns the updated profile in JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+</span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jack"</span><span class="p">,</span><span class="w">
+</span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Deen"</span><span class="p">,</span><span class="w">
+</span><span class="nl">"birth_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12/28/1998"</span><span class="p">,</span><span class="w">
+</span><span class="nl">"height"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cm"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="w">
+</span><span class="p">},</span><span class="w">
+</span><span class="nl">"weight"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"g"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">90718.4</span><span class="w">
+</span><span class="p">},</span><span class="w">
+</span><span class="nl">"phone_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+33751515151"</span><span class="p">,</span><span class="w">
+</span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12 Jean Jaures, 38000 Grenoble"</span><span class="p">,</span><span class="w">
+</span><span class="nl">"profile_picture"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/mediafiles/1/4ujo5kXS4AjWufTY88YdgV/43336475_054_ea9e.jpg"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='query-parameters-that-are-allowed'>Query Parameters that are allowed</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
-<th>Required</th>
 <th>Description</th>
+<th>Type</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>id</td>
-<td>True</td>
-<td>ID of the profile</td>
-</tr>
-<tr>
 <td>first_name</td>
-<td>False</td>
-<td>(string)</td>
+<td>First name</td>
+<td>String</td>
 </tr>
 <tr>
 <td>last_name</td>
-<td>False</td>
-<td>(string)</td>
+<td>Last name</td>
+<td>String</td>
 </tr>
 <tr>
-<td>profile_picture</td>
-<td>False</td>
-<td>upload_id of the profile picture created by filepond_drf, null if no profile picture (string)</td>
+<td>birth_date</td>
+<td>Birth date in a MM/DD/YYYY format</td>
+<td>String</td>
+</tr>
+<tr>
+<td>phone_number</td>
+<td>Full phone number with the country code prepended</td>
+<td>String</td>
+</tr>
+<tr>
+<td>height_value</td>
+<td>Height value corresponding to the unit in the query</td>
+<td>Float</td>
+</tr>
+<tr>
+<td>height_unit</td>
+<td>Height unit one of (&#39;cm&#39;, &#39;m&#39;, &#39;inch&#39;, &#39;ft&#39;)</td>
+<td>String</td>
+</tr>
+<tr>
+<td>weight_value</td>
+<td>Weight value corresponding to the unit in the query</td>
+<td>Float</td>
+</tr>
+<tr>
+<td>weight_unit</td>
+<td>Weight unit one of (&#39;kg&#39;, &#39;g&#39;, &#39;lb&#39;)</td>
+<td>String</td>
+</tr>
+<tr>
+<td>address</td>
+<td>Full address</td>
+<td>String</td>
 </tr>
 </tbody></table>
+
+<aside class="warning">When updating the weight or height, _unit must be set</aside>
 <h2 id='profile-picture'>Profile picture</h2>
 <p><code>reverse URL shared_rest:profile-picture</code></p>
 
@@ -1178,7 +1237,7 @@ ID | The ID of the kitten to delete
 <p><code>POST /api-shared/profile-picture/</code></p>
 
 <p>Store a temporary uploaded object and update the profile picture filed in the database</p>
-<h3 id='query-parameters-2'>Query Parameters</h3>
+<h3 id='query-parameters'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1196,7 +1255,7 @@ ID | The ID of the kitten to delete
 <p><code>DELETE /api-share/profile_picture/</code></p>
 
 <p>Delete the profile picture and set the field to default in database</p>
-<h3 id='query-parameters-3'>Query Parameters</h3>
+<h3 id='query-parameters-2'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1222,7 +1281,7 @@ ID | The ID of the kitten to delete
 <p><code>GET /api-coach/training-planned/?id=</code></p>
 
 <p>Used to retrieve a training planned</p>
-<h3 id='query-parameters-4'>Query Parameters</h3>
+<h3 id='query-parameters-3'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1379,7 +1438,7 @@ ID | The ID of the kitten to delete
 <p><code>DELETE /api-coach/sessions-text/&lt;id&gt;</code></p>
 
 <p>Delete the text session</p>
-<h3 id='query-parameters-5'>Query Parameters</h3>
+<h3 id='query-parameters-4'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1397,7 +1456,7 @@ ID | The ID of the kitten to delete
 <p><code>POST /api/sessions-text/</code></p>
 
 <p>Create a the text session</p>
-<h3 id='query-parameters-6'>Query Parameters</h3>
+<h3 id='query-parameters-5'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1430,7 +1489,7 @@ ID | The ID of the kitten to delete
 <p><code>POST /api/sessions-text/&lt;id&gt;</code></p>
 
 <p>Updates a the text session</p>
-<h3 id='query-parameters-7'>Query Parameters</h3>
+<h3 id='query-parameters-6'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1495,7 +1554,7 @@ ID | The ID of the kitten to delete
 <p><code>GET /api-coach/tag-coach/?metadata=</code></p>
 
 <p>Get all coach tags, if metadata parameter is set, filter the tags case-insensitive</p>
-<h3 id='query-parameters-8'>Query Parameters</h3>
+<h3 id='query-parameters-7'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1513,7 +1572,7 @@ ID | The ID of the kitten to delete
 <p><code>POST /api-coach/tag-coach/</code></p>
 
 <p>Creates a tag assigned to the logged coach</p>
-<h3 id='query-parameters-9'>Query Parameters</h3>
+<h3 id='query-parameters-8'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
