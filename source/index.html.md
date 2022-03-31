@@ -683,10 +683,16 @@ curl -v \
 "first_name": "John",
 "last_name": "Doe",
 "birth_date": "12/28/1998",
-"phone_number": "+33123456789",
-"height": 1.8,
-"weight": 75000,
-"address": "17 Chemin de la Capuche, Grenoble, France",
+"height": {
+  "unit": "m",
+  "value": 2
+},
+"weight": {
+  "unit": "g",
+  "value": 90718.4
+},
+"phone_number": "+33751515151",
+"address": "12 Jean Jaures, 38000 Grenoble",
 "profile_picture": "/mediafiles/1/4ujo5kXS4AjWufTY88YdgV/43336475_054_ea9e.jpg"
 }
 ```
@@ -699,19 +705,55 @@ This endpoint retrieves the coach profile.
 
 ### HTTP Request
 
-`PUT /api-shared/profile-coach/`
+`PATCH /api-shared/profile-coach/`
 
-This endpoint update the coach profile.
+This endpoint patch (update partially) the coach profile. You can pass one or more query parameters to update the profile.
 
-### Query Parameters
+```shell
+curl -v \
+	-X PATCH \
+	-H "Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476" \
+	-H "Content-Type: application/x-www-form-urlencoded; charset=utf-8" \
+	-d "address=12%20Jean%20Jaures%2C%2038000%20Grenoble&height_unit=cm&height_value=200&phone_number=%2B33751515151" \
+	"http://localhost:8000/api-shared/profile-coach/"
+```
 
-Parameter | Required | Description
+> The above command returns the updated profile in JSON structured like this:
+
+```json
+{
+"first_name": "Jack",
+"last_name": "Deen",
+"birth_date": "12/28/1998",
+"height": {
+  "unit": "cm",
+  "value": 200
+},
+"weight": {
+  "unit": "g",
+  "value": 90718.4
+},
+"phone_number": "+33751515151",
+"address": "12 Jean Jaures, 38000 Grenoble",
+"profile_picture": "/mediafiles/1/4ujo5kXS4AjWufTY88YdgV/43336475_054_ea9e.jpg"
+}
+```
+
+### Query Parameters that are allowed
+
+Parameter | Description | Type
 --------- | ------- | -----------
-id | True | ID of the profile
-first_name | False | (string)
-last_name | False | (string)
-profile_picture | False | upload_id of the profile picture created by filepond_drf, null if no profile picture (string)
+first_name | First name  | String
+last_name | Last name  | String
+birth_date | Birth date in a MM/DD/YYYY format  | String
+phone_number | Full phone number with the country code prepended  | String
+height_value | Height value corresponding to the unit in the query | Float
+height_unit | Height unit one of ('cm', 'm', 'inch', 'ft')| String
+weight_value | Weight value corresponding to the unit in the query | Float
+weight_unit | Weight unit one of ('kg', 'g', 'lb')| String
+address | Full address | String
 
+<aside class="warning">When updating the weight or height, _unit must be set</aside>
 
 
 ## Profile picture
