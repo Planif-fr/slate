@@ -273,7 +273,7 @@ This header is composed of a token associated with each user. You first need to 
 curl -v \
 	-X POST \
 	-d "password=password&username=username" \
-	"http://localhost:8000/api-shared/api-token-auth/"
+	"https://dev.planif.fr/api-shared/api-token-auth/"
 ```
 
 > The above command returns JSON structured like this:
@@ -673,7 +673,7 @@ profile_picture | Relative url of the profile picture, or the default picture if
 curl -v \
 	-X GET \
 	-H "Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476" \
-	"http://localhost:8000/api-shared/profile-coach/"
+	"https://dev.planif.fr/api-shared/profile-coach/"
 ```
 
 > The above command returns JSON structured like this:
@@ -715,7 +715,7 @@ curl -v \
 	-H "Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476" \
 	-H "Content-Type: application/x-www-form-urlencoded; charset=utf-8" \
 	-d "address=12%20Jean%20Jaures%2C%2038000%20Grenoble&height_unit=cm&height_value=200&phone_number=%2B33751515151" \
-	"http://localhost:8000/api-shared/profile-coach/"
+	"https://dev.planif.fr/api-shared/profile-coach/"
 ```
 
 > The above command returns the updated profile in JSON structured like this:
@@ -959,12 +959,11 @@ curl --location --request DELETE 'https://dev.planif.fr/api-coach/experience/10'
 Property | Description | Type
 --------- | ----------- | -----------
 id | Id of the education  | Integer
-position | Position in the company  | String
-company | Company where he used to work  | String
-start_date | Start date of the experience  | String
-end_date | End date of the experience (could be null if today)  | String
-description | Description of the experience (optionnal) | String
-company_url | Company url (optionnal) | String
+title | Title of education  | String
+institution | Institution of the education  | String
+start_date | Start date of the education  | String
+end_date | End date of the education (could be null if today)  | String
+description | Description of the education (optionnal) | String
 
 ```shell
 curl -v \
@@ -973,133 +972,248 @@ curl -v \
 	"https://dev.planif.fr/api-coach/education/"
 ```
 
-> The GET command returns a list of experiences as JSON structured like this:
+> The GET command returns a list of educations as JSON structured like this:
 
 ```json
 [
     {
         "id": 1,
-        "position": "Position test",
-        "company": "Company",
+        "title": "Title test",
+        "institution": "institution",
         "start_date": "2020-10-20",
-        "end_date": null,
+        "end_date": "2022-01-01",
         "description": "Yay",
-        "company_url": null,
         "coach": 1
     },
     {
         "id": 2,
-        "position": "Position test",
-        "company": "Company",
+        "title": "Title test 2",
+        "institution": "institution 2",
         "start_date": "2020-10-20",
-        "end_date": "2022-01-01",
-        "description": "Yay",
-        "company_url": "https://gitlab.com/planif/django-ec2/-/pipelines",
+        "end_date": null,
+        "description": null,
         "coach": 1
     }
 ]
 ```
 
-### Get all experiences
+### Get all educations
 
-`GET /api-coach/experience/`
+`GET /api-coach/education/`
 
-This endpoint retrieves the coach experiences.
+This endpoint retrieves the coach educations.
 
-### Create an experience
+### Create an education
 
-`POST /api-coach/experience/`
+`POST /api-coach/education/`
 
-This endpoint is used to create a coach experience. You have to pass at the minimum all the required fields or more to create an experience
+This endpoint is used to create a coach education. You have to pass at the minimum all the required fields or more to create an education
 
 ```shell
-curl --location --request POST 'https://dev.planif.fr/api-coach/experience/' \
---header 'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476' \
---form 'position="Position test"' \
---form 'company="Company"' \
+curl --location --request POST 'https://dev.planif.fr/api-coach/education/' \
+--header 'Authorization: Token a7816be6d761730bbca7b3de33d7b76467786b57' \
+--form 'title="Title test"' \
+--form 'institution="institution"' \
 --form 'start_date="2020-10-20"' \
 --form 'description="Yay"' \
---form 'end_date="2022-01-01"' \
---form 'company_url="https://gitlab.com/planif/django-ec2/-/pipelines"'
+--form 'end_date="2022-01-01"'
 ```
 
-> The POST command returns the created experience in JSON structured like this:
+> The POST command returns the created education in JSON structured like this:
 
 ```json
 {
-    "id": 3,
-    "position": "Position test",
-    "company": "Company",
+    "id": 1,
+    "title": "Title test",
+    "institution": "institution",
     "start_date": "2020-10-20",
     "end_date": "2022-01-01",
     "description": "Yay",
-    "company_url": "https://gitlab.com/planif/django-ec2/-/pipelines",
     "coach": 1
 }
 ```
 
-### Get a specific experience 
+### Get a specific education 
 
-`GET /api-coach/experience/<id>`
+`GET /api-coach/education/<id>`
 
-This endpoint is used to get a coach experience. You have to pass the id of the experience
-
-```shell
-curl --location --request GET 'https://dev.planif.fr/api-coach/experience/2' \
---header 'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'
-```
-
-> The GET command returns the target experience in JSON structured like this:
-
-```json
-{
-    "id": 2,
-    "position": "Position test",
-    "company": "Company",
-    "start_date": "2020-10-20",
-    "end_date": "2022-01-01",
-    "description": "Yay",
-    "company_url": "https://gitlab.com/planif/django-ec2/-/pipelines",
-    "coach": 1
-}
-```
-
-### Modify an experience
-
-`PATCH /api-coach/experience/<id>`
-
-This endpoint is used to update a coach experience. You have to pass the id of the experience in the url and the data you want to modify as params. You can update partially the data.
+This endpoint is used to get a coach education. You have to pass the id of the education
 
 ```shell
-curl --location --request PATCH 'https://dev.planif.fr/api-coach/experience/2' \
---header 'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476' \
---form 'position="New position"'
+curl --location --request GET 'https://dev.planif.fr/api-coach/education/2' \
+--header 'Authorization: Token a7816be6d761730bbca7b3de33d7b76467786b57'
 ```
 
-> If successful the PATCH command returns the updated experience in JSON structured like this:
+> The GET command returns the target education in JSON structured like this:
 
 ```json
 {
     "id": 2,
-    "position": "New position",
-    "company": "Company",
+    "title": "Title test 2",
+    "institution": "institution 2",
     "start_date": "2020-10-20",
-    "end_date": "2022-01-01",
-    "description": "Yay",
-    "company_url": "https://gitlab.com/planif/django-ec2/-/pipelines",
+    "end_date": null,
+    "description": null,
     "coach": 1
 }
 ```
 
-### Delete a specific experience
+### Modify an education
 
-`DELETE /api-coach/experience/<id>`
+`PATCH /api-coach/education/<id>`
 
-This endpoint is used to delete a coach experience. You have to pass the id of the experience. If successful the request will return a 204 No content
+This endpoint is used to update a coach education. You have to pass the id of the education in the url and the data you want to modify as params. You can update partially the data.
 
 ```shell
-curl --location --request DELETE 'https://dev.planif.fr/api-coach/experience/10' \
---header 'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'
+curl --location --request PATCH 'https://dev.planif.fr/api-coach/education/1' \
+--header 'Authorization: Token a7816be6d761730bbca7b3de33d7b76467786b57' \
+--form 'institution="New institution"'
+```
+
+> If successful the PATCH command returns the updated education in JSON structured like this:
+
+```json
+{
+    "id": 1,
+    "title": "Title test",
+    "institution": "New institution",
+    "start_date": "2020-10-20",
+    "end_date": "2022-01-01",
+    "description": "Yay",
+    "coach": 1
+}
+```
+
+### Delete a specific education
+
+`DELETE /api-coach/education/<id>`
+
+This endpoint is used to delete a coach education. You have to pass the id of the education. If successful the request will return a 204 No content
+
+```shell
+curl --location --request DELETE 'https://dev.planif.fr/api-coach/education/2' \
+--header 'Authorization: Token a7816be6d761730bbca7b3de33d7b76467786b57'
+```
+
+## Skill
+
+`reverse URL coach_rest:skill-coach`
+`reverse URL coach_rest:skill-coach-obj`
+
+Property | Description | Type
+--------- | ----------- | -----------
+id | Id of the education  | Integer
+name | Name of the skill  | String
+percentage | Percentage of the skill, int min: 0, max: 100  | Integer
+
+```shell
+curl --location --request GET 'https://dev.planif.fr/api-coach/skill/' \
+--header 'Authorization: Token a7816be6d761730bbca7b3de33d7b76467786b57'
+```
+
+> The GET command returns a list of skills as JSON structured like this:
+
+```json
+[
+    {
+        "id": 1,
+        "name": "friendly",
+        "percentage": 85,
+        "coach": 1
+    },
+    {
+        "id": 2,
+        "name": "effiency",
+        "percentage": 99,
+        "coach": 1
+    }
+]
+```
+
+### Get all skills
+
+`GET /api-coach/skill/`
+
+This endpoint retrieves the coach skills.
+
+### Create a skill
+
+`POST /api-coach/skill/`
+
+This endpoint is used to create a coach skill. You have to pass the name and the percentage to create a skill
+
+```shell
+curl --location --request POST 'https://dev.planif.fr/api-coach/skill/' \
+--header 'Authorization: Token a7816be6d761730bbca7b3de33d7b76467786b57' \
+--form 'name="friendly"' \
+--form 'percentage="85"'
+```
+
+> The POST command returns the created skill in JSON structured like this:
+
+```json
+{
+    "id": 1,
+    "name": "friendly",
+    "percentage": 85,
+    "coach": 1
+}
+```
+
+### Get a specific skill 
+
+`GET /api-coach/skill/<id>`
+
+This endpoint is used to get a coach skill. You have to pass the id of the skill
+
+```shell
+curl --location --request GET 'https://dev.planif.fr/api-coach/skill/2' \
+--header 'Authorization: Token a7816be6d761730bbca7b3de33d7b76467786b57'
+```
+
+> The GET command returns the target skill in JSON structured like this:
+
+```json
+{
+    "id": 2,
+    "name": "effiency",
+    "percentage": 99,
+    "coach": 1
+}
+```
+
+### Modify a skill
+
+`PATCH /api-coach/skill/<id>`
+
+This endpoint is used to update a coach skill. You have to pass the id of the skill in the url and the data you want to modify as params. You can update partially the data.
+
+```shell
+curl --location --request PATCH 'https://dev.planif.fr/api-coach/skill/1' \
+--header 'Authorization: Token a7816be6d761730bbca7b3de33d7b76467786b57' \
+--form 'percentage="77"'
+```
+
+> If successful the PATCH command returns the updated skill in JSON structured like this:
+
+```json
+{
+    "id": 1,
+    "name": "friendly",
+    "percentage": 77,
+    "coach": 1
+}
+```
+
+### Delete a specific skill
+
+`DELETE /api-coach/skill/<id>`
+
+This endpoint is used to delete a coach skill. You have to pass the id of the skill. If successful the request will return a 204 No content
+
+```shell
+curl --location --request DELETE 'https://dev.planif.fr/api-coach/skill/2' \
+--header 'Authorization: Token a7816be6d761730bbca7b3de33d7b76467786b57'
 ```
 
 ## Training Planned
