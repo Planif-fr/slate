@@ -673,7 +673,7 @@ profile_picture | Relative url of the profile picture, or the default picture if
 curl -v \
 	-X GET \
 	-H "Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476" \
-	"http://localhost:8000/api-shared/profile-coach/?password=6673boss&username=coach"
+	"http://localhost:8000/api-shared/profile-coach/"
 ```
 
 > The above command returns JSON structured like this:
@@ -798,7 +798,309 @@ id | True | upload_id assigned by filepond_drf
 
 # Coach REST API
 
-<aside class="notice">For all the next endpoints, you will need to be authenticated as a Coach and sending a CRSF Token containing a <code>Coach</code> instance.</aside>
+<aside class="notice">For all the next endpoints, you will need to be authenticated as a Coach and sending request containing a Token with such headers <code>Athorization: Token <your_token></code>.</aside>
+
+## Experience
+
+`reverse URL coach_rest:experience-coach`
+`reverse URL coach_rest:experience-coach-obj`
+
+Property | Description | Type
+--------- | ----------- | -----------
+id | Id of the experience  | Integer
+position | Position in the company  | String
+company | Company where he used to work  | String
+start_date | Start date of the experience  | String
+end_date | End date of the experience (could be null if today)  | String
+description | Description of the experience (optionnal) | String
+company_url | Company url (optionnal) | String
+
+```shell
+curl -v \
+	-X GET \
+	-H "Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476" \
+	"https://dev.planif.fr/api-coach/experience/"
+```
+
+> The GET command returns a list of experiences as JSON structured like this:
+
+```json
+[
+    {
+        "id": 1,
+        "position": "Position test",
+        "company": "Company",
+        "start_date": "2020-10-20",
+        "end_date": null,
+        "description": "Yay",
+        "company_url": null,
+        "coach": 1
+    },
+    {
+        "id": 2,
+        "position": "Position test",
+        "company": "Company",
+        "start_date": "2020-10-20",
+        "end_date": "2022-01-01",
+        "description": "Yay",
+        "company_url": "https://gitlab.com/planif/django-ec2/-/pipelines",
+        "coach": 1
+    }
+]
+```
+
+### Get all experiences
+
+`GET /api-coach/experience/`
+
+This endpoint retrieves the coach experiences.
+
+### Create an experience
+
+`POST /api-coach/experience/`
+
+This endpoint is used to create a coach experience. You have to pass at the minimum all the required fields or more to create an experience
+
+```shell
+curl --location --request POST 'https://dev.planif.fr/api-coach/experience/' \
+--header 'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476' \
+--form 'position="Position test"' \
+--form 'company="Company"' \
+--form 'start_date="2020-10-20"' \
+--form 'description="Yay"' \
+--form 'end_date="2022-01-01"' \
+--form 'company_url="https://gitlab.com/planif/django-ec2/-/pipelines"'
+```
+
+> The POST command returns the created experience in JSON structured like this:
+
+```json
+{
+    "id": 3,
+    "position": "Position test",
+    "company": "Company",
+    "start_date": "2020-10-20",
+    "end_date": "2022-01-01",
+    "description": "Yay",
+    "company_url": "https://gitlab.com/planif/django-ec2/-/pipelines",
+    "coach": 1
+}
+```
+
+### Get a specific experience 
+
+`GET /api-coach/experience/<id>`
+
+This endpoint is used to get a coach experience. You have to pass the id of the experience
+
+```shell
+curl --location --request GET 'https://dev.planif.fr/api-coach/experience/2' \
+--header 'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'
+```
+
+> The GET command returns the target experience in JSON structured like this:
+
+```json
+{
+    "id": 2,
+    "position": "Position test",
+    "company": "Company",
+    "start_date": "2020-10-20",
+    "end_date": "2022-01-01",
+    "description": "Yay",
+    "company_url": "https://gitlab.com/planif/django-ec2/-/pipelines",
+    "coach": 1
+}
+```
+
+### Modify an experience
+
+`PATCH /api-coach/experience/<id>`
+
+This endpoint is used to update a coach experience. You have to pass the id of the experience in the url and the data you want to modify as params. You can update partially the data.
+
+```shell
+curl --location --request PATCH 'https://dev.planif.fr/api-coach/experience/2' \
+--header 'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476' \
+--form 'position="New position"'
+```
+
+> If successful the PATCH command returns the updated experience in JSON structured like this:
+
+```json
+{
+    "id": 2,
+    "position": "New position",
+    "company": "Company",
+    "start_date": "2020-10-20",
+    "end_date": "2022-01-01",
+    "description": "Yay",
+    "company_url": "https://gitlab.com/planif/django-ec2/-/pipelines",
+    "coach": 1
+}
+```
+
+### Delete a specific experience
+
+`DELETE /api-coach/experience/<id>`
+
+This endpoint is used to delete a coach experience. You have to pass the id of the experience. If successful the request will return a 204 No content
+
+```shell
+curl --location --request DELETE 'https://dev.planif.fr/api-coach/experience/10' \
+--header 'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'
+```
+
+## Education
+
+`reverse URL coach_rest:education-coach`
+`reverse URL coach_rest:education-coach-obj`
+
+Property | Description | Type
+--------- | ----------- | -----------
+id | Id of the education  | Integer
+position | Position in the company  | String
+company | Company where he used to work  | String
+start_date | Start date of the experience  | String
+end_date | End date of the experience (could be null if today)  | String
+description | Description of the experience (optionnal) | String
+company_url | Company url (optionnal) | String
+
+```shell
+curl -v \
+	-X GET \
+	-H "Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476" \
+	"https://dev.planif.fr/api-coach/education/"
+```
+
+> The GET command returns a list of experiences as JSON structured like this:
+
+```json
+[
+    {
+        "id": 1,
+        "position": "Position test",
+        "company": "Company",
+        "start_date": "2020-10-20",
+        "end_date": null,
+        "description": "Yay",
+        "company_url": null,
+        "coach": 1
+    },
+    {
+        "id": 2,
+        "position": "Position test",
+        "company": "Company",
+        "start_date": "2020-10-20",
+        "end_date": "2022-01-01",
+        "description": "Yay",
+        "company_url": "https://gitlab.com/planif/django-ec2/-/pipelines",
+        "coach": 1
+    }
+]
+```
+
+### Get all experiences
+
+`GET /api-coach/experience/`
+
+This endpoint retrieves the coach experiences.
+
+### Create an experience
+
+`POST /api-coach/experience/`
+
+This endpoint is used to create a coach experience. You have to pass at the minimum all the required fields or more to create an experience
+
+```shell
+curl --location --request POST 'https://dev.planif.fr/api-coach/experience/' \
+--header 'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476' \
+--form 'position="Position test"' \
+--form 'company="Company"' \
+--form 'start_date="2020-10-20"' \
+--form 'description="Yay"' \
+--form 'end_date="2022-01-01"' \
+--form 'company_url="https://gitlab.com/planif/django-ec2/-/pipelines"'
+```
+
+> The POST command returns the created experience in JSON structured like this:
+
+```json
+{
+    "id": 3,
+    "position": "Position test",
+    "company": "Company",
+    "start_date": "2020-10-20",
+    "end_date": "2022-01-01",
+    "description": "Yay",
+    "company_url": "https://gitlab.com/planif/django-ec2/-/pipelines",
+    "coach": 1
+}
+```
+
+### Get a specific experience 
+
+`GET /api-coach/experience/<id>`
+
+This endpoint is used to get a coach experience. You have to pass the id of the experience
+
+```shell
+curl --location --request GET 'https://dev.planif.fr/api-coach/experience/2' \
+--header 'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'
+```
+
+> The GET command returns the target experience in JSON structured like this:
+
+```json
+{
+    "id": 2,
+    "position": "Position test",
+    "company": "Company",
+    "start_date": "2020-10-20",
+    "end_date": "2022-01-01",
+    "description": "Yay",
+    "company_url": "https://gitlab.com/planif/django-ec2/-/pipelines",
+    "coach": 1
+}
+```
+
+### Modify an experience
+
+`PATCH /api-coach/experience/<id>`
+
+This endpoint is used to update a coach experience. You have to pass the id of the experience in the url and the data you want to modify as params. You can update partially the data.
+
+```shell
+curl --location --request PATCH 'https://dev.planif.fr/api-coach/experience/2' \
+--header 'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476' \
+--form 'position="New position"'
+```
+
+> If successful the PATCH command returns the updated experience in JSON structured like this:
+
+```json
+{
+    "id": 2,
+    "position": "New position",
+    "company": "Company",
+    "start_date": "2020-10-20",
+    "end_date": "2022-01-01",
+    "description": "Yay",
+    "company_url": "https://gitlab.com/planif/django-ec2/-/pipelines",
+    "coach": 1
+}
+```
+
+### Delete a specific experience
+
+`DELETE /api-coach/experience/<id>`
+
+This endpoint is used to delete a coach experience. You have to pass the id of the experience. If successful the request will return a 204 No content
+
+```shell
+curl --location --request DELETE 'https://dev.planif.fr/api-coach/experience/10' \
+--header 'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'
+```
 
 ## Training Planned
 
