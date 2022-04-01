@@ -362,6 +362,9 @@
                     <a href="#education" class="toc-h2 toc-link" data-title="Education">Education</a>
                   </li>
                   <li>
+                    <a href="#skill" class="toc-h2 toc-link" data-title="Skill">Skill</a>
+                  </li>
+                  <li>
                     <a href="#training-planned" class="toc-h2 toc-link" data-title="Training Planned">Training Planned</a>
                   </li>
                   <li>
@@ -623,7 +626,7 @@ ID | The ID of the kitten to delete
 <h2 id='login-endpoint'>Login endpoint</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-v</span> <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-d</span> <span class="s2">"password=password&amp;username=username"</span> <span class="se">\</span>
-    <span class="s2">"http://localhost:8000/api-shared/api-token-auth/"</span>
+    <span class="s2">"https://dev.planif.fr/api-shared/api-token-auth/"</span>
 </code></pre></div>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
@@ -1102,7 +1105,7 @@ ID | The ID of the kitten to delete
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-v</span> <span class="se">\</span>
     <span class="nt">-X</span> GET <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476"</span> <span class="se">\</span>
-    <span class="s2">"http://localhost:8000/api-shared/profile-coach/"</span>
+    <span class="s2">"https://dev.planif.fr/api-shared/profile-coach/"</span>
 </code></pre></div>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
@@ -1136,7 +1139,7 @@ ID | The ID of the kitten to delete
     <span class="nt">-H</span> <span class="s2">"Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476"</span> <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/x-www-form-urlencoded; charset=utf-8"</span> <span class="se">\</span>
     <span class="nt">-d</span> <span class="s2">"address=12%20Jean%20Jaures%2C%2038000%20Grenoble&amp;height_unit=cm&amp;height_value=200&amp;phone_number=%2B33751515151"</span> <span class="se">\</span>
-    <span class="s2">"http://localhost:8000/api-shared/profile-coach/"</span>
+    <span class="s2">"https://dev.planif.fr/api-shared/profile-coach/"</span>
 </code></pre></div>
 <blockquote>
 <p>The above command returns the updated profile in JSON structured like this:</p>
@@ -1450,33 +1453,28 @@ ID | The ID of the kitten to delete
 <td>Integer</td>
 </tr>
 <tr>
-<td>position</td>
-<td>Position in the company</td>
+<td>title</td>
+<td>Title of education</td>
 <td>String</td>
 </tr>
 <tr>
-<td>company</td>
-<td>Company where he used to work</td>
+<td>institution</td>
+<td>Institution of the education</td>
 <td>String</td>
 </tr>
 <tr>
 <td>start_date</td>
-<td>Start date of the experience</td>
+<td>Start date of the education</td>
 <td>String</td>
 </tr>
 <tr>
 <td>end_date</td>
-<td>End date of the experience (could be null if today)</td>
+<td>End date of the education (could be null if today)</td>
 <td>String</td>
 </tr>
 <tr>
 <td>description</td>
-<td>Description of the experience (optionnal)</td>
-<td>String</td>
-</tr>
-<tr>
-<td>company_url</td>
-<td>Company url (optionnal)</td>
+<td>Description of the education (optionnal)</td>
 <td>String</td>
 </tr>
 </tbody></table>
@@ -1486,107 +1484,209 @@ ID | The ID of the kitten to delete
     <span class="s2">"https://dev.planif.fr/api-coach/education/"</span>
 </code></pre></div>
 <blockquote>
-<p>The GET command returns a list of experiences as JSON structured like this:</p>
+<p>The GET command returns a list of educations as JSON structured like this:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
         </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"position"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Position test"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"company"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Company"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Title test"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"institution"</span><span class="p">:</span><span class="w"> </span><span class="s2">"institution"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"start_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-10-20"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"end_date"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"end_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-01-01"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Yay"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"company_url"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
         </span><span class="nl">"coach"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
         </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"position"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Position test"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"company"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Company"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Title test 2"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"institution"</span><span class="p">:</span><span class="w"> </span><span class="s2">"institution 2"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"start_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-10-20"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"end_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-01-01"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Yay"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"company_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://gitlab.com/planif/django-ec2/-/pipelines"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"end_date"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
         </span><span class="nl">"coach"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
     </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
-</span></code></pre></div><h3 id='get-all-experiences-2'>Get all experiences</h3>
-<p><code>GET /api-coach/experience/</code></p>
+</span></code></pre></div><h3 id='get-all-educations'>Get all educations</h3>
+<p><code>GET /api-coach/education/</code></p>
 
-<p>This endpoint retrieves the coach experiences.</p>
-<h3 id='create-an-experience-2'>Create an experience</h3>
-<p><code>POST /api-coach/experience/</code></p>
+<p>This endpoint retrieves the coach educations.</p>
+<h3 id='create-an-education'>Create an education</h3>
+<p><code>POST /api-coach/education/</code></p>
 
-<p>This endpoint is used to create a coach experience. You have to pass at the minimum all the required fields or more to create an experience</p>
-<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'https://dev.planif.fr/api-coach/experience/'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'</span> <span class="se">\</span>
-<span class="nt">--form</span> <span class="s1">'position="Position test"'</span> <span class="se">\</span>
-<span class="nt">--form</span> <span class="s1">'company="Company"'</span> <span class="se">\</span>
+<p>This endpoint is used to create a coach education. You have to pass at the minimum all the required fields or more to create an education</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'https://dev.planif.fr/api-coach/education/'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Token a7816be6d761730bbca7b3de33d7b76467786b57'</span> <span class="se">\</span>
+<span class="nt">--form</span> <span class="s1">'title="Title test"'</span> <span class="se">\</span>
+<span class="nt">--form</span> <span class="s1">'institution="institution"'</span> <span class="se">\</span>
 <span class="nt">--form</span> <span class="s1">'start_date="2020-10-20"'</span> <span class="se">\</span>
 <span class="nt">--form</span> <span class="s1">'description="Yay"'</span> <span class="se">\</span>
-<span class="nt">--form</span> <span class="s1">'end_date="2022-01-01"'</span> <span class="se">\</span>
-<span class="nt">--form</span> <span class="s1">'company_url="https://gitlab.com/planif/django-ec2/-/pipelines"'</span>
+<span class="nt">--form</span> <span class="s1">'end_date="2022-01-01"'</span>
 </code></pre></div>
 <blockquote>
-<p>The POST command returns the created experience in JSON structured like this:</p>
+<p>The POST command returns the created education in JSON structured like this:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"position"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Position test"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"company"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Company"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Title test"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"institution"</span><span class="p">:</span><span class="w"> </span><span class="s2">"institution"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"start_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-10-20"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"end_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-01-01"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Yay"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"company_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://gitlab.com/planif/django-ec2/-/pipelines"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"coach"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='get-a-specific-experience-2'>Get a specific experience</h3>
-<p><code>GET /api-coach/experience/&lt;id&gt;</code></p>
+</span></code></pre></div><h3 id='get-a-specific-education'>Get a specific education</h3>
+<p><code>GET /api-coach/education/&lt;id&gt;</code></p>
 
-<p>This endpoint is used to get a coach experience. You have to pass the id of the experience</p>
-<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'https://dev.planif.fr/api-coach/experience/2'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'</span>
+<p>This endpoint is used to get a coach education. You have to pass the id of the education</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'https://dev.planif.fr/api-coach/education/2'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Token a7816be6d761730bbca7b3de33d7b76467786b57'</span>
 </code></pre></div>
 <blockquote>
-<p>The GET command returns the target experience in JSON structured like this:</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"position"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Position test"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"company"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Company"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"start_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-10-20"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"end_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-01-01"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Yay"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"company_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://gitlab.com/planif/django-ec2/-/pipelines"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"coach"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='modify-an-experience-2'>Modify an experience</h3>
-<p><code>PATCH /api-coach/experience/&lt;id&gt;</code></p>
-
-<p>This endpoint is used to update a coach experience. You have to pass the id of the experience in the url and the data you want to modify as params. You can update partially the data.</p>
-<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> PATCH <span class="s1">'https://dev.planif.fr/api-coach/experience/2'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'</span> <span class="se">\</span>
-<span class="nt">--form</span> <span class="s1">'position="New position"'</span>
-</code></pre></div>
-<blockquote>
-<p>If successful the PATCH command returns the updated experience in JSON structured like this:</p>
+<p>The GET command returns the target education in JSON structured like this:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"position"</span><span class="p">:</span><span class="w"> </span><span class="s2">"New position"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"company"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Company"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Title test 2"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"institution"</span><span class="p">:</span><span class="w"> </span><span class="s2">"institution 2"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"start_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-10-20"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"end_date"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"coach"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='modify-an-education'>Modify an education</h3>
+<p><code>PATCH /api-coach/education/&lt;id&gt;</code></p>
+
+<p>This endpoint is used to update a coach education. You have to pass the id of the education in the url and the data you want to modify as params. You can update partially the data.</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> PATCH <span class="s1">'https://dev.planif.fr/api-coach/education/1'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Token a7816be6d761730bbca7b3de33d7b76467786b57'</span> <span class="se">\</span>
+<span class="nt">--form</span> <span class="s1">'institution="New institution"'</span>
+</code></pre></div>
+<blockquote>
+<p>If successful the PATCH command returns the updated education in JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Title test"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"institution"</span><span class="p">:</span><span class="w"> </span><span class="s2">"New institution"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"start_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-10-20"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"end_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-01-01"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Yay"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"company_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://gitlab.com/planif/django-ec2/-/pipelines"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"coach"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='delete-a-specific-experience-2'>Delete a specific experience</h3>
-<p><code>DELETE /api-coach/experience/&lt;id&gt;</code></p>
+</span></code></pre></div><h3 id='delete-a-specific-education'>Delete a specific education</h3>
+<p><code>DELETE /api-coach/education/&lt;id&gt;</code></p>
 
-<p>This endpoint is used to delete a coach experience. You have to pass the id of the experience. If successful the request will return a 204 No content</p>
-<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> DELETE <span class="s1">'https://dev.planif.fr/api-coach/experience/10'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'</span>
+<p>This endpoint is used to delete a coach education. You have to pass the id of the education. If successful the request will return a 204 No content</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> DELETE <span class="s1">'https://dev.planif.fr/api-coach/education/2'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Token a7816be6d761730bbca7b3de33d7b76467786b57'</span>
+</code></pre></div><h2 id='skill'>Skill</h2>
+<p><code>reverse URL coach_rest:skill-coach</code>
+<code>reverse URL coach_rest:skill-coach-obj</code></p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>Id of the education</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>name</td>
+<td>Name of the skill</td>
+<td>String</td>
+</tr>
+<tr>
+<td>percentage</td>
+<td>Percentage of the skill, int min: 0, max: 100</td>
+<td>Integer</td>
+</tr>
+</tbody></table>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'https://dev.planif.fr/api-coach/skill/'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Token a7816be6d761730bbca7b3de33d7b76467786b57'</span>
+</code></pre></div>
+<blockquote>
+<p>The GET command returns a list of skills as JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"friendly"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"percentage"</span><span class="p">:</span><span class="w"> </span><span class="mi">85</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"coach"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"effiency"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"percentage"</span><span class="p">:</span><span class="w"> </span><span class="mi">99</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"coach"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div><h3 id='get-all-skills'>Get all skills</h3>
+<p><code>GET /api-coach/skill/</code></p>
+
+<p>This endpoint retrieves the coach skills.</p>
+<h3 id='create-a-skill'>Create a skill</h3>
+<p><code>POST /api-coach/skill/</code></p>
+
+<p>This endpoint is used to create a coach skill. You have to pass the name and the percentage to create a skill</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'https://dev.planif.fr/api-coach/skill/'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Token a7816be6d761730bbca7b3de33d7b76467786b57'</span> <span class="se">\</span>
+<span class="nt">--form</span> <span class="s1">'name="friendly"'</span> <span class="se">\</span>
+<span class="nt">--form</span> <span class="s1">'percentage="85"'</span>
+</code></pre></div>
+<blockquote>
+<p>The POST command returns the created skill in JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"friendly"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"percentage"</span><span class="p">:</span><span class="w"> </span><span class="mi">85</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"coach"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='get-a-specific-skill'>Get a specific skill</h3>
+<p><code>GET /api-coach/skill/&lt;id&gt;</code></p>
+
+<p>This endpoint is used to get a coach skill. You have to pass the id of the skill</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'https://dev.planif.fr/api-coach/skill/2'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Token a7816be6d761730bbca7b3de33d7b76467786b57'</span>
+</code></pre></div>
+<blockquote>
+<p>The GET command returns the target skill in JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"effiency"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"percentage"</span><span class="p">:</span><span class="w"> </span><span class="mi">99</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"coach"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='modify-a-skill'>Modify a skill</h3>
+<p><code>PATCH /api-coach/skill/&lt;id&gt;</code></p>
+
+<p>This endpoint is used to update a coach skill. You have to pass the id of the skill in the url and the data you want to modify as params. You can update partially the data.</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> PATCH <span class="s1">'https://dev.planif.fr/api-coach/skill/1'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Token a7816be6d761730bbca7b3de33d7b76467786b57'</span> <span class="se">\</span>
+<span class="nt">--form</span> <span class="s1">'percentage="77"'</span>
+</code></pre></div>
+<blockquote>
+<p>If successful the PATCH command returns the updated skill in JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"friendly"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"percentage"</span><span class="p">:</span><span class="w"> </span><span class="mi">77</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"coach"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='delete-a-specific-skill'>Delete a specific skill</h3>
+<p><code>DELETE /api-coach/skill/&lt;id&gt;</code></p>
+
+<p>This endpoint is used to delete a coach skill. You have to pass the id of the skill. If successful the request will return a 204 No content</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> DELETE <span class="s1">'https://dev.planif.fr/api-coach/skill/2'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Token a7816be6d761730bbca7b3de33d7b76467786b57'</span>
 </code></pre></div><h2 id='training-planned'>Training Planned</h2>
 <p><code>reverse URL coach_rest:training-planned</code></p>
 
