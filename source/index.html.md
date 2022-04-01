@@ -1102,7 +1102,7 @@ curl --location --request DELETE 'https://dev.planif.fr/api-coach/education/2' \
 
 Property | Description | Type
 --------- | ----------- | -----------
-id | Id of the education  | Integer
+id | Id of the skill  | Integer
 name | Name of the skill  | String
 percentage | Percentage of the skill, int min: 0, max: 100  | Integer
 
@@ -1213,6 +1213,120 @@ This endpoint is used to delete a coach skill. You have to pass the id of the sk
 
 ```shell
 curl --location --request DELETE 'https://dev.planif.fr/api-coach/skill/2' \
+--header 'Authorization: Token a7816be6d761730bbca7b3de33d7b76467786b57'
+```
+
+## Hashtag
+
+`reverse URL coach_rest:hashtag-coach`
+`reverse URL coach_rest:hashtag-coach-obj`
+
+Property | Description | Type
+--------- | ----------- | -----------
+id | Id of the hashtag  | Integer
+name | Name of the hashtag  | String
+
+```shell
+curl --location --request GET 'http://localhost:8000/api-coach/hashtag/' \
+--header 'Authorization: Token a7816be6d761730bbca7b3de33d7b76467786b57'
+```
+
+> The GET command returns a list of skills as JSON structured like this:
+
+```json
+[
+    {
+        "id": 1,
+        "name": "efficient",
+        "coach": 1
+    },
+    {
+        "id": 2,
+        "name": "devoted",
+        "coach": 1
+    }
+]
+```
+
+### Get all hashtags
+
+`GET /api-coach/hashtag/`
+
+This endpoint retrieves the coach hashtags.
+
+### Create a hashtag
+
+`POST /api-coach/hashtag/`
+
+This endpoint is used to create a coach hashtag. You have to pass the nameto create a hashtag
+
+```shell
+curl --location --request POST 'http://localhost:8000/api-coach/hashtag/' \
+--header 'Authorization: Token a7816be6d761730bbca7b3de33d7b76467786b57' \
+--form 'name="devoted"'
+```
+
+> The POST command returns the created hashtag in JSON structured like this:
+
+```json
+{
+    "id": 2,
+    "name": "devoted",
+    "coach": 1
+}
+```
+
+### Get a specific hashtag 
+
+`GET /api-coach/hashtag/<id>`
+
+This endpoint is used to get a coach hashtag. You have to pass the id of the hashtag
+
+```shell
+curl --location --request GET 'http://localhost:8000/api-coach/hashtag/1' \
+--header 'Authorization: Token a7816be6d761730bbca7b3de33d7b76467786b57'
+```
+
+> The GET command returns the target hashtag in JSON structured like this:
+
+```json
+{
+    "id": 1,
+    "name": "efficient",
+    "coach": 1
+}
+```
+
+### Modify a hashtag
+
+`PATCH /api-coach/hashtag/<id>`
+
+This endpoint is used to update a coach hashtag. You have to pass the id of the skill in the url and the data you want to modify as params. You can update partially the data.
+
+```shell
+curl --location --request PATCH 'http://localhost:8000/api-coach/hashtag/1' \
+--header 'Authorization: Token a7816be6d761730bbca7b3de33d7b76467786b57' \
+--form 'name="new name"'
+```
+
+> If successful the PATCH command returns the updated hashtag in JSON structured like this:
+
+```json
+{
+    "id": 1,
+    "name": "new name",
+    "coach": 1
+}
+```
+
+### Delete a hashtag skill
+
+`DELETE /api-coach/hashtag/<id>`
+
+This endpoint is used to delete a coach hashtag. You have to pass the id of the hashtag. If successful the request will return a 204 No content
+
+```shell
+curl --location --request DELETE 'http://localhost:8000/api-coach/hashtag/2' \
 --header 'Authorization: Token a7816be6d761730bbca7b3de33d7b76467786b57'
 ```
 
