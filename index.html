@@ -385,6 +385,14 @@
               </ul>
           </li>
           <li>
+            <a href="#athlete-rest-api" class="toc-h1 toc-link" data-title="Athlete REST API">Athlete REST API</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#training-plan-rating" class="toc-h2 toc-link" data-title="Training Plan Rating">Training Plan Rating</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
           </li>
       </ul>
@@ -1305,29 +1313,19 @@ ID | The ID of the kitten to delete
 <td>Integer</td>
 </tr>
 <tr>
-<td>coach</td>
-<td>Id of the coach, owner of the plan</td>
-<td>Integer</td>
-</tr>
-<tr>
 <td>name</td>
 <td>Name of the plan</td>
 <td>String</td>
 </tr>
 <tr>
+<td>coach</td>
+<td>Id of the coach, owner of the plan</td>
+<td>Integer</td>
+</tr>
+<tr>
 <td>description</td>
 <td>Description of the plan (optional)</td>
 <td>String</td>
-</tr>
-<tr>
-<td>is_public</td>
-<td>True if the plan is public, false otherwise</td>
-<td>Boolean</td>
-</tr>
-<tr>
-<td>is_static</td>
-<td>True if the plan is static, false otherwise</td>
-<td>Boolean</td>
 </tr>
 <tr>
 <td>duration</td>
@@ -1339,8 +1337,23 @@ ID | The ID of the kitten to delete
 <td>Price of a public plan in Eur, available only if the plan is public</td>
 <td>Integer</td>
 </tr>
+<tr>
+<td>rate</td>
+<td>The rating of the plan, average of all the rate given by the athlete. Could be null, cannot be changed by this endpoint</td>
+<td>Float</td>
+</tr>
+<tr>
+<td>is_public</td>
+<td>True if the plan is public, false otherwise</td>
+<td>Boolean</td>
+</tr>
+<tr>
+<td>is_static</td>
+<td>True if the plan is static, false otherwise</td>
+<td>Boolean</td>
+</tr>
 </tbody></table>
-<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'http://localhost:8000/api-coach/plan/'</span> <span class="se">\</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'https://dev.planif.fr/api-coach/plan/'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'</span>
 </code></pre></div>
 <blockquote>
@@ -1348,13 +1361,13 @@ ID | The ID of the kitten to delete
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
         </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My insane plan"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"coach"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
         </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"duration"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">5.0</span><span class="p">,</span><span class="w">
         </span><span class="nl">"is_public"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"is_static"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+        </span><span class="nl">"is_static"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
         </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w">
@@ -1363,15 +1376,18 @@ ID | The ID of the kitten to delete
         </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Be ready to become fiiiiit AF"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"duration"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
         </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123.32"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"rate"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
         </span><span class="nl">"is_public"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
         </span><span class="nl">"is_static"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A nice plan"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"New Plan"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"coach"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Great for beginners"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"is_public"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12.00"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">4.7</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"is_public"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
         </span><span class="nl">"is_static"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
     </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
@@ -1387,7 +1403,7 @@ ID | The ID of the kitten to delete
 <p>To make a plan public, use the price paramater. To make the plan static, use the duration parameter.</p>
 
 <p>By default, the plan will be private and dynamic.</p>
-<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'http://localhost:8000/api-coach/plan/'</span> <span class="se">\</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'https://dev.planif.fr/api-coach/plan/'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'</span> <span class="se">\</span>
 <span class="nt">--form</span> <span class="s1">'name="My insane plan"'</span> <span class="se">\</span>
 <span class="nt">--form</span> <span class="s1">'description="Be ready to become fiiiiit AF"'</span> <span class="se">\</span>
@@ -1403,6 +1419,7 @@ ID | The ID of the kitten to delete
     </span><span class="nl">"coach"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
     </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Be ready to become fiiiiit AF"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"duration"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"rate"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123.32"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"is_public"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
     </span><span class="nl">"is_static"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
@@ -1411,7 +1428,7 @@ ID | The ID of the kitten to delete
 <p><code>GET /api-coach/plan/&lt;id&gt;</code></p>
 
 <p>This endpoint is used to get a coach specific plan. You have to pass the id of the plan</p>
-<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'http://localhost:8000/api-coach/plan/4'</span> <span class="se">\</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'https://dev.planif.fr/api-coach/plan/4'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'</span>
 </code></pre></div>
 <blockquote>
@@ -1422,6 +1439,7 @@ ID | The ID of the kitten to delete
     </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Nice plan"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"coach"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
     </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Excellent"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"rate"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="nl">"is_public"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
     </span><span class="nl">"is_static"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -1433,7 +1451,7 @@ ID | The ID of the kitten to delete
 <p>You can update partially the data. </p>
 
 <p>To make the plan static simply pass the duration, to make it dynamic, pass an empty duration. Same goes for the is_public attribute : to make the plan public, pass a price, to make it private pass an empty price. </p>
-<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> PATCH <span class="s1">'http://localhost:8000/api-coach/plan/4'</span> <span class="se">\</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> PATCH <span class="s1">'https://dev.planif.fr/api-coach/plan/4'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'</span> <span class="se">\</span>
 <span class="nt">--form</span> <span class="s1">'price=""'</span>
 </code></pre></div>
@@ -1445,6 +1463,7 @@ ID | The ID of the kitten to delete
     </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Nice plan"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"coach"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
     </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Excellent"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"rate"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="nl">"is_public"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
     </span><span class="nl">"is_static"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -1452,7 +1471,7 @@ ID | The ID of the kitten to delete
 <p><code>DELETE /api-coach/plan/&lt;id&gt;</code></p>
 
 <p>This endpoint is used to delete a coach training plan. You have to pass the id of the plan. If successful the request will return a 204 No content</p>
-<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> DELETE <span class="s1">'http://localhost:8000/api-coach/plan/3'</span> <span class="se">\</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> DELETE <span class="s1">'https://dev.planif.fr/api-coach/plan/3'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'</span>
 </code></pre></div><h2 id='experience'>Experience</h2>
 <p><code>reverse URL coach_rest:experience-coach</code>
@@ -1881,7 +1900,7 @@ ID | The ID of the kitten to delete
 <td>String</td>
 </tr>
 </tbody></table>
-<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'http://localhost:8000/api-coach/hashtag/'</span> <span class="se">\</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'https://dev.planif.fr/api-coach/hashtag/'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Token a7816be6d761730bbca7b3de33d7b76467786b57'</span>
 </code></pre></div>
 <blockquote>
@@ -1907,7 +1926,7 @@ ID | The ID of the kitten to delete
 <p><code>POST /api-coach/hashtag/</code></p>
 
 <p>This endpoint is used to create a coach hashtag. You have to pass the nameto create a hashtag</p>
-<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'http://localhost:8000/api-coach/hashtag/'</span> <span class="se">\</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'https://dev.planif.fr/api-coach/hashtag/'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Token a7816be6d761730bbca7b3de33d7b76467786b57'</span> <span class="se">\</span>
 <span class="nt">--form</span> <span class="s1">'name="devoted"'</span>
 </code></pre></div>
@@ -1923,7 +1942,7 @@ ID | The ID of the kitten to delete
 <p><code>GET /api-coach/hashtag/&lt;id&gt;</code></p>
 
 <p>This endpoint is used to get a coach hashtag. You have to pass the id of the hashtag</p>
-<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'http://localhost:8000/api-coach/hashtag/1'</span> <span class="se">\</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'https://dev.planif.fr/api-coach/hashtag/1'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Token a7816be6d761730bbca7b3de33d7b76467786b57'</span>
 </code></pre></div>
 <blockquote>
@@ -1938,7 +1957,7 @@ ID | The ID of the kitten to delete
 <p><code>PATCH /api-coach/hashtag/&lt;id&gt;</code></p>
 
 <p>This endpoint is used to update a coach hashtag. You have to pass the id of the skill in the url and the data you want to modify as params. You can update partially the data.</p>
-<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> PATCH <span class="s1">'http://localhost:8000/api-coach/hashtag/1'</span> <span class="se">\</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> PATCH <span class="s1">'https://dev.planif.fr/api-coach/hashtag/1'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Token a7816be6d761730bbca7b3de33d7b76467786b57'</span> <span class="se">\</span>
 <span class="nt">--form</span> <span class="s1">'name="new name"'</span>
 </code></pre></div>
@@ -1954,7 +1973,7 @@ ID | The ID of the kitten to delete
 <p><code>DELETE /api-coach/hashtag/&lt;id&gt;</code></p>
 
 <p>This endpoint is used to delete a coach hashtag. You have to pass the id of the hashtag. If successful the request will return a 204 No content</p>
-<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> DELETE <span class="s1">'http://localhost:8000/api-coach/hashtag/2'</span> <span class="se">\</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> DELETE <span class="s1">'https://dev.planif.fr/api-coach/hashtag/2'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Token a7816be6d761730bbca7b3de33d7b76467786b57'</span>
 </code></pre></div><h2 id='training-planned'>Training Planned</h2>
 <p><code>reverse URL coach_rest:training-planned</code></p>
@@ -2273,7 +2292,137 @@ ID | The ID of the kitten to delete
 <aside class="success">
 Remember — a happy coach is an authenticated coach!
 </aside>
+<h1 id='athlete-rest-api'>Athlete REST API</h1>
+<aside class="notice">For all the next endpoints, you will need to be authenticated as a Athlete and sending request containing a Token with such headers <code>Authorization: Token <your_token></code>.</aside>
+<h2 id='training-plan-rating'>Training Plan Rating</h2>
+<p><code>reverse URL athlete_rest:rate-plan-athlete</code>
+<code>reverse URL athlete_rest:rate-plan-athlete-obj</code></p>
 
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>Id of the training plan rating</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>rate</td>
+<td>Rating of the training plan (must be between 1 to 5)</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>text</td>
+<td>Optional text of the rating</td>
+<td>String</td>
+</tr>
+<tr>
+<td>training_plan</td>
+<td>Id of the concerned training</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>athlete</td>
+<td>Id of the athlete giving the rating</td>
+<td>Integer</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">Careful, there can be only one rating per couple athlete - training plan</aside>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'https://dev.planif.fr/api-athlete/rate-plan/'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Token 7c9aa8c2e995a233520e223d95a584e77636c057'</span>
+</code></pre></div>
+<blockquote>
+<p>The GET command returns a list of ratings as JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"rate"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A great plan 2"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"training_plan"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"athlete"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"rate"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Not so good"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"training_plan"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"athlete"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div><h3 id='get-all-ratings-for-the-athlete'>Get all ratings for the athlete</h3>
+<p><code>GET /api-athlete/rate-plan/</code></p>
+
+<p>This endpoint retrieves all the athlete ratings.</p>
+<h3 id='create-a-rating'>Create a rating</h3>
+<p><code>POST /api-athlete/rate-plan/</code></p>
+
+<p>This endpoint is used to create a rating for a specific training plan. You have to pass at the minimum the id of the plan and the rate to create a rating.</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'https://dev.planif.fr/api-athlete/rate-plan/'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Token 7c9aa8c2e995a233520e223d95a584e77636c057'</span> <span class="se">\</span>
+<span class="nt">--form</span> <span class="s1">'training_plan="2"'</span> <span class="se">\</span>
+<span class="nt">--form</span> <span class="s1">'rate="5"'</span> <span class="se">\</span>
+<span class="nt">--form</span> <span class="s1">'text="A great plan 2"'</span>
+</code></pre></div>
+<blockquote>
+<p>The POST command returns the created rating in JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"rate"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A great plan 2"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"training_plan"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"athlete"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='get-a-specific-rating'>Get a specific rating</h3>
+<p><code>GET /api-athlete/rate-plan/&lt;id&gt;</code></p>
+
+<p>This endpoint is used to get an athlete specific rating. You have to pass the id of the rating</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'https://dev.planif.fr/api-athlete/rate-plan/1'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Token 7c9aa8c2e995a233520e223d95a584e77636c057'</span>
+</code></pre></div>
+<blockquote>
+<p>The GET command returns the target rating in JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"rate"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Not so good"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"training_plan"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"athlete"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='modify-a-rating'>Modify a rating</h3>
+<p><code>PATCH /api-athlete/rate-plan/&lt;id&gt;</code></p>
+
+<p>This endpoint is used to update an athlete rating. You have to pass the id of the rating in the url and the data you want to modify as params. </p>
+
+<p>You can update partially the data. </p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> PATCH <span class="s1">'https://dev.planif.fr/api-athlete/rate-plan/1'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Token 7c9aa8c2e995a233520e223d95a584e77636c057'</span> <span class="se">\</span>
+<span class="nt">--form</span> <span class="s1">'text="New text rating"'</span>
+</code></pre></div>
+<blockquote>
+<p>If successful the PATCH command returns the updated rating in JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"rate"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"New text rating"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"training_plan"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"athlete"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='delete-a-specific-rating'>Delete a specific rating</h3>
+<p><code>DELETE /api-athlete/rate-plan/&lt;id&gt;</code></p>
+
+<p>This endpoint is used to delete an athlete rating. You have to pass the id of the rating. If successful the request will return a 204 No content</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> DELETE <span class="s1">'https://dev.planif.fr/api-athlete/rate-plan/2'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Token 7c9aa8c2e995a233520e223d95a584e77636c057'</span>
+</code></pre></div>
 <!-- 
 
 TEMPLATE
