@@ -808,16 +808,17 @@ id | True | upload_id assigned by filepond_drf
 Property | Description | Type
 --------- | ----------- | -----------
 id | Id of the plan  | Integer
-coach | Id of the coach, owner of the plan  | Integer
 name | Name of the plan  | String
+coach | Id of the coach, owner of the plan  | Integer
 description | Description of the plan (optional)  | String
-is_public | True if the plan is public, false otherwise  | Boolean
-is_static | True if the plan is static, false otherwise  | Boolean
 duration | Duration of a static plan in week, available only if the plan is static  | Integer
 price | Price of a public plan in Eur, available only if the plan is public  | Integer
+rate | The rating of the plan, average of all the rate given by the athlete. Could be null, cannot be changed by this endpoint  | Float
+is_public | True if the plan is public, false otherwise  | Boolean
+is_static | True if the plan is static, false otherwise  | Boolean
 
 ```shell
-curl --location --request GET 'http://localhost:8000/api-coach/plan/' \
+curl --location --request GET 'https://dev.planif.fr/api-coach/plan/' \
 --header 'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'
 ```
 
@@ -826,13 +827,13 @@ curl --location --request GET 'http://localhost:8000/api-coach/plan/' \
 ```json
 [
     {
-        "id": 15,
+        "id": 2,
         "name": "My insane plan",
         "coach": 1,
         "description": null,
-        "duration": 12,
+        "rate": 5.0,
         "is_public": false,
-        "is_static": true
+        "is_static": false
     },
     {
         "id": 16,
@@ -841,15 +842,18 @@ curl --location --request GET 'http://localhost:8000/api-coach/plan/' \
         "description": "Be ready to become fiiiiit AF",
         "duration": 2,
         "price": "123.32",
+        "rate": null,
         "is_public": true,
         "is_static": true
     },
     {
-        "id": 4,
-        "name": "A nice plan",
+        "id": 1,
+        "name": "New Plan",
         "coach": 1,
-        "description": "Great for beginners",
-        "is_public": false,
+        "description": null,
+        "price": "12.00",
+        "rate": 4.7,
+        "is_public": true,
         "is_static": false
     }
 ]
@@ -872,7 +876,7 @@ To make a plan public, use the price paramater. To make the plan static, use the
 By default, the plan will be private and dynamic.
 
 ```shell
-curl --location --request POST 'http://localhost:8000/api-coach/plan/' \
+curl --location --request POST 'https://dev.planif.fr/api-coach/plan/' \
 --header 'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476' \
 --form 'name="My insane plan"' \
 --form 'description="Be ready to become fiiiiit AF"' \
@@ -889,6 +893,7 @@ curl --location --request POST 'http://localhost:8000/api-coach/plan/' \
     "coach": 1,
     "description": "Be ready to become fiiiiit AF",
     "duration": 2,
+    "rate": null,
     "price": "123.32",
     "is_public": true,
     "is_static": true
@@ -902,7 +907,7 @@ curl --location --request POST 'http://localhost:8000/api-coach/plan/' \
 This endpoint is used to get a coach specific plan. You have to pass the id of the plan
 
 ```shell
-curl --location --request GET 'http://localhost:8000/api-coach/plan/4' \
+curl --location --request GET 'https://dev.planif.fr/api-coach/plan/4' \
 --header 'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'
 ```
 
@@ -914,6 +919,7 @@ curl --location --request GET 'http://localhost:8000/api-coach/plan/4' \
     "name": "Nice plan",
     "coach": 1,
     "description": "Excellent",
+    "rate": null,
     "is_public": false,
     "is_static": false
 }
@@ -930,7 +936,7 @@ You can update partially the data.
 To make the plan static simply pass the duration, to make it dynamic, pass an empty duration. Same goes for the is_public attribute : to make the plan public, pass a price, to make it private pass an empty price. 
 
 ```shell
-curl --location --request PATCH 'http://localhost:8000/api-coach/plan/4' \
+curl --location --request PATCH 'https://dev.planif.fr/api-coach/plan/4' \
 --header 'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476' \
 --form 'price=""'
 ```
@@ -943,6 +949,7 @@ curl --location --request PATCH 'http://localhost:8000/api-coach/plan/4' \
     "name": "Nice plan",
     "coach": 1,
     "description": "Excellent",
+    "rate": null,
     "is_public": false,
     "is_static": false
 }
@@ -955,7 +962,7 @@ curl --location --request PATCH 'http://localhost:8000/api-coach/plan/4' \
 This endpoint is used to delete a coach training plan. You have to pass the id of the plan. If successful the request will return a 204 No content
 
 ```shell
-curl --location --request DELETE 'http://localhost:8000/api-coach/plan/3' \
+curl --location --request DELETE 'https://dev.planif.fr/api-coach/plan/3' \
 --header 'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'
 ```
 
@@ -1386,7 +1393,7 @@ id | Id of the hashtag  | Integer
 name | Name of the hashtag  | String
 
 ```shell
-curl --location --request GET 'http://localhost:8000/api-coach/hashtag/' \
+curl --location --request GET 'https://dev.planif.fr/api-coach/hashtag/' \
 --header 'Authorization: Token a7816be6d761730bbca7b3de33d7b76467786b57'
 ```
 
@@ -1420,7 +1427,7 @@ This endpoint retrieves the coach hashtags.
 This endpoint is used to create a coach hashtag. You have to pass the nameto create a hashtag
 
 ```shell
-curl --location --request POST 'http://localhost:8000/api-coach/hashtag/' \
+curl --location --request POST 'https://dev.planif.fr/api-coach/hashtag/' \
 --header 'Authorization: Token a7816be6d761730bbca7b3de33d7b76467786b57' \
 --form 'name="devoted"'
 ```
@@ -1442,7 +1449,7 @@ curl --location --request POST 'http://localhost:8000/api-coach/hashtag/' \
 This endpoint is used to get a coach hashtag. You have to pass the id of the hashtag
 
 ```shell
-curl --location --request GET 'http://localhost:8000/api-coach/hashtag/1' \
+curl --location --request GET 'https://dev.planif.fr/api-coach/hashtag/1' \
 --header 'Authorization: Token a7816be6d761730bbca7b3de33d7b76467786b57'
 ```
 
@@ -1463,7 +1470,7 @@ curl --location --request GET 'http://localhost:8000/api-coach/hashtag/1' \
 This endpoint is used to update a coach hashtag. You have to pass the id of the skill in the url and the data you want to modify as params. You can update partially the data.
 
 ```shell
-curl --location --request PATCH 'http://localhost:8000/api-coach/hashtag/1' \
+curl --location --request PATCH 'https://dev.planif.fr/api-coach/hashtag/1' \
 --header 'Authorization: Token a7816be6d761730bbca7b3de33d7b76467786b57' \
 --form 'name="new name"'
 ```
@@ -1485,7 +1492,7 @@ curl --location --request PATCH 'http://localhost:8000/api-coach/hashtag/1' \
 This endpoint is used to delete a coach hashtag. You have to pass the id of the hashtag. If successful the request will return a 204 No content
 
 ```shell
-curl --location --request DELETE 'http://localhost:8000/api-coach/hashtag/2' \
+curl --location --request DELETE 'https://dev.planif.fr/api-coach/hashtag/2' \
 --header 'Authorization: Token a7816be6d761730bbca7b3de33d7b76467786b57'
 ```
 
@@ -1735,6 +1742,143 @@ Remember — a happy coach is an authenticated coach!
 </aside>
 
 
+# Athlete REST API
+
+<aside class="notice">For all the next endpoints, you will need to be authenticated as a Athlete and sending request containing a Token with such headers <code>Authorization: Token <your_token></code>.</aside>
+
+## Training Plan Rating
+
+`reverse URL athlete_rest:rate-plan-athlete`
+`reverse URL athlete_rest:rate-plan-athlete-obj`
+
+Property | Description | Type
+--------- | ----------- | -----------
+id | Id of the training plan rating  | Integer
+rate | Rating of the training plan (must be between 1 to 5)  | Integer
+text | Optional text of the rating  | String
+training_plan | Id of the concerned training  | Integer
+athlete | Id of the athlete giving the rating  | Integer
+
+  
+<aside class="notice">Careful, there can be only one rating per couple athlete - training plan</aside>
+
+```shell
+curl --location --request GET 'https://dev.planif.fr/api-athlete/rate-plan/' \
+--header 'Authorization: Token 7c9aa8c2e995a233520e223d95a584e77636c057'
+```
+
+> The GET command returns a list of ratings as JSON structured like this:
+
+```json
+[
+    {
+        "id": 3,
+        "rate": 5,
+        "text": "A great plan 2",
+        "training_plan": 2,
+        "athlete": 2
+    },
+    {
+        "id": 1,
+        "rate": 4,
+        "text": "Not so good",
+        "training_plan": 1,
+        "athlete": 2
+    }
+]
+```
+
+### Get all ratings for the athlete
+
+`GET /api-athlete/rate-plan/`
+
+This endpoint retrieves all the athlete ratings.
+
+### Create a rating
+
+`POST /api-athlete/rate-plan/`
+
+This endpoint is used to create a rating for a specific training plan. You have to pass at the minimum the id of the plan and the rate to create a rating.
+
+```shell
+curl --location --request POST 'https://dev.planif.fr/api-athlete/rate-plan/' \
+--header 'Authorization: Token 7c9aa8c2e995a233520e223d95a584e77636c057' \
+--form 'training_plan="2"' \
+--form 'rate="5"' \
+--form 'text="A great plan 2"'
+```
+
+> The POST command returns the created rating in JSON structured like this:
+
+```json
+{
+    "id": 1,
+    "rate": 5,
+    "text": "A great plan 2",
+    "training_plan": 2,
+    "athlete": 2
+}
+```
+
+### Get a specific rating 
+
+`GET /api-athlete/rate-plan/<id>`
+
+This endpoint is used to get an athlete specific rating. You have to pass the id of the rating
+
+```shell
+curl --location --request GET 'https://dev.planif.fr/api-athlete/rate-plan/1' \
+--header 'Authorization: Token 7c9aa8c2e995a233520e223d95a584e77636c057'
+```
+
+> The GET command returns the target rating in JSON structured like this:
+
+```json
+{
+    "id": 1,
+    "rate": 4,
+    "text": "Not so good",
+    "training_plan": 1,
+    "athlete": 2
+}
+```
+
+### Modify a rating
+
+`PATCH /api-athlete/rate-plan/<id>`
+
+This endpoint is used to update an athlete rating. You have to pass the id of the rating in the url and the data you want to modify as params. 
+
+You can update partially the data. 
+
+```shell
+curl --location --request PATCH 'https://dev.planif.fr/api-athlete/rate-plan/1' \
+--header 'Authorization: Token 7c9aa8c2e995a233520e223d95a584e77636c057' \
+--form 'text="New text rating"'
+```
+
+> If successful the PATCH command returns the updated rating in JSON structured like this:
+
+```json
+{
+    "id": 1,
+    "rate": 4,
+    "text": "New text rating",
+    "training_plan": 1,
+    "athlete": 2
+}
+```
+
+### Delete a specific rating
+
+`DELETE /api-athlete/rate-plan/<id>`
+
+This endpoint is used to delete an athlete rating. You have to pass the id of the rating. If successful the request will return a 204 No content
+
+```shell
+curl --location --request DELETE 'https://dev.planif.fr/api-athlete/rate-plan/2' \
+--header 'Authorization: Token 7c9aa8c2e995a233520e223d95a584e77636c057'
+```
 
 
 
