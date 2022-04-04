@@ -798,7 +798,166 @@ id | True | upload_id assigned by filepond_drf
 
 # Coach REST API
 
-<aside class="notice">For all the next endpoints, you will need to be authenticated as a Coach and sending request containing a Token with such headers <code>Athorization: Token <your_token></code>.</aside>
+<aside class="notice">For all the next endpoints, you will need to be authenticated as a Coach and sending request containing a Token with such headers <code>Authorization: Token <your_token></code>.</aside>
+
+## Plan
+
+`reverse URL coach_rest:plan-coach`
+`reverse URL coach_rest:plan-coach-obj`
+
+Property | Description | Type
+--------- | ----------- | -----------
+id | Id of the plan  | Integer
+coach | Id of the coach, owner of the plan  | Integer
+name | Name of the plan  | String
+description | Description of the plan (optional)  | String
+is_public | True if the plan is public, false otherwise  | Boolean
+is_static | True if the plan is static, false otherwise  | Boolean
+duration | Duration of a static plan in week, available only if the plan is static  | Integer
+price | Price of a public plan in Eur, available only if the plan is public  | Integer
+
+```shell
+curl --location --request GET 'http://localhost:8000/api-coach/plan/' \
+--header 'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'
+```
+
+> The GET command returns a list of plans as JSON structured like this:
+
+```json
+[
+    {
+        "id": 15,
+        "name": "My insane plan",
+        "coach": 1,
+        "description": null,
+        "duration": 12,
+        "is_public": false,
+        "is_static": true
+    },
+    {
+        "id": 16,
+        "name": "My insane plan",
+        "coach": 1,
+        "description": "Be ready to become fiiiiit AF",
+        "duration": 2,
+        "price": "123.32",
+        "is_public": true,
+        "is_static": true
+    },
+    {
+        "id": 4,
+        "name": "A nice plan",
+        "coach": 1,
+        "description": "Great for beginners",
+        "is_public": false,
+        "is_static": false
+    }
+]
+```
+
+### Get all plans
+
+`GET /api-coach/plan/`
+
+This endpoint retrieves all the coach plans.
+
+### Create an plan
+
+`POST /api-coach/plan/`
+
+This endpoint is used to create a training plan. You have to pass at the minimum all the required fields or more to create an plan.
+
+To make a plan public, use the price paramater. To make the plan static, use the duration parameter.
+
+By default, the plan will be private and dynamic.
+
+```shell
+curl --location --request POST 'http://localhost:8000/api-coach/plan/' \
+--header 'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476' \
+--form 'name="My insane plan"' \
+--form 'description="Be ready to become fiiiiit AF"' \
+--form 'price="123.32"' \
+--form 'duration="2"'
+```
+
+> The POST command returns the created plan in JSON structured like this:
+
+```json
+{
+    "id": 17,
+    "name": "My insane plan",
+    "coach": 1,
+    "description": "Be ready to become fiiiiit AF",
+    "duration": 2,
+    "price": "123.32",
+    "is_public": true,
+    "is_static": true
+}
+```
+
+### Get a specific plan 
+
+`GET /api-coach/plan/<id>`
+
+This endpoint is used to get a coach specific plan. You have to pass the id of the plan
+
+```shell
+curl --location --request GET 'http://localhost:8000/api-coach/plan/4' \
+--header 'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'
+```
+
+> The GET command returns the target plan in JSON structured like this:
+
+```json
+{
+    "id": 4,
+    "name": "Nice plan",
+    "coach": 1,
+    "description": "Excellent",
+    "is_public": false,
+    "is_static": false
+}
+```
+
+### Modify a plan
+
+`PATCH /api-coach/plan/<id>`
+
+This endpoint is used to update a coach training plan. You have to pass the id of the plan in the url and the data you want to modify as params. 
+
+You can update partially the data. 
+
+To make the plan static simply pass the duration, to make it dynamic, pass an empty duration. Same goes for the is_public attribute : to make the plan public, pass a price, to make it private pass an empty price. 
+
+```shell
+curl --location --request PATCH 'http://localhost:8000/api-coach/plan/4' \
+--header 'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476' \
+--form 'price=""'
+```
+
+> If successful the PATCH command returns the updated plan in JSON structured like this:
+
+```json
+{
+    "id": 4,
+    "name": "Nice plan",
+    "coach": 1,
+    "description": "Excellent",
+    "is_public": false,
+    "is_static": false
+}
+```
+
+### Delete a specific plan
+
+`DELETE /api-coach/plan/<id>`
+
+This endpoint is used to delete a coach training plan. You have to pass the id of the plan. If successful the request will return a 204 No content
+
+```shell
+curl --location --request DELETE 'http://localhost:8000/api-coach/plan/3' \
+--header 'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'
+```
 
 ## Experience
 
@@ -812,8 +971,8 @@ position | Position in the company  | String
 company | Company where he used to work  | String
 start_date | Start date of the experience  | String
 end_date | End date of the experience (could be null if today)  | String
-description | Description of the experience (optionnal) | String
-company_url | Company url (optionnal) | String
+description | Description of the experience (optional) | String
+company_url | Company url (optional) | String
 
 ```shell
 curl -v \
@@ -963,7 +1122,7 @@ title | Title of education  | String
 institution | Institution of the education  | String
 start_date | Start date of the education  | String
 end_date | End date of the education (could be null if today)  | String
-description | Description of the education (optionnal) | String
+description | Description of the education (optional) | String
 
 ```shell
 curl -v \
