@@ -2079,148 +2079,149 @@ ID | The ID of the kitten to delete
 
 <p>This endpoint retrieves the athletes of a coach.</p>
 <h2 id='text-session'>Text Session</h2>
-<p><code>reverse URL coach_rest:sessions-text</code></p>
+<p><code>reverse URL coach_rest:text-session-list</code>
+<code>reverse URL coach_rest:text-session-detail</code></p>
 
 <table><thead>
 <tr>
 <th>Property</th>
 <th>Description</th>
+<th>Type</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>id</td>
-<td>The ID of the text session</td>
+<td>Id of the text session</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>title</td>
+<td>Title of the text session max_length=100</td>
+<td>String</td>
+</tr>
+<tr>
+<td>description</td>
+<td>Description of the text session (optional) max_length=500</td>
+<td>String</td>
+</tr>
+<tr>
+<td>session</td>
+<td>Body of the session (HTML markup)</td>
+<td>String</td>
+</tr>
+<tr>
+<td>tags</td>
+<td>Array of tags describing the session</td>
+<td>Array of String</td>
 </tr>
 <tr>
 <td>coach</td>
-<td>The ID of the coach who created the session</td>
-</tr>
-<tr>
-<td>title</td>
-<td>(string)</td>
-</tr>
-<tr>
-<td>description</td>
-<td>(string)</td>
-</tr>
-<tr>
-<td>tags</td>
-<td>array of tags (Array of string)</td>
-</tr>
-<tr>
-<td>session</td>
-<td>HTML markup coming from tinyMce (string)</td>
+<td>Id of the coach owner of the session</td>
+<td>Integer</td>
 </tr>
 </tbody></table>
-<div class="highlight"><pre class="highlight javascript tab-javascript"><code></code></pre></div>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'http://localhost:8000/api-coach/text-session'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'</span>
+</code></pre></div>
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>The GET command returns a list of text sessions as JSON structured like this:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="w">    </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jogging"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A simple workout"</span><span class="p">,</span><span class="w">
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"New title"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Be ready to unleash your inner footbal"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-            </span><span class="s2">"easy"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Hard"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"run"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"jogging"</span><span class="w">
+            </span><span class="s2">"yeah"</span><span class="w">
         </span><span class="p">],</span><span class="w">
         </span><span class="nl">"session"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;p&gt;1 hour easy jogging&lt;/p&gt;"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"coach"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="w">
+        </span><span class="nl">"coach"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
     </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-request-8'>HTTP Request</h3>
-<p><code>GET /api-coach/sessions-text/</code></p>
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div><h3 id='get-all-text-session'>Get all text session</h3>
+<p><code>GET /api-coach/text-session</code></p>
 
-<p>Retrieve all the text sessions of the coach</p>
-<h3 id='http-request-9'>HTTP Request</h3>
-<p><code>GET /api-coach/sessions-text/&lt;id&gt;</code></p>
+<p>This endpoint retrieves the coach text sessions.</p>
+<h3 id='create-a-text-session'>Create a text session</h3>
+<p><code>POST /api-coach/text-session</code></p>
 
-<p>Retrieve the text session</p>
+<p>This endpoint is used to create a text session. You have to pass the minimum parameters to create a text session</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'http://localhost:8000/api-coach/text-session'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'</span> <span class="se">\</span>
+<span class="nt">--form</span> <span class="s1">'title="A text session"'</span> <span class="se">\</span>
+<span class="nt">--form</span> <span class="s1">'description="Be ready to unleash your inner footbal"'</span> <span class="se">\</span>
+<span class="nt">--form</span> <span class="s1">'tags="easy, jogging"'</span> <span class="se">\</span>
+<span class="nt">--form</span> <span class="s1">'session="&lt;p&gt;1 hour easy jogging&lt;/p&gt;"'</span>
+</code></pre></div>
+<blockquote>
+<p>The POST command returns the created text session in JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A text session"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Be ready to unleash your inner footbal"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"easy"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">" jogging"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"session"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;p&gt;1 hour easy jogging&lt;/p&gt;"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"coach"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='get-a-specific-text-session'>Get a specific text session</h3>
+<p><code>GET /api-coach/text-session/&lt;id&gt;</code></p>
 
-<p><code>DELETE /api-coach/sessions-text/&lt;id&gt;</code></p>
+<p>This endpoint is used to get a text session. You have to pass the id of the text session</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'http://localhost:8000/api-coach/text-session/2'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'</span>
+</code></pre></div>
+<blockquote>
+<p>The GET command returns the target text session in JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"New title"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Be ready to unleash your inner footbal"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"Hard"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"run"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"yeah"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"session"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;p&gt;1 hour easy jogging&lt;/p&gt;"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"coach"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='modify-a-text-session'>Modify a text session</h3>
+<p><code>PATCH /api-coach/text-session/&lt;id&gt;</code></p>
 
-<p>Delete the text session</p>
-<h3 id='query-parameters-4'>Query Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>id</td>
-<td>True</td>
-<td>ID of the text session</td>
-</tr>
-</tbody></table>
-<h3 id='http-request-10'>HTTP Request</h3>
-<p><code>POST /api/sessions-text/</code></p>
+<p>This endpoint is used to update a text session. You have to pass the id of the text session in the url and the data you want to modify as params. You can update partially the data.</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> PATCH <span class="s1">'http://localhost:8000/api-coach/text-session/2'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'</span> <span class="se">\</span>
+<span class="nt">--form</span> <span class="s1">'title="New title 2"'</span> <span class="se">\</span>
+<span class="nt">--form</span> <span class="s1">'tags="Hard, run, yeah"'</span>
+</code></pre></div>
+<blockquote>
+<p>If successful the PATCH command returns the updated text session in JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"New title 2"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Be ready to unleash your inner footbal"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"Hard"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"run"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"yeah"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"session"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;p&gt;1 hour easy jogging&lt;/p&gt;"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"coach"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='delete-a-specific-text-session'>Delete a specific text session</h3>
+<p><code>DELETE /api-coach/text-session/&lt;id&gt;</code></p>
 
-<p>Create a the text session</p>
-<h3 id='query-parameters-5'>Query Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>title</td>
-<td>True</td>
-<td>(string)</td>
-</tr>
-<tr>
-<td>description</td>
-<td>False</td>
-<td>(string)</td>
-</tr>
-<tr>
-<td>tags</td>
-<td>False</td>
-<td>array of tags (Array of string)</td>
-</tr>
-<tr>
-<td>session</td>
-<td>True</td>
-<td>HTML markup coming from tinyMce (string)</td>
-</tr>
-</tbody></table>
-<h3 id='http-request-11'>HTTP Request</h3>
-<p><code>POST /api/sessions-text/&lt;id&gt;</code></p>
-
-<p>Updates a the text session</p>
-<h3 id='query-parameters-6'>Query Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>title</td>
-<td>True</td>
-<td>(string)</td>
-</tr>
-<tr>
-<td>description</td>
-<td>False</td>
-<td>(string)</td>
-</tr>
-<tr>
-<td>tags</td>
-<td>False</td>
-<td>array of tags (Array of string)</td>
-</tr>
-<tr>
-<td>session</td>
-<td>True</td>
-<td>HTML markup coming from tinyMce (string)</td>
-</tr>
-</tbody></table>
-<h2 id='tags'>Tags</h2>
+<p>This endpoint is used to delete a text session. You have to pass the id of the text session. If successful the request will return a 204 No content</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> DELETE <span class="s1">'http://localhost:8000/api-coach/text-session/2'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'</span>
+</code></pre></div><h2 id='tags'>Tags</h2>
 <p><code>reverse URL coach_rest:tag-coach</code></p>
 
 <p>Endpoint used to retrieve the tags of a coach, filtered or not, and create new ones.</p>
@@ -2252,11 +2253,11 @@ ID | The ID of the kitten to delete
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <p>This endpoint retrieves, creates ou deletes tags</p>
-<h3 id='http-request-12'>HTTP Request</h3>
+<h3 id='http-request-8'>HTTP Request</h3>
 <p><code>GET /api-coach/tag-coach/?metadata=</code></p>
 
 <p>Get all coach tags, if metadata parameter is set, filter the tags case-insensitive</p>
-<h3 id='query-parameters-7'>Query Parameters</h3>
+<h3 id='query-parameters-4'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -2270,11 +2271,11 @@ ID | The ID of the kitten to delete
 <td>use to filter the result (string)</td>
 </tr>
 </tbody></table>
-<h3 id='http-request-13'>HTTP Request</h3>
+<h3 id='http-request-9'>HTTP Request</h3>
 <p><code>POST /api-coach/tag-coach/</code></p>
 
 <p>Creates a tag assigned to the logged coach</p>
-<h3 id='query-parameters-8'>Query Parameters</h3>
+<h3 id='query-parameters-5'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
