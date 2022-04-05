@@ -1598,91 +1598,147 @@ This endpoint retrieves the athletes of a coach.
 
 ## Text Session
 
-`reverse URL coach_rest:sessions-text`
+`reverse URL coach_rest:text-session-list`
+`reverse URL coach_rest:text-session-detail`
 
-Property | Description
---------- | -----------
-id | The ID of the text session
-coach | The ID of the coach who created the session
-title | (string)
-description | (string)
-tags | array of tags (Array of string)
-session | HTML markup coming from tinyMce (string)
+Property | Description | Type
+--------- | ----------- | -----------
+id | Id of the text session  | Integer
+title | Title of the text session max_length=100  | String
+description | Description of the text session (optional) max_length=500  | String
+session | Body of the session (HTML markup)  | String
+tags | Array of tags describing the session  | Array of String
+coach | Id of the coach owner of the session  | Integer
 
-
-```javascript
+```shell
+curl --location --request GET 'http://localhost:8000/api-coach/text-session' \
+--header 'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'
 ```
 
-> The above command returns JSON structured like this:
+> The GET command returns a list of text sessions as JSON structured like this:
 
 ```json
+[
     {
-        "id": 8,
-        "title": "Jogging",
-        "description": "A simple workout",
+        "id": 2,
+        "title": "New title",
+        "description": "Be ready to unleash your inner footbal",
         "tags": [
-            "easy",
+            "Hard",
             "run",
-            "jogging"
+            "yeah"
         ],
         "session": "<p>1 hour easy jogging</p>",
-        "coach": 4
+        "coach": 1
     }
+]
 ```
 
+### Get all text session
 
-### HTTP Request
+`GET /api-coach/text-session`
 
-`GET /api-coach/sessions-text/`
+This endpoint retrieves the coach text sessions.
 
-Retrieve all the text sessions of the coach
+### Create a text session
 
-### HTTP Request
+`POST /api-coach/text-session`
 
-`GET /api-coach/sessions-text/<id>`
+This endpoint is used to create a text session. You have to pass the minimum parameters to create a text session
 
-Retrieve the text session
+```shell
+curl --location --request POST 'http://localhost:8000/api-coach/text-session' \
+--header 'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476' \
+--form 'title="A text session"' \
+--form 'description="Be ready to unleash your inner footbal"' \
+--form 'tags="easy, jogging"' \
+--form 'session="<p>1 hour easy jogging</p>"'
+```
 
-`DELETE /api-coach/sessions-text/<id>`
+> The POST command returns the created text session in JSON structured like this:
 
-Delete the text session
+```json
+{
+    "id": 3,
+    "title": "A text session",
+    "description": "Be ready to unleash your inner footbal",
+    "tags": [
+        "easy",
+        " jogging"
+    ],
+    "session": "<p>1 hour easy jogging</p>",
+    "coach": 1
+}
+```
 
-### Query Parameters
+### Get a specific text session 
 
-Parameter | Required | Description
---------- | ------- | -----------
-id | True | ID of the text session
+`GET /api-coach/text-session/<id>`
 
-### HTTP Request
+This endpoint is used to get a text session. You have to pass the id of the text session
 
-`POST /api/sessions-text/`
+```shell
+curl --location --request GET 'http://localhost:8000/api-coach/text-session/2' \
+--header 'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'
+```
 
-Create a the text session
+> The GET command returns the target text session in JSON structured like this:
 
-### Query Parameters
+```json
+{
+    "id": 2,
+    "title": "New title",
+    "description": "Be ready to unleash your inner footbal",
+    "tags": [
+        "Hard",
+        "run",
+        "yeah"
+    ],
+    "session": "<p>1 hour easy jogging</p>",
+    "coach": 1
+}
+```
 
-Parameter | Required | Description
---------- | ------- | -----------
-title | True | (string)
-description | False | (string)
-tags | False | array of tags (Array of string)
-session | True | HTML markup coming from tinyMce (string)
+### Modify a text session
 
-### HTTP Request
+`PATCH /api-coach/text-session/<id>`
 
-`POST /api/sessions-text/<id>`
+This endpoint is used to update a text session. You have to pass the id of the text session in the url and the data you want to modify as params. You can update partially the data.
 
-Updates a the text session
+```shell
+curl --location --request PATCH 'http://localhost:8000/api-coach/text-session/2' \
+--header 'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476' \
+--form 'title="New title 2"' \
+--form 'tags="Hard, run, yeah"'
+```
 
-### Query Parameters
+> If successful the PATCH command returns the updated text session in JSON structured like this:
 
-Parameter | Required | Description
---------- | ------- | -----------
-title | True | (string)
-description | False | (string)
-tags | False | array of tags (Array of string)
-session | True | HTML markup coming from tinyMce (string)
+```json
+{
+    "id": 2,
+    "title": "New title 2",
+    "description": "Be ready to unleash your inner footbal",
+    "tags": [
+        "Hard",
+        "run",
+        "yeah"
+    ],
+    "session": "<p>1 hour easy jogging</p>",
+    "coach": 1
+}
+```
 
+### Delete a specific text session
+
+`DELETE /api-coach/text-session/<id>`
+
+This endpoint is used to delete a text session. You have to pass the id of the text session. If successful the request will return a 204 No content
+
+```shell
+curl --location --request DELETE 'http://localhost:8000/api-coach/text-session/2' \
+--header 'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'
+```
 
 ## Tags
 
