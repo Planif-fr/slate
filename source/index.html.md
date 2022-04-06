@@ -1640,6 +1640,7 @@ description | Description of the text session (optional) max_length=500  | Strin
 session | Body of the session (HTML markup)  | String
 tags | Array of tags describing the session  | Array of String
 coach | Id of the coach owner of the session  | Integer
+estimated_duration | Estimated duration of the session in seconds (optional)  | Integer
 sport | Name of the sport | String
 
 ```shell
@@ -1661,7 +1662,8 @@ curl --location --request GET 'https://dev.planif.fr/api-coach/text-session' \
         ],
         "session": "<p>1 hour easy jogging</p>",
         "coach": 1,
-        "sport": "RUNNING"
+        "sport": "RUNNING",
+        "estimated_duration": null
     },
     {
         "id": 3,
@@ -1672,7 +1674,8 @@ curl --location --request GET 'https://dev.planif.fr/api-coach/text-session' \
         ],
         "session": "<p>1 hour easy jogging</p>",
         "coach": 1,
-        "sport": "CYCLING"
+        "sport": "CYCLING",
+        "estimated_duration": null
     }
 ]
 ```
@@ -1712,7 +1715,8 @@ curl --location --request POST 'https://dev.planif.fr/api-coach/text-session' \
     ],
     "session": "<p>1 hour easy jogging</p>",
     "coach": 1,
-    "sport": "CYCLING"
+    "sport": "CYCLING",
+    "estimated_duration": null
 }
 ```
 
@@ -1740,7 +1744,8 @@ curl --location --request GET 'https://dev.planif.fr/api-coach/text-session/2' \
     ],
     "session": "<p>1 hour easy jogging</p>",
     "coach": 1,
-    "sport": "RUNNING"
+    "sport": "RUNNING",
+    "estimated_duration": null
 }
 ```
 
@@ -1771,7 +1776,8 @@ curl --location --request PATCH 'https://dev.planif.fr/api-coach/text-session/2'
     ],
     "session": "<p>1 hour easy jogging</p>",
     "coach": 1,
-    "sport": "CYCLING"
+    "sport": "CYCLING",
+    "estimated_duration": null
 }
 ```
 
@@ -1800,6 +1806,7 @@ steps | Steps of the session created by the session Builder | JSON
 variants | Variants of the session created by the session Builder (multiple steps) | JSON
 tags | Array of tags describing the session  | Array of String
 coach | Id of the coach owner of the session  | Integer
+estimated_duration | Estimated duration of the session in seconds. This field can be given or automatically calculated with the steps or mean of durations if variants  | Integer
 sport | Name of the sport | String
 
 Either Steps or Variants must be set but not both at the same time
