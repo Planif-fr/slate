@@ -328,22 +328,11 @@
               </ul>
           </li>
           <li>
-            <a href="#sessions" class="toc-h1 toc-link" data-title="Sessions">Sessions</a>
-              <ul class="toc-list-h2">
-                  <li>
-                    <a href="#built-session" class="toc-h2 toc-link" data-title="Built session">Built session</a>
-                  </li>
-                  <li>
-                    <a href="#text-amp-image-session" class="toc-h2 toc-link" data-title="Text &amp; Image session">Text &amp; Image session</a>
-                  </li>
-                  <li>
-                    <a href="#session-builder" class="toc-h2 toc-link" data-title="Session builder">Session builder</a>
-                  </li>
-              </ul>
-          </li>
-          <li>
             <a href="#shared-rest-api" class="toc-h1 toc-link" data-title="Shared REST API">Shared REST API</a>
               <ul class="toc-list-h2">
+                  <li>
+                    <a href="#sport" class="toc-h2 toc-link" data-title="Sport">Sport</a>
+                  </li>
                   <li>
                     <a href="#profile" class="toc-h2 toc-link" data-title="Profile">Profile</a>
                   </li>
@@ -378,6 +367,9 @@
                   </li>
                   <li>
                     <a href="#text-session" class="toc-h2 toc-link" data-title="Text Session">Text Session</a>
+                  </li>
+                  <li>
+                    <a href="#built-session" class="toc-h2 toc-link" data-title="Built Session">Built Session</a>
                   </li>
                   <li>
                     <a href="#tags" class="toc-h2 toc-link" data-title="Tags">Tags</a>
@@ -668,404 +660,401 @@ ID | The ID of the kitten to delete
 <td>required (string)</td>
 </tr>
 </tbody></table>
-<h1 id='sessions'>Sessions</h1><h2 id='built-session'>Built session</h2>
-<p>Here is an example of a built session object with Planif session builder. This example contains 3 differents variants of the session.</p>
 
-<table><thead>
-<tr>
-<th>Property</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>_id</td>
-<td>The ID of the session (ObjectId)</td>
-</tr>
-<tr>
-<td>sport</td>
-<td>instance of sport of the session (string)</td>
-</tr>
-<tr>
-<td>title</td>
-<td>title of the session (string)</td>
-</tr>
-<tr>
-<td>description</td>
-<td>description of the session (string)</td>
-</tr>
-<tr>
-<td>tags</td>
-<td>list of tags choose by the creator (Array of string)</td>
-</tr>
-<tr>
-<td>steps</td>
-<td>list of steps of the session, null if variants (Array of steps)</td>
-</tr>
-<tr>
-<td>variants</td>
-<td>list of variants of the session, empty if only one variant (Array of variants)</td>
-</tr>
-</tbody></table>
+<!-- 
+# Sessions
 
-<blockquote>
-<p>JSON structured like this:</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"_id"</span><span class="p">:{</span><span class="w">
-    </span><span class="nl">"$oid"</span><span class="p">:</span><span class="s2">"6225e150d19fffa18fa4139f"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nl">"sport"</span><span class="p">:</span><span class="s2">"RUNNING"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"title"</span><span class="p">:</span><span class="s2">"30/30"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"description"</span><span class="p">:</span><span class="s2">"Session 30/30 for beginners, intermediates, experts"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"steps"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"variants"</span><span class="p">:[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"name"</span><span class="p">:</span><span class="s2">"Beginner"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"steps"</span><span class="p">:[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="nl">"intensity"</span><span class="p">:</span><span class="s2">"WARMUP"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"targetType"</span><span class="p">:</span><span class="s2">"OPEN"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"durationType"</span><span class="p">:</span><span class="s2">"TIME"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"durationValue"</span><span class="p">:{</span><span class="w">
-            </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="s2">"1200"</span><span class="w">
-          </span><span class="p">}</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="nl">"repeatType"</span><span class="p">:</span><span class="s2">"REPEAT_UNTIL_STEPS_CMPLT"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"repeatValue"</span><span class="p">:{</span><span class="w">
-            </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="s2">"2"</span><span class="w">
-          </span><span class="p">},</span><span class="w">
-          </span><span class="nl">"steps"</span><span class="p">:[</span><span class="w">
-            </span><span class="p">{</span><span class="w">
-              </span><span class="nl">"repeatType"</span><span class="p">:</span><span class="s2">"REPEAT_UNTIL_STEPS_CMPLT"</span><span class="p">,</span><span class="w">
-              </span><span class="nl">"repeatValue"</span><span class="p">:{</span><span class="w">
-                </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="s2">"6"</span><span class="w">
-              </span><span class="p">},</span><span class="w">
-              </span><span class="nl">"steps"</span><span class="p">:[</span><span class="w">
-                </span><span class="p">{</span><span class="w">
-                  </span><span class="nl">"intensity"</span><span class="p">:</span><span class="s2">"INTERVAL"</span><span class="p">,</span><span class="w">
-                  </span><span class="nl">"targetType"</span><span class="p">:</span><span class="s2">"SPEED_LAP"</span><span class="p">,</span><span class="w">
-                  </span><span class="nl">"durationType"</span><span class="p">:</span><span class="s2">"TIME"</span><span class="p">,</span><span class="w">
-                  </span><span class="nl">"durationValue"</span><span class="p">:{</span><span class="w">
-                    </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="s2">"30"</span><span class="w">
-                  </span><span class="p">},</span><span class="w">
-                  </span><span class="nl">"targetValue"</span><span class="p">:</span><span class="s2">"5"</span><span class="w">
-                </span><span class="p">},</span><span class="w">
-                </span><span class="p">{</span><span class="w">
-                  </span><span class="nl">"intensity"</span><span class="p">:</span><span class="s2">"RECOVERY"</span><span class="p">,</span><span class="w">
-                  </span><span class="nl">"targetType"</span><span class="p">:</span><span class="s2">"OPEN"</span><span class="p">,</span><span class="w">
-                  </span><span class="nl">"durationType"</span><span class="p">:</span><span class="s2">"TIME"</span><span class="p">,</span><span class="w">
-                  </span><span class="nl">"durationValue"</span><span class="p">:{</span><span class="w">
-                    </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="s2">"30"</span><span class="w">
-                  </span><span class="p">}</span><span class="w">
-                </span><span class="p">}</span><span class="w">
-              </span><span class="p">]</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="p">{</span><span class="w">
-              </span><span class="nl">"intensity"</span><span class="p">:</span><span class="s2">"COOLDOWN"</span><span class="p">,</span><span class="w">
-              </span><span class="nl">"targetType"</span><span class="p">:</span><span class="s2">"OPEN"</span><span class="p">,</span><span class="w">
-              </span><span class="nl">"durationType"</span><span class="p">:</span><span class="s2">"TIME"</span><span class="p">,</span><span class="w">
-              </span><span class="nl">"durationValue"</span><span class="p">:{</span><span class="w">
-                </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="s2">"240"</span><span class="w">
-              </span><span class="p">}</span><span class="w">
-            </span><span class="p">}</span><span class="w">
-          </span><span class="p">]</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="nl">"intensity"</span><span class="p">:</span><span class="s2">"COOLDOWN"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"targetType"</span><span class="p">:</span><span class="s2">"OPEN"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"durationType"</span><span class="p">:</span><span class="s2">"TIME"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"durationValue"</span><span class="p">:{</span><span class="w">
-            </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="s2">"360"</span><span class="w">
-          </span><span class="p">}</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">]</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"name"</span><span class="p">:</span><span class="s2">"Intermediate"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"steps"</span><span class="p">:[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="nl">"intensity"</span><span class="p">:</span><span class="s2">"WARMUP"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"targetType"</span><span class="p">:</span><span class="s2">"OPEN"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"durationType"</span><span class="p">:</span><span class="s2">"TIME"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"durationValue"</span><span class="p">:{</span><span class="w">
-            </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="s2">"1200"</span><span class="w">
-          </span><span class="p">}</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="nl">"repeatType"</span><span class="p">:</span><span class="s2">"REPEAT_UNTIL_STEPS_CMPLT"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"repeatValue"</span><span class="p">:{</span><span class="w">
-            </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="s2">"2"</span><span class="w">
-          </span><span class="p">},</span><span class="w">
-          </span><span class="nl">"steps"</span><span class="p">:[</span><span class="w">
-            </span><span class="p">{</span><span class="w">
-              </span><span class="nl">"repeatType"</span><span class="p">:</span><span class="s2">"REPEAT_UNTIL_STEPS_CMPLT"</span><span class="p">,</span><span class="w">
-              </span><span class="nl">"repeatValue"</span><span class="p">:{</span><span class="w">
-                </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="s2">"8"</span><span class="w">
-              </span><span class="p">},</span><span class="w">
-              </span><span class="nl">"steps"</span><span class="p">:[</span><span class="w">
-                </span><span class="p">{</span><span class="w">
-                  </span><span class="nl">"intensity"</span><span class="p">:</span><span class="s2">"INTERVAL"</span><span class="p">,</span><span class="w">
-                  </span><span class="nl">"targetType"</span><span class="p">:</span><span class="s2">"SPEED_LAP"</span><span class="p">,</span><span class="w">
-                  </span><span class="nl">"durationType"</span><span class="p">:</span><span class="s2">"TIME"</span><span class="p">,</span><span class="w">
-                  </span><span class="nl">"durationValue"</span><span class="p">:{</span><span class="w">
-                    </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="s2">"30"</span><span class="w">
-                  </span><span class="p">},</span><span class="w">
-                  </span><span class="nl">"targetValue"</span><span class="p">:</span><span class="s2">"5"</span><span class="w">
-                </span><span class="p">},</span><span class="w">
-                </span><span class="p">{</span><span class="w">
-                  </span><span class="nl">"intensity"</span><span class="p">:</span><span class="s2">"RECOVERY"</span><span class="p">,</span><span class="w">
-                  </span><span class="nl">"targetType"</span><span class="p">:</span><span class="s2">"OPEN"</span><span class="p">,</span><span class="w">
-                  </span><span class="nl">"durationType"</span><span class="p">:</span><span class="s2">"TIME"</span><span class="p">,</span><span class="w">
-                  </span><span class="nl">"durationValue"</span><span class="p">:{</span><span class="w">
-                    </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="s2">"30"</span><span class="w">
-                  </span><span class="p">}</span><span class="w">
-                </span><span class="p">}</span><span class="w">
-              </span><span class="p">]</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="p">{</span><span class="w">
-              </span><span class="nl">"intensity"</span><span class="p">:</span><span class="s2">"COOLDOWN"</span><span class="p">,</span><span class="w">
-              </span><span class="nl">"targetType"</span><span class="p">:</span><span class="s2">"OPEN"</span><span class="p">,</span><span class="w">
-              </span><span class="nl">"durationType"</span><span class="p">:</span><span class="s2">"TIME"</span><span class="p">,</span><span class="w">
-              </span><span class="nl">"durationValue"</span><span class="p">:{</span><span class="w">
-                </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="s2">"240"</span><span class="w">
-              </span><span class="p">}</span><span class="w">
-            </span><span class="p">}</span><span class="w">
-          </span><span class="p">]</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="nl">"intensity"</span><span class="p">:</span><span class="s2">"COOLDOWN"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"targetType"</span><span class="p">:</span><span class="s2">"OPEN"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"durationType"</span><span class="p">:</span><span class="s2">"TIME"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"durationValue"</span><span class="p">:{</span><span class="w">
-            </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="s2">"360"</span><span class="w">
-          </span><span class="p">}</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">]</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"name"</span><span class="p">:</span><span class="s2">"Expert"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"steps"</span><span class="p">:[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="nl">"intensity"</span><span class="p">:</span><span class="s2">"WARMUP"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"targetType"</span><span class="p">:</span><span class="s2">"OPEN"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"durationType"</span><span class="p">:</span><span class="s2">"TIME"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"durationValue"</span><span class="p">:{</span><span class="w">
-            </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="s2">"1800"</span><span class="w">
-          </span><span class="p">}</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="nl">"repeatType"</span><span class="p">:</span><span class="s2">"REPEAT_UNTIL_STEPS_CMPLT"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"repeatValue"</span><span class="p">:{</span><span class="w">
-            </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="s2">"2"</span><span class="w">
-          </span><span class="p">},</span><span class="w">
-          </span><span class="nl">"steps"</span><span class="p">:[</span><span class="w">
-            </span><span class="p">{</span><span class="w">
-              </span><span class="nl">"repeatType"</span><span class="p">:</span><span class="s2">"REPEAT_UNTIL_STEPS_CMPLT"</span><span class="p">,</span><span class="w">
-              </span><span class="nl">"repeatValue"</span><span class="p">:{</span><span class="w">
-                </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="s2">"8"</span><span class="w">
-              </span><span class="p">},</span><span class="w">
-              </span><span class="nl">"steps"</span><span class="p">:[</span><span class="w">
-                </span><span class="p">{</span><span class="w">
-                  </span><span class="nl">"intensity"</span><span class="p">:</span><span class="s2">"INTERVAL"</span><span class="p">,</span><span class="w">
-                  </span><span class="nl">"targetType"</span><span class="p">:</span><span class="s2">"SPEED_LAP"</span><span class="p">,</span><span class="w">
-                  </span><span class="nl">"durationType"</span><span class="p">:</span><span class="s2">"TIME"</span><span class="p">,</span><span class="w">
-                  </span><span class="nl">"durationValue"</span><span class="p">:{</span><span class="w">
-                    </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="s2">"30"</span><span class="w">
-                  </span><span class="p">},</span><span class="w">
-                  </span><span class="nl">"targetValue"</span><span class="p">:</span><span class="s2">"5"</span><span class="w">
-                </span><span class="p">},</span><span class="w">
-                </span><span class="p">{</span><span class="w">
-                  </span><span class="nl">"intensity"</span><span class="p">:</span><span class="s2">"RECOVERY"</span><span class="p">,</span><span class="w">
-                  </span><span class="nl">"targetType"</span><span class="p">:</span><span class="s2">"OPEN"</span><span class="p">,</span><span class="w">
-                  </span><span class="nl">"durationType"</span><span class="p">:</span><span class="s2">"TIME"</span><span class="p">,</span><span class="w">
-                  </span><span class="nl">"durationValue"</span><span class="p">:{</span><span class="w">
-                    </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="s2">"30"</span><span class="w">
-                  </span><span class="p">}</span><span class="w">
-                </span><span class="p">}</span><span class="w">
-              </span><span class="p">]</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="p">{</span><span class="w">
-              </span><span class="nl">"intensity"</span><span class="p">:</span><span class="s2">"COOLDOWN"</span><span class="p">,</span><span class="w">
-              </span><span class="nl">"targetType"</span><span class="p">:</span><span class="s2">"OPEN"</span><span class="p">,</span><span class="w">
-              </span><span class="nl">"durationType"</span><span class="p">:</span><span class="s2">"TIME"</span><span class="p">,</span><span class="w">
-              </span><span class="nl">"durationValue"</span><span class="p">:{</span><span class="w">
-                </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="s2">"240"</span><span class="w">
-              </span><span class="p">}</span><span class="w">
-            </span><span class="p">}</span><span class="w">
-          </span><span class="p">]</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="nl">"intensity"</span><span class="p">:</span><span class="s2">"COOLDOWN"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"targetType"</span><span class="p">:</span><span class="s2">"OPEN"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"durationType"</span><span class="p">:</span><span class="s2">"TIME"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"durationValue"</span><span class="p">:{</span><span class="w">
-            </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="s2">"360"</span><span class="w">
-          </span><span class="p">}</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">]</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nl">"coach_id"</span><span class="p">:{</span><span class="w">
-    </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="s2">"4"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<blockquote>
-<p>Simple example with tags</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"_id"</span><span class="p">:{</span><span class="w">
-    </span><span class="nl">"$oid"</span><span class="p">:</span><span class="s2">"62261a8b4f3f8e0b136791c7"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nl">"sport"</span><span class="p">:</span><span class="s2">"LAP_SWIMMING"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"title"</span><span class="p">:</span><span class="s2">"Swim open water example"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"description"</span><span class="p">:</span><span class="s2">"Example with tags"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"tags"</span><span class="p">:[</span><span class="w">
-    </span><span class="s2">"easy swim"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"beginner"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"intermediate"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"open water"</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nl">"steps"</span><span class="p">:[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"intensity"</span><span class="p">:</span><span class="s2">"INTERVAL"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"targetType"</span><span class="p">:</span><span class="s2">"OPEN"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"durationType"</span><span class="p">:</span><span class="s2">"DISTANCE"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"durationValue"</span><span class="p">:{</span><span class="w">
-        </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="s2">"5"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="nl">"durationValueType"</span><span class="p">:</span><span class="s2">"KM"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nl">"variants"</span><span class="p">:[</span><span class="w">
+## Built session
 
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nl">"coach_id"</span><span class="p">:{</span><span class="w">
-    </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="s2">"4"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<blockquote>
-<p>Example ramp</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"_id"</span><span class="p">:{</span><span class="w">
-    </span><span class="nl">"$oid"</span><span class="p">:</span><span class="s2">"6228c63e06b096526738dae8"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nl">"sport"</span><span class="p">:</span><span class="s2">"CYCLING"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"title"</span><span class="p">:</span><span class="s2">"Cycling ramp"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"description"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"tags"</span><span class="p">:[</span><span class="w">
-    </span><span class="s2">"cycling"</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nl">"steps"</span><span class="p">:[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"intensity"</span><span class="p">:</span><span class="s2">"WARMUP"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"targetType"</span><span class="p">:</span><span class="s2">"OPEN"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"durationType"</span><span class="p">:</span><span class="s2">"TIME"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"durationValue"</span><span class="p">:{</span><span class="w">
-        </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="s2">"1200"</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"repeatValue"</span><span class="p">:{</span><span class="w">
-        </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="s2">"4"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="nl">"uuid-Comment"</span><span class="p">:</span><span class="s2">"a0612b3ef9024151b3947a5e6ac5da7b"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"steps"</span><span class="p">:[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="nl">"intensity"</span><span class="p">:</span><span class="s2">"INTERVAL"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"targetType"</span><span class="p">:</span><span class="s2">"OPEN"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"durationType"</span><span class="p">:</span><span class="s2">"TIME"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"durationValue"</span><span class="p">:{</span><span class="w">
-            </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="s2">"60"</span><span class="w">
-          </span><span class="p">}</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="nl">"intensity"</span><span class="p">:</span><span class="s2">"INTERVAL"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"targetType"</span><span class="p">:</span><span class="s2">"OPEN"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"durationType"</span><span class="p">:</span><span class="s2">"TIME"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"durationValue"</span><span class="p">:{</span><span class="w">
-            </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="s2">"60"</span><span class="w">
-          </span><span class="p">}</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="nl">"intensity"</span><span class="p">:</span><span class="s2">"INTERVAL"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"targetType"</span><span class="p">:</span><span class="s2">"OPEN"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"durationType"</span><span class="p">:</span><span class="s2">"DISTANCE"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"durationValueType"</span><span class="p">:</span><span class="s2">"KM"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"durationValue"</span><span class="p">:{</span><span class="w">
-            </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="s2">"12"</span><span class="w">
-          </span><span class="p">}</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="nl">"intensity"</span><span class="p">:</span><span class="s2">"INTERVAL"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"targetType"</span><span class="p">:</span><span class="s2">"OPEN"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"durationType"</span><span class="p">:</span><span class="s2">"TIME"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"durationValue"</span><span class="p">:{</span><span class="w">
-            </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="s2">"10"</span><span class="w">
-          </span><span class="p">}</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">]</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"intensity"</span><span class="p">:</span><span class="s2">"COOLDOWN"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"targetType"</span><span class="p">:</span><span class="s2">"OPEN"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"durationType"</span><span class="p">:</span><span class="s2">"TIME"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"durationValue"</span><span class="p">:{</span><span class="w">
-        </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="s2">"600"</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nl">"variants"</span><span class="p">:[</span><span class="w">
+Here is an example of a built session object with Planif session builder. This example contains 3 differents variants of the session.
 
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nl">"coach_id"</span><span class="p">:{</span><span class="w">
-    </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="s2">"4"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div><h2 id='text-amp-image-session'>Text &amp; Image session</h2>
-<p>Text and image session object</p>
+Property | Description
+--------- | -----------
+_id | The ID of the session (ObjectId)
+sport | instance of sport of the session (string)
+title | title of the session (string)
+description | description of the session (string)
+tags | list of tags choose by the creator (Array of string)
+steps | list of steps of the session, null if variants (Array of steps)
+variants | list of variants of the session, empty if only one variant (Array of variants)
 
-<table><thead>
-<tr>
-<th>Property</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>id</td>
-<td>The ID of the session (int)</td>
-</tr>
-<tr>
-<td>coach</td>
-<td>Coach creator ID (int or Coach model instance)</td>
-</tr>
-<tr>
-<td>title</td>
-<td>title of the session (string)</td>
-</tr>
-<tr>
-<td>description</td>
-<td>description of the session (string)</td>
-</tr>
-<tr>
-<td>tags</td>
-<td>list of tags choose by the creator (Array of string)</td>
-</tr>
-<tr>
-<td>session</td>
-<td>content of the session produced by timyMce (html string)</td>
-</tr>
-</tbody></table>
-<h2 id='session-builder'>Session builder</h2>
+> JSON structured like this:
+
+```json
+{
+  "_id":{
+    "$oid":"6225e150d19fffa18fa4139f"
+  },
+  "sport":"RUNNING",
+  "title":"30/30",
+  "description":"Session 30/30 for beginners, intermediates, experts",
+  "steps":null,
+  "variants":[
+    {
+      "name":"Beginner",
+      "steps":[
+        {
+          "intensity":"WARMUP",
+          "targetType":"OPEN",
+          "durationType":"TIME",
+          "durationValue":{
+            "$numberInt":"1200"
+          }
+        },
+        {
+          "repeatType":"REPEAT_UNTIL_STEPS_CMPLT",
+          "repeatValue":{
+            "$numberInt":"2"
+          },
+          "steps":[
+            {
+              "repeatType":"REPEAT_UNTIL_STEPS_CMPLT",
+              "repeatValue":{
+                "$numberInt":"6"
+              },
+              "steps":[
+                {
+                  "intensity":"INTERVAL",
+                  "targetType":"SPEED_LAP",
+                  "durationType":"TIME",
+                  "durationValue":{
+                    "$numberInt":"30"
+                  },
+                  "targetValue":"5"
+                },
+                {
+                  "intensity":"RECOVERY",
+                  "targetType":"OPEN",
+                  "durationType":"TIME",
+                  "durationValue":{
+                    "$numberInt":"30"
+                  }
+                }
+              ]
+            },
+            {
+              "intensity":"COOLDOWN",
+              "targetType":"OPEN",
+              "durationType":"TIME",
+              "durationValue":{
+                "$numberInt":"240"
+              }
+            }
+          ]
+        },
+        {
+          "intensity":"COOLDOWN",
+          "targetType":"OPEN",
+          "durationType":"TIME",
+          "durationValue":{
+            "$numberInt":"360"
+          }
+        }
+      ]
+    },
+    {
+      "name":"Intermediate",
+      "steps":[
+        {
+          "intensity":"WARMUP",
+          "targetType":"OPEN",
+          "durationType":"TIME",
+          "durationValue":{
+            "$numberInt":"1200"
+          }
+        },
+        {
+          "repeatType":"REPEAT_UNTIL_STEPS_CMPLT",
+          "repeatValue":{
+            "$numberInt":"2"
+          },
+          "steps":[
+            {
+              "repeatType":"REPEAT_UNTIL_STEPS_CMPLT",
+              "repeatValue":{
+                "$numberInt":"8"
+              },
+              "steps":[
+                {
+                  "intensity":"INTERVAL",
+                  "targetType":"SPEED_LAP",
+                  "durationType":"TIME",
+                  "durationValue":{
+                    "$numberInt":"30"
+                  },
+                  "targetValue":"5"
+                },
+                {
+                  "intensity":"RECOVERY",
+                  "targetType":"OPEN",
+                  "durationType":"TIME",
+                  "durationValue":{
+                    "$numberInt":"30"
+                  }
+                }
+              ]
+            },
+            {
+              "intensity":"COOLDOWN",
+              "targetType":"OPEN",
+              "durationType":"TIME",
+              "durationValue":{
+                "$numberInt":"240"
+              }
+            }
+          ]
+        },
+        {
+          "intensity":"COOLDOWN",
+          "targetType":"OPEN",
+          "durationType":"TIME",
+          "durationValue":{
+            "$numberInt":"360"
+          }
+        }
+      ]
+    },
+    {
+      "name":"Expert",
+      "steps":[
+        {
+          "intensity":"WARMUP",
+          "targetType":"OPEN",
+          "durationType":"TIME",
+          "durationValue":{
+            "$numberInt":"1800"
+          }
+        },
+        {
+          "repeatType":"REPEAT_UNTIL_STEPS_CMPLT",
+          "repeatValue":{
+            "$numberInt":"2"
+          },
+          "steps":[
+            {
+              "repeatType":"REPEAT_UNTIL_STEPS_CMPLT",
+              "repeatValue":{
+                "$numberInt":"8"
+              },
+              "steps":[
+                {
+                  "intensity":"INTERVAL",
+                  "targetType":"SPEED_LAP",
+                  "durationType":"TIME",
+                  "durationValue":{
+                    "$numberInt":"30"
+                  },
+                  "targetValue":"5"
+                },
+                {
+                  "intensity":"RECOVERY",
+                  "targetType":"OPEN",
+                  "durationType":"TIME",
+                  "durationValue":{
+                    "$numberInt":"30"
+                  }
+                }
+              ]
+            },
+            {
+              "intensity":"COOLDOWN",
+              "targetType":"OPEN",
+              "durationType":"TIME",
+              "durationValue":{
+                "$numberInt":"240"
+              }
+            }
+          ]
+        },
+        {
+          "intensity":"COOLDOWN",
+          "targetType":"OPEN",
+          "durationType":"TIME",
+          "durationValue":{
+            "$numberInt":"360"
+          }
+        }
+      ]
+    }
+  ],
+  "coach_id":{
+    "$numberInt":"4"
+  }
+}
+```
+
+> Simple example with tags
+
+```json
+{
+  "_id":{
+    "$oid":"62261a8b4f3f8e0b136791c7"
+  },
+  "sport":"LAP_SWIMMING",
+  "title":"Swim open water example",
+  "description":"Example with tags",
+  "tags":[
+    "easy swim",
+    "beginner",
+    "intermediate",
+    "open water"
+  ],
+  "steps":[
+    {
+      "intensity":"INTERVAL",
+      "targetType":"OPEN",
+      "durationType":"DISTANCE",
+      "durationValue":{
+        "$numberInt":"5"
+      },
+      "durationValueType":"KM"
+    }
+  ],
+  "variants":[
+    
+  ],
+  "coach_id":{
+    "$numberInt":"4"
+  }
+}
+```
+> Example ramp
+
+```json
+{
+  "_id":{
+    "$oid":"6228c63e06b096526738dae8"
+  },
+  "sport":"CYCLING",
+  "title":"Cycling ramp",
+  "description":null,
+  "tags":[
+    "cycling"
+  ],
+  "steps":[
+    {
+      "intensity":"WARMUP",
+      "targetType":"OPEN",
+      "durationType":"TIME",
+      "durationValue":{
+        "$numberInt":"1200"
+      }
+    },
+    {
+      "repeatValue":{
+        "$numberInt":"4"
+      },
+      "uuid-Comment":"a0612b3ef9024151b3947a5e6ac5da7b",
+      "steps":[
+        {
+          "intensity":"INTERVAL",
+          "targetType":"OPEN",
+          "durationType":"TIME",
+          "durationValue":{
+            "$numberInt":"60"
+          }
+        },
+        {
+          "intensity":"INTERVAL",
+          "targetType":"OPEN",
+          "durationType":"TIME",
+          "durationValue":{
+            "$numberInt":"60"
+          }
+        },
+        {
+          "intensity":"INTERVAL",
+          "targetType":"OPEN",
+          "durationType":"DISTANCE",
+          "durationValueType":"KM",
+          "durationValue":{
+            "$numberInt":"12"
+          }
+        },
+        {
+          "intensity":"INTERVAL",
+          "targetType":"OPEN",
+          "durationType":"TIME",
+          "durationValue":{
+            "$numberInt":"10"
+          }
+        }
+      ]
+    },
+    {
+      "intensity":"COOLDOWN",
+      "targetType":"OPEN",
+      "durationType":"TIME",
+      "durationValue":{
+        "$numberInt":"600"
+      }
+    }
+  ],
+  "variants":[
+    
+  ],
+  "coach_id":{
+    "$numberInt":"4"
+  }
+}
+```
+
+## Text & Image session
+
+Text and image session object
+
+Property | Description
+--------- | -----------
+id | The ID of the session (int)
+coach | Coach creator ID (int or Coach model instance)
+title | title of the session (string)
+description | description of the session (string)
+tags | list of tags choose by the creator (Array of string)
+session | content of the session produced by timyMce (html string)
+
+
+
+## Session builder -->
+
 <!-- ****** -->
 
 <!-- SHARED -->
 
 <!-- ****** -->
-<h1 id='shared-rest-api'>Shared REST API</h1><h2 id='profile'>Profile</h2>
+<h1 id='shared-rest-api'>Shared REST API</h1><h2 id='sport'>Sport</h2>
+<p><code>reverse URL shared_rest:sport</code></p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>Name of the sport</td>
+<td>String</td>
+</tr>
+</tbody></table>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'https://dev.planif.fr/api-shared/sport/'</span>
+</code></pre></div>
+<blockquote>
+<p>The GET command returns a list of all possible sport as an array of string structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+    </span><span class="s2">"RUNNING"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"CYCLING"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"SWIMMING"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"WORKOUT"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"SKIING"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"CLIMBING"</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div><h3 id='get-all-sports'>Get all sports</h3>
+<p><code>GET /api-shared/sport/</code></p>
+
+<p>This endpoint retrieves all the sports available on Planif.</p>
+<h2 id='profile'>Profile</h2>
 <p><code>reverse URL shared_rest:profile-coach</code></p>
 
 <table><thead>
@@ -2119,8 +2108,13 @@ ID | The ID of the kitten to delete
 <td>Id of the coach owner of the session</td>
 <td>Integer</td>
 </tr>
+<tr>
+<td>sport</td>
+<td>Name of the sport</td>
+<td>String</td>
+</tr>
 </tbody></table>
-<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'http://localhost:8000/api-coach/text-session'</span> <span class="se">\</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'https://dev.planif.fr/api-coach/text-session'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'</span>
 </code></pre></div>
 <blockquote>
@@ -2129,15 +2123,26 @@ ID | The ID of the kitten to delete
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
         </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"New title"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A text session"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Be ready to unleash your inner footbal"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-            </span><span class="s2">"Hard"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"run"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"yeah"</span><span class="w">
+            </span><span class="s2">"easy"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">" jogging"</span><span class="w">
         </span><span class="p">],</span><span class="w">
         </span><span class="nl">"session"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;p&gt;1 hour easy jogging&lt;/p&gt;"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"coach"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+        </span><span class="nl">"coach"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"sport"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RUNNING"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A text session"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Be ready to unleash your inner footbal"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"easy"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nl">"session"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;p&gt;1 hour easy jogging&lt;/p&gt;"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"coach"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"sport"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CYCLING"</span><span class="w">
     </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div><h3 id='get-all-text-session'>Get all text session</h3>
@@ -2148,12 +2153,13 @@ ID | The ID of the kitten to delete
 <p><code>POST /api-coach/text-session</code></p>
 
 <p>This endpoint is used to create a text session. You have to pass the minimum parameters to create a text session</p>
-<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'http://localhost:8000/api-coach/text-session'</span> <span class="se">\</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'https://dev.planif.fr/api-coach/text-session'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'</span> <span class="se">\</span>
 <span class="nt">--form</span> <span class="s1">'title="A text session"'</span> <span class="se">\</span>
 <span class="nt">--form</span> <span class="s1">'description="Be ready to unleash your inner footbal"'</span> <span class="se">\</span>
 <span class="nt">--form</span> <span class="s1">'tags="easy, jogging"'</span> <span class="se">\</span>
 <span class="nt">--form</span> <span class="s1">'session="&lt;p&gt;1 hour easy jogging&lt;/p&gt;"'</span>
+<span class="nt">--form</span> <span class="s1">'sport="CYCLING"'</span>
 </code></pre></div>
 <blockquote>
 <p>The POST command returns the created text session in JSON structured like this:</p>
@@ -2167,13 +2173,14 @@ ID | The ID of the kitten to delete
         </span><span class="s2">" jogging"</span><span class="w">
     </span><span class="p">],</span><span class="w">
     </span><span class="nl">"session"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;p&gt;1 hour easy jogging&lt;/p&gt;"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"coach"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+    </span><span class="nl">"coach"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"sport"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CYCLING"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='get-a-specific-text-session'>Get a specific text session</h3>
 <p><code>GET /api-coach/text-session/&lt;id&gt;</code></p>
 
 <p>This endpoint is used to get a text session. You have to pass the id of the text session</p>
-<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'http://localhost:8000/api-coach/text-session/2'</span> <span class="se">\</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'https://dev.planif.fr/api-coach/text-session/2'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'</span>
 </code></pre></div>
 <blockquote>
@@ -2181,21 +2188,21 @@ ID | The ID of the kitten to delete
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"New title"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A text session"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Be ready to unleash your inner footbal"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="s2">"Hard"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"run"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"yeah"</span><span class="w">
+        </span><span class="s2">"easy"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">" jogging"</span><span class="w">
     </span><span class="p">],</span><span class="w">
     </span><span class="nl">"session"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;p&gt;1 hour easy jogging&lt;/p&gt;"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"coach"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+    </span><span class="nl">"coach"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"sport"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RUNNING"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='modify-a-text-session'>Modify a text session</h3>
 <p><code>PATCH /api-coach/text-session/&lt;id&gt;</code></p>
 
 <p>This endpoint is used to update a text session. You have to pass the id of the text session in the url and the data you want to modify as params. You can update partially the data.</p>
-<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> PATCH <span class="s1">'http://localhost:8000/api-coach/text-session/2'</span> <span class="se">\</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> PATCH <span class="s1">'https://dev.planif.fr/api-coach/text-session/2'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'</span> <span class="se">\</span>
 <span class="nt">--form</span> <span class="s1">'title="New title 2"'</span> <span class="se">\</span>
 <span class="nt">--form</span> <span class="s1">'tags="Hard, run, yeah"'</span>
@@ -2213,13 +2220,925 @@ ID | The ID of the kitten to delete
         </span><span class="s2">"yeah"</span><span class="w">
     </span><span class="p">],</span><span class="w">
     </span><span class="nl">"session"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;p&gt;1 hour easy jogging&lt;/p&gt;"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"coach"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+    </span><span class="nl">"coach"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"sport"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CYCLING"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='delete-a-specific-text-session'>Delete a specific text session</h3>
 <p><code>DELETE /api-coach/text-session/&lt;id&gt;</code></p>
 
 <p>This endpoint is used to delete a text session. You have to pass the id of the text session. If successful the request will return a 204 No content</p>
-<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> DELETE <span class="s1">'http://localhost:8000/api-coach/text-session/2'</span> <span class="se">\</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> DELETE <span class="s1">'https://dev.planif.fr/api-coach/text-session/2'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'</span>
+</code></pre></div><h2 id='built-session'>Built Session</h2>
+<p><code>reverse URL coach_rest:built-session-list</code>
+<code>reverse URL coach_rest:built-session-detail</code></p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>Id of the built session</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>title</td>
+<td>Title of the built session max_length=100</td>
+<td>String</td>
+</tr>
+<tr>
+<td>description</td>
+<td>Description of the built session (optional) max_length=500</td>
+<td>String</td>
+</tr>
+<tr>
+<td>steps</td>
+<td>Steps of the session created by the session Builder</td>
+<td>JSON</td>
+</tr>
+<tr>
+<td>variants</td>
+<td>Variants of the session created by the session Builder (multiple steps)</td>
+<td>JSON</td>
+</tr>
+<tr>
+<td>tags</td>
+<td>Array of tags describing the session</td>
+<td>Array of String</td>
+</tr>
+<tr>
+<td>coach</td>
+<td>Id of the coach owner of the session</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>sport</td>
+<td>Name of the sport</td>
+<td>String</td>
+</tr>
+</tbody></table>
+
+<p>Either Steps or Variants must be set but not both at the same time</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'https://dev.planif.fr/api-coach/built-session'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'</span>
+</code></pre></div>
+<blockquote>
+<p>The GET command returns a list of built sessions as JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A text session"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Be ready to unleash your inner footbal"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"sport"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CYCLING"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"Hard"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"run"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"yop"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nl">"steps"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"intensity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"WARMUP"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"targetType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OPEN"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"durationType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TIME"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"durationValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1200"</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"steps"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="p">{</span><span class="w">
+                        </span><span class="nl">"intensity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INTERVAL"</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"targetType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OPEN"</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"durationType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TIME"</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"durationValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                            </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"60"</span><span class="w">
+                        </span><span class="p">}</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="p">{</span><span class="w">
+                        </span><span class="nl">"intensity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INTERVAL"</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"targetType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OPEN"</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"durationType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TIME"</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"durationValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                            </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"60"</span><span class="w">
+                        </span><span class="p">}</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="p">{</span><span class="w">
+                        </span><span class="nl">"intensity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INTERVAL"</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"targetType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OPEN"</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"durationType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DISTANCE"</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"durationValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                            </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12"</span><span class="w">
+                        </span><span class="p">},</span><span class="w">
+                        </span><span class="nl">"durationValueType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"KM"</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="p">{</span><span class="w">
+                        </span><span class="nl">"intensity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INTERVAL"</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"targetType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OPEN"</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"durationType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TIME"</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"durationValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                            </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10"</span><span class="w">
+                        </span><span class="p">}</span><span class="w">
+                    </span><span class="p">}</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="nl">"repeatValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4"</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="nl">"uuid-Comment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a0612b3ef9024151b3947a5e6ac5da7b"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"intensity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"COOLDOWN"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"targetType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OPEN"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"durationType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TIME"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"durationValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"600"</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nl">"variants"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"coach"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A built session run"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Be ready to unleash your inner footbal"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"sport"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RUNNING"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"easy"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">" jogging"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nl">"steps"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"variants"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Beginner"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"steps"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="p">{</span><span class="w">
+                        </span><span class="nl">"intensity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"WARMUP"</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"targetType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OPEN"</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"durationType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TIME"</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"durationValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                            </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1200"</span><span class="w">
+                        </span><span class="p">}</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="p">{</span><span class="w">
+                        </span><span class="nl">"steps"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                            </span><span class="p">{</span><span class="w">
+                                </span><span class="nl">"steps"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                                    </span><span class="p">{</span><span class="w">
+                                        </span><span class="nl">"intensity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INTERVAL"</span><span class="p">,</span><span class="w">
+                                        </span><span class="nl">"targetType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SPEED_LAP"</span><span class="p">,</span><span class="w">
+                                        </span><span class="nl">"targetValue"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5"</span><span class="p">,</span><span class="w">
+                                        </span><span class="nl">"durationType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TIME"</span><span class="p">,</span><span class="w">
+                                        </span><span class="nl">"durationValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                                            </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30"</span><span class="w">
+                                        </span><span class="p">}</span><span class="w">
+                                    </span><span class="p">},</span><span class="w">
+                                    </span><span class="p">{</span><span class="w">
+                                        </span><span class="nl">"intensity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RECOVERY"</span><span class="p">,</span><span class="w">
+                                        </span><span class="nl">"targetType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OPEN"</span><span class="p">,</span><span class="w">
+                                        </span><span class="nl">"durationType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TIME"</span><span class="p">,</span><span class="w">
+                                        </span><span class="nl">"durationValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                                            </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30"</span><span class="w">
+                                        </span><span class="p">}</span><span class="w">
+                                    </span><span class="p">}</span><span class="w">
+                                </span><span class="p">],</span><span class="w">
+                                </span><span class="nl">"repeatType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"REPEAT_UNTIL_STEPS_CMPLT"</span><span class="p">,</span><span class="w">
+                                </span><span class="nl">"repeatValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                                    </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6"</span><span class="w">
+                                </span><span class="p">}</span><span class="w">
+                            </span><span class="p">},</span><span class="w">
+                            </span><span class="p">{</span><span class="w">
+                                </span><span class="nl">"intensity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"COOLDOWN"</span><span class="p">,</span><span class="w">
+                                </span><span class="nl">"targetType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OPEN"</span><span class="p">,</span><span class="w">
+                                </span><span class="nl">"durationType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TIME"</span><span class="p">,</span><span class="w">
+                                </span><span class="nl">"durationValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                                    </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"240"</span><span class="w">
+                                </span><span class="p">}</span><span class="w">
+                            </span><span class="p">}</span><span class="w">
+                        </span><span class="p">],</span><span class="w">
+                        </span><span class="nl">"repeatType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"REPEAT_UNTIL_STEPS_CMPLT"</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"repeatValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                            </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="w">
+                        </span><span class="p">}</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="p">{</span><span class="w">
+                        </span><span class="nl">"intensity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"COOLDOWN"</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"targetType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OPEN"</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"durationType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TIME"</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"durationValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                            </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"360"</span><span class="w">
+                        </span><span class="p">}</span><span class="w">
+                    </span><span class="p">}</span><span class="w">
+                </span><span class="p">]</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Intermediate"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"steps"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="p">{</span><span class="w">
+                        </span><span class="nl">"intensity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"WARMUP"</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"targetType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OPEN"</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"durationType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TIME"</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"durationValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                            </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1200"</span><span class="w">
+                        </span><span class="p">}</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="p">{</span><span class="w">
+                        </span><span class="nl">"steps"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                            </span><span class="p">{</span><span class="w">
+                                </span><span class="nl">"steps"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                                    </span><span class="p">{</span><span class="w">
+                                        </span><span class="nl">"intensity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INTERVAL"</span><span class="p">,</span><span class="w">
+                                        </span><span class="nl">"targetType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SPEED_LAP"</span><span class="p">,</span><span class="w">
+                                        </span><span class="nl">"targetValue"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5"</span><span class="p">,</span><span class="w">
+                                        </span><span class="nl">"durationType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TIME"</span><span class="p">,</span><span class="w">
+                                        </span><span class="nl">"durationValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                                            </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30"</span><span class="w">
+                                        </span><span class="p">}</span><span class="w">
+                                    </span><span class="p">},</span><span class="w">
+                                    </span><span class="p">{</span><span class="w">
+                                        </span><span class="nl">"intensity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RECOVERY"</span><span class="p">,</span><span class="w">
+                                        </span><span class="nl">"targetType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OPEN"</span><span class="p">,</span><span class="w">
+                                        </span><span class="nl">"durationType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TIME"</span><span class="p">,</span><span class="w">
+                                        </span><span class="nl">"durationValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                                            </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30"</span><span class="w">
+                                        </span><span class="p">}</span><span class="w">
+                                    </span><span class="p">}</span><span class="w">
+                                </span><span class="p">],</span><span class="w">
+                                </span><span class="nl">"repeatType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"REPEAT_UNTIL_STEPS_CMPLT"</span><span class="p">,</span><span class="w">
+                                </span><span class="nl">"repeatValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                                    </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8"</span><span class="w">
+                                </span><span class="p">}</span><span class="w">
+                            </span><span class="p">},</span><span class="w">
+                            </span><span class="p">{</span><span class="w">
+                                </span><span class="nl">"intensity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"COOLDOWN"</span><span class="p">,</span><span class="w">
+                                </span><span class="nl">"targetType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OPEN"</span><span class="p">,</span><span class="w">
+                                </span><span class="nl">"durationType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TIME"</span><span class="p">,</span><span class="w">
+                                </span><span class="nl">"durationValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                                    </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"240"</span><span class="w">
+                                </span><span class="p">}</span><span class="w">
+                            </span><span class="p">}</span><span class="w">
+                        </span><span class="p">],</span><span class="w">
+                        </span><span class="nl">"repeatType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"REPEAT_UNTIL_STEPS_CMPLT"</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"repeatValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                            </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="w">
+                        </span><span class="p">}</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="p">{</span><span class="w">
+                        </span><span class="nl">"intensity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"COOLDOWN"</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"targetType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OPEN"</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"durationType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TIME"</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"durationValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                            </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"360"</span><span class="w">
+                        </span><span class="p">}</span><span class="w">
+                    </span><span class="p">}</span><span class="w">
+                </span><span class="p">]</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Expert"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"steps"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="p">{</span><span class="w">
+                        </span><span class="nl">"intensity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"WARMUP"</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"targetType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OPEN"</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"durationType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TIME"</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"durationValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                            </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1800"</span><span class="w">
+                        </span><span class="p">}</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="p">{</span><span class="w">
+                        </span><span class="nl">"steps"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                            </span><span class="p">{</span><span class="w">
+                                </span><span class="nl">"steps"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                                    </span><span class="p">{</span><span class="w">
+                                        </span><span class="nl">"intensity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INTERVAL"</span><span class="p">,</span><span class="w">
+                                        </span><span class="nl">"targetType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SPEED_LAP"</span><span class="p">,</span><span class="w">
+                                        </span><span class="nl">"targetValue"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5"</span><span class="p">,</span><span class="w">
+                                        </span><span class="nl">"durationType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TIME"</span><span class="p">,</span><span class="w">
+                                        </span><span class="nl">"durationValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                                            </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30"</span><span class="w">
+                                        </span><span class="p">}</span><span class="w">
+                                    </span><span class="p">},</span><span class="w">
+                                    </span><span class="p">{</span><span class="w">
+                                        </span><span class="nl">"intensity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RECOVERY"</span><span class="p">,</span><span class="w">
+                                        </span><span class="nl">"targetType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OPEN"</span><span class="p">,</span><span class="w">
+                                        </span><span class="nl">"durationType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TIME"</span><span class="p">,</span><span class="w">
+                                        </span><span class="nl">"durationValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                                            </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30"</span><span class="w">
+                                        </span><span class="p">}</span><span class="w">
+                                    </span><span class="p">}</span><span class="w">
+                                </span><span class="p">],</span><span class="w">
+                                </span><span class="nl">"repeatType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"REPEAT_UNTIL_STEPS_CMPLT"</span><span class="p">,</span><span class="w">
+                                </span><span class="nl">"repeatValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                                    </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8"</span><span class="w">
+                                </span><span class="p">}</span><span class="w">
+                            </span><span class="p">},</span><span class="w">
+                            </span><span class="p">{</span><span class="w">
+                                </span><span class="nl">"intensity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"COOLDOWN"</span><span class="p">,</span><span class="w">
+                                </span><span class="nl">"targetType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OPEN"</span><span class="p">,</span><span class="w">
+                                </span><span class="nl">"durationType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TIME"</span><span class="p">,</span><span class="w">
+                                </span><span class="nl">"durationValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                                    </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"240"</span><span class="w">
+                                </span><span class="p">}</span><span class="w">
+                            </span><span class="p">}</span><span class="w">
+                        </span><span class="p">],</span><span class="w">
+                        </span><span class="nl">"repeatType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"REPEAT_UNTIL_STEPS_CMPLT"</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"repeatValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                            </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="w">
+                        </span><span class="p">}</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="p">{</span><span class="w">
+                        </span><span class="nl">"intensity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"COOLDOWN"</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"targetType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OPEN"</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"durationType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TIME"</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"durationValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                            </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"360"</span><span class="w">
+                        </span><span class="p">}</span><span class="w">
+                    </span><span class="p">}</span><span class="w">
+                </span><span class="p">]</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nl">"coach"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div><h3 id='get-all-built-session'>Get all built session</h3>
+<p><code>GET /api-coach/built-session</code></p>
+
+<p>This endpoint retrieves the coach built sessions.</p>
+<h3 id='create-a-built-session'>Create a built session</h3>
+<p><code>POST /api-coach/built-session</code></p>
+
+<p>This endpoint is used to create a built session. You have to pass the minimum parameters to create a built session</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'https://dev.planif.fr/api-coach/built-session'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'</span> <span class="se">\</span>
+<span class="nt">--form</span> <span class="s1">'title="A built session run"'</span> <span class="se">\</span>
+<span class="nt">--form</span> <span class="s1">'description="Be ready to unleash your inner footbal"'</span> <span class="se">\</span>
+<span class="nt">--form</span> <span class="s1">'tags="easy, jogging"'</span> <span class="se">\</span>
+<span class="nt">--form</span> <span class="s1">'sport="RUNNING"'</span> <span class="se">\</span>
+<span class="nt">--form</span> <span class="s1">'variants="[
+    {
+      \"name\":\"Beginner\",
+      \"steps\":[
+        {
+          \"intensity\":\"WARMUP\",
+          \"targetType\":\"OPEN\",
+          \"durationType\":\"TIME\",
+          \"durationValue\":{
+            \"$numberInt\":\"1200\"
+          }
+        },
+        {
+          \"repeatType\":\"REPEAT_UNTIL_STEPS_CMPLT\",
+          \"repeatValue\":{
+            \"$numberInt\":\"2\"
+          },
+          \"steps\":[
+            {
+              \"repeatType\":\"REPEAT_UNTIL_STEPS_CMPLT\",
+              \"repeatValue\":{
+                \"$numberInt\":\"6\"
+              },
+              \"steps\":[
+                {
+                  \"intensity\":\"INTERVAL\",
+                  \"targetType\":\"SPEED_LAP\",
+                  \"durationType\":\"TIME\",
+                  \"durationValue\":{
+                    \"$numberInt\":\"30\"
+                  },
+                  \"targetValue\":\"5\"
+                },
+                {
+                  \"intensity\":\"RECOVERY\",
+                  \"targetType\":\"OPEN\",
+                  \"durationType\":\"TIME\",
+                  \"durationValue\":{
+                    \"$numberInt\":\"30\"
+                  }
+                }
+              ]
+            },
+            {
+              \"intensity\":\"COOLDOWN\",
+              \"targetType\":\"OPEN\",
+              \"durationType\":\"TIME\",
+              \"durationValue\":{
+                \"$numberInt\":\"240\"
+              }
+            }
+          ]
+        },
+        {
+          \"intensity\":\"COOLDOWN\",
+          \"targetType\":\"OPEN\",
+          \"durationType\":\"TIME\",
+          \"durationValue\":{
+            \"$numberInt\":\"360\"
+          }
+        }
+      ]
+    },
+    {
+      \"name\":\"Intermediate\",
+      \"steps\":[
+        {
+          \"intensity\":\"WARMUP\",
+          \"targetType\":\"OPEN\",
+          \"durationType\":\"TIME\",
+          \"durationValue\":{
+            \"$numberInt\":\"1200\"
+          }
+        },
+        {
+          \"repeatType\":\"REPEAT_UNTIL_STEPS_CMPLT\",
+          \"repeatValue\":{
+            \"$numberInt\":\"2\"
+          },
+          \"steps\":[
+            {
+              \"repeatType\":\"REPEAT_UNTIL_STEPS_CMPLT\",
+              \"repeatValue\":{
+                \"$numberInt\":\"8\"
+              },
+              \"steps\":[
+                {
+                  \"intensity\":\"INTERVAL\",
+                  \"targetType\":\"SPEED_LAP\",
+                  \"durationType\":\"TIME\",
+                  \"durationValue\":{
+                    \"$numberInt\":\"30\"
+                  },
+                  \"targetValue\":\"5\"
+                },
+                {
+                  \"intensity\":\"RECOVERY\",
+                  \"targetType\":\"OPEN\",
+                  \"durationType\":\"TIME\",
+                  \"durationValue\":{
+                    \"$numberInt\":\"30\"
+                  }
+                }
+              ]
+            },
+            {
+              \"intensity\":\"COOLDOWN\",
+              \"targetType\":\"OPEN\",
+              \"durationType\":\"TIME\",
+              \"durationValue\":{
+                \"$numberInt\":\"240\"
+              }
+            }
+          ]
+        },
+        {
+          \"intensity\":\"COOLDOWN\",
+          \"targetType\":\"OPEN\",
+          \"durationType\":\"TIME\",
+          \"durationValue\":{
+            \"$numberInt\":\"360\"
+          }
+        }
+      ]
+    },
+    {
+      \"name\":\"Expert\",
+      \"steps\":[
+        {
+          \"intensity\":\"WARMUP\",
+          \"targetType\":\"OPEN\",
+          \"durationType\":\"TIME\",
+          \"durationValue\":{
+            \"$numberInt\":\"1800\"
+          }
+        },
+        {
+          \"repeatType\":\"REPEAT_UNTIL_STEPS_CMPLT\",
+          \"repeatValue\":{
+            \"$numberInt\":\"2\"
+          },
+          \"steps\":[
+            {
+              \"repeatType\":\"REPEAT_UNTIL_STEPS_CMPLT\",
+              \"repeatValue\":{
+                \"$numberInt\":\"8\"
+              },
+              \"steps\":[
+                {
+                  \"intensity\":\"INTERVAL\",
+                  \"targetType\":\"SPEED_LAP\",
+                  \"durationType\":\"TIME\",
+                  \"durationValue\":{
+                    \"$numberInt\":\"30\"
+                  },
+                  \"targetValue\":\"5\"
+                },
+                {
+                  \"intensity\":\"RECOVERY\",
+                  \"targetType\":\"OPEN\",
+                  \"durationType\":\"TIME\",
+                  \"durationValue\":{
+                    \"$numberInt\":\"30\"
+                  }
+                }
+              ]
+            },
+            {
+              \"intensity\":\"COOLDOWN\",
+              \"targetType\":\"OPEN\",
+              \"durationType\":\"TIME\",
+              \"durationValue\":{
+                \"$numberInt\":\"240\"
+              }
+            }
+          ]
+        },
+        {
+          \"intensity\":\"COOLDOWN\",
+          \"targetType\":\"OPEN\",
+          \"durationType\":\"TIME\",
+          \"durationValue\":{
+            \"$numberInt\":\"360\"
+          }
+        }
+      ]
+    }
+  ]"'</span>
+</code></pre></div>
+<blockquote>
+<p>The POST command returns the created built session in JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A built session run"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Be ready to unleash your inner footbal"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"sport"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RUNNING"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"easy"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">" jogging"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"steps"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"variants"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Beginner"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"steps"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"intensity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"WARMUP"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"targetType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OPEN"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"durationType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TIME"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"durationValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1200"</span><span class="w">
+                    </span><span class="p">}</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"repeatType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"REPEAT_UNTIL_STEPS_CMPLT"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"repeatValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="nl">"steps"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                        </span><span class="p">{</span><span class="w">
+                            </span><span class="nl">"repeatType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"REPEAT_UNTIL_STEPS_CMPLT"</span><span class="p">,</span><span class="w">
+                            </span><span class="nl">"repeatValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                                </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6"</span><span class="w">
+                            </span><span class="p">},</span><span class="w">
+                            </span><span class="nl">"steps"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                                </span><span class="p">{</span><span class="w">
+                                    </span><span class="nl">"intensity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INTERVAL"</span><span class="p">,</span><span class="w">
+                                    </span><span class="nl">"targetType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SPEED_LAP"</span><span class="p">,</span><span class="w">
+                                    </span><span class="nl">"durationType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TIME"</span><span class="p">,</span><span class="w">
+                                    </span><span class="nl">"durationValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                                        </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30"</span><span class="w">
+                                    </span><span class="p">},</span><span class="w">
+                                    </span><span class="nl">"targetValue"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5"</span><span class="w">
+                                </span><span class="p">},</span><span class="w">
+                                </span><span class="p">{</span><span class="w">
+                                    </span><span class="nl">"intensity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RECOVERY"</span><span class="p">,</span><span class="w">
+                                    </span><span class="nl">"targetType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OPEN"</span><span class="p">,</span><span class="w">
+                                    </span><span class="nl">"durationType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TIME"</span><span class="p">,</span><span class="w">
+                                    </span><span class="nl">"durationValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                                        </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30"</span><span class="w">
+                                    </span><span class="p">}</span><span class="w">
+                                </span><span class="p">}</span><span class="w">
+                            </span><span class="p">]</span><span class="w">
+                        </span><span class="p">},</span><span class="w">
+                        </span><span class="p">{</span><span class="w">
+                            </span><span class="nl">"intensity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"COOLDOWN"</span><span class="p">,</span><span class="w">
+                            </span><span class="nl">"targetType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OPEN"</span><span class="p">,</span><span class="w">
+                            </span><span class="nl">"durationType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TIME"</span><span class="p">,</span><span class="w">
+                            </span><span class="nl">"durationValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                                </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"240"</span><span class="w">
+                            </span><span class="p">}</span><span class="w">
+                        </span><span class="p">}</span><span class="w">
+                    </span><span class="p">]</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"intensity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"COOLDOWN"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"targetType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OPEN"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"durationType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TIME"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"durationValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"360"</span><span class="w">
+                    </span><span class="p">}</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Intermediate"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"steps"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"intensity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"WARMUP"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"targetType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OPEN"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"durationType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TIME"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"durationValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1200"</span><span class="w">
+                    </span><span class="p">}</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"repeatType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"REPEAT_UNTIL_STEPS_CMPLT"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"repeatValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="nl">"steps"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                        </span><span class="p">{</span><span class="w">
+                            </span><span class="nl">"repeatType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"REPEAT_UNTIL_STEPS_CMPLT"</span><span class="p">,</span><span class="w">
+                            </span><span class="nl">"repeatValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                                </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8"</span><span class="w">
+                            </span><span class="p">},</span><span class="w">
+                            </span><span class="nl">"steps"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                                </span><span class="p">{</span><span class="w">
+                                    </span><span class="nl">"intensity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INTERVAL"</span><span class="p">,</span><span class="w">
+                                    </span><span class="nl">"targetType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SPEED_LAP"</span><span class="p">,</span><span class="w">
+                                    </span><span class="nl">"durationType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TIME"</span><span class="p">,</span><span class="w">
+                                    </span><span class="nl">"durationValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                                        </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30"</span><span class="w">
+                                    </span><span class="p">},</span><span class="w">
+                                    </span><span class="nl">"targetValue"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5"</span><span class="w">
+                                </span><span class="p">},</span><span class="w">
+                                </span><span class="p">{</span><span class="w">
+                                    </span><span class="nl">"intensity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RECOVERY"</span><span class="p">,</span><span class="w">
+                                    </span><span class="nl">"targetType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OPEN"</span><span class="p">,</span><span class="w">
+                                    </span><span class="nl">"durationType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TIME"</span><span class="p">,</span><span class="w">
+                                    </span><span class="nl">"durationValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                                        </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30"</span><span class="w">
+                                    </span><span class="p">}</span><span class="w">
+                                </span><span class="p">}</span><span class="w">
+                            </span><span class="p">]</span><span class="w">
+                        </span><span class="p">},</span><span class="w">
+                        </span><span class="p">{</span><span class="w">
+                            </span><span class="nl">"intensity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"COOLDOWN"</span><span class="p">,</span><span class="w">
+                            </span><span class="nl">"targetType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OPEN"</span><span class="p">,</span><span class="w">
+                            </span><span class="nl">"durationType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TIME"</span><span class="p">,</span><span class="w">
+                            </span><span class="nl">"durationValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                                </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"240"</span><span class="w">
+                            </span><span class="p">}</span><span class="w">
+                        </span><span class="p">}</span><span class="w">
+                    </span><span class="p">]</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"intensity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"COOLDOWN"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"targetType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OPEN"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"durationType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TIME"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"durationValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"360"</span><span class="w">
+                    </span><span class="p">}</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Expert"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"steps"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"intensity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"WARMUP"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"targetType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OPEN"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"durationType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TIME"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"durationValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1800"</span><span class="w">
+                    </span><span class="p">}</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"repeatType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"REPEAT_UNTIL_STEPS_CMPLT"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"repeatValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="nl">"steps"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                        </span><span class="p">{</span><span class="w">
+                            </span><span class="nl">"repeatType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"REPEAT_UNTIL_STEPS_CMPLT"</span><span class="p">,</span><span class="w">
+                            </span><span class="nl">"repeatValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                                </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8"</span><span class="w">
+                            </span><span class="p">},</span><span class="w">
+                            </span><span class="nl">"steps"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                                </span><span class="p">{</span><span class="w">
+                                    </span><span class="nl">"intensity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INTERVAL"</span><span class="p">,</span><span class="w">
+                                    </span><span class="nl">"targetType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SPEED_LAP"</span><span class="p">,</span><span class="w">
+                                    </span><span class="nl">"durationType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TIME"</span><span class="p">,</span><span class="w">
+                                    </span><span class="nl">"durationValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                                        </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30"</span><span class="w">
+                                    </span><span class="p">},</span><span class="w">
+                                    </span><span class="nl">"targetValue"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5"</span><span class="w">
+                                </span><span class="p">},</span><span class="w">
+                                </span><span class="p">{</span><span class="w">
+                                    </span><span class="nl">"intensity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RECOVERY"</span><span class="p">,</span><span class="w">
+                                    </span><span class="nl">"targetType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OPEN"</span><span class="p">,</span><span class="w">
+                                    </span><span class="nl">"durationType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TIME"</span><span class="p">,</span><span class="w">
+                                    </span><span class="nl">"durationValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                                        </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30"</span><span class="w">
+                                    </span><span class="p">}</span><span class="w">
+                                </span><span class="p">}</span><span class="w">
+                            </span><span class="p">]</span><span class="w">
+                        </span><span class="p">},</span><span class="w">
+                        </span><span class="p">{</span><span class="w">
+                            </span><span class="nl">"intensity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"COOLDOWN"</span><span class="p">,</span><span class="w">
+                            </span><span class="nl">"targetType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OPEN"</span><span class="p">,</span><span class="w">
+                            </span><span class="nl">"durationType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TIME"</span><span class="p">,</span><span class="w">
+                            </span><span class="nl">"durationValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                                </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"240"</span><span class="w">
+                            </span><span class="p">}</span><span class="w">
+                        </span><span class="p">}</span><span class="w">
+                    </span><span class="p">]</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"intensity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"COOLDOWN"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"targetType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OPEN"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"durationType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TIME"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"durationValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"360"</span><span class="w">
+                    </span><span class="p">}</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"coach"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='get-a-specific-built-session'>Get a specific built session</h3>
+<p><code>GET /api-coach/built-session/&lt;id&gt;</code></p>
+
+<p>This endpoint is used to get a built session. You have to pass the id of the built session</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'https://dev.planif.fr/api-coach/built-session/2'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'</span>
+</code></pre></div>
+<blockquote>
+<p>The GET command returns the target built session in JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A text session"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Be ready to unleash your inner footbal"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"sport"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CYCLING"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"Hard"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"run"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"yop"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"steps"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"intensity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"WARMUP"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"targetType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OPEN"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"durationType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TIME"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"durationValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1200"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"steps"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"intensity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INTERVAL"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"targetType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OPEN"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"durationType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TIME"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"durationValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"60"</span><span class="w">
+                    </span><span class="p">}</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"intensity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INTERVAL"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"targetType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OPEN"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"durationType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TIME"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"durationValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"60"</span><span class="w">
+                    </span><span class="p">}</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"intensity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INTERVAL"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"targetType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OPEN"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"durationType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DISTANCE"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"durationValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12"</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="nl">"durationValueType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"KM"</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"intensity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INTERVAL"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"targetType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OPEN"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"durationType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TIME"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"durationValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10"</span><span class="w">
+                    </span><span class="p">}</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="nl">"repeatValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nl">"uuid-Comment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a0612b3ef9024151b3947a5e6ac5da7b"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"intensity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"COOLDOWN"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"targetType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OPEN"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"durationType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TIME"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"durationValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"600"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"variants"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"coach"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='modify-a-built-session'>Modify a built session</h3>
+<p><code>PATCH /api-coach/built-session/&lt;id&gt;</code></p>
+
+<p>This endpoint is used to update a built session. You have to pass the id of the built session in the url and the data you want to modify as params. You can update partially the data.</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> PATCH <span class="s1">'https://dev.planif.fr/api-coach/built-session/2'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'</span> <span class="se">\</span>
+<span class="nt">--form</span> <span class="s1">'tags="Hard, run, yop"'</span>
+</code></pre></div>
+<blockquote>
+<p>If successful the PATCH command returns the updated built session in JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A text session"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Be ready to unleash your inner footbal"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"sport"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CYCLING"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"Hard"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"run"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"yop"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"steps"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"intensity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"WARMUP"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"targetType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OPEN"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"durationType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TIME"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"durationValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1200"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"steps"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"intensity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INTERVAL"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"targetType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OPEN"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"durationType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TIME"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"durationValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"60"</span><span class="w">
+                    </span><span class="p">}</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"intensity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INTERVAL"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"targetType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OPEN"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"durationType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TIME"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"durationValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"60"</span><span class="w">
+                    </span><span class="p">}</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"intensity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INTERVAL"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"targetType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OPEN"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"durationType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DISTANCE"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"durationValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12"</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="nl">"durationValueType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"KM"</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"intensity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INTERVAL"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"targetType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OPEN"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"durationType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TIME"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"durationValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10"</span><span class="w">
+                    </span><span class="p">}</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="nl">"repeatValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nl">"uuid-Comment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a0612b3ef9024151b3947a5e6ac5da7b"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"intensity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"COOLDOWN"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"targetType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OPEN"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"durationType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TIME"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"durationValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"$numberInt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"600"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"variants"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"coach"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='delete-a-specific-built-session'>Delete a specific built session</h3>
+<p><code>DELETE /api-coach/built-session/&lt;id&gt;</code></p>
+
+<p>This endpoint is used to delete a built session. You have to pass the id of the built session. If successful the request will return a 204 No content</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> DELETE <span class="s1">'https://dev.planif.fr/api-coach/built-session/2'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'</span>
 </code></pre></div><h2 id='tags'>Tags</h2>
 <p><code>reverse URL coach_rest:tag-coach</code></p>
