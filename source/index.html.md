@@ -293,7 +293,7 @@ Property | Description
 username | required (string)
 password | required (string)
 
-
+<!-- 
 # Sessions
 
 ## Built session
@@ -646,13 +646,44 @@ session | content of the session produced by timyMce (html string)
 
 
 
-## Session builder
+## Session builder -->
 
 <!-- ****** -->
 <!-- SHARED -->
 <!-- ****** -->
 
 # Shared REST API
+
+## Sport
+
+`reverse URL shared_rest:sport`
+
+Property | Description | Type
+--------- | ----------- | -----------
+name | Name of the sport  | String
+
+```shell
+curl --location --request GET 'https://dev.planif.fr/api-shared/sport/'
+```
+
+> The GET command returns a list of all possible sport as an array of string structured like this:
+
+```json
+[
+    "RUNNING",
+    "CYCLING",
+    "SWIMMING",
+    "WORKOUT",
+    "SKIING",
+    "CLIMBING"
+]
+```
+
+### Get all sports
+
+`GET /api-shared/sport/`
+
+This endpoint retrieves all the sports available on Planif.
 
 ## Profile
 
@@ -1609,9 +1640,10 @@ description | Description of the text session (optional) max_length=500  | Strin
 session | Body of the session (HTML markup)  | String
 tags | Array of tags describing the session  | Array of String
 coach | Id of the coach owner of the session  | Integer
+sport | Name of the sport | String
 
 ```shell
-curl --location --request GET 'http://localhost:8000/api-coach/text-session' \
+curl --location --request GET 'https://dev.planif.fr/api-coach/text-session' \
 --header 'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'
 ```
 
@@ -1621,15 +1653,26 @@ curl --location --request GET 'http://localhost:8000/api-coach/text-session' \
 [
     {
         "id": 2,
-        "title": "New title",
+        "title": "A text session",
         "description": "Be ready to unleash your inner footbal",
         "tags": [
-            "Hard",
-            "run",
-            "yeah"
+            "easy",
+            " jogging"
         ],
         "session": "<p>1 hour easy jogging</p>",
-        "coach": 1
+        "coach": 1,
+        "sport": "RUNNING"
+    },
+    {
+        "id": 3,
+        "title": "A text session",
+        "description": "Be ready to unleash your inner footbal",
+        "tags": [
+            "easy"
+        ],
+        "session": "<p>1 hour easy jogging</p>",
+        "coach": 1,
+        "sport": "CYCLING"
     }
 ]
 ```
@@ -1647,12 +1690,13 @@ This endpoint retrieves the coach text sessions.
 This endpoint is used to create a text session. You have to pass the minimum parameters to create a text session
 
 ```shell
-curl --location --request POST 'http://localhost:8000/api-coach/text-session' \
+curl --location --request POST 'https://dev.planif.fr/api-coach/text-session' \
 --header 'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476' \
 --form 'title="A text session"' \
 --form 'description="Be ready to unleash your inner footbal"' \
 --form 'tags="easy, jogging"' \
 --form 'session="<p>1 hour easy jogging</p>"'
+--form 'sport="CYCLING"'
 ```
 
 > The POST command returns the created text session in JSON structured like this:
@@ -1667,7 +1711,8 @@ curl --location --request POST 'http://localhost:8000/api-coach/text-session' \
         " jogging"
     ],
     "session": "<p>1 hour easy jogging</p>",
-    "coach": 1
+    "coach": 1,
+    "sport": "CYCLING"
 }
 ```
 
@@ -1678,7 +1723,7 @@ curl --location --request POST 'http://localhost:8000/api-coach/text-session' \
 This endpoint is used to get a text session. You have to pass the id of the text session
 
 ```shell
-curl --location --request GET 'http://localhost:8000/api-coach/text-session/2' \
+curl --location --request GET 'https://dev.planif.fr/api-coach/text-session/2' \
 --header 'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'
 ```
 
@@ -1687,15 +1732,15 @@ curl --location --request GET 'http://localhost:8000/api-coach/text-session/2' \
 ```json
 {
     "id": 2,
-    "title": "New title",
+    "title": "A text session",
     "description": "Be ready to unleash your inner footbal",
     "tags": [
-        "Hard",
-        "run",
-        "yeah"
+        "easy",
+        " jogging"
     ],
     "session": "<p>1 hour easy jogging</p>",
-    "coach": 1
+    "coach": 1,
+    "sport": "RUNNING"
 }
 ```
 
@@ -1706,7 +1751,7 @@ curl --location --request GET 'http://localhost:8000/api-coach/text-session/2' \
 This endpoint is used to update a text session. You have to pass the id of the text session in the url and the data you want to modify as params. You can update partially the data.
 
 ```shell
-curl --location --request PATCH 'http://localhost:8000/api-coach/text-session/2' \
+curl --location --request PATCH 'https://dev.planif.fr/api-coach/text-session/2' \
 --header 'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476' \
 --form 'title="New title 2"' \
 --form 'tags="Hard, run, yeah"'
@@ -1725,7 +1770,8 @@ curl --location --request PATCH 'http://localhost:8000/api-coach/text-session/2'
         "yeah"
     ],
     "session": "<p>1 hour easy jogging</p>",
-    "coach": 1
+    "coach": 1,
+    "sport": "CYCLING"
 }
 ```
 
@@ -1736,7 +1782,911 @@ curl --location --request PATCH 'http://localhost:8000/api-coach/text-session/2'
 This endpoint is used to delete a text session. You have to pass the id of the text session. If successful the request will return a 204 No content
 
 ```shell
-curl --location --request DELETE 'http://localhost:8000/api-coach/text-session/2' \
+curl --location --request DELETE 'https://dev.planif.fr/api-coach/text-session/2' \
+--header 'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'
+```
+
+## Built Session
+
+`reverse URL coach_rest:built-session-list`
+`reverse URL coach_rest:built-session-detail`
+
+Property | Description | Type
+--------- | ----------- | -----------
+id | Id of the built session  | Integer
+title | Title of the built session max_length=100  | String
+description | Description of the built session (optional) max_length=500  | String
+steps | Steps of the session created by the session Builder | JSON
+variants | Variants of the session created by the session Builder (multiple steps) | JSON
+tags | Array of tags describing the session  | Array of String
+coach | Id of the coach owner of the session  | Integer
+sport | Name of the sport | String
+
+Either Steps or Variants must be set but not both at the same time
+
+```shell
+curl --location --request GET 'https://dev.planif.fr/api-coach/built-session' \
+--header 'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'
+```
+
+> The GET command returns a list of built sessions as JSON structured like this:
+
+```json
+[
+    {
+        "id": 2,
+        "title": "A text session",
+        "description": "Be ready to unleash your inner footbal",
+        "sport": "CYCLING",
+        "tags": [
+            "Hard",
+            "run",
+            "yop"
+        ],
+        "steps": [
+            {
+                "intensity": "WARMUP",
+                "targetType": "OPEN",
+                "durationType": "TIME",
+                "durationValue": {
+                    "$numberInt": "1200"
+                }
+            },
+            {
+                "steps": [
+                    {
+                        "intensity": "INTERVAL",
+                        "targetType": "OPEN",
+                        "durationType": "TIME",
+                        "durationValue": {
+                            "$numberInt": "60"
+                        }
+                    },
+                    {
+                        "intensity": "INTERVAL",
+                        "targetType": "OPEN",
+                        "durationType": "TIME",
+                        "durationValue": {
+                            "$numberInt": "60"
+                        }
+                    },
+                    {
+                        "intensity": "INTERVAL",
+                        "targetType": "OPEN",
+                        "durationType": "DISTANCE",
+                        "durationValue": {
+                            "$numberInt": "12"
+                        },
+                        "durationValueType": "KM"
+                    },
+                    {
+                        "intensity": "INTERVAL",
+                        "targetType": "OPEN",
+                        "durationType": "TIME",
+                        "durationValue": {
+                            "$numberInt": "10"
+                        }
+                    }
+                ],
+                "repeatValue": {
+                    "$numberInt": "4"
+                },
+                "uuid-Comment": "a0612b3ef9024151b3947a5e6ac5da7b"
+            },
+            {
+                "intensity": "COOLDOWN",
+                "targetType": "OPEN",
+                "durationType": "TIME",
+                "durationValue": {
+                    "$numberInt": "600"
+                }
+            }
+        ],
+        "variants": "",
+        "coach": 1
+    },
+    {
+        "id": 3,
+        "title": "A built session run",
+        "description": "Be ready to unleash your inner footbal",
+        "sport": "RUNNING",
+        "tags": [
+            "easy",
+            " jogging"
+        ],
+        "steps": "",
+        "variants": [
+            {
+                "name": "Beginner",
+                "steps": [
+                    {
+                        "intensity": "WARMUP",
+                        "targetType": "OPEN",
+                        "durationType": "TIME",
+                        "durationValue": {
+                            "$numberInt": "1200"
+                        }
+                    },
+                    {
+                        "steps": [
+                            {
+                                "steps": [
+                                    {
+                                        "intensity": "INTERVAL",
+                                        "targetType": "SPEED_LAP",
+                                        "targetValue": "5",
+                                        "durationType": "TIME",
+                                        "durationValue": {
+                                            "$numberInt": "30"
+                                        }
+                                    },
+                                    {
+                                        "intensity": "RECOVERY",
+                                        "targetType": "OPEN",
+                                        "durationType": "TIME",
+                                        "durationValue": {
+                                            "$numberInt": "30"
+                                        }
+                                    }
+                                ],
+                                "repeatType": "REPEAT_UNTIL_STEPS_CMPLT",
+                                "repeatValue": {
+                                    "$numberInt": "6"
+                                }
+                            },
+                            {
+                                "intensity": "COOLDOWN",
+                                "targetType": "OPEN",
+                                "durationType": "TIME",
+                                "durationValue": {
+                                    "$numberInt": "240"
+                                }
+                            }
+                        ],
+                        "repeatType": "REPEAT_UNTIL_STEPS_CMPLT",
+                        "repeatValue": {
+                            "$numberInt": "2"
+                        }
+                    },
+                    {
+                        "intensity": "COOLDOWN",
+                        "targetType": "OPEN",
+                        "durationType": "TIME",
+                        "durationValue": {
+                            "$numberInt": "360"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "Intermediate",
+                "steps": [
+                    {
+                        "intensity": "WARMUP",
+                        "targetType": "OPEN",
+                        "durationType": "TIME",
+                        "durationValue": {
+                            "$numberInt": "1200"
+                        }
+                    },
+                    {
+                        "steps": [
+                            {
+                                "steps": [
+                                    {
+                                        "intensity": "INTERVAL",
+                                        "targetType": "SPEED_LAP",
+                                        "targetValue": "5",
+                                        "durationType": "TIME",
+                                        "durationValue": {
+                                            "$numberInt": "30"
+                                        }
+                                    },
+                                    {
+                                        "intensity": "RECOVERY",
+                                        "targetType": "OPEN",
+                                        "durationType": "TIME",
+                                        "durationValue": {
+                                            "$numberInt": "30"
+                                        }
+                                    }
+                                ],
+                                "repeatType": "REPEAT_UNTIL_STEPS_CMPLT",
+                                "repeatValue": {
+                                    "$numberInt": "8"
+                                }
+                            },
+                            {
+                                "intensity": "COOLDOWN",
+                                "targetType": "OPEN",
+                                "durationType": "TIME",
+                                "durationValue": {
+                                    "$numberInt": "240"
+                                }
+                            }
+                        ],
+                        "repeatType": "REPEAT_UNTIL_STEPS_CMPLT",
+                        "repeatValue": {
+                            "$numberInt": "2"
+                        }
+                    },
+                    {
+                        "intensity": "COOLDOWN",
+                        "targetType": "OPEN",
+                        "durationType": "TIME",
+                        "durationValue": {
+                            "$numberInt": "360"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "Expert",
+                "steps": [
+                    {
+                        "intensity": "WARMUP",
+                        "targetType": "OPEN",
+                        "durationType": "TIME",
+                        "durationValue": {
+                            "$numberInt": "1800"
+                        }
+                    },
+                    {
+                        "steps": [
+                            {
+                                "steps": [
+                                    {
+                                        "intensity": "INTERVAL",
+                                        "targetType": "SPEED_LAP",
+                                        "targetValue": "5",
+                                        "durationType": "TIME",
+                                        "durationValue": {
+                                            "$numberInt": "30"
+                                        }
+                                    },
+                                    {
+                                        "intensity": "RECOVERY",
+                                        "targetType": "OPEN",
+                                        "durationType": "TIME",
+                                        "durationValue": {
+                                            "$numberInt": "30"
+                                        }
+                                    }
+                                ],
+                                "repeatType": "REPEAT_UNTIL_STEPS_CMPLT",
+                                "repeatValue": {
+                                    "$numberInt": "8"
+                                }
+                            },
+                            {
+                                "intensity": "COOLDOWN",
+                                "targetType": "OPEN",
+                                "durationType": "TIME",
+                                "durationValue": {
+                                    "$numberInt": "240"
+                                }
+                            }
+                        ],
+                        "repeatType": "REPEAT_UNTIL_STEPS_CMPLT",
+                        "repeatValue": {
+                            "$numberInt": "2"
+                        }
+                    },
+                    {
+                        "intensity": "COOLDOWN",
+                        "targetType": "OPEN",
+                        "durationType": "TIME",
+                        "durationValue": {
+                            "$numberInt": "360"
+                        }
+                    }
+                ]
+            }
+        ],
+        "coach": 1
+    }
+]
+```
+
+### Get all built session
+
+`GET /api-coach/built-session`
+
+This endpoint retrieves the coach built sessions.
+
+### Create a built session
+
+`POST /api-coach/built-session`
+
+This endpoint is used to create a built session. You have to pass the minimum parameters to create a built session
+
+```shell
+curl --location --request POST 'https://dev.planif.fr/api-coach/built-session' \
+--header 'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476' \
+--form 'title="A built session run"' \
+--form 'description="Be ready to unleash your inner footbal"' \
+--form 'tags="easy, jogging"' \
+--form 'sport="RUNNING"' \
+--form 'variants="[
+    {
+      \"name\":\"Beginner\",
+      \"steps\":[
+        {
+          \"intensity\":\"WARMUP\",
+          \"targetType\":\"OPEN\",
+          \"durationType\":\"TIME\",
+          \"durationValue\":{
+            \"$numberInt\":\"1200\"
+          }
+        },
+        {
+          \"repeatType\":\"REPEAT_UNTIL_STEPS_CMPLT\",
+          \"repeatValue\":{
+            \"$numberInt\":\"2\"
+          },
+          \"steps\":[
+            {
+              \"repeatType\":\"REPEAT_UNTIL_STEPS_CMPLT\",
+              \"repeatValue\":{
+                \"$numberInt\":\"6\"
+              },
+              \"steps\":[
+                {
+                  \"intensity\":\"INTERVAL\",
+                  \"targetType\":\"SPEED_LAP\",
+                  \"durationType\":\"TIME\",
+                  \"durationValue\":{
+                    \"$numberInt\":\"30\"
+                  },
+                  \"targetValue\":\"5\"
+                },
+                {
+                  \"intensity\":\"RECOVERY\",
+                  \"targetType\":\"OPEN\",
+                  \"durationType\":\"TIME\",
+                  \"durationValue\":{
+                    \"$numberInt\":\"30\"
+                  }
+                }
+              ]
+            },
+            {
+              \"intensity\":\"COOLDOWN\",
+              \"targetType\":\"OPEN\",
+              \"durationType\":\"TIME\",
+              \"durationValue\":{
+                \"$numberInt\":\"240\"
+              }
+            }
+          ]
+        },
+        {
+          \"intensity\":\"COOLDOWN\",
+          \"targetType\":\"OPEN\",
+          \"durationType\":\"TIME\",
+          \"durationValue\":{
+            \"$numberInt\":\"360\"
+          }
+        }
+      ]
+    },
+    {
+      \"name\":\"Intermediate\",
+      \"steps\":[
+        {
+          \"intensity\":\"WARMUP\",
+          \"targetType\":\"OPEN\",
+          \"durationType\":\"TIME\",
+          \"durationValue\":{
+            \"$numberInt\":\"1200\"
+          }
+        },
+        {
+          \"repeatType\":\"REPEAT_UNTIL_STEPS_CMPLT\",
+          \"repeatValue\":{
+            \"$numberInt\":\"2\"
+          },
+          \"steps\":[
+            {
+              \"repeatType\":\"REPEAT_UNTIL_STEPS_CMPLT\",
+              \"repeatValue\":{
+                \"$numberInt\":\"8\"
+              },
+              \"steps\":[
+                {
+                  \"intensity\":\"INTERVAL\",
+                  \"targetType\":\"SPEED_LAP\",
+                  \"durationType\":\"TIME\",
+                  \"durationValue\":{
+                    \"$numberInt\":\"30\"
+                  },
+                  \"targetValue\":\"5\"
+                },
+                {
+                  \"intensity\":\"RECOVERY\",
+                  \"targetType\":\"OPEN\",
+                  \"durationType\":\"TIME\",
+                  \"durationValue\":{
+                    \"$numberInt\":\"30\"
+                  }
+                }
+              ]
+            },
+            {
+              \"intensity\":\"COOLDOWN\",
+              \"targetType\":\"OPEN\",
+              \"durationType\":\"TIME\",
+              \"durationValue\":{
+                \"$numberInt\":\"240\"
+              }
+            }
+          ]
+        },
+        {
+          \"intensity\":\"COOLDOWN\",
+          \"targetType\":\"OPEN\",
+          \"durationType\":\"TIME\",
+          \"durationValue\":{
+            \"$numberInt\":\"360\"
+          }
+        }
+      ]
+    },
+    {
+      \"name\":\"Expert\",
+      \"steps\":[
+        {
+          \"intensity\":\"WARMUP\",
+          \"targetType\":\"OPEN\",
+          \"durationType\":\"TIME\",
+          \"durationValue\":{
+            \"$numberInt\":\"1800\"
+          }
+        },
+        {
+          \"repeatType\":\"REPEAT_UNTIL_STEPS_CMPLT\",
+          \"repeatValue\":{
+            \"$numberInt\":\"2\"
+          },
+          \"steps\":[
+            {
+              \"repeatType\":\"REPEAT_UNTIL_STEPS_CMPLT\",
+              \"repeatValue\":{
+                \"$numberInt\":\"8\"
+              },
+              \"steps\":[
+                {
+                  \"intensity\":\"INTERVAL\",
+                  \"targetType\":\"SPEED_LAP\",
+                  \"durationType\":\"TIME\",
+                  \"durationValue\":{
+                    \"$numberInt\":\"30\"
+                  },
+                  \"targetValue\":\"5\"
+                },
+                {
+                  \"intensity\":\"RECOVERY\",
+                  \"targetType\":\"OPEN\",
+                  \"durationType\":\"TIME\",
+                  \"durationValue\":{
+                    \"$numberInt\":\"30\"
+                  }
+                }
+              ]
+            },
+            {
+              \"intensity\":\"COOLDOWN\",
+              \"targetType\":\"OPEN\",
+              \"durationType\":\"TIME\",
+              \"durationValue\":{
+                \"$numberInt\":\"240\"
+              }
+            }
+          ]
+        },
+        {
+          \"intensity\":\"COOLDOWN\",
+          \"targetType\":\"OPEN\",
+          \"durationType\":\"TIME\",
+          \"durationValue\":{
+            \"$numberInt\":\"360\"
+          }
+        }
+      ]
+    }
+  ]"'
+```
+
+> The POST command returns the created built session in JSON structured like this:
+
+```json
+{
+    "id": 3,
+    "title": "A built session run",
+    "description": "Be ready to unleash your inner footbal",
+    "sport": "RUNNING",
+    "tags": [
+        "easy",
+        " jogging"
+    ],
+    "steps": "",
+    "variants": [
+        {
+            "name": "Beginner",
+            "steps": [
+                {
+                    "intensity": "WARMUP",
+                    "targetType": "OPEN",
+                    "durationType": "TIME",
+                    "durationValue": {
+                        "$numberInt": "1200"
+                    }
+                },
+                {
+                    "repeatType": "REPEAT_UNTIL_STEPS_CMPLT",
+                    "repeatValue": {
+                        "$numberInt": "2"
+                    },
+                    "steps": [
+                        {
+                            "repeatType": "REPEAT_UNTIL_STEPS_CMPLT",
+                            "repeatValue": {
+                                "$numberInt": "6"
+                            },
+                            "steps": [
+                                {
+                                    "intensity": "INTERVAL",
+                                    "targetType": "SPEED_LAP",
+                                    "durationType": "TIME",
+                                    "durationValue": {
+                                        "$numberInt": "30"
+                                    },
+                                    "targetValue": "5"
+                                },
+                                {
+                                    "intensity": "RECOVERY",
+                                    "targetType": "OPEN",
+                                    "durationType": "TIME",
+                                    "durationValue": {
+                                        "$numberInt": "30"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "intensity": "COOLDOWN",
+                            "targetType": "OPEN",
+                            "durationType": "TIME",
+                            "durationValue": {
+                                "$numberInt": "240"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "intensity": "COOLDOWN",
+                    "targetType": "OPEN",
+                    "durationType": "TIME",
+                    "durationValue": {
+                        "$numberInt": "360"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Intermediate",
+            "steps": [
+                {
+                    "intensity": "WARMUP",
+                    "targetType": "OPEN",
+                    "durationType": "TIME",
+                    "durationValue": {
+                        "$numberInt": "1200"
+                    }
+                },
+                {
+                    "repeatType": "REPEAT_UNTIL_STEPS_CMPLT",
+                    "repeatValue": {
+                        "$numberInt": "2"
+                    },
+                    "steps": [
+                        {
+                            "repeatType": "REPEAT_UNTIL_STEPS_CMPLT",
+                            "repeatValue": {
+                                "$numberInt": "8"
+                            },
+                            "steps": [
+                                {
+                                    "intensity": "INTERVAL",
+                                    "targetType": "SPEED_LAP",
+                                    "durationType": "TIME",
+                                    "durationValue": {
+                                        "$numberInt": "30"
+                                    },
+                                    "targetValue": "5"
+                                },
+                                {
+                                    "intensity": "RECOVERY",
+                                    "targetType": "OPEN",
+                                    "durationType": "TIME",
+                                    "durationValue": {
+                                        "$numberInt": "30"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "intensity": "COOLDOWN",
+                            "targetType": "OPEN",
+                            "durationType": "TIME",
+                            "durationValue": {
+                                "$numberInt": "240"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "intensity": "COOLDOWN",
+                    "targetType": "OPEN",
+                    "durationType": "TIME",
+                    "durationValue": {
+                        "$numberInt": "360"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Expert",
+            "steps": [
+                {
+                    "intensity": "WARMUP",
+                    "targetType": "OPEN",
+                    "durationType": "TIME",
+                    "durationValue": {
+                        "$numberInt": "1800"
+                    }
+                },
+                {
+                    "repeatType": "REPEAT_UNTIL_STEPS_CMPLT",
+                    "repeatValue": {
+                        "$numberInt": "2"
+                    },
+                    "steps": [
+                        {
+                            "repeatType": "REPEAT_UNTIL_STEPS_CMPLT",
+                            "repeatValue": {
+                                "$numberInt": "8"
+                            },
+                            "steps": [
+                                {
+                                    "intensity": "INTERVAL",
+                                    "targetType": "SPEED_LAP",
+                                    "durationType": "TIME",
+                                    "durationValue": {
+                                        "$numberInt": "30"
+                                    },
+                                    "targetValue": "5"
+                                },
+                                {
+                                    "intensity": "RECOVERY",
+                                    "targetType": "OPEN",
+                                    "durationType": "TIME",
+                                    "durationValue": {
+                                        "$numberInt": "30"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "intensity": "COOLDOWN",
+                            "targetType": "OPEN",
+                            "durationType": "TIME",
+                            "durationValue": {
+                                "$numberInt": "240"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "intensity": "COOLDOWN",
+                    "targetType": "OPEN",
+                    "durationType": "TIME",
+                    "durationValue": {
+                        "$numberInt": "360"
+                    }
+                }
+            ]
+        }
+    ],
+    "coach": 1
+}
+```
+
+### Get a specific built session 
+
+`GET /api-coach/built-session/<id>`
+
+This endpoint is used to get a built session. You have to pass the id of the built session
+
+```shell
+curl --location --request GET 'https://dev.planif.fr/api-coach/built-session/2' \
+--header 'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'
+```
+
+> The GET command returns the target built session in JSON structured like this:
+
+```json
+{
+    "id": 2,
+    "title": "A text session",
+    "description": "Be ready to unleash your inner footbal",
+    "sport": "CYCLING",
+    "tags": [
+        "Hard",
+        "run",
+        "yop"
+    ],
+    "steps": [
+        {
+            "intensity": "WARMUP",
+            "targetType": "OPEN",
+            "durationType": "TIME",
+            "durationValue": {
+                "$numberInt": "1200"
+            }
+        },
+        {
+            "steps": [
+                {
+                    "intensity": "INTERVAL",
+                    "targetType": "OPEN",
+                    "durationType": "TIME",
+                    "durationValue": {
+                        "$numberInt": "60"
+                    }
+                },
+                {
+                    "intensity": "INTERVAL",
+                    "targetType": "OPEN",
+                    "durationType": "TIME",
+                    "durationValue": {
+                        "$numberInt": "60"
+                    }
+                },
+                {
+                    "intensity": "INTERVAL",
+                    "targetType": "OPEN",
+                    "durationType": "DISTANCE",
+                    "durationValue": {
+                        "$numberInt": "12"
+                    },
+                    "durationValueType": "KM"
+                },
+                {
+                    "intensity": "INTERVAL",
+                    "targetType": "OPEN",
+                    "durationType": "TIME",
+                    "durationValue": {
+                        "$numberInt": "10"
+                    }
+                }
+            ],
+            "repeatValue": {
+                "$numberInt": "4"
+            },
+            "uuid-Comment": "a0612b3ef9024151b3947a5e6ac5da7b"
+        },
+        {
+            "intensity": "COOLDOWN",
+            "targetType": "OPEN",
+            "durationType": "TIME",
+            "durationValue": {
+                "$numberInt": "600"
+            }
+        }
+    ],
+    "variants": "",
+    "coach": 1
+}
+```
+
+### Modify a built session
+
+`PATCH /api-coach/built-session/<id>`
+
+This endpoint is used to update a built session. You have to pass the id of the built session in the url and the data you want to modify as params. You can update partially the data.
+
+```shell
+curl --location --request PATCH 'https://dev.planif.fr/api-coach/built-session/2' \
+--header 'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476' \
+--form 'tags="Hard, run, yop"'
+```
+
+> If successful the PATCH command returns the updated built session in JSON structured like this:
+
+```json
+{
+    "id": 2,
+    "title": "A text session",
+    "description": "Be ready to unleash your inner footbal",
+    "sport": "CYCLING",
+    "tags": [
+        "Hard",
+        "run",
+        "yop"
+    ],
+    "steps": [
+        {
+            "intensity": "WARMUP",
+            "targetType": "OPEN",
+            "durationType": "TIME",
+            "durationValue": {
+                "$numberInt": "1200"
+            }
+        },
+        {
+            "steps": [
+                {
+                    "intensity": "INTERVAL",
+                    "targetType": "OPEN",
+                    "durationType": "TIME",
+                    "durationValue": {
+                        "$numberInt": "60"
+                    }
+                },
+                {
+                    "intensity": "INTERVAL",
+                    "targetType": "OPEN",
+                    "durationType": "TIME",
+                    "durationValue": {
+                        "$numberInt": "60"
+                    }
+                },
+                {
+                    "intensity": "INTERVAL",
+                    "targetType": "OPEN",
+                    "durationType": "DISTANCE",
+                    "durationValue": {
+                        "$numberInt": "12"
+                    },
+                    "durationValueType": "KM"
+                },
+                {
+                    "intensity": "INTERVAL",
+                    "targetType": "OPEN",
+                    "durationType": "TIME",
+                    "durationValue": {
+                        "$numberInt": "10"
+                    }
+                }
+            ],
+            "repeatValue": {
+                "$numberInt": "4"
+            },
+            "uuid-Comment": "a0612b3ef9024151b3947a5e6ac5da7b"
+        },
+        {
+            "intensity": "COOLDOWN",
+            "targetType": "OPEN",
+            "durationType": "TIME",
+            "durationValue": {
+                "$numberInt": "600"
+            }
+        }
+    ],
+    "variants": "",
+    "coach": 1
+}
+```
+
+### Delete a specific built session
+
+`DELETE /api-coach/built-session/<id>`
+
+This endpoint is used to delete a built session. You have to pass the id of the built session. If successful the request will return a 204 No content
+
+```shell
+curl --location --request DELETE 'https://dev.planif.fr/api-coach/built-session/2' \
 --header 'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'
 ```
 
