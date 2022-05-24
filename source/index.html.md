@@ -2759,6 +2759,241 @@ Remember — a happy coach is an authenticated coach!
 
 <aside class="notice">For all the next endpoints, you will need to be authenticated as a Athlete and sending request containing a Token with such headers <code>Authorization: Token <your_token></code>.</aside>
 
+## Activities
+
+`GET /api-athlete/activity/?limit={limit}&page={page}`
+
+Retrieve all the activity of an athlete with pagination. Order by start_time desc
+
+`GET /api-athlete/activity-month/?month={month}&year={year}`
+
+Retrieve activities for an athlete by month and year
+
+> Example activities list
+
+```json
+[
+    {
+        "id": "c427ac5e-3ee6-45f3-bfaa-36afbc004319",
+        "name": "Footing a jeun",
+        "sport": "RUNNING",
+        "start_time": "2022-05-24T05:53:41Z",
+        "notes": "",
+        "private": true,
+        "has_file": true,
+        "stats": {
+            "activity": "c427ac5e-3ee6-45f3-bfaa-36afbc004319",
+            "distance": "6228.63",
+            "timer_time": 1688,
+            "elapsed_time": 1688,
+            "moving_time": 1688,
+            "energy": 324,
+            "avg_speed": "3.56",
+            "max_speed": "5.08",
+            "max_elevation": 483,
+            "min_elevation": 437,
+            "gain_elevation": 118,
+            "loss_elevation": 120,
+            "avg_hr": "161.3",
+            "max_hr": 176,
+            "avg_cadence": "85.3",
+            "max_cadence": 100,
+            "strides": "1.30",
+            "avg_temp": null,
+            "max_temp": null,
+            "min_temp": null,
+            "avg_power": null,
+            "max_power": null
+        }
+    }
+]
+```
+
+`GET /api-athlete/activity/{id}`
+
+Retrieve an activity of an athlete with the id of the activity.
+
+> Example activity object 
+
+```json
+{
+    "id": "c427ac5e-3ee6-45f3-bfaa-36afbc004319",
+    "name": "Footing a jeun",
+    "sport": "RUNNING",
+    "start_time": "2022-05-24T05:53:41Z",
+    "notes": "",
+    "private": true,
+    "has_file": true,
+    "stats": {
+        "activity": "c427ac5e-3ee6-45f3-bfaa-36afbc004319",
+        "distance": "6228.63",
+        "timer_time": 1688,
+        "elapsed_time": 1688,
+        "moving_time": 1688,
+        "energy": 324,
+        "avg_speed": "3.56",
+        "max_speed": "5.08",
+        "max_elevation": 483,
+        "min_elevation": 437,
+        "gain_elevation": 118,
+        "loss_elevation": 120,
+        "avg_hr": "161.3",
+        "max_hr": 176,
+        "avg_cadence": "85.3",
+        "max_cadence": 100,
+        "strides": "1.30",
+        "avg_temp": null,
+        "max_temp": null,
+        "min_temp": null,
+        "avg_power": null,
+        "max_power": null
+    },
+    "laps": [
+        {
+            "timestamp": "2022-05-24T06:21:49",
+            "start_time": "2022-05-24T05:53:41",
+            "total_elapsed_time": 1688.795,
+            "total_timer_time": 1688.795,
+            "total_distance": 6228.63,
+            "total_moving_time": 1688.795,
+            "time_in_hr_zone": [
+                0,
+                0,
+                0,
+                0,
+                1547.152
+            ],
+            "total_calories": 324,
+            "enhanced_avg_speed": 3.688,
+            "avg_speed": 3.688,
+            "enhanced_max_speed": 5.083,
+            "max_speed": 5.083,
+            "total_ascent": 118,
+            "total_descent": 119,
+            "enhanced_avg_altitude": 463.20000000000005,
+            "avg_altitude": 463.20000000000005,
+            "enhanced_max_altitude": 483.79999999999995,
+            "max_altitude": 483.79999999999995,
+            "avg_grade": 0.32,
+            "max_pos_grade": 17.7,
+            "max_neg_grade": -10.65,
+            "enhanced_min_altitude": 437.4,
+            "min_altitude": 437.4,
+            "avg_vertical_oscillation": 0,
+            "avg_stance_time": 0,
+            "event": "lap",
+            "event_type": "stop",
+            "avg_heart_rate": 157,
+            "max_heart_rate": 176,
+            "avg_running_cadence": 85,
+            "max_running_cadence": 100,
+            "lap_trigger": "session_end",
+            "sport": "running",
+            "sub_sport": "generic",
+            "min_heart_rate": 118
+        }
+    ],
+    "points_as_features": [
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.074628433212638,
+                    48.83592551574111
+                ]
+            },
+            "properties": {
+                "time": 563
+            }
+        }
+    ],
+    "points_as_line": [
+        [
+            10.074469428509474,
+            48.83623388595879
+        ],
+    ],
+    "records": [
+        {
+            "duration": 0,
+            "position_lat": 582638965,
+            "position_long": 120193102,
+            "distance": 0,
+            "calories": 0,
+            "battery_soc": 82,
+            "lon_gps": 120193000,
+            "lat_gps": 582638921,
+            "enhanced_altitude": null,
+            "altitude": null,
+            "enhanced_speed": null,
+            "speed": null,
+            "grade": null,
+            "vertical_speed": null,
+            "heart_rate": null,
+            "cadence": null,
+            "gps_accuracy": null,
+            "ascent": null
+        },
+    ]
+}
+```
+
+`PATCH /api-athlete/activity/{id}`
+
+Modify an activity of an athlete with the id of the activity.
+
+`DELETE /api-athlete/activity/{id}`
+
+Delete an activity of an athlete with the id of the activity.
+
+## Statistics
+
+`GET /api-athlete/stats-activity/?start_date={start_date}&end_date={end_date}`
+
+Get all the statistics for a given duration
+
+> Example stastitics object
+
+```json
+{
+    "total": {
+        "count": 1,
+        "distance": 6228.63,
+        "duration": 1688,
+        "calories": 324
+    },
+    "by_sport": [
+        {
+            "sport": "RUNNING",
+            "count": 1,
+            "distance": 6228.63,
+            "duration": 1688,
+            "calories": 324
+        }
+    ],
+    "by_sport_interval": [
+        {
+            "sport": "RUNNING",
+            "day": "2022-05-24T00:00:00Z",
+            "count": 1,
+            "duration": 1688
+        }
+    ],
+    "by_sport_previous": [],
+    "total_previous": {
+        "count": 0,
+        "duration": null
+    }
+}
+```
+
+## Training Planned
+
+`GET /api-athlete/training-planned/?start_date={start_date}&end_date={end_date}`
+
+Get all the training planned of an athlete for the given date interval.
+
 ## Training Plan Rating
 
 `reverse URL athlete_rest:rate-plan-athlete`
