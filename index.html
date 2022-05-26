@@ -334,7 +334,10 @@
                     <a href="#sport" class="toc-h2 toc-link" data-title="Sport">Sport</a>
                   </li>
                   <li>
-                    <a href="#profile" class="toc-h2 toc-link" data-title="Profile">Profile</a>
+                    <a href="#profile-coach" class="toc-h2 toc-link" data-title="Profile Coach">Profile Coach</a>
+                  </li>
+                  <li>
+                    <a href="#profile-athlete" class="toc-h2 toc-link" data-title="Profile Athlete">Profile Athlete</a>
                   </li>
                   <li>
                     <a href="#profile-picture" class="toc-h2 toc-link" data-title="Profile picture">Profile picture</a>
@@ -1063,7 +1066,7 @@ session | content of the session produced by timyMce (html string)
 <p><code>GET /api-shared/sport/</code></p>
 
 <p>This endpoint retrieves all the sports available on Planif.</p>
-<h2 id='profile'>Profile</h2>
+<h2 id='profile-coach'>Profile Coach</h2>
 <p><code>reverse URL shared_rest:profile-coach</code></p>
 
 <table><thead>
@@ -1085,7 +1088,7 @@ session | content of the session produced by timyMce (html string)
 </tr>
 <tr>
 <td>birth_date</td>
-<td>Birth date in a MM/DD/YYYY format</td>
+<td>Birth date in a YYYY-MM-DD format</td>
 <td>String</td>
 </tr>
 <tr>
@@ -1113,6 +1116,16 @@ session | content of the session produced by timyMce (html string)
 <td>Relative url of the profile picture, or the default picture if none. It is relative to the base url</td>
 <td>String</td>
 </tr>
+<tr>
+<td>sex</td>
+<td>Sex of the coach, 0 if male, 1 if female, can be null</td>
+<td>Boolean</td>
+</tr>
+<tr>
+<td>age</td>
+<td>Age in years, read-only field, can be null if empty birth_date</td>
+<td>Integer</td>
+</tr>
 </tbody></table>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-v</span> <span class="se">\</span>
     <span class="nt">-X</span> GET <span class="se">\</span>
@@ -1125,7 +1138,7 @@ session | content of the session produced by timyMce (html string)
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
 </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John"</span><span class="p">,</span><span class="w">
 </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Doe"</span><span class="p">,</span><span class="w">
-</span><span class="nl">"birth_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12/28/1998"</span><span class="p">,</span><span class="w">
+</span><span class="nl">"birth_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1998-12-28"</span><span class="p">,</span><span class="w">
 </span><span class="nl">"height"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
   </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"m"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w">
@@ -1135,6 +1148,8 @@ session | content of the session produced by timyMce (html string)
   </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">90718.4</span><span class="w">
 </span><span class="p">},</span><span class="w">
 </span><span class="nl">"phone_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+33751515151"</span><span class="p">,</span><span class="w">
+</span><span class="nl">"sex"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+</span><span class="nl">"age"</span><span class="p">:</span><span class="w"> </span><span class="mi">23</span><span class="p">,</span><span class="w">
 </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12 Jean Jaures, 38000 Grenoble"</span><span class="p">,</span><span class="w">
 </span><span class="nl">"profile_picture"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/mediafiles/1/4ujo5kXS4AjWufTY88YdgV/43336475_054_ea9e.jpg"</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -1159,7 +1174,7 @@ session | content of the session produced by timyMce (html string)
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
 </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jack"</span><span class="p">,</span><span class="w">
 </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Deen"</span><span class="p">,</span><span class="w">
-</span><span class="nl">"birth_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12/28/1998"</span><span class="p">,</span><span class="w">
+</span><span class="nl">"birth_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1998-12-28"</span><span class="p">,</span><span class="w">
 </span><span class="nl">"height"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
   </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cm"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="w">
@@ -1170,6 +1185,131 @@ session | content of the session produced by timyMce (html string)
 </span><span class="p">},</span><span class="w">
 </span><span class="nl">"phone_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+33751515151"</span><span class="p">,</span><span class="w">
 </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12 Jean Jaures, 38000 Grenoble"</span><span class="p">,</span><span class="w">
+</span><span class="nl">"sex"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+</span><span class="nl">"age"</span><span class="p">:</span><span class="w"> </span><span class="mi">23</span><span class="p">,</span><span class="w">
+</span><span class="nl">"profile_picture"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/mediafiles/1/4ujo5kXS4AjWufTY88YdgV/43336475_054_ea9e.jpg"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h2 id='profile-athlete'>Profile Athlete</h2>
+<p><code>reverse URL shared_rest:profile-athlete</code></p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>first_name</td>
+<td>First name</td>
+<td>String</td>
+</tr>
+<tr>
+<td>last_name</td>
+<td>Last name</td>
+<td>String</td>
+</tr>
+<tr>
+<td>birth_date</td>
+<td>Birth date in a YYYY-MM-DD format</td>
+<td>String</td>
+</tr>
+<tr>
+<td>phone_number</td>
+<td>Full phone number with the country code prepended</td>
+<td>String</td>
+</tr>
+<tr>
+<td>height</td>
+<td>Height in meters</td>
+<td>Float</td>
+</tr>
+<tr>
+<td>weight</td>
+<td>Weight in grams</td>
+<td>Float</td>
+</tr>
+<tr>
+<td>address</td>
+<td>Full address</td>
+<td>String</td>
+</tr>
+<tr>
+<td>profile_picture</td>
+<td>Relative url of the profile picture, or the default picture if none. It is relative to the base url</td>
+<td>String</td>
+</tr>
+<tr>
+<td>sex</td>
+<td>Sex, 0 if male, 1 if female, can be null</td>
+<td>Boolean</td>
+</tr>
+<tr>
+<td>age</td>
+<td>Age in years, read-only field, can be null if empty birth_date</td>
+<td>Integer</td>
+</tr>
+</tbody></table>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-v</span> <span class="se">\</span>
+    <span class="nt">-X</span> GET <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s2">"Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476"</span> <span class="se">\</span>
+    <span class="s2">"https://dev.planif.fr/api-shared/profile-athlete/"</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+</span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John"</span><span class="p">,</span><span class="w">
+</span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Doe"</span><span class="p">,</span><span class="w">
+</span><span class="nl">"birth_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1998-12-28"</span><span class="p">,</span><span class="w">
+</span><span class="nl">"height"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"m"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="p">},</span><span class="w">
+</span><span class="nl">"weight"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"g"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">90718.4</span><span class="w">
+</span><span class="p">},</span><span class="w">
+</span><span class="nl">"phone_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+33751515151"</span><span class="p">,</span><span class="w">
+</span><span class="nl">"sex"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+</span><span class="nl">"age"</span><span class="p">:</span><span class="w"> </span><span class="mi">23</span><span class="p">,</span><span class="w">
+</span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12 Jean Jaures, 38000 Grenoble"</span><span class="p">,</span><span class="w">
+</span><span class="nl">"profile_picture"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/mediafiles/1/4ujo5kXS4AjWufTY88YdgV/43336475_054_ea9e.jpg"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='http-request-3'>HTTP Request</h3>
+<p><code>GET /api-shared/profile-athlete/</code></p>
+
+<p>This endpoint retrieves the athlete profile.</p>
+<h3 id='http-request-4'>HTTP Request</h3>
+<p><code>PATCH /api-shared/profile-athlete/</code></p>
+
+<p>This endpoint patch (update partially) the coach profile. You can pass one or more query parameters to update the profile.</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-v</span> <span class="se">\</span>
+    <span class="nt">-X</span> PATCH <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s2">"Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476"</span> <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s2">"Content-Type: application/x-www-form-urlencoded; charset=utf-8"</span> <span class="se">\</span>
+    <span class="nt">-d</span> <span class="s2">"address=12%20Jean%20Jaures%2C%2038000%20Grenoble&amp;height_unit=cm&amp;height_value=200&amp;phone_number=%2B33751515151"</span> <span class="se">\</span>
+    <span class="s2">"https://dev.planif.fr/api-shared/profile-coach/"</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns the updated profile in JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+</span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jack"</span><span class="p">,</span><span class="w">
+</span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Deen"</span><span class="p">,</span><span class="w">
+</span><span class="nl">"birth_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1998-12-28"</span><span class="p">,</span><span class="w">
+</span><span class="nl">"height"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cm"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="w">
+</span><span class="p">},</span><span class="w">
+</span><span class="nl">"weight"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"g"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">90718.4</span><span class="w">
+</span><span class="p">},</span><span class="w">
+</span><span class="nl">"phone_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+33751515151"</span><span class="p">,</span><span class="w">
+</span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12 Jean Jaures, 38000 Grenoble"</span><span class="p">,</span><span class="w">
+</span><span class="nl">"sex"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+</span><span class="nl">"age"</span><span class="p">:</span><span class="w"> </span><span class="mi">23</span><span class="p">,</span><span class="w">
 </span><span class="nl">"profile_picture"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/mediafiles/1/4ujo5kXS4AjWufTY88YdgV/43336475_054_ea9e.jpg"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='query-parameters-that-are-allowed'>Query Parameters that are allowed</h3>
@@ -1254,7 +1394,7 @@ session | content of the session produced by timyMce (html string)
 <td>Not Found -- Your temporary picture or uploaded could not be found.</td>
 </tr>
 </tbody></table>
-<div class="highlight"><pre class="highlight javascript tab-javascript"><code></code></pre></div><h3 id='http-request-3'>HTTP Request</h3>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code></code></pre></div><h3 id='http-request-5'>HTTP Request</h3>
 <p><code>POST /api-shared/profile-picture/</code></p>
 
 <p>Store a temporary uploaded object and update the profile picture filed in the database</p>
@@ -1977,7 +2117,7 @@ session | content of the session produced by timyMce (html string)
 <p><code>reverse URL coach_rest:training-planned</code></p>
 
 <p>This endpoint is used to retrieve, create, update training planned </p>
-<div class="highlight"><pre class="highlight javascript tab-javascript"><code></code></pre></div><h3 id='http-request-4'>HTTP Request</h3>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code></code></pre></div><h3 id='http-request-6'>HTTP Request</h3>
 <p><code>GET /api-coach/training-planned/?id=</code></p>
 
 <p>Used to retrieve a training planned</p>
@@ -1995,7 +2135,7 @@ session | content of the session produced by timyMce (html string)
 <td>ID of the training planned (Integer)</td>
 </tr>
 </tbody></table>
-<h3 id='http-request-5'>HTTP Request</h3>
+<h3 id='http-request-7'>HTTP Request</h3>
 <p><code>POST /api-coach/training-planned/</code></p>
 
 <p>Used to creates a training planned by sending data as a json like</p>
@@ -2015,7 +2155,7 @@ session | content of the session produced by timyMce (html string)
     </span><span class="nl">"sessions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">],</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
-</span></code></pre></div><h3 id='http-request-6'>HTTP Request</h3>
+</span></code></pre></div><h3 id='http-request-8'>HTTP Request</h3>
 <p><code>PATCH /api-coach/training-planned/</code></p>
 
 <p>Used to update a training planned, data should be send as json with an ID field, data could be partial</p>
@@ -2072,7 +2212,7 @@ session | content of the session produced by timyMce (html string)
     </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"lucas.damalix@planif.fr"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"profile_picture"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4hK2NvuZJD34oWmvnBSeKo"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-request-7'>HTTP Request</h3>
+</span></code></pre></div><h3 id='http-request-9'>HTTP Request</h3>
 <p><code>GET /api-coach/list-athletes-coach/</code></p>
 
 <p>This endpoint retrieves the athletes of a coach.</p>
@@ -3196,7 +3336,7 @@ session | content of the session produced by timyMce (html string)
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <p>This endpoint retrieves, creates ou deletes tags</p>
-<h3 id='http-request-8'>HTTP Request</h3>
+<h3 id='http-request-10'>HTTP Request</h3>
 <p><code>GET /api-coach/tag-coach/?metadata=</code></p>
 
 <p>Get all coach tags, if metadata parameter is set, filter the tags case-insensitive</p>
@@ -3214,7 +3354,7 @@ session | content of the session produced by timyMce (html string)
 <td>use to filter the result (string)</td>
 </tr>
 </tbody></table>
-<h3 id='http-request-9'>HTTP Request</h3>
+<h3 id='http-request-11'>HTTP Request</h3>
 <p><code>POST /api-coach/tag-coach/</code></p>
 
 <p>Creates a tag assigned to the logged coach</p>
