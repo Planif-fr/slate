@@ -685,7 +685,7 @@ curl --location --request GET 'https://dev.planif.fr/api-shared/sport/'
 
 This endpoint retrieves all the sports available on Planif.
 
-## Profile
+## Profile Coach
 
 `reverse URL shared_rest:profile-coach`
 
@@ -693,12 +693,14 @@ Property | Description | Type
 --------- | ----------- | -----------
 first_name | First name  | String
 last_name | Last name  | String
-birth_date | Birth date in a MM/DD/YYYY format  | String
+birth_date | Birth date in a YYYY-MM-DD format  | String
 phone_number | Full phone number with the country code prepended  | String
 height | Height in meters | Float
 weight | Weight in grams | Float
 address | Full address | String
 profile_picture | Relative url of the profile picture, or the default picture if none. It is relative to the base url | String
+sex | Sex of the coach, 0 if male, 1 if female, can be null | Boolean
+age | Age in years, read-only field, can be null if empty birth_date | Integer
 
 ```shell
 curl -v \
@@ -713,7 +715,7 @@ curl -v \
 {
 "first_name": "John",
 "last_name": "Doe",
-"birth_date": "12/28/1998",
+"birth_date": "1998-12-28",
 "height": {
   "unit": "m",
   "value": 2
@@ -723,6 +725,8 @@ curl -v \
   "value": 90718.4
 },
 "phone_number": "+33751515151",
+"sex": false,
+"age": 23,
 "address": "12 Jean Jaures, 38000 Grenoble",
 "profile_picture": "/mediafiles/1/4ujo5kXS4AjWufTY88YdgV/43336475_054_ea9e.jpg"
 }
@@ -755,7 +759,7 @@ curl -v \
 {
 "first_name": "Jack",
 "last_name": "Deen",
-"birth_date": "12/28/1998",
+"birth_date": "1998-12-28",
 "height": {
   "unit": "cm",
   "value": 200
@@ -766,6 +770,99 @@ curl -v \
 },
 "phone_number": "+33751515151",
 "address": "12 Jean Jaures, 38000 Grenoble",
+"sex": false,
+"age": 23,
+"profile_picture": "/mediafiles/1/4ujo5kXS4AjWufTY88YdgV/43336475_054_ea9e.jpg"
+}
+```
+
+## Profile Athlete
+
+`reverse URL shared_rest:profile-athlete`
+
+Property | Description | Type
+--------- | ----------- | -----------
+first_name | First name  | String
+last_name | Last name  | String
+birth_date | Birth date in a YYYY-MM-DD format  | String
+phone_number | Full phone number with the country code prepended  | String
+height | Height in meters | Float
+weight | Weight in grams | Float
+address | Full address | String
+profile_picture | Relative url of the profile picture, or the default picture if none. It is relative to the base url | String
+sex | Sex, 0 if male, 1 if female, can be null | Boolean
+age | Age in years, read-only field, can be null if empty birth_date | Integer
+
+```shell
+curl -v \
+	-X GET \
+	-H "Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476" \
+	"https://dev.planif.fr/api-shared/profile-athlete/"
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+"first_name": "John",
+"last_name": "Doe",
+"birth_date": "1998-12-28",
+"height": {
+  "unit": "m",
+  "value": 2
+},
+"weight": {
+  "unit": "g",
+  "value": 90718.4
+},
+"phone_number": "+33751515151",
+"sex": false,
+"age": 23,
+"address": "12 Jean Jaures, 38000 Grenoble",
+"profile_picture": "/mediafiles/1/4ujo5kXS4AjWufTY88YdgV/43336475_054_ea9e.jpg"
+}
+```
+
+### HTTP Request
+
+`GET /api-shared/profile-athlete/`
+
+This endpoint retrieves the athlete profile.
+
+### HTTP Request
+
+`PATCH /api-shared/profile-athlete/`
+
+This endpoint patch (update partially) the coach profile. You can pass one or more query parameters to update the profile.
+
+```shell
+curl -v \
+	-X PATCH \
+	-H "Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476" \
+	-H "Content-Type: application/x-www-form-urlencoded; charset=utf-8" \
+	-d "address=12%20Jean%20Jaures%2C%2038000%20Grenoble&height_unit=cm&height_value=200&phone_number=%2B33751515151" \
+	"https://dev.planif.fr/api-shared/profile-coach/"
+```
+
+> The above command returns the updated profile in JSON structured like this:
+
+```json
+{
+"first_name": "Jack",
+"last_name": "Deen",
+"birth_date": "1998-12-28",
+"height": {
+  "unit": "cm",
+  "value": 200
+},
+"weight": {
+  "unit": "g",
+  "value": 90718.4
+},
+"phone_number": "+33751515151",
+"address": "12 Jean Jaures, 38000 Grenoble",
+"sex": false,
+"age": 23,
 "profile_picture": "/mediafiles/1/4ujo5kXS4AjWufTY88YdgV/43336475_054_ea9e.jpg"
 }
 ```
