@@ -357,6 +357,9 @@
                     <a href="#education" class="toc-h2 toc-link" data-title="Education">Education</a>
                   </li>
                   <li>
+                    <a href="#social" class="toc-h2 toc-link" data-title="Social">Social</a>
+                  </li>
+                  <li>
                     <a href="#skill" class="toc-h2 toc-link" data-title="Skill">Skill</a>
                   </li>
                   <li>
@@ -376,6 +379,9 @@
                   </li>
                   <li>
                     <a href="#tags" class="toc-h2 toc-link" data-title="Tags">Tags</a>
+                  </li>
+                  <li>
+                    <a href="#public-profile-coach" class="toc-h2 toc-link" data-title="Public profile Coach">Public profile Coach</a>
                   </li>
               </ul>
           </li>
@@ -1908,7 +1914,114 @@ session | content of the session produced by timyMce (html string)
 <p>This endpoint is used to delete a coach education. You have to pass the id of the education. If successful the request will return a 204 No content</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> DELETE <span class="s1">'https://dev.planif.fr/api-coach/education/2'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Token a7816be6d761730bbca7b3de33d7b76467786b57'</span>
-</code></pre></div><h2 id='skill'>Skill</h2>
+</code></pre></div><h2 id='social'>Social</h2>
+<p><code>reverse URL coach_rest:social-coach</code>
+<code>reverse URL coach_rest:social-coach-obj</code></p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>Id of the social</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>website</td>
+<td>Website of the social, must be a valid choice</td>
+<td>String</td>
+</tr>
+<tr>
+<td>url</td>
+<td>Url of the social</td>
+<td>String</td>
+</tr>
+</tbody></table>
+
+<p>Choices are : 
+&quot;facebook&quot;,
+&quot;twitter&quot;,
+&quot;instagram&quot;,
+&quot;linkedin&quot;,
+&quot;youtube&quot;,
+&quot;website&quot;</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-v</span> <span class="se">\</span>
+    <span class="nt">-X</span> GET <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s2">"Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476"</span> <span class="se">\</span>
+    <span class="s2">"https://dev.planif.fr/api-coach/social/"</span>
+</code></pre></div>
+<blockquote>
+<p>The GET command returns a list of socials as JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"website"</span><span class="p">:</span><span class="w"> </span><span class="s2">"instagram"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ne"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"coach"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"website"</span><span class="p">:</span><span class="w"> </span><span class="s2">"instagram"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.instagram.com/instagram/"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"coach"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div><h3 id='get-all-socials'>Get all socials</h3>
+<p><code>GET /api-coach/social/</code></p>
+
+<p>This endpoint retrieves the coach social.</p>
+<h3 id='create-an-social'>Create an social</h3>
+<p><code>POST /api-coach/social/</code></p>
+
+<p>This endpoint is used to create a coach social. You have to pass at the minimum all the required fields or more to create an social</p>
+
+<blockquote>
+<p>The POST command returns the created social in JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"website"</span><span class="p">:</span><span class="w"> </span><span class="s2">"instagram"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.instagram.com/instagram/"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"coach"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='get-a-specific-social'>Get a specific social</h3>
+<p><code>GET /api-coach/social/&lt;id&gt;</code></p>
+
+<p>This endpoint is used to get a coach social. You have to pass the id of the social</p>
+
+<blockquote>
+<p>The GET command returns the target social in JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"website"</span><span class="p">:</span><span class="w"> </span><span class="s2">"instagram"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.instagram.com/instagram/"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"coach"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='modify-an-social'>Modify an social</h3>
+<p><code>PATCH /api-coach/social/&lt;id&gt;</code></p>
+
+<p>This endpoint is used to update a coach social. You have to pass the id of the social and the data you want to modify as params. You can update partially the data.</p>
+
+<blockquote>
+<p>If successful the PATCH command returns the updated social in JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"website"</span><span class="p">:</span><span class="w"> </span><span class="s2">"instagram"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.instagram.com/instagram/"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"coach"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='delete-a-specific-social'>Delete a specific social</h3>
+<p><code>DELETE /api-coach/social/&lt;id&gt;</code></p>
+
+<p>This endpoint is used to delete a coach social. You have to pass the id of the social. If successful the request will return a 204 No content</p>
+<h2 id='skill'>Skill</h2>
 <p><code>reverse URL coach_rest:skill-coach</code>
 <code>reverse URL coach_rest:skill-coach-obj</code></p>
 
@@ -3368,6 +3481,99 @@ session | content of the session produced by timyMce (html string)
 </thead><tbody>
 <tr>
 <td>metadata</td>
+<td>True</td>
+<td>string</td>
+</tr>
+</tbody></table>
+
+<aside class="success">
+Remember — a happy coach is an authenticated coach!
+</aside>
+<h2 id='public-profile-coach'>Public profile Coach</h2>
+<p><code>reverse URL coach_rest:tag-coach</code></p>
+
+<p>Endpoint used to retrieve the tags of a coach, filtered or not, and create new ones.</p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>quote</td>
+<td>String</td>
+<td>Quote of the coach</td>
+</tr>
+<tr>
+<td>bio</td>
+<td>String</td>
+<td>Bio of the coach</td>
+</tr>
+<tr>
+<td>languages</td>
+<td>Array of integer or string</td>
+<td>Languages of the coach</td>
+</tr>
+</tbody></table>
+
+<p>For the languages :</p>
+
+<p>When the request is get, the languages are returned as String (&quot;FR&quot;, &quot;UK&quot;, ...)
+To modify the profile, the request must be send with languages ids ([1, 2, ...])</p>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code></code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"quote"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A new qute"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"bio"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Yayyyyy"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"is_public_email"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"is_public_phone"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"is_public_city"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"languages"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='get-public-profile'>GET public profile</h3>
+<p><code>GET /api-coach/public-profile/</code></p>
+
+<p>Get public profile</p>
+<h3 id='put-public-profile'>PUT public profile</h3>
+<p><code>PUT /api-coach/public-profile/</code></p>
+
+<p>Modify the public profile</p>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FR"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EN"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DE"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div><h3 id='get-languages'>GET languages</h3>
+<p><code>GET /api-coach/public-language/</code></p>
+
+<p>Get languages available (must add them via the next endpoint at first creation of database)</p>
+<h3 id='add-language'>ADD language</h3>
+<p><code>POST /api-coach/public-language/</code></p>
+
+<p>Create a language</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
 <td>True</td>
 <td>string</td>
 </tr>
