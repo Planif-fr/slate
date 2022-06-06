@@ -1094,6 +1094,37 @@ curl --location --request DELETE 'https://dev.planif.fr/api-coach/plan/3' \
 --header 'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'
 ```
 
+### Link a plan to an athlete
+
+`POST /api-coach/link-athlete-to-plan/`
+
+This endpoint is used to link a training plan to a specific athlete. You have to pass the id of the plan and the id of the athlete  . If successful the request will return a 201 Created
+
+```shell
+curl --location --request POST 'http://localhost:8000/api-coach/link-athlete-to-plan/' \
+--header 'Authorization: Bearer <token>' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "plan": 2,
+    "athlete": 2
+}'
+```
+
+### Unlink a plan to an athlete
+
+`DELETE /api-coach/link-athlete-to-plan/`
+
+This endpoint is used to unlink a training plan to a specific athlete. You have to pass the id of the plan and the id of the athlete  . If successful the request will return a 204 No content
+
+```shell
+curl --location --request DELETE 'http://localhost:8000/api-coach/link-athlete-to-plan/' \
+--header 'Authorization: Bearer <token>' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "plan": 2,
+    "athlete": 2
+}'
+```
 ## Experience
 
 `reverse URL coach_rest:experience-coach`
