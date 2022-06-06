@@ -1617,6 +1617,28 @@ session | content of the session produced by timyMce (html string)
 <p>This endpoint is used to delete a coach training plan. You have to pass the id of the plan. If successful the request will return a 204 No content</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> DELETE <span class="s1">'https://dev.planif.fr/api-coach/plan/3'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'</span>
+</code></pre></div><h3 id='link-a-plan-to-an-athlete'>Link a plan to an athlete</h3>
+<p><code>POST /api-coach/link-athlete-to-plan/</code></p>
+
+<p>This endpoint is used to link a training plan to a specific athlete. You have to pass the id of the plan and the id of the athlete  . If successful the request will return a 201 Created</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'http://localhost:8000/api-coach/link-athlete-to-plan/'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer &lt;token&gt;'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">--data-raw</span> <span class="s1">'{
+    "plan": 2,
+    "athlete": 2
+}'</span>
+</code></pre></div><h3 id='unlink-a-plan-to-an-athlete'>Unlink a plan to an athlete</h3>
+<p><code>DELETE /api-coach/link-athlete-to-plan/</code></p>
+
+<p>This endpoint is used to unlink a training plan to a specific athlete. You have to pass the id of the plan and the id of the athlete  . If successful the request will return a 204 No content</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> DELETE <span class="s1">'http://localhost:8000/api-coach/link-athlete-to-plan/'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer &lt;token&gt;'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">--data-raw</span> <span class="s1">'{
+    "plan": 2,
+    "athlete": 2
+}'</span>
 </code></pre></div><h2 id='experience'>Experience</h2>
 <p><code>reverse URL coach_rest:experience-coach</code>
 <code>reverse URL coach_rest:experience-coach-obj</code></p>
