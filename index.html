@@ -3512,9 +3512,7 @@ session | content of the session produced by timyMce (html string)
 Remember — a happy coach is an authenticated coach!
 </aside>
 <h2 id='public-profile-coach'>Public profile Coach</h2>
-<p><code>reverse URL coach_rest:tag-coach</code></p>
-
-<p>Endpoint used to retrieve the tags of a coach, filtered or not, and create new ones.</p>
+<p>Endpoint used to retrieve the public profile of a coach, and update it.</p>
 
 <table><thead>
 <tr>
@@ -3535,15 +3533,96 @@ Remember — a happy coach is an authenticated coach!
 </tr>
 <tr>
 <td>languages</td>
-<td>Array of integer or string</td>
+<td>Array of string, can only be inside LANGUAGE_CHOICES</td>
 <td>Languages of the coach</td>
+</tr>
+<tr>
+<td>sports</td>
+<td>Array of string, can only be inside SPORT_CHOICES</td>
+<td>Sports of the coach</td>
+</tr>
+<tr>
+<td>is_public</td>
+<td>Boolean, default False</td>
+<td>Control wether the coach profile is public</td>
+</tr>
+<tr>
+<td>is_public_email</td>
+<td>Boolean, default True</td>
+<td>Control wether the coach email is public</td>
+</tr>
+<tr>
+<td>is_public_city</td>
+<td>Boolean, default False</td>
+<td>Control wether the coach address is public</td>
+</tr>
+<tr>
+<td>is_public_phone</td>
+<td>Boolean, default False</td>
+<td>Control wether the coach phone is public</td>
 </tr>
 </tbody></table>
 
-<p>For the languages :</p>
+<p>LANGUAGE_CHOICES = [
+    &quot;FR&quot;,
+    &quot;EN&quot;,
+    &quot;DE&quot;,
+    &quot;ES&quot;,
+    &quot;IT&quot;
+]</p>
 
-<p>When the request is get, the languages are returned as String (&quot;FR&quot;, &quot;UK&quot;, ...)
-To modify the profile, the request must be send with languages ids ([1, 2, ...])</p>
+<p>SPORT_CHOICES = [
+   &quot;OTHER&quot;,
+    &quot;RUNNING&quot;,
+    &quot;CYCLING&quot;,
+    &quot;TRANSITION&quot;,
+    &quot;FITNESS_EQUIPMENT&quot;,
+    &quot;SWIMMING&quot;,
+    &quot;BASKETBALL&quot;,
+    &quot;SOCCER&quot;,
+    &quot;TENNIS&quot;,
+    &quot;AMERICAN_FOOTBALL&quot;,
+    &quot;TRAINING&quot;,
+    &quot;WALKING&quot;,
+    &quot;CROSS_COUNTRY_SKIING&quot;,
+    &quot;ALPINE_SKIING&quot;,
+    &quot;SNOWBOARDING&quot;,
+    &quot;ROWING&quot;,
+    &quot;MOUNTAIN_EQUIPMENT&quot;,
+    &quot;HIKING&quot;,
+    &quot;MULTISPORT&quot;,
+    &quot;PADDING&quot;,
+    &quot;FLYING&quot;,
+    &quot;E_BIKING&quot;,
+    &quot;MOTORCYCLING&quot;,
+    &quot;BOATING&quot;,
+    &quot;DRIVING&quot;,
+    &quot;GOLF&quot;,
+    &quot;HANG_GLIDING&quot;,
+    &quot;HORSEBACK_RIDING&quot;,
+    &quot;HUNTING&quot;,
+    &quot;FISHING&quot;,
+    &quot;INLINE_SKATING&quot;,
+    &quot;ROCK_CLIMBING&quot;,
+    &quot;SAILING&quot;,
+    &quot;ICE_SKATING&quot;,
+    &quot;SKY_DIVING&quot;,
+    &quot;SNOWSHOEING&quot;,
+    &quot;SNOWMOBILING&quot;,
+    &quot;STAND_UP_PADDLEBOARDING&quot;,
+    &quot;SURFING&quot;,
+    &quot;WAKEBOARDING&quot;,
+    &quot;WATER_SKIING&quot;,
+    &quot;KAYAKING&quot;,
+    &quot;RAFTING&quot;,
+    &quot;WINDSURFING&quot;,
+    &quot;KITE_SURFING&quot;,
+    &quot;TACTICAL&quot;,
+    &quot;JUMP_MASTER&quot;,
+    &quot;BOXING&quot;,
+    &quot;FLOOR_CLIMBING&quot;,
+    &quot;DIVING&quot;,
+]</p>
 <div class="highlight"><pre class="highlight javascript tab-javascript"><code></code></pre></div>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
