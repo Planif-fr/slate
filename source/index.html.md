@@ -2994,21 +2994,79 @@ Remember — a happy coach is an authenticated coach!
 
 ## Public profile Coach
 
-`reverse URL coach_rest:tag-coach`
-
-Endpoint used to retrieve the tags of a coach, filtered or not, and create new ones.
+Endpoint used to retrieve the public profile of a coach, and update it.
 
 Property | Type | Description
 --------- | ----------- | -----------
 quote | String | Quote of the coach
 bio | String | Bio of the coach
-languages | Array of integer or string | Languages of the coach
+languages | Array of string, can only be inside LANGUAGE_CHOICES | Languages of the coach
+sports | Array of string, can only be inside SPORT_CHOICES | Sports of the coach
+is_public | Boolean, default False | Control wether the coach profile is public
+is_public_email | Boolean, default True | Control wether the coach email is public
+is_public_city | Boolean, default False | Control wether the coach address is public
+is_public_phone | Boolean, default False | Control wether the coach phone is public
 
-For the languages :
+LANGUAGE_CHOICES = [
+    "FR",
+    "EN",
+    "DE",
+    "ES",
+    "IT"
+]
 
-When the request is get, the languages are returned as String ("FR", "UK", ...)
-To modify the profile, the request must be send with languages ids ([1, 2, ...])
-
+SPORT_CHOICES = [
+   "OTHER",
+    "RUNNING",
+    "CYCLING",
+    "TRANSITION",
+    "FITNESS_EQUIPMENT",
+    "SWIMMING",
+    "BASKETBALL",
+    "SOCCER",
+    "TENNIS",
+    "AMERICAN_FOOTBALL",
+    "TRAINING",
+    "WALKING",
+    "CROSS_COUNTRY_SKIING",
+    "ALPINE_SKIING",
+    "SNOWBOARDING",
+    "ROWING",
+    "MOUNTAIN_EQUIPMENT",
+    "HIKING",
+    "MULTISPORT",
+    "PADDING",
+    "FLYING",
+    "E_BIKING",
+    "MOTORCYCLING",
+    "BOATING",
+    "DRIVING",
+    "GOLF",
+    "HANG_GLIDING",
+    "HORSEBACK_RIDING",
+    "HUNTING",
+    "FISHING",
+    "INLINE_SKATING",
+    "ROCK_CLIMBING",
+    "SAILING",
+    "ICE_SKATING",
+    "SKY_DIVING",
+    "SNOWSHOEING",
+    "SNOWMOBILING",
+    "STAND_UP_PADDLEBOARDING",
+    "SURFING",
+    "WAKEBOARDING",
+    "WATER_SKIING",
+    "KAYAKING",
+    "RAFTING",
+    "WINDSURFING",
+    "KITE_SURFING",
+    "TACTICAL",
+    "JUMP_MASTER",
+    "BOXING",
+    "FLOOR_CLIMBING",
+    "DIVING",
+]
 
 ```javascript
 ```
