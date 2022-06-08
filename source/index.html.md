@@ -3075,12 +3075,26 @@ SPORT_CHOICES = [
 
 ```json
 {
+    "coach": 8,
+    "languages": [
+        "FR",
+        "DE"
+    ],
+    "sports": [
+        "RUNNING",
+        "MULTISPORT"
+    ],
+    "is_public": true,
     "quote": "A new qute",
     "bio": "Yayyyyy",
     "is_public_email": true,
-    "is_public_phone": true,
     "is_public_city": false,
-    "languages": []
+    "is_public_phone": true,
+    "banner": "J6PC2YRnApK7uXFMoKHubq",
+    "pictures": [
+        "nChUoyH268mSy22rFQ6LLS",
+        "5HkbFDhfUsFBbUy4nZ5xZP"
+    ]
 }
 ```
 
@@ -3090,44 +3104,33 @@ SPORT_CHOICES = [
 
 Get public profile
 
+```shell
+curl --location --request PUT 'http://localhost:8000/api-coach/public-profile/' \
+--header 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU0Njg0OTMxLCJpYXQiOjE2NTQ2ODEzMzEsImp0aSI6ImQxN2VjYmJkMjNhZDQ3ZWZhNGE4OTIyNTM0Zjc0YzY4IiwidXNlcl9pZCI6OH0.kDTsRRCu6Z1qN_rZB9hWfgLxFfbx5EvVzx6XbWX444o' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "quote":"A new qute",
+    "bio":"Yayyyyy",
+    "is_public": true,
+    "is_public_email": true,
+    "is_public_city": false,
+    "is_public_phone":true,
+    "languages" : [
+        "FR",
+        "DE"
+    ],
+    "sports" : [
+        "RUNNING",
+        "MULTISPORT"
+    ]
+}'
+```
+
 ### PUT public profile
 
 `PUT /api-coach/public-profile/`
 
 Modify the public profile
-
-```json
-[
-    {
-        "id": 1,
-        "name": "FR"
-    },
-    {
-        "id": 2,
-        "name": "EN"
-    },
-    {
-        "id": 3,
-        "name": "DE"
-    }
-]
-```
-### GET languages
-
-`GET /api-coach/public-language/`
-
-Get languages available (must add them via the next endpoint at first creation of database)
-
-### ADD language
-
-`POST /api-coach/public-language/`
-
-Create a language
-
-Parameter | Required | Description
---------- | ------- | -----------
-name | True | string
-
 
 <aside class="success">
 Remember — a happy coach is an authenticated coach!
