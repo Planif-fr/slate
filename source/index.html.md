@@ -3006,6 +3006,10 @@ is_public | Boolean, default False | Control wether the coach profile is public
 is_public_email | Boolean, default True | Control wether the coach email is public
 is_public_city | Boolean, default False | Control wether the coach address is public
 is_public_phone | Boolean, default False | Control wether the coach phone is public
+banner_id | String | id of the banner filepond object (don't update manually)
+banner | String | url of the banner
+pictures_id | Array of String | ids of the picture filepond objects (don't update manually)
+pictures | Array of String | urls of the pictures
 
 LANGUAGE_CHOICES = [
     "FR",
@@ -3090,8 +3094,13 @@ SPORT_CHOICES = [
     "is_public_email": true,
     "is_public_city": false,
     "is_public_phone": true,
-    "banner": "J6PC2YRnApK7uXFMoKHubq",
+    "banner": "http://localhost:8000/mediafiles/media/8/public_profile/Santa Claus.H16.2k.png",
+    "banner_id": "J6PC2YRnApK7uXFMoKHubq",
     "pictures": [
+        "http://localhost:8000/mediafiles/media/8/public_profile/Directing the arrow up-rafiki.png",
+        "http://localhost:8000/mediafiles/media/8/public_profile/Fans-amico.png"
+    ],
+    "pictures_id": [
         "nChUoyH268mSy22rFQ6LLS",
         "5HkbFDhfUsFBbUy4nZ5xZP"
     ]
