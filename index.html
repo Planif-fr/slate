@@ -3561,6 +3561,26 @@ Remember — a happy coach is an authenticated coach!
 <td>Boolean, default False</td>
 <td>Control wether the coach phone is public</td>
 </tr>
+<tr>
+<td>banner_id</td>
+<td>String</td>
+<td>id of the banner filepond object (don&#39;t update manually)</td>
+</tr>
+<tr>
+<td>banner</td>
+<td>String</td>
+<td>url of the banner</td>
+</tr>
+<tr>
+<td>pictures_id</td>
+<td>Array of String</td>
+<td>ids of the picture filepond objects (don&#39;t update manually)</td>
+</tr>
+<tr>
+<td>pictures</td>
+<td>Array of String</td>
+<td>urls of the pictures</td>
+</tr>
 </tbody></table>
 
 <p>LANGUAGE_CHOICES = [
@@ -3643,8 +3663,13 @@ Remember — a happy coach is an authenticated coach!
     </span><span class="nl">"is_public_email"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
     </span><span class="nl">"is_public_city"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
     </span><span class="nl">"is_public_phone"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"banner"</span><span class="p">:</span><span class="w"> </span><span class="s2">"J6PC2YRnApK7uXFMoKHubq"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"banner"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:8000/mediafiles/media/8/public_profile/Santa Claus.H16.2k.png"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"banner_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"J6PC2YRnApK7uXFMoKHubq"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"pictures"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"http://localhost:8000/mediafiles/media/8/public_profile/Directing the arrow up-rafiki.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"http://localhost:8000/mediafiles/media/8/public_profile/Fans-amico.png"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"pictures_id"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="s2">"nChUoyH268mSy22rFQ6LLS"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"5HkbFDhfUsFBbUy4nZ5xZP"</span><span class="w">
     </span><span class="p">]</span><span class="w">
