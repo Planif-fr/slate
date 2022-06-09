@@ -255,12 +255,12 @@ ID | The ID of the kitten to delete
 > An authoriation header should be like that
 
 ```
-Authorization: Token <your_token>
+Authorization: Bearer <your_token>
 ```
 
 ```shell
 curl -v \
-	-H "Authorization: Token <your_token>"
+	-H "Authorization: Bearer <your_token>"
 ```
 
 To access all ressources that need authentification, you need to pass an authorization header.
@@ -705,7 +705,7 @@ age | Age in years, read-only field, can be null if empty birth_date | Integer
 ```shell
 curl -v \
 	-X GET \
-	-H "Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476" \
+	-H "Authorization: Bearer 23d8f0bed20b838474b782454f68ba4f1195b476" \
 	"https://dev.planif.fr/api-shared/profile-coach/"
 ```
 
@@ -747,7 +747,7 @@ This endpoint patch (update partially) the coach profile. You can pass one or mo
 ```shell
 curl -v \
 	-X PATCH \
-	-H "Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476" \
+	-H "Authorization: Bearer 23d8f0bed20b838474b782454f68ba4f1195b476" \
 	-H "Content-Type: application/x-www-form-urlencoded; charset=utf-8" \
 	-d "address=12%20Jean%20Jaures%2C%2038000%20Grenoble&height_unit=cm&height_value=200&phone_number=%2B33751515151" \
 	"https://dev.planif.fr/api-shared/profile-coach/"
@@ -775,6 +775,75 @@ curl -v \
 "profile_picture": "/mediafiles/1/4ujo5kXS4AjWufTY88YdgV/43336475_054_ea9e.jpg"
 }
 ```
+## Profile Club
+
+`reverse URL shared_rest:profile-club`
+
+Property | Description | Type
+--------- | ----------- | -----------
+club_name | club name  | String
+creation_date | Creation date in a YYYY-MM-DD format  | String
+phone_number | Full phone number with the country code prepended  | String
+address | Full address | String
+profile_picture | Relative url of the profile picture, or the default picture if none. It is relative to the base url | String
+age | Age in years, read-only field, can be null if empty creation_date | Integer
+
+```shell
+curl --location --request GET 'http://localhost:8000/api-shared/profile-club/' \
+--header 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU0ODEwNDg4LCJpYXQiOjE2NTQ4MDY4ODgsImp0aSI6ImFhZjE4YmYyYzdiYjQ5MDE5MWQwZWFlMzQ5YzUzYjNkIiwidXNlcl9pZCI6MTN9.XcAQWfoxdgYT2Pk256oz1tmuUmuHKspQGPK0XY-E_VI'
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+    "club_name": "Cluuub",
+    "creation_date": null,
+    "phone_number": null,
+    "age": null,
+    "address": null,
+    "profile_picture": null,
+    "profile_picture_id": null
+}
+```
+
+### HTTP Request
+
+`GET /api-shared/profile-club/`
+
+This endpoint retrieves the club profile.
+
+### HTTP Request
+
+`PATCH /api-shared/profile-club/`
+
+This endpoint patch (update partially) the club profile. You can pass one or more query parameters to update the profile.
+
+```shell
+curl --location --request PATCH 'http://localhost:8000/api-shared/profile-club/' \
+--header 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU0ODEwNDg4LCJpYXQiOjE2NTQ4MDY4ODgsImp0aSI6ImFhZjE4YmYyYzdiYjQ5MDE5MWQwZWFlMzQ5YzUzYjNkIiwidXNlcl9pZCI6MTN9.XcAQWfoxdgYT2Pk256oz1tmuUmuHKspQGPK0XY-E_VI' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+"club_name": "New club name",
+"creation_date": "2022-02-23",
+"phone_number":"+33651024955",
+"address":"17 Chemin de la Capuche Grenoble 38100 France"
+}'
+```
+
+> The above command returns the updated profile in JSON structured like this:
+
+```json
+{
+    "club_name": "New club name",
+    "creation_date": "2022-02-23",
+    "phone_number": "+33651024955",
+    "age": 0,
+    "address": "17 Chemin de la Capuche Grenoble 38100 France",
+    "profile_picture": null,
+    "profile_picture_id": null
+}
+```
 
 ## Profile Athlete
 
@@ -796,7 +865,7 @@ age | Age in years, read-only field, can be null if empty birth_date | Integer
 ```shell
 curl -v \
 	-X GET \
-	-H "Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476" \
+	-H "Authorization: Bearer 23d8f0bed20b838474b782454f68ba4f1195b476" \
 	"https://dev.planif.fr/api-shared/profile-athlete/"
 ```
 
@@ -838,7 +907,7 @@ This endpoint patch (update partially) the coach profile. You can pass one or mo
 ```shell
 curl -v \
 	-X PATCH \
-	-H "Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476" \
+	-H "Authorization: Bearer 23d8f0bed20b838474b782454f68ba4f1195b476" \
 	-H "Content-Type: application/x-www-form-urlencoded; charset=utf-8" \
 	-d "address=12%20Jean%20Jaures%2C%2038000%20Grenoble&height_unit=cm&height_value=200&phone_number=%2B33751515151" \
 	"https://dev.planif.fr/api-shared/profile-coach/"
@@ -926,7 +995,7 @@ id | True | upload_id assigned by filepond_drf
 
 # Coach REST API
 
-<aside class="notice">For all the next endpoints, you will need to be authenticated as a Coach and sending request containing a Token with such headers <code>Authorization: Token <your_token></code>.</aside>
+<aside class="notice">For all the next endpoints, you will need to be authenticated as a Coach and sending request containing a Bearer with such headers <code>Authorization: Bearer <your_token></code>.</aside>
 
 ## Plan
 
@@ -947,7 +1016,7 @@ is_static | True if the plan is static, false otherwise  | Boolean
 
 ```shell
 curl --location --request GET 'https://dev.planif.fr/api-coach/plan/' \
---header 'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'
+--header 'Authorization: Bearer 23d8f0bed20b838474b782454f68ba4f1195b476'
 ```
 
 > The GET command returns a list of plans as JSON structured like this:
@@ -1005,7 +1074,7 @@ By default, the plan will be private and dynamic.
 
 ```shell
 curl --location --request POST 'https://dev.planif.fr/api-coach/plan/' \
---header 'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476' \
+--header 'Authorization: Bearer 23d8f0bed20b838474b782454f68ba4f1195b476' \
 --form 'name="My insane plan"' \
 --form 'description="Be ready to become fiiiiit AF"' \
 --form 'price="123.32"' \
@@ -1036,7 +1105,7 @@ This endpoint is used to get a coach specific plan. You have to pass the id of t
 
 ```shell
 curl --location --request GET 'https://dev.planif.fr/api-coach/plan/4' \
---header 'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'
+--header 'Authorization: Bearer 23d8f0bed20b838474b782454f68ba4f1195b476'
 ```
 
 > The GET command returns the target plan in JSON structured like this:
@@ -1065,7 +1134,7 @@ To make the plan static simply pass the duration, to make it dynamic, pass an em
 
 ```shell
 curl --location --request PATCH 'https://dev.planif.fr/api-coach/plan/4' \
---header 'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476' \
+--header 'Authorization: Bearer 23d8f0bed20b838474b782454f68ba4f1195b476' \
 --form 'price=""'
 ```
 
@@ -1091,7 +1160,7 @@ This endpoint is used to delete a coach training plan. You have to pass the id o
 
 ```shell
 curl --location --request DELETE 'https://dev.planif.fr/api-coach/plan/3' \
---header 'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'
+--header 'Authorization: Bearer 23d8f0bed20b838474b782454f68ba4f1195b476'
 ```
 
 ### Link a plan to an athlete
@@ -1143,7 +1212,7 @@ company_url | Company url (optional) | String
 ```shell
 curl -v \
 	-X GET \
-	-H "Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476" \
+	-H "Authorization: Bearer 23d8f0bed20b838474b782454f68ba4f1195b476" \
 	"https://dev.planif.fr/api-coach/experience/"
 ```
 
@@ -1188,7 +1257,7 @@ This endpoint is used to create a coach experience. You have to pass at the mini
 
 ```shell
 curl --location --request POST 'https://dev.planif.fr/api-coach/experience/' \
---header 'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476' \
+--header 'Authorization: Bearer 23d8f0bed20b838474b782454f68ba4f1195b476' \
 --form 'position="Position test"' \
 --form 'company="Company"' \
 --form 'start_date="2020-10-20"' \
@@ -1220,7 +1289,7 @@ This endpoint is used to get a coach experience. You have to pass the id of the 
 
 ```shell
 curl --location --request GET 'https://dev.planif.fr/api-coach/experience/2' \
---header 'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'
+--header 'Authorization: Bearer 23d8f0bed20b838474b782454f68ba4f1195b476'
 ```
 
 > The GET command returns the target experience in JSON structured like this:
@@ -1246,7 +1315,7 @@ This endpoint is used to update a coach experience. You have to pass the id of t
 
 ```shell
 curl --location --request PATCH 'https://dev.planif.fr/api-coach/experience/2' \
---header 'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476' \
+--header 'Authorization: Bearer 23d8f0bed20b838474b782454f68ba4f1195b476' \
 --form 'position="New position"'
 ```
 
@@ -1273,7 +1342,7 @@ This endpoint is used to delete a coach experience. You have to pass the id of t
 
 ```shell
 curl --location --request DELETE 'https://dev.planif.fr/api-coach/experience/10' \
---header 'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'
+--header 'Authorization: Bearer 23d8f0bed20b838474b782454f68ba4f1195b476'
 ```
 
 ## Education
@@ -1293,7 +1362,7 @@ description | Description of the education (optional) | String
 ```shell
 curl -v \
 	-X GET \
-	-H "Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476" \
+	-H "Authorization: Bearer 23d8f0bed20b838474b782454f68ba4f1195b476" \
 	"https://dev.planif.fr/api-coach/education/"
 ```
 
@@ -1336,7 +1405,7 @@ This endpoint is used to create a coach education. You have to pass at the minim
 
 ```shell
 curl --location --request POST 'https://dev.planif.fr/api-coach/education/' \
---header 'Authorization: Token a7816be6d761730bbca7b3de33d7b76467786b57' \
+--header 'Authorization: Bearer a7816be6d761730bbca7b3de33d7b76467786b57' \
 --form 'title="Title test"' \
 --form 'institution="institution"' \
 --form 'start_date="2020-10-20"' \
@@ -1366,7 +1435,7 @@ This endpoint is used to get a coach education. You have to pass the id of the e
 
 ```shell
 curl --location --request GET 'https://dev.planif.fr/api-coach/education/2' \
---header 'Authorization: Token a7816be6d761730bbca7b3de33d7b76467786b57'
+--header 'Authorization: Bearer a7816be6d761730bbca7b3de33d7b76467786b57'
 ```
 
 > The GET command returns the target education in JSON structured like this:
@@ -1391,7 +1460,7 @@ This endpoint is used to update a coach education. You have to pass the id of th
 
 ```shell
 curl --location --request PATCH 'https://dev.planif.fr/api-coach/education/1' \
---header 'Authorization: Token a7816be6d761730bbca7b3de33d7b76467786b57' \
+--header 'Authorization: Bearer a7816be6d761730bbca7b3de33d7b76467786b57' \
 --form 'institution="New institution"'
 ```
 
@@ -1417,7 +1486,7 @@ This endpoint is used to delete a coach education. You have to pass the id of th
 
 ```shell
 curl --location --request DELETE 'https://dev.planif.fr/api-coach/education/2' \
---header 'Authorization: Token a7816be6d761730bbca7b3de33d7b76467786b57'
+--header 'Authorization: Bearer a7816be6d761730bbca7b3de33d7b76467786b57'
 ```
 
 ## Social
@@ -1442,7 +1511,7 @@ Choices are :
 ```shell
 curl -v \
 	-X GET \
-	-H "Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476" \
+	-H "Authorization: Bearer 23d8f0bed20b838474b782454f68ba4f1195b476" \
 	"https://dev.planif.fr/api-coach/social/"
 ```
 
@@ -1543,7 +1612,7 @@ percentage | Percentage of the skill, int min: 0, max: 100  | Integer
 
 ```shell
 curl --location --request GET 'https://dev.planif.fr/api-coach/skill/' \
---header 'Authorization: Token a7816be6d761730bbca7b3de33d7b76467786b57'
+--header 'Authorization: Bearer a7816be6d761730bbca7b3de33d7b76467786b57'
 ```
 
 > The GET command returns a list of skills as JSON structured like this:
@@ -1579,7 +1648,7 @@ This endpoint is used to create a coach skill. You have to pass the name and the
 
 ```shell
 curl --location --request POST 'https://dev.planif.fr/api-coach/skill/' \
---header 'Authorization: Token a7816be6d761730bbca7b3de33d7b76467786b57' \
+--header 'Authorization: Bearer a7816be6d761730bbca7b3de33d7b76467786b57' \
 --form 'name="friendly"' \
 --form 'percentage="85"'
 ```
@@ -1603,7 +1672,7 @@ This endpoint is used to get a coach skill. You have to pass the id of the skill
 
 ```shell
 curl --location --request GET 'https://dev.planif.fr/api-coach/skill/2' \
---header 'Authorization: Token a7816be6d761730bbca7b3de33d7b76467786b57'
+--header 'Authorization: Bearer a7816be6d761730bbca7b3de33d7b76467786b57'
 ```
 
 > The GET command returns the target skill in JSON structured like this:
@@ -1625,7 +1694,7 @@ This endpoint is used to update a coach skill. You have to pass the id of the sk
 
 ```shell
 curl --location --request PATCH 'https://dev.planif.fr/api-coach/skill/1' \
---header 'Authorization: Token a7816be6d761730bbca7b3de33d7b76467786b57' \
+--header 'Authorization: Bearer a7816be6d761730bbca7b3de33d7b76467786b57' \
 --form 'percentage="77"'
 ```
 
@@ -1648,7 +1717,7 @@ This endpoint is used to delete a coach skill. You have to pass the id of the sk
 
 ```shell
 curl --location --request DELETE 'https://dev.planif.fr/api-coach/skill/2' \
---header 'Authorization: Token a7816be6d761730bbca7b3de33d7b76467786b57'
+--header 'Authorization: Bearer a7816be6d761730bbca7b3de33d7b76467786b57'
 ```
 
 ## Hashtag
@@ -1663,7 +1732,7 @@ name | Name of the hashtag  | String
 
 ```shell
 curl --location --request GET 'https://dev.planif.fr/api-coach/hashtag/' \
---header 'Authorization: Token a7816be6d761730bbca7b3de33d7b76467786b57'
+--header 'Authorization: Bearer a7816be6d761730bbca7b3de33d7b76467786b57'
 ```
 
 > The GET command returns a list of skills as JSON structured like this:
@@ -1697,7 +1766,7 @@ This endpoint is used to create a coach hashtag. You have to pass the nameto cre
 
 ```shell
 curl --location --request POST 'https://dev.planif.fr/api-coach/hashtag/' \
---header 'Authorization: Token a7816be6d761730bbca7b3de33d7b76467786b57' \
+--header 'Authorization: Bearer a7816be6d761730bbca7b3de33d7b76467786b57' \
 --form 'name="devoted"'
 ```
 
@@ -1719,7 +1788,7 @@ This endpoint is used to get a coach hashtag. You have to pass the id of the has
 
 ```shell
 curl --location --request GET 'https://dev.planif.fr/api-coach/hashtag/1' \
---header 'Authorization: Token a7816be6d761730bbca7b3de33d7b76467786b57'
+--header 'Authorization: Bearer a7816be6d761730bbca7b3de33d7b76467786b57'
 ```
 
 > The GET command returns the target hashtag in JSON structured like this:
@@ -1740,7 +1809,7 @@ This endpoint is used to update a coach hashtag. You have to pass the id of the 
 
 ```shell
 curl --location --request PATCH 'https://dev.planif.fr/api-coach/hashtag/1' \
---header 'Authorization: Token a7816be6d761730bbca7b3de33d7b76467786b57' \
+--header 'Authorization: Bearer a7816be6d761730bbca7b3de33d7b76467786b57' \
 --form 'name="new name"'
 ```
 
@@ -1762,7 +1831,7 @@ This endpoint is used to delete a coach hashtag. You have to pass the id of the 
 
 ```shell
 curl --location --request DELETE 'https://dev.planif.fr/api-coach/hashtag/2' \
---header 'Authorization: Token a7816be6d761730bbca7b3de33d7b76467786b57'
+--header 'Authorization: Bearer a7816be6d761730bbca7b3de33d7b76467786b57'
 ```
 
 ## Training Planned
@@ -1883,7 +1952,7 @@ sport | Name of the sport | String
 
 ```shell
 curl --location --request GET 'https://dev.planif.fr/api-coach/text-session' \
---header 'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'
+--header 'Authorization: Bearer 23d8f0bed20b838474b782454f68ba4f1195b476'
 ```
 
 > The GET command returns a list of text sessions as JSON structured like this:
@@ -1932,7 +2001,7 @@ This endpoint is used to create a text session. You have to pass the minimum par
 
 ```shell
 curl --location --request POST 'https://dev.planif.fr/api-coach/text-session' \
---header 'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476' \
+--header 'Authorization: Bearer 23d8f0bed20b838474b782454f68ba4f1195b476' \
 --form 'title="A text session"' \
 --form 'description="Be ready to unleash your inner footbal"' \
 --form 'tags="easy, jogging"' \
@@ -1966,7 +2035,7 @@ This endpoint is used to get a text session. You have to pass the id of the text
 
 ```shell
 curl --location --request GET 'https://dev.planif.fr/api-coach/text-session/2' \
---header 'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'
+--header 'Authorization: Bearer 23d8f0bed20b838474b782454f68ba4f1195b476'
 ```
 
 > The GET command returns the target text session in JSON structured like this:
@@ -1995,7 +2064,7 @@ This endpoint is used to update a text session. You have to pass the id of the t
 
 ```shell
 curl --location --request PATCH 'https://dev.planif.fr/api-coach/text-session/2' \
---header 'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476' \
+--header 'Authorization: Bearer 23d8f0bed20b838474b782454f68ba4f1195b476' \
 --form 'title="New title 2"' \
 --form 'tags="Hard, run, yeah"'
 ```
@@ -2027,7 +2096,7 @@ This endpoint is used to delete a text session. You have to pass the id of the t
 
 ```shell
 curl --location --request DELETE 'https://dev.planif.fr/api-coach/text-session/2' \
---header 'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'
+--header 'Authorization: Bearer 23d8f0bed20b838474b782454f68ba4f1195b476'
 ```
 
 ## Built Session
@@ -2051,7 +2120,7 @@ Either Steps or Variants must be set but not both at the same time
 
 ```shell
 curl --location --request GET 'https://dev.planif.fr/api-coach/built-session' \
---header 'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'
+--header 'Authorization: Bearer 23d8f0bed20b838474b782454f68ba4f1195b476'
 ```
 
 > The GET command returns a list of built sessions as JSON structured like this:
@@ -2347,7 +2416,7 @@ This endpoint is used to create a built session. You have to pass the minimum pa
 
 ```shell
 curl --location --request POST 'https://dev.planif.fr/api-coach/built-session' \
---header 'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476' \
+--header 'Authorization: Bearer 23d8f0bed20b838474b782454f68ba4f1195b476' \
 --form 'title="A built session run"' \
 --form 'description="Be ready to unleash your inner footbal"' \
 --form 'tags="easy, jogging"' \
@@ -2755,7 +2824,7 @@ This endpoint is used to get a built session. You have to pass the id of the bui
 
 ```shell
 curl --location --request GET 'https://dev.planif.fr/api-coach/built-session/2' \
---header 'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'
+--header 'Authorization: Bearer 23d8f0bed20b838474b782454f68ba4f1195b476'
 ```
 
 > The GET command returns the target built session in JSON structured like this:
@@ -2843,7 +2912,7 @@ This endpoint is used to update a built session. You have to pass the id of the 
 
 ```shell
 curl --location --request PATCH 'https://dev.planif.fr/api-coach/built-session/2' \
---header 'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476' \
+--header 'Authorization: Bearer 23d8f0bed20b838474b782454f68ba4f1195b476' \
 --form 'tags="Hard, run, yop"'
 ```
 
@@ -2932,7 +3001,7 @@ This endpoint is used to delete a built session. You have to pass the id of the 
 
 ```shell
 curl --location --request DELETE 'https://dev.planif.fr/api-coach/built-session/2' \
---header 'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'
+--header 'Authorization: Bearer 23d8f0bed20b838474b782454f68ba4f1195b476'
 ```
 
 ## Tags
@@ -3148,7 +3217,7 @@ Remember — a happy coach is an authenticated coach!
 
 # Athlete REST API
 
-<aside class="notice">For all the next endpoints, you will need to be authenticated as a Athlete and sending request containing a Token with such headers <code>Authorization: Token <your_token></code>.</aside>
+<aside class="notice">For all the next endpoints, you will need to be authenticated as a Athlete and sending request containing a Bearer with such headers <code>Authorization: Bearer <your_token></code>.</aside>
 
 ## Activities
 
@@ -3403,7 +3472,7 @@ athlete | Id of the athlete giving the rating  | Integer
 
 ```shell
 curl --location --request GET 'https://dev.planif.fr/api-athlete/rate-plan/' \
---header 'Authorization: Token 7c9aa8c2e995a233520e223d95a584e77636c057'
+--header 'Authorization: Bearer 7c9aa8c2e995a233520e223d95a584e77636c057'
 ```
 
 > The GET command returns a list of ratings as JSON structured like this:
@@ -3441,7 +3510,7 @@ This endpoint is used to create a rating for a specific training plan. You have 
 
 ```shell
 curl --location --request POST 'https://dev.planif.fr/api-athlete/rate-plan/' \
---header 'Authorization: Token 7c9aa8c2e995a233520e223d95a584e77636c057' \
+--header 'Authorization: Bearer 7c9aa8c2e995a233520e223d95a584e77636c057' \
 --form 'training_plan="2"' \
 --form 'rate="5"' \
 --form 'text="A great plan 2"'
@@ -3467,7 +3536,7 @@ This endpoint is used to get an athlete specific rating. You have to pass the id
 
 ```shell
 curl --location --request GET 'https://dev.planif.fr/api-athlete/rate-plan/1' \
---header 'Authorization: Token 7c9aa8c2e995a233520e223d95a584e77636c057'
+--header 'Authorization: Bearer 7c9aa8c2e995a233520e223d95a584e77636c057'
 ```
 
 > The GET command returns the target rating in JSON structured like this:
@@ -3492,7 +3561,7 @@ You can update partially the data.
 
 ```shell
 curl --location --request PATCH 'https://dev.planif.fr/api-athlete/rate-plan/1' \
---header 'Authorization: Token 7c9aa8c2e995a233520e223d95a584e77636c057' \
+--header 'Authorization: Bearer 7c9aa8c2e995a233520e223d95a584e77636c057' \
 --form 'text="New text rating"'
 ```
 
@@ -3516,8 +3585,157 @@ This endpoint is used to delete an athlete rating. You have to pass the id of th
 
 ```shell
 curl --location --request DELETE 'https://dev.planif.fr/api-athlete/rate-plan/2' \
---header 'Authorization: Token 7c9aa8c2e995a233520e223d95a584e77636c057'
+--header 'Authorization: Bearer 7c9aa8c2e995a233520e223d95a584e77636c057'
 ```
+
+# Club REST API
+
+<aside class="notice">For all the next endpoints, you will need to be authenticated as a Club and sending request containing a Token with such headers <code>Authorization: Bearer <your_token></code>.</aside>
+
+## Public profile Club
+
+Endpoint used to retrieve the public profile of a club, and update it.
+
+Property | Type | Description
+--------- | ----------- | -----------
+bio | String | Bio of the club
+languages | Array of string, can only be inside LANGUAGE_CHOICES | Languages of the club
+sports | Array of string, can only be inside SPORT_CHOICES | Sports of the club
+is_public | Boolean, default False | Control wether the club profile is public
+is_public_email | Boolean, default True | Control wether the club email is public
+is_public_city | Boolean, default False | Control wether the club address is public
+is_public_phone | Boolean, default False | Control wether the club phone is public
+banner_id | String | id of the banner filepond object (don't update manually)
+banner | String | url of the banner
+pictures_id | Array of String | ids of the picture filepond objects (don't update manually)
+pictures | Array of String | urls of the pictures
+
+LANGUAGE_CHOICES = [
+    "FR",
+    "EN",
+    "DE",
+    "ES",
+    "IT"
+]
+
+SPORT_CHOICES = [
+   "OTHER",
+    "RUNNING",
+    "CYCLING",
+    "TRANSITION",
+    "FITNESS_EQUIPMENT",
+    "SWIMMING",
+    "BASKETBALL",
+    "SOCCER",
+    "TENNIS",
+    "AMERICAN_FOOTBALL",
+    "TRAINING",
+    "WALKING",
+    "CROSS_COUNTRY_SKIING",
+    "ALPINE_SKIING",
+    "SNOWBOARDING",
+    "ROWING",
+    "MOUNTAIN_EQUIPMENT",
+    "HIKING",
+    "MULTISPORT",
+    "PADDING",
+    "FLYING",
+    "E_BIKING",
+    "MOTORCYCLING",
+    "BOATING",
+    "DRIVING",
+    "GOLF",
+    "HANG_GLIDING",
+    "HORSEBACK_RIDING",
+    "HUNTING",
+    "FISHING",
+    "INLINE_SKATING",
+    "ROCK_CLIMBING",
+    "SAILING",
+    "ICE_SKATING",
+    "SKY_DIVING",
+    "SNOWSHOEING",
+    "SNOWMOBILING",
+    "STAND_UP_PADDLEBOARDING",
+    "SURFING",
+    "WAKEBOARDING",
+    "WATER_SKIING",
+    "KAYAKING",
+    "RAFTING",
+    "WINDSURFING",
+    "KITE_SURFING",
+    "TACTICAL",
+    "JUMP_MASTER",
+    "BOXING",
+    "FLOOR_CLIMBING",
+    "DIVING",
+]
+
+```javascript
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+    "club": 13,
+    "languages": [
+        "FR",
+        "DE"
+    ],
+    "sports": [
+        "RUNNING",
+        "MULTISPORT"
+    ],
+    "is_public": true,
+    "bio": "Yayyyyy",
+    "is_public_email": true,
+    "is_public_city": false,
+    "is_public_phone": true,
+    "banner": null,
+    "banner_id": null,
+    "pictures": [],
+    "pictures_id": []
+}
+```
+
+### GET public profile
+
+`GET /api-club/public-profile/`
+
+Get public profile
+
+```shell
+curl --location --request PUT 'http://localhost:8000/api-club/public-profile/' \
+--header 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU0ODEwNDg4LCJpYXQiOjE2NTQ4MDY4ODgsImp0aSI6ImFhZjE4YmYyYzdiYjQ5MDE5MWQwZWFlMzQ5YzUzYjNkIiwidXNlcl9pZCI6MTN9.XcAQWfoxdgYT2Pk256oz1tmuUmuHKspQGPK0XY-E_VI' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "bio":"Yayyyyy",
+    "is_public": true,
+    "is_public_email": true,
+    "is_public_city": false,
+    "is_public_phone":true,
+    "languages" : [
+        "FR",
+        "DE"
+    ],
+    "sports" : [
+        "RUNNING",
+        "MULTISPORT"
+    ]
+}'
+```
+
+### PUT public profile
+
+`PUT /api-club/public-profile/`
+
+Modify the public profile
+
+<aside class="success">
+Remember — a happy club is an authenticated club!
+</aside>
+
 
 
 
