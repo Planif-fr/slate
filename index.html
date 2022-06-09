@@ -337,6 +337,9 @@
                     <a href="#profile-coach" class="toc-h2 toc-link" data-title="Profile Coach">Profile Coach</a>
                   </li>
                   <li>
+                    <a href="#profile-club" class="toc-h2 toc-link" data-title="Profile Club">Profile Club</a>
+                  </li>
+                  <li>
                     <a href="#profile-athlete" class="toc-h2 toc-link" data-title="Profile Athlete">Profile Athlete</a>
                   </li>
                   <li>
@@ -399,6 +402,14 @@
                   </li>
                   <li>
                     <a href="#training-plan-rating" class="toc-h2 toc-link" data-title="Training Plan Rating">Training Plan Rating</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#club-rest-api" class="toc-h1 toc-link" data-title="Club REST API">Club REST API</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#public-profile-club" class="toc-h2 toc-link" data-title="Public profile Club">Public profile Club</a>
                   </li>
               </ul>
           </li>
@@ -640,9 +651,9 @@ ID | The ID of the kitten to delete
 <blockquote>
 <p>An authoriation header should be like that</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>Authorization: Token &lt;your_token&gt;
+<div class="highlight"><pre class="highlight plaintext"><code>Authorization: Bearer &lt;your_token&gt;
 </code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-v</span> <span class="se">\</span>
-    <span class="nt">-H</span> <span class="s2">"Authorization: Token &lt;your_token&gt;"</span>
+    <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;your_token&gt;"</span>
 </code></pre></div>
 <p>To access all ressources that need authentification, you need to pass an authorization header.</p>
 
@@ -1135,7 +1146,7 @@ session | content of the session produced by timyMce (html string)
 </tbody></table>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-v</span> <span class="se">\</span>
     <span class="nt">-X</span> GET <span class="se">\</span>
-    <span class="nt">-H</span> <span class="s2">"Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476"</span> <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s2">"Authorization: Bearer 23d8f0bed20b838474b782454f68ba4f1195b476"</span> <span class="se">\</span>
     <span class="s2">"https://dev.planif.fr/api-shared/profile-coach/"</span>
 </code></pre></div>
 <blockquote>
@@ -1169,7 +1180,7 @@ session | content of the session produced by timyMce (html string)
 <p>This endpoint patch (update partially) the coach profile. You can pass one or more query parameters to update the profile.</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-v</span> <span class="se">\</span>
     <span class="nt">-X</span> PATCH <span class="se">\</span>
-    <span class="nt">-H</span> <span class="s2">"Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476"</span> <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s2">"Authorization: Bearer 23d8f0bed20b838474b782454f68ba4f1195b476"</span> <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/x-www-form-urlencoded; charset=utf-8"</span> <span class="se">\</span>
     <span class="nt">-d</span> <span class="s2">"address=12%20Jean%20Jaures%2C%2038000%20Grenoble&amp;height_unit=cm&amp;height_value=200&amp;phone_number=%2B33751515151"</span> <span class="se">\</span>
     <span class="s2">"https://dev.planif.fr/api-shared/profile-coach/"</span>
@@ -1194,6 +1205,92 @@ session | content of the session produced by timyMce (html string)
 </span><span class="nl">"sex"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
 </span><span class="nl">"age"</span><span class="p">:</span><span class="w"> </span><span class="mi">23</span><span class="p">,</span><span class="w">
 </span><span class="nl">"profile_picture"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/mediafiles/1/4ujo5kXS4AjWufTY88YdgV/43336475_054_ea9e.jpg"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h2 id='profile-club'>Profile Club</h2>
+<p><code>reverse URL shared_rest:profile-club</code></p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>club_name</td>
+<td>club name</td>
+<td>String</td>
+</tr>
+<tr>
+<td>creation_date</td>
+<td>Creation date in a YYYY-MM-DD format</td>
+<td>String</td>
+</tr>
+<tr>
+<td>phone_number</td>
+<td>Full phone number with the country code prepended</td>
+<td>String</td>
+</tr>
+<tr>
+<td>address</td>
+<td>Full address</td>
+<td>String</td>
+</tr>
+<tr>
+<td>profile_picture</td>
+<td>Relative url of the profile picture, or the default picture if none. It is relative to the base url</td>
+<td>String</td>
+</tr>
+<tr>
+<td>age</td>
+<td>Age in years, read-only field, can be null if empty creation_date</td>
+<td>Integer</td>
+</tr>
+</tbody></table>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'http://localhost:8000/api-shared/profile-club/'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU0ODEwNDg4LCJpYXQiOjE2NTQ4MDY4ODgsImp0aSI6ImFhZjE4YmYyYzdiYjQ5MDE5MWQwZWFlMzQ5YzUzYjNkIiwidXNlcl9pZCI6MTN9.XcAQWfoxdgYT2Pk256oz1tmuUmuHKspQGPK0XY-E_VI'</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"club_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cluuub"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"creation_date"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"phone_number"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"age"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"profile_picture"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"profile_picture_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='http-request-3'>HTTP Request</h3>
+<p><code>GET /api-shared/profile-club/</code></p>
+
+<p>This endpoint retrieves the club profile.</p>
+<h3 id='http-request-4'>HTTP Request</h3>
+<p><code>PATCH /api-shared/profile-club/</code></p>
+
+<p>This endpoint patch (update partially) the club profile. You can pass one or more query parameters to update the profile.</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> PATCH <span class="s1">'http://localhost:8000/api-shared/profile-club/'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU0ODEwNDg4LCJpYXQiOjE2NTQ4MDY4ODgsImp0aSI6ImFhZjE4YmYyYzdiYjQ5MDE5MWQwZWFlMzQ5YzUzYjNkIiwidXNlcl9pZCI6MTN9.XcAQWfoxdgYT2Pk256oz1tmuUmuHKspQGPK0XY-E_VI'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">--data-raw</span> <span class="s1">'{
+"club_name": "New club name",
+"creation_date": "2022-02-23",
+"phone_number":"+33651024955",
+"address":"17 Chemin de la Capuche Grenoble 38100 France"
+}'</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns the updated profile in JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"club_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"New club name"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"creation_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-02-23"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"phone_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+33651024955"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"age"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"17 Chemin de la Capuche Grenoble 38100 France"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"profile_picture"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"profile_picture_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h2 id='profile-athlete'>Profile Athlete</h2>
 <p><code>reverse URL shared_rest:profile-athlete</code></p>
@@ -1258,7 +1355,7 @@ session | content of the session produced by timyMce (html string)
 </tbody></table>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-v</span> <span class="se">\</span>
     <span class="nt">-X</span> GET <span class="se">\</span>
-    <span class="nt">-H</span> <span class="s2">"Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476"</span> <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s2">"Authorization: Bearer 23d8f0bed20b838474b782454f68ba4f1195b476"</span> <span class="se">\</span>
     <span class="s2">"https://dev.planif.fr/api-shared/profile-athlete/"</span>
 </code></pre></div>
 <blockquote>
@@ -1282,17 +1379,17 @@ session | content of the session produced by timyMce (html string)
 </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12 Jean Jaures, 38000 Grenoble"</span><span class="p">,</span><span class="w">
 </span><span class="nl">"profile_picture"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/mediafiles/1/4ujo5kXS4AjWufTY88YdgV/43336475_054_ea9e.jpg"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-request-3'>HTTP Request</h3>
+</span></code></pre></div><h3 id='http-request-5'>HTTP Request</h3>
 <p><code>GET /api-shared/profile-athlete/</code></p>
 
 <p>This endpoint retrieves the athlete profile.</p>
-<h3 id='http-request-4'>HTTP Request</h3>
+<h3 id='http-request-6'>HTTP Request</h3>
 <p><code>PATCH /api-shared/profile-athlete/</code></p>
 
 <p>This endpoint patch (update partially) the coach profile. You can pass one or more query parameters to update the profile.</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-v</span> <span class="se">\</span>
     <span class="nt">-X</span> PATCH <span class="se">\</span>
-    <span class="nt">-H</span> <span class="s2">"Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476"</span> <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s2">"Authorization: Bearer 23d8f0bed20b838474b782454f68ba4f1195b476"</span> <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/x-www-form-urlencoded; charset=utf-8"</span> <span class="se">\</span>
     <span class="nt">-d</span> <span class="s2">"address=12%20Jean%20Jaures%2C%2038000%20Grenoble&amp;height_unit=cm&amp;height_value=200&amp;phone_number=%2B33751515151"</span> <span class="se">\</span>
     <span class="s2">"https://dev.planif.fr/api-shared/profile-coach/"</span>
@@ -1400,7 +1497,7 @@ session | content of the session produced by timyMce (html string)
 <td>Not Found -- Your temporary picture or uploaded could not be found.</td>
 </tr>
 </tbody></table>
-<div class="highlight"><pre class="highlight javascript tab-javascript"><code></code></pre></div><h3 id='http-request-5'>HTTP Request</h3>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code></code></pre></div><h3 id='http-request-7'>HTTP Request</h3>
 <p><code>POST /api-shared/profile-picture/</code></p>
 
 <p>Store a temporary uploaded object and update the profile picture filed in the database</p>
@@ -1439,7 +1536,7 @@ session | content of the session produced by timyMce (html string)
 
 <!-- # Plan -->
 <h1 id='coach-rest-api'>Coach REST API</h1>
-<aside class="notice">For all the next endpoints, you will need to be authenticated as a Coach and sending request containing a Token with such headers <code>Authorization: Token <your_token></code>.</aside>
+<aside class="notice">For all the next endpoints, you will need to be authenticated as a Coach and sending request containing a Bearer with such headers <code>Authorization: Bearer <your_token></code>.</aside>
 <h2 id='plan'>Plan</h2>
 <p><code>reverse URL coach_rest:plan-coach</code>
 <code>reverse URL coach_rest:plan-coach-obj</code></p>
@@ -1498,7 +1595,7 @@ session | content of the session produced by timyMce (html string)
 </tr>
 </tbody></table>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'https://dev.planif.fr/api-coach/plan/'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer 23d8f0bed20b838474b782454f68ba4f1195b476'</span>
 </code></pre></div>
 <blockquote>
 <p>The GET command returns a list of plans as JSON structured like this:</p>
@@ -1548,7 +1645,7 @@ session | content of the session produced by timyMce (html string)
 
 <p>By default, the plan will be private and dynamic.</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'https://dev.planif.fr/api-coach/plan/'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer 23d8f0bed20b838474b782454f68ba4f1195b476'</span> <span class="se">\</span>
 <span class="nt">--form</span> <span class="s1">'name="My insane plan"'</span> <span class="se">\</span>
 <span class="nt">--form</span> <span class="s1">'description="Be ready to become fiiiiit AF"'</span> <span class="se">\</span>
 <span class="nt">--form</span> <span class="s1">'price="123.32"'</span> <span class="se">\</span>
@@ -1573,7 +1670,7 @@ session | content of the session produced by timyMce (html string)
 
 <p>This endpoint is used to get a coach specific plan. You have to pass the id of the plan</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'https://dev.planif.fr/api-coach/plan/4'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer 23d8f0bed20b838474b782454f68ba4f1195b476'</span>
 </code></pre></div>
 <blockquote>
 <p>The GET command returns the target plan in JSON structured like this:</p>
@@ -1596,7 +1693,7 @@ session | content of the session produced by timyMce (html string)
 
 <p>To make the plan static simply pass the duration, to make it dynamic, pass an empty duration. Same goes for the is_public attribute : to make the plan public, pass a price, to make it private pass an empty price. </p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> PATCH <span class="s1">'https://dev.planif.fr/api-coach/plan/4'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer 23d8f0bed20b838474b782454f68ba4f1195b476'</span> <span class="se">\</span>
 <span class="nt">--form</span> <span class="s1">'price=""'</span>
 </code></pre></div>
 <blockquote>
@@ -1616,7 +1713,7 @@ session | content of the session produced by timyMce (html string)
 
 <p>This endpoint is used to delete a coach training plan. You have to pass the id of the plan. If successful the request will return a 204 No content</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> DELETE <span class="s1">'https://dev.planif.fr/api-coach/plan/3'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer 23d8f0bed20b838474b782454f68ba4f1195b476'</span>
 </code></pre></div><h3 id='link-a-plan-to-an-athlete'>Link a plan to an athlete</h3>
 <p><code>POST /api-coach/link-athlete-to-plan/</code></p>
 
@@ -1688,7 +1785,7 @@ session | content of the session produced by timyMce (html string)
 </tbody></table>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-v</span> <span class="se">\</span>
     <span class="nt">-X</span> GET <span class="se">\</span>
-    <span class="nt">-H</span> <span class="s2">"Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476"</span> <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s2">"Authorization: Bearer 23d8f0bed20b838474b782454f68ba4f1195b476"</span> <span class="se">\</span>
     <span class="s2">"https://dev.planif.fr/api-coach/experience/"</span>
 </code></pre></div>
 <blockquote>
@@ -1725,7 +1822,7 @@ session | content of the session produced by timyMce (html string)
 
 <p>This endpoint is used to create a coach experience. You have to pass at the minimum all the required fields or more to create an experience</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'https://dev.planif.fr/api-coach/experience/'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer 23d8f0bed20b838474b782454f68ba4f1195b476'</span> <span class="se">\</span>
 <span class="nt">--form</span> <span class="s1">'position="Position test"'</span> <span class="se">\</span>
 <span class="nt">--form</span> <span class="s1">'company="Company"'</span> <span class="se">\</span>
 <span class="nt">--form</span> <span class="s1">'start_date="2020-10-20"'</span> <span class="se">\</span>
@@ -1751,7 +1848,7 @@ session | content of the session produced by timyMce (html string)
 
 <p>This endpoint is used to get a coach experience. You have to pass the id of the experience</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'https://dev.planif.fr/api-coach/experience/2'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer 23d8f0bed20b838474b782454f68ba4f1195b476'</span>
 </code></pre></div>
 <blockquote>
 <p>The GET command returns the target experience in JSON structured like this:</p>
@@ -1771,7 +1868,7 @@ session | content of the session produced by timyMce (html string)
 
 <p>This endpoint is used to update a coach experience. You have to pass the id of the experience in the url and the data you want to modify as params. You can update partially the data.</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> PATCH <span class="s1">'https://dev.planif.fr/api-coach/experience/2'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer 23d8f0bed20b838474b782454f68ba4f1195b476'</span> <span class="se">\</span>
 <span class="nt">--form</span> <span class="s1">'position="New position"'</span>
 </code></pre></div>
 <blockquote>
@@ -1792,7 +1889,7 @@ session | content of the session produced by timyMce (html string)
 
 <p>This endpoint is used to delete a coach experience. You have to pass the id of the experience. If successful the request will return a 204 No content</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> DELETE <span class="s1">'https://dev.planif.fr/api-coach/experience/10'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer 23d8f0bed20b838474b782454f68ba4f1195b476'</span>
 </code></pre></div><h2 id='education'>Education</h2>
 <p><code>reverse URL coach_rest:education-coach</code>
 <code>reverse URL coach_rest:education-coach-obj</code></p>
@@ -1837,7 +1934,7 @@ session | content of the session produced by timyMce (html string)
 </tbody></table>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-v</span> <span class="se">\</span>
     <span class="nt">-X</span> GET <span class="se">\</span>
-    <span class="nt">-H</span> <span class="s2">"Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476"</span> <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s2">"Authorization: Bearer 23d8f0bed20b838474b782454f68ba4f1195b476"</span> <span class="se">\</span>
     <span class="s2">"https://dev.planif.fr/api-coach/education/"</span>
 </code></pre></div>
 <blockquote>
@@ -1872,7 +1969,7 @@ session | content of the session produced by timyMce (html string)
 
 <p>This endpoint is used to create a coach education. You have to pass at the minimum all the required fields or more to create an education</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'https://dev.planif.fr/api-coach/education/'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Authorization: Token a7816be6d761730bbca7b3de33d7b76467786b57'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer a7816be6d761730bbca7b3de33d7b76467786b57'</span> <span class="se">\</span>
 <span class="nt">--form</span> <span class="s1">'title="Title test"'</span> <span class="se">\</span>
 <span class="nt">--form</span> <span class="s1">'institution="institution"'</span> <span class="se">\</span>
 <span class="nt">--form</span> <span class="s1">'start_date="2020-10-20"'</span> <span class="se">\</span>
@@ -1896,7 +1993,7 @@ session | content of the session produced by timyMce (html string)
 
 <p>This endpoint is used to get a coach education. You have to pass the id of the education</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'https://dev.planif.fr/api-coach/education/2'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Authorization: Token a7816be6d761730bbca7b3de33d7b76467786b57'</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer a7816be6d761730bbca7b3de33d7b76467786b57'</span>
 </code></pre></div>
 <blockquote>
 <p>The GET command returns the target education in JSON structured like this:</p>
@@ -1915,7 +2012,7 @@ session | content of the session produced by timyMce (html string)
 
 <p>This endpoint is used to update a coach education. You have to pass the id of the education in the url and the data you want to modify as params. You can update partially the data.</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> PATCH <span class="s1">'https://dev.planif.fr/api-coach/education/1'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Authorization: Token a7816be6d761730bbca7b3de33d7b76467786b57'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer a7816be6d761730bbca7b3de33d7b76467786b57'</span> <span class="se">\</span>
 <span class="nt">--form</span> <span class="s1">'institution="New institution"'</span>
 </code></pre></div>
 <blockquote>
@@ -1935,7 +2032,7 @@ session | content of the session produced by timyMce (html string)
 
 <p>This endpoint is used to delete a coach education. You have to pass the id of the education. If successful the request will return a 204 No content</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> DELETE <span class="s1">'https://dev.planif.fr/api-coach/education/2'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Authorization: Token a7816be6d761730bbca7b3de33d7b76467786b57'</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer a7816be6d761730bbca7b3de33d7b76467786b57'</span>
 </code></pre></div><h2 id='social'>Social</h2>
 <p><code>reverse URL coach_rest:social-coach</code>
 <code>reverse URL coach_rest:social-coach-obj</code></p>
@@ -1973,7 +2070,7 @@ session | content of the session produced by timyMce (html string)
 &quot;website&quot;</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-v</span> <span class="se">\</span>
     <span class="nt">-X</span> GET <span class="se">\</span>
-    <span class="nt">-H</span> <span class="s2">"Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476"</span> <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s2">"Authorization: Bearer 23d8f0bed20b838474b782454f68ba4f1195b476"</span> <span class="se">\</span>
     <span class="s2">"https://dev.planif.fr/api-coach/social/"</span>
 </code></pre></div>
 <blockquote>
@@ -2071,7 +2168,7 @@ session | content of the session produced by timyMce (html string)
 </tr>
 </tbody></table>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'https://dev.planif.fr/api-coach/skill/'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Authorization: Token a7816be6d761730bbca7b3de33d7b76467786b57'</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer a7816be6d761730bbca7b3de33d7b76467786b57'</span>
 </code></pre></div>
 <blockquote>
 <p>The GET command returns a list of skills as JSON structured like this:</p>
@@ -2099,7 +2196,7 @@ session | content of the session produced by timyMce (html string)
 
 <p>This endpoint is used to create a coach skill. You have to pass the name and the percentage to create a skill</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'https://dev.planif.fr/api-coach/skill/'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Authorization: Token a7816be6d761730bbca7b3de33d7b76467786b57'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer a7816be6d761730bbca7b3de33d7b76467786b57'</span> <span class="se">\</span>
 <span class="nt">--form</span> <span class="s1">'name="friendly"'</span> <span class="se">\</span>
 <span class="nt">--form</span> <span class="s1">'percentage="85"'</span>
 </code></pre></div>
@@ -2117,7 +2214,7 @@ session | content of the session produced by timyMce (html string)
 
 <p>This endpoint is used to get a coach skill. You have to pass the id of the skill</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'https://dev.planif.fr/api-coach/skill/2'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Authorization: Token a7816be6d761730bbca7b3de33d7b76467786b57'</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer a7816be6d761730bbca7b3de33d7b76467786b57'</span>
 </code></pre></div>
 <blockquote>
 <p>The GET command returns the target skill in JSON structured like this:</p>
@@ -2133,7 +2230,7 @@ session | content of the session produced by timyMce (html string)
 
 <p>This endpoint is used to update a coach skill. You have to pass the id of the skill in the url and the data you want to modify as params. You can update partially the data.</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> PATCH <span class="s1">'https://dev.planif.fr/api-coach/skill/1'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Authorization: Token a7816be6d761730bbca7b3de33d7b76467786b57'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer a7816be6d761730bbca7b3de33d7b76467786b57'</span> <span class="se">\</span>
 <span class="nt">--form</span> <span class="s1">'percentage="77"'</span>
 </code></pre></div>
 <blockquote>
@@ -2150,7 +2247,7 @@ session | content of the session produced by timyMce (html string)
 
 <p>This endpoint is used to delete a coach skill. You have to pass the id of the skill. If successful the request will return a 204 No content</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> DELETE <span class="s1">'https://dev.planif.fr/api-coach/skill/2'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Authorization: Token a7816be6d761730bbca7b3de33d7b76467786b57'</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer a7816be6d761730bbca7b3de33d7b76467786b57'</span>
 </code></pre></div><h2 id='hashtag'>Hashtag</h2>
 <p><code>reverse URL coach_rest:hashtag-coach</code>
 <code>reverse URL coach_rest:hashtag-coach-obj</code></p>
@@ -2174,7 +2271,7 @@ session | content of the session produced by timyMce (html string)
 </tr>
 </tbody></table>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'https://dev.planif.fr/api-coach/hashtag/'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Authorization: Token a7816be6d761730bbca7b3de33d7b76467786b57'</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer a7816be6d761730bbca7b3de33d7b76467786b57'</span>
 </code></pre></div>
 <blockquote>
 <p>The GET command returns a list of skills as JSON structured like this:</p>
@@ -2200,7 +2297,7 @@ session | content of the session produced by timyMce (html string)
 
 <p>This endpoint is used to create a coach hashtag. You have to pass the nameto create a hashtag</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'https://dev.planif.fr/api-coach/hashtag/'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Authorization: Token a7816be6d761730bbca7b3de33d7b76467786b57'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer a7816be6d761730bbca7b3de33d7b76467786b57'</span> <span class="se">\</span>
 <span class="nt">--form</span> <span class="s1">'name="devoted"'</span>
 </code></pre></div>
 <blockquote>
@@ -2216,7 +2313,7 @@ session | content of the session produced by timyMce (html string)
 
 <p>This endpoint is used to get a coach hashtag. You have to pass the id of the hashtag</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'https://dev.planif.fr/api-coach/hashtag/1'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Authorization: Token a7816be6d761730bbca7b3de33d7b76467786b57'</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer a7816be6d761730bbca7b3de33d7b76467786b57'</span>
 </code></pre></div>
 <blockquote>
 <p>The GET command returns the target hashtag in JSON structured like this:</p>
@@ -2231,7 +2328,7 @@ session | content of the session produced by timyMce (html string)
 
 <p>This endpoint is used to update a coach hashtag. You have to pass the id of the skill in the url and the data you want to modify as params. You can update partially the data.</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> PATCH <span class="s1">'https://dev.planif.fr/api-coach/hashtag/1'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Authorization: Token a7816be6d761730bbca7b3de33d7b76467786b57'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer a7816be6d761730bbca7b3de33d7b76467786b57'</span> <span class="se">\</span>
 <span class="nt">--form</span> <span class="s1">'name="new name"'</span>
 </code></pre></div>
 <blockquote>
@@ -2247,12 +2344,12 @@ session | content of the session produced by timyMce (html string)
 
 <p>This endpoint is used to delete a coach hashtag. You have to pass the id of the hashtag. If successful the request will return a 204 No content</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> DELETE <span class="s1">'https://dev.planif.fr/api-coach/hashtag/2'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Authorization: Token a7816be6d761730bbca7b3de33d7b76467786b57'</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer a7816be6d761730bbca7b3de33d7b76467786b57'</span>
 </code></pre></div><h2 id='training-planned'>Training Planned</h2>
 <p><code>reverse URL coach_rest:training-planned</code></p>
 
 <p>This endpoint is used to retrieve, create, update training planned </p>
-<div class="highlight"><pre class="highlight javascript tab-javascript"><code></code></pre></div><h3 id='http-request-6'>HTTP Request</h3>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code></code></pre></div><h3 id='http-request-8'>HTTP Request</h3>
 <p><code>GET /api-coach/training-planned/?id=</code></p>
 
 <p>Used to retrieve a training planned</p>
@@ -2270,7 +2367,7 @@ session | content of the session produced by timyMce (html string)
 <td>ID of the training planned (Integer)</td>
 </tr>
 </tbody></table>
-<h3 id='http-request-7'>HTTP Request</h3>
+<h3 id='http-request-9'>HTTP Request</h3>
 <p><code>POST /api-coach/training-planned/</code></p>
 
 <p>Used to creates a training planned by sending data as a json like</p>
@@ -2290,7 +2387,7 @@ session | content of the session produced by timyMce (html string)
     </span><span class="nl">"sessions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">],</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
-</span></code></pre></div><h3 id='http-request-8'>HTTP Request</h3>
+</span></code></pre></div><h3 id='http-request-10'>HTTP Request</h3>
 <p><code>PATCH /api-coach/training-planned/</code></p>
 
 <p>Used to update a training planned, data should be send as json with an ID field, data could be partial</p>
@@ -2347,7 +2444,7 @@ session | content of the session produced by timyMce (html string)
     </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"lucas.damalix@planif.fr"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"profile_picture"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4hK2NvuZJD34oWmvnBSeKo"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-request-9'>HTTP Request</h3>
+</span></code></pre></div><h3 id='http-request-11'>HTTP Request</h3>
 <p><code>GET /api-coach/list-athletes-coach/</code></p>
 
 <p>This endpoint retrieves the athletes of a coach.</p>
@@ -2404,7 +2501,7 @@ session | content of the session produced by timyMce (html string)
 </tr>
 </tbody></table>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'https://dev.planif.fr/api-coach/text-session'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer 23d8f0bed20b838474b782454f68ba4f1195b476'</span>
 </code></pre></div>
 <blockquote>
 <p>The GET command returns a list of text sessions as JSON structured like this:</p>
@@ -2445,7 +2542,7 @@ session | content of the session produced by timyMce (html string)
 
 <p>This endpoint is used to create a text session. You have to pass the minimum parameters to create a text session</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'https://dev.planif.fr/api-coach/text-session'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer 23d8f0bed20b838474b782454f68ba4f1195b476'</span> <span class="se">\</span>
 <span class="nt">--form</span> <span class="s1">'title="A text session"'</span> <span class="se">\</span>
 <span class="nt">--form</span> <span class="s1">'description="Be ready to unleash your inner footbal"'</span> <span class="se">\</span>
 <span class="nt">--form</span> <span class="s1">'tags="easy, jogging"'</span> <span class="se">\</span>
@@ -2473,7 +2570,7 @@ session | content of the session produced by timyMce (html string)
 
 <p>This endpoint is used to get a text session. You have to pass the id of the text session</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'https://dev.planif.fr/api-coach/text-session/2'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer 23d8f0bed20b838474b782454f68ba4f1195b476'</span>
 </code></pre></div>
 <blockquote>
 <p>The GET command returns the target text session in JSON structured like this:</p>
@@ -2496,7 +2593,7 @@ session | content of the session produced by timyMce (html string)
 
 <p>This endpoint is used to update a text session. You have to pass the id of the text session in the url and the data you want to modify as params. You can update partially the data.</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> PATCH <span class="s1">'https://dev.planif.fr/api-coach/text-session/2'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer 23d8f0bed20b838474b782454f68ba4f1195b476'</span> <span class="se">\</span>
 <span class="nt">--form</span> <span class="s1">'title="New title 2"'</span> <span class="se">\</span>
 <span class="nt">--form</span> <span class="s1">'tags="Hard, run, yeah"'</span>
 </code></pre></div>
@@ -2522,7 +2619,7 @@ session | content of the session produced by timyMce (html string)
 
 <p>This endpoint is used to delete a text session. You have to pass the id of the text session. If successful the request will return a 204 No content</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> DELETE <span class="s1">'https://dev.planif.fr/api-coach/text-session/2'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer 23d8f0bed20b838474b782454f68ba4f1195b476'</span>
 </code></pre></div><h2 id='built-session'>Built Session</h2>
 <p><code>reverse URL coach_rest:built-session-list</code>
 <code>reverse URL coach_rest:built-session-detail</code></p>
@@ -2583,7 +2680,7 @@ session | content of the session produced by timyMce (html string)
 
 <p>Either Steps or Variants must be set but not both at the same time</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'https://dev.planif.fr/api-coach/built-session'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer 23d8f0bed20b838474b782454f68ba4f1195b476'</span>
 </code></pre></div>
 <blockquote>
 <p>The GET command returns a list of built sessions as JSON structured like this:</p>
@@ -2871,7 +2968,7 @@ session | content of the session produced by timyMce (html string)
 
 <p>This endpoint is used to create a built session. You have to pass the minimum parameters to create a built session</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'https://dev.planif.fr/api-coach/built-session'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer 23d8f0bed20b838474b782454f68ba4f1195b476'</span> <span class="se">\</span>
 <span class="nt">--form</span> <span class="s1">'title="A built session run"'</span> <span class="se">\</span>
 <span class="nt">--form</span> <span class="s1">'description="Be ready to unleash your inner footbal"'</span> <span class="se">\</span>
 <span class="nt">--form</span> <span class="s1">'tags="easy, jogging"'</span> <span class="se">\</span>
@@ -3273,7 +3370,7 @@ session | content of the session produced by timyMce (html string)
 
 <p>This endpoint is used to get a built session. You have to pass the id of the built session</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'https://dev.planif.fr/api-coach/built-session/2'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer 23d8f0bed20b838474b782454f68ba4f1195b476'</span>
 </code></pre></div>
 <blockquote>
 <p>The GET command returns the target built session in JSON structured like this:</p>
@@ -3355,7 +3452,7 @@ session | content of the session produced by timyMce (html string)
 
 <p>This endpoint is used to update a built session. You have to pass the id of the built session in the url and the data you want to modify as params. You can update partially the data.</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> PATCH <span class="s1">'https://dev.planif.fr/api-coach/built-session/2'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer 23d8f0bed20b838474b782454f68ba4f1195b476'</span> <span class="se">\</span>
 <span class="nt">--form</span> <span class="s1">'tags="Hard, run, yop"'</span>
 </code></pre></div>
 <blockquote>
@@ -3438,7 +3535,7 @@ session | content of the session produced by timyMce (html string)
 
 <p>This endpoint is used to delete a built session. You have to pass the id of the built session. If successful the request will return a 204 No content</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> DELETE <span class="s1">'https://dev.planif.fr/api-coach/built-session/2'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Authorization: Token 23d8f0bed20b838474b782454f68ba4f1195b476'</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer 23d8f0bed20b838474b782454f68ba4f1195b476'</span>
 </code></pre></div><h2 id='tags'>Tags</h2>
 <p><code>reverse URL coach_rest:tag-coach</code></p>
 
@@ -3471,7 +3568,7 @@ session | content of the session produced by timyMce (html string)
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <p>This endpoint retrieves, creates ou deletes tags</p>
-<h3 id='http-request-10'>HTTP Request</h3>
+<h3 id='http-request-12'>HTTP Request</h3>
 <p><code>GET /api-coach/tag-coach/?metadata=</code></p>
 
 <p>Get all coach tags, if metadata parameter is set, filter the tags case-insensitive</p>
@@ -3489,7 +3586,7 @@ session | content of the session produced by timyMce (html string)
 <td>use to filter the result (string)</td>
 </tr>
 </tbody></table>
-<h3 id='http-request-11'>HTTP Request</h3>
+<h3 id='http-request-13'>HTTP Request</h3>
 <p><code>POST /api-coach/tag-coach/</code></p>
 
 <p>Creates a tag assigned to the logged coach</p>
@@ -3706,7 +3803,7 @@ Remember — a happy coach is an authenticated coach!
 Remember — a happy coach is an authenticated coach!
 </aside>
 <h1 id='athlete-rest-api'>Athlete REST API</h1>
-<aside class="notice">For all the next endpoints, you will need to be authenticated as a Athlete and sending request containing a Token with such headers <code>Authorization: Token <your_token></code>.</aside>
+<aside class="notice">For all the next endpoints, you will need to be authenticated as a Athlete and sending request containing a Bearer with such headers <code>Authorization: Bearer <your_token></code>.</aside>
 <h2 id='activities'>Activities</h2>
 <p><code>GET /api-athlete/activity/?limit={limit}&amp;page={page}</code></p>
 
@@ -3973,7 +4070,7 @@ Remember — a happy coach is an authenticated coach!
 
 <aside class="notice">Careful, there can be only one rating per couple athlete - training plan</aside>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'https://dev.planif.fr/api-athlete/rate-plan/'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Authorization: Token 7c9aa8c2e995a233520e223d95a584e77636c057'</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer 7c9aa8c2e995a233520e223d95a584e77636c057'</span>
 </code></pre></div>
 <blockquote>
 <p>The GET command returns a list of ratings as JSON structured like this:</p>
@@ -4003,7 +4100,7 @@ Remember — a happy coach is an authenticated coach!
 
 <p>This endpoint is used to create a rating for a specific training plan. You have to pass at the minimum the id of the plan and the rate to create a rating.</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'https://dev.planif.fr/api-athlete/rate-plan/'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Authorization: Token 7c9aa8c2e995a233520e223d95a584e77636c057'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer 7c9aa8c2e995a233520e223d95a584e77636c057'</span> <span class="se">\</span>
 <span class="nt">--form</span> <span class="s1">'training_plan="2"'</span> <span class="se">\</span>
 <span class="nt">--form</span> <span class="s1">'rate="5"'</span> <span class="se">\</span>
 <span class="nt">--form</span> <span class="s1">'text="A great plan 2"'</span>
@@ -4023,7 +4120,7 @@ Remember — a happy coach is an authenticated coach!
 
 <p>This endpoint is used to get an athlete specific rating. You have to pass the id of the rating</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'https://dev.planif.fr/api-athlete/rate-plan/1'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Authorization: Token 7c9aa8c2e995a233520e223d95a584e77636c057'</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer 7c9aa8c2e995a233520e223d95a584e77636c057'</span>
 </code></pre></div>
 <blockquote>
 <p>The GET command returns the target rating in JSON structured like this:</p>
@@ -4042,7 +4139,7 @@ Remember — a happy coach is an authenticated coach!
 
 <p>You can update partially the data. </p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> PATCH <span class="s1">'https://dev.planif.fr/api-athlete/rate-plan/1'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Authorization: Token 7c9aa8c2e995a233520e223d95a584e77636c057'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer 7c9aa8c2e995a233520e223d95a584e77636c057'</span> <span class="se">\</span>
 <span class="nt">--form</span> <span class="s1">'text="New text rating"'</span>
 </code></pre></div>
 <blockquote>
@@ -4060,8 +4157,191 @@ Remember — a happy coach is an authenticated coach!
 
 <p>This endpoint is used to delete an athlete rating. You have to pass the id of the rating. If successful the request will return a 204 No content</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> DELETE <span class="s1">'https://dev.planif.fr/api-athlete/rate-plan/2'</span> <span class="se">\</span>
-<span class="nt">--header</span> <span class="s1">'Authorization: Token 7c9aa8c2e995a233520e223d95a584e77636c057'</span>
-</code></pre></div>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer 7c9aa8c2e995a233520e223d95a584e77636c057'</span>
+</code></pre></div><h1 id='club-rest-api'>Club REST API</h1>
+<aside class="notice">For all the next endpoints, you will need to be authenticated as a Club and sending request containing a Token with such headers <code>Authorization: Bearer <your_token></code>.</aside>
+<h2 id='public-profile-club'>Public profile Club</h2>
+<p>Endpoint used to retrieve the public profile of a club, and update it.</p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>bio</td>
+<td>String</td>
+<td>Bio of the club</td>
+</tr>
+<tr>
+<td>languages</td>
+<td>Array of string, can only be inside LANGUAGE_CHOICES</td>
+<td>Languages of the club</td>
+</tr>
+<tr>
+<td>sports</td>
+<td>Array of string, can only be inside SPORT_CHOICES</td>
+<td>Sports of the club</td>
+</tr>
+<tr>
+<td>is_public</td>
+<td>Boolean, default False</td>
+<td>Control wether the club profile is public</td>
+</tr>
+<tr>
+<td>is_public_email</td>
+<td>Boolean, default True</td>
+<td>Control wether the club email is public</td>
+</tr>
+<tr>
+<td>is_public_city</td>
+<td>Boolean, default False</td>
+<td>Control wether the club address is public</td>
+</tr>
+<tr>
+<td>is_public_phone</td>
+<td>Boolean, default False</td>
+<td>Control wether the club phone is public</td>
+</tr>
+<tr>
+<td>banner_id</td>
+<td>String</td>
+<td>id of the banner filepond object (don&#39;t update manually)</td>
+</tr>
+<tr>
+<td>banner</td>
+<td>String</td>
+<td>url of the banner</td>
+</tr>
+<tr>
+<td>pictures_id</td>
+<td>Array of String</td>
+<td>ids of the picture filepond objects (don&#39;t update manually)</td>
+</tr>
+<tr>
+<td>pictures</td>
+<td>Array of String</td>
+<td>urls of the pictures</td>
+</tr>
+</tbody></table>
+
+<p>LANGUAGE_CHOICES = [
+    &quot;FR&quot;,
+    &quot;EN&quot;,
+    &quot;DE&quot;,
+    &quot;ES&quot;,
+    &quot;IT&quot;
+]</p>
+
+<p>SPORT_CHOICES = [
+   &quot;OTHER&quot;,
+    &quot;RUNNING&quot;,
+    &quot;CYCLING&quot;,
+    &quot;TRANSITION&quot;,
+    &quot;FITNESS_EQUIPMENT&quot;,
+    &quot;SWIMMING&quot;,
+    &quot;BASKETBALL&quot;,
+    &quot;SOCCER&quot;,
+    &quot;TENNIS&quot;,
+    &quot;AMERICAN_FOOTBALL&quot;,
+    &quot;TRAINING&quot;,
+    &quot;WALKING&quot;,
+    &quot;CROSS_COUNTRY_SKIING&quot;,
+    &quot;ALPINE_SKIING&quot;,
+    &quot;SNOWBOARDING&quot;,
+    &quot;ROWING&quot;,
+    &quot;MOUNTAIN_EQUIPMENT&quot;,
+    &quot;HIKING&quot;,
+    &quot;MULTISPORT&quot;,
+    &quot;PADDING&quot;,
+    &quot;FLYING&quot;,
+    &quot;E_BIKING&quot;,
+    &quot;MOTORCYCLING&quot;,
+    &quot;BOATING&quot;,
+    &quot;DRIVING&quot;,
+    &quot;GOLF&quot;,
+    &quot;HANG_GLIDING&quot;,
+    &quot;HORSEBACK_RIDING&quot;,
+    &quot;HUNTING&quot;,
+    &quot;FISHING&quot;,
+    &quot;INLINE_SKATING&quot;,
+    &quot;ROCK_CLIMBING&quot;,
+    &quot;SAILING&quot;,
+    &quot;ICE_SKATING&quot;,
+    &quot;SKY_DIVING&quot;,
+    &quot;SNOWSHOEING&quot;,
+    &quot;SNOWMOBILING&quot;,
+    &quot;STAND_UP_PADDLEBOARDING&quot;,
+    &quot;SURFING&quot;,
+    &quot;WAKEBOARDING&quot;,
+    &quot;WATER_SKIING&quot;,
+    &quot;KAYAKING&quot;,
+    &quot;RAFTING&quot;,
+    &quot;WINDSURFING&quot;,
+    &quot;KITE_SURFING&quot;,
+    &quot;TACTICAL&quot;,
+    &quot;JUMP_MASTER&quot;,
+    &quot;BOXING&quot;,
+    &quot;FLOOR_CLIMBING&quot;,
+    &quot;DIVING&quot;,
+]</p>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code></code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"club"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"languages"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"FR"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"DE"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"sports"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"RUNNING"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"MULTISPORT"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"is_public"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"bio"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Yayyyyy"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"is_public_email"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"is_public_city"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"is_public_phone"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"banner"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"banner_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"pictures"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+    </span><span class="nl">"pictures_id"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='get-public-profile-2'>GET public profile</h3>
+<p><code>GET /api-club/public-profile/</code></p>
+
+<p>Get public profile</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> PUT <span class="s1">'http://localhost:8000/api-club/public-profile/'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU0ODEwNDg4LCJpYXQiOjE2NTQ4MDY4ODgsImp0aSI6ImFhZjE4YmYyYzdiYjQ5MDE5MWQwZWFlMzQ5YzUzYjNkIiwidXNlcl9pZCI6MTN9.XcAQWfoxdgYT2Pk256oz1tmuUmuHKspQGPK0XY-E_VI'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">--data-raw</span> <span class="s1">'{
+    "bio":"Yayyyyy",
+    "is_public": true,
+    "is_public_email": true,
+    "is_public_city": false,
+    "is_public_phone":true,
+    "languages" : [
+        "FR",
+        "DE"
+    ],
+    "sports" : [
+        "RUNNING",
+        "MULTISPORT"
+    ]
+}'</span>
+</code></pre></div><h3 id='put-public-profile-2'>PUT public profile</h3>
+<p><code>PUT /api-club/public-profile/</code></p>
+
+<p>Modify the public profile</p>
+
+<aside class="success">
+Remember — a happy club is an authenticated club!
+</aside>
+
 <!-- 
 
 TEMPLATE
