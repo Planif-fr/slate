@@ -1489,115 +1489,59 @@ curl --location --request DELETE 'https://dev.planif.fr/api-coach/education/2' \
 --header 'Authorization: Bearer a7816be6d761730bbca7b3de33d7b76467786b57'
 ```
 
-## Social
-
-`reverse URL coach_rest:social-coach`
-`reverse URL coach_rest:social-coach-obj`
+## Socials
 
 Property | Description | Type
 --------- | ----------- | -----------
-id | Id of the social  | Integer
-website | Website of the social, must be a valid choice | String
-url | Url of the social  | String
-
-Choices are : 
-"facebook",
-"twitter",
-"instagram",
-"linkedin",
-"youtube",
-"website"
+facebook_url | Url of facebook profile, could be null  | String
+twitter_url | Url of twitter profile, could be null  | String
+instagram_url | Url of instagram profile, could be null  | String
+youtube_url | Url of youtube profile, could be null  | String
+linkedin_url | Url of linkedin profile, could be null  | String
+website_url | Url of website profile, could be null  | String
 
 ```shell
-curl -v \
-	-X GET \
-	-H "Authorization: Bearer 23d8f0bed20b838474b782454f68ba4f1195b476" \
-	"https://dev.planif.fr/api-coach/social/"
+curl --location --request GET 'http://localhost:8000/api-coach/socials/' \
+--header 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU1MjA1MDk4LCJpYXQiOjE2NTUyMDE0OTgsImp0aSI6IjgxNzgwMjBhNTViNjQwYzk5MmY4YjEyOWUxNzIxOGE3IiwidXNlcl9pZCI6OH0.lNc9icQlfU6Vhj7_cGFherhvimwRt03mf8MmSrXc_Bw'
 ```
 
 > The GET command returns a list of socials as JSON structured like this:
 
 ```json
-[
-    {
-        "id": 2,
-        "website": "instagram",
-        "url": "Ne",
-        "coach": 8
-    },
-    {
-        "id": 3,
-        "website": "instagram",
-        "url": "https://www.instagram.com/instagram/",
-        "coach": 8
-    }
-]
+{
+    "facebook_url": null,
+    "twitter_url": null,
+    "instagram_url": null,
+    "youtube_url": null,
+    "linkedin_url": null,
+    "website_url": null
+}
 ```
 
-### Get all socials
+### Get coach socials
 
-`GET /api-coach/social/`
+`GET /api-coach/socials/`
 
 This endpoint retrieves the coach social.
 
-### Create an social
+### Patch socials
 
-`POST /api-coach/social/`
+`PATCH /api-coach/socials/`
 
-This endpoint is used to create a coach social. You have to pass at the minimum all the required fields or more to create an social
+This endpoint is used to patch the coach socials.
 
-> The POST command returns the created social in JSON structured like this:
-
-```json
-{
-    "id": 3,
-    "website": "instagram",
-    "url": "https://www.instagram.com/instagram/",
-    "coach": 8
-}
-```
-
-### Get a specific social 
-
-`GET /api-coach/social/<id>`
-
-This endpoint is used to get a coach social. You have to pass the id of the social
-
-> The GET command returns the target social in JSON structured like this:
+> The PATCH command returns the coach socials in JSON structured like this:
 
 ```json
 {
-    "id": 3,
-    "website": "instagram",
-    "url": "https://www.instagram.com/instagram/",
-    "coach": 8
+    "facebook_url": null,
+    "twitter_url": null,
+    "instagram_url": null,
+    "youtube_url": null,
+    "linkedin_url": null,
+    "website_url": null
 }
 ```
-
-### Modify an social
-
-`PATCH /api-coach/social/<id>`
-
-This endpoint is used to update a coach social. You have to pass the id of the social and the data you want to modify as params. You can update partially the data.
-
-
-> If successful the PATCH command returns the updated social in JSON structured like this:
-
-```json
-{
-    "id": 3,
-    "website": "instagram",
-    "url": "https://www.instagram.com/instagram/",
-    "coach": 8
-}
-```
-
-### Delete a specific social
-
-`DELETE /api-coach/social/<id>`
-
-This endpoint is used to delete a coach social. You have to pass the id of the social. If successful the request will return a 204 No content
-
 
 ## Skill
 
