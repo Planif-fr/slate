@@ -1013,6 +1013,20 @@ price | Price of a public plan in Eur, available only if the plan is public  | I
 rate | The rating of the plan, average of all the rate given by the athlete. Could be null, cannot be changed by this endpoint  | Float
 is_public | True if the plan is public, false otherwise  | Boolean
 is_static | True if the plan is static, false otherwise  | Boolean
+athletes | List of 4 random selected athletes linked to this plan to display the avatars | List of athletes object as specified below
+count_athletes | Number of athletes linked to this plan | Integer
+
+Athlete object in the list of athletes
+
+Property | Description | Type
+--------- | ----------- | -----------
+id | Id of the athlete  | Integer
+first_name | First name of the athlete  | String
+last_name | Last name of the athlete  | String
+email | Email of the athlete  | String
+username | Username of the athlete  | String
+profile_picture | link source of the profile picture of the athlete, could be null  | String
+
 
 ```shell
 curl --location --request GET 'https://dev.planif.fr/api-coach/plan/' \
@@ -1025,31 +1039,31 @@ curl --location --request GET 'https://dev.planif.fr/api-coach/plan/' \
 [
     {
         "id": 2,
-        "name": "My insane plan",
-        "coach": 1,
-        "description": null,
-        "rate": 5.0,
-        "is_public": false,
-        "is_static": false
-    },
-    {
-        "id": 16,
-        "name": "My insane plan",
-        "coach": 1,
-        "description": "Be ready to become fiiiiit AF",
-        "duration": 2,
-        "price": "123.32",
-        "rate": null,
-        "is_public": true,
-        "is_static": true
-    },
-    {
-        "id": 1,
-        "name": "New Plan",
-        "coach": 1,
-        "description": null,
+        "name": "Ronaldo training week",
+        "coach": 8,
+        "description": "Be ready to unleash your inner footbal",
+        "duration": null,
         "price": "12.00",
-        "rate": 4.7,
+        "rate": null,
+        "athletes": [
+            {
+                "first_name": "Lucas",
+                "last_name": "Damalix",
+                "profile_picture": "http://localhost:8000/mediafiles/media/2/profile/Riccione FINP.jpg",
+                "email": "terspychore.yt@gmail.com",
+                "username": "terspychore.yt",
+                "id": 2
+            },
+            {
+                "first_name": "Lucas",
+                "last_name": "Damalix",
+                "profile_picture": null,
+                "email": "lucasdamaev@gmail.com",
+                "username": "Terspy",
+                "id": 5
+            }
+        ],
+        "count_athletes": 2,
         "is_public": true,
         "is_static": false
     }
@@ -1099,7 +1113,7 @@ curl --location --request POST 'https://dev.planif.fr/api-coach/plan/' \
 
 ### Get a specific plan 
 
-`GET /api-coach/plan/<id>`
+`GET /api-coach/plan/<id>/`
 
 This endpoint is used to get a coach specific plan. You have to pass the id of the plan
 
@@ -1112,19 +1126,40 @@ curl --location --request GET 'https://dev.planif.fr/api-coach/plan/4' \
 
 ```json
 {
-    "id": 4,
-    "name": "Nice plan",
-    "coach": 1,
-    "description": "Excellent",
+    "id": 2,
+    "name": "Ronaldo training week",
+    "coach": 8,
+    "description": "Be ready to unleash your inner footbal",
+    "duration": null,
+    "price": "12.00",
     "rate": null,
-    "is_public": false,
+    "athletes": [
+        {
+            "first_name": "Lucas",
+            "last_name": "Damalix",
+            "profile_picture": null,
+            "email": "lucasdamaev@gmail.com",
+            "username": "Terspy",
+            "id": 5
+        },
+        {
+            "first_name": "Lucas",
+            "last_name": "Damalix",
+            "profile_picture": "http://localhost:8000/mediafiles/media/2/profile/Riccione FINP.jpg",
+            "email": "terspychore.yt@gmail.com",
+            "username": "terspychore.yt",
+            "id": 2
+        }
+    ],
+    "count_athletes": 2,
+    "is_public": true,
     "is_static": false
 }
 ```
 
 ### Modify a plan
 
-`PATCH /api-coach/plan/<id>`
+`PATCH /api-coach/plan/<id>/`
 
 This endpoint is used to update a coach training plan. You have to pass the id of the plan in the url and the data you want to modify as params. 
 
@@ -1154,7 +1189,7 @@ curl --location --request PATCH 'https://dev.planif.fr/api-coach/plan/4' \
 
 ### Delete a specific plan
 
-`DELETE /api-coach/plan/<id>`
+`DELETE /api-coach/plan/<id>/`
 
 This endpoint is used to delete a coach training plan. You have to pass the id of the plan. If successful the request will return a 204 No content
 
