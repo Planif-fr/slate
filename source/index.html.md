@@ -3328,7 +3328,7 @@ curl --location --request PATCH 'http://localhost:8000/api-coach/group/6' \
   This endpoint is used to get the list of groups, and athletes of the coach.
   When the athletes are not in a group, they are returned in the array of athletes. Otherwise they are returned in the group they are in.
 
-    ```shell
+```shell
   curl --location --request GET 'http://localhost:8000/api-coach/group-athlete-list/' \
 --header 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU1MzcyMjAwLCJpYXQiOjE2NTUzNjg2MDAsImp0aSI6IjgzODdlMDVhMTczZDRkZTRiMTEzYTZkNzY5ZDNkZDI0IiwidXNlcl9pZCI6MTN9.hjvQ-lUSW_uCK9V6sdwygLCWJjUy7MmgiQcaFDw7vuA'
 ```
@@ -4124,7 +4124,7 @@ Do no set them both in the same request !
   This endpoint is used to get the list of groups, athletes and coaches of the club.
   When the athletes or coaches are not in a group, they are returned in the array of athletes or coaches. Otherwise they are returned in the group they are in.
 
-  ```shell
+```shell
   curl --location --request GET 'http://localhost:8000/api-club/group-athlete-list/' \
 --header 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU1MzcyMjAwLCJpYXQiOjE2NTUzNjg2MDAsImp0aSI6IjgzODdlMDVhMTczZDRkZTRiMTEzYTZkNzY5ZDNkZDI0IiwidXNlcl9pZCI6MTN9.hjvQ-lUSW_uCK9V6sdwygLCWJjUy7MmgiQcaFDw7vuA'
 ```
