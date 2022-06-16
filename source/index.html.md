@@ -3189,6 +3189,237 @@ curl --location --request PUT 'http://localhost:8000/api-coach/public-profile/' 
 
 Modify the public profile
 
+## Group
+
+Property | Type | Description
+--------- | ----------- | -----------
+owner | Compte | Owner of the group
+name | String | Name of the group
+description | String | Description of the group (optionnal)
+icon | String | Icon of the group (optionnal)
+
+### List all groups
+
+`GET /api-coach/group`
+
+This endpoint is used to list all the groups of the coach.
+
+> The above command returns JSON structured like this:
+
+```json
+[
+    {
+        "id": 4,
+        "name": "Group 2",
+        "description": "A nice group",
+        "owner": 8,
+        "number_of_athletes": 0,
+        "number_of_coaches": 0
+    },
+    {
+        "id": 5,
+        "name": "dfgh",
+        "description": "sdf",
+        "owner": 8,
+        "number_of_athletes": 0,
+        "number_of_coaches": 0
+    }
+]
+```
+
+### Add a group
+
+`POST /api-coach/group`
+
+This endpoint is used to add a group to the coach.
+
+
+```shell
+curl --location --request POST 'http://localhost:8000/api-coach/group' \
+--header 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU1MzcyMjAwLCJpYXQiOjE2NTUzNjg2MDAsImp0aSI6IjgzODdlMDVhMTczZDRkZTRiMTEzYTZkNzY5ZDNkZDI0IiwidXNlcl9pZCI6MTN9.hjvQ-lUSW_uCK9V6sdwygLCWJjUy7MmgiQcaFDw7vuA' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "name":"Test",
+    "description":"Yay",
+    "icon":null
+}'
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+    "id": 9,
+    "name": "Test",
+    "description": "Yay",
+    "owner": 13,
+    "number_of_athletes": 0,
+    "number_of_coaches": 0
+}
+```
+
+### Delete a group
+
+`DELETE /api-coach/group/<id>`
+
+This endpoint is used to delete a group from the coach.
+
+Returns a 204 No Content response if the group is deleted. Otherwise a 404 Not Found response is returned.
+
+### Get a specific group
+
+`GET /api-coach/group/<id>`
+
+This endpoint is used to get a specific group.
+
+  
+  ```shell
+curl --location --request GET 'http://localhost:8000/api-coach/group/6' \
+--header 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU1MzcyMjAwLCJpYXQiOjE2NTUzNjg2MDAsImp0aSI6IjgzODdlMDVhMTczZDRkZTRiMTEzYTZkNzY5ZDNkZDI0IiwidXNlcl9pZCI6MTN9.hjvQ-lUSW_uCK9V6sdwygLCWJjUy7MmgiQcaFDw7vuA'
+```
+
+> The above command returns JSON structured like this:
+
+  ```json
+{
+    "id": 6,
+    "name": "Oh dam",
+    "description": "Yay",
+    "owner": 13,
+    "number_of_athletes": 0,
+    "number_of_coaches": 0
+}
+```
+
+### Modify a group
+
+`PATCH /api-coach/group/<id>`
+
+This endpoint is used to modify a group.
+
+Pass any field that you wanna change in the body
+
+```shell
+curl --location --request PATCH 'http://localhost:8000/api-coach/group/6' \
+--header 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU1MzcyMjAwLCJpYXQiOjE2NTUzNjg2MDAsImp0aSI6IjgzODdlMDVhMTczZDRkZTRiMTEzYTZkNzY5ZDNkZDI0IiwidXNlcl9pZCI6MTN9.hjvQ-lUSW_uCK9V6sdwygLCWJjUy7MmgiQcaFDw7vuA' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "name":"Oh dam"
+}'
+```
+
+  > The above command returns JSON structured like this:
+
+  ```json
+{
+    "id": 6,
+    "name": "Oh dam",
+    "description": "Yay",
+    "owner": 13,
+    "number_of_athletes": 0,
+    "number_of_coaches": 0
+}
+```
+
+### Get athletes and groups
+
+`GET /api-coach/group-athlete-list/`
+  
+  This endpoint is used to get the list of groups, and athletes of the coach.
+  When the athletes are not in a group, they are returned in the array of athletes. Otherwise they are returned in the group they are in.
+
+    ```shell
+  curl --location --request GET 'http://localhost:8000/api-coach/group-athlete-list/' \
+--header 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU1MzcyMjAwLCJpYXQiOjE2NTUzNjg2MDAsImp0aSI6IjgzODdlMDVhMTczZDRkZTRiMTEzYTZkNzY5ZDNkZDI0IiwidXNlcl9pZCI6MTN9.hjvQ-lUSW_uCK9V6sdwygLCWJjUy7MmgiQcaFDw7vuA'
+```
+
+> The above command returns JSON structured like this:
+
+
+```json
+{
+    "groups": [
+        {
+            "id": 4,
+            "owner": {
+                "utilisateur": 8,
+                "first_name": "Lucas",
+                "last_name": "Damalix",
+                "birth_date": "2017-01-10",
+                "height": {
+                    "unit": "m",
+                    "value": 1.72
+                },
+                "weight": {
+                    "unit": "g",
+                    "value": 65000.0
+                },
+                "phone_number": "+33651024955",
+                "sex": false,
+                "age": 5,
+                "address": "17 Chemin de la Capuche Grenoble 38100 France",
+                "profile_picture": "media/8/profile/Riccione FINP.jpg",
+                "profile_picture_id": "fQyw8oDnvW287qhhoVrkmC"
+            },
+            "description": "A nice group",
+            "icon": "",
+            "name": "Group 2",
+            "membre_coach": [],
+            "membre_athlete": []
+        },
+        {
+            "id": 5,
+            "owner": {
+                "utilisateur": 8,
+                "first_name": "Lucas",
+                "last_name": "Damalix",
+                "birth_date": "2017-01-10",
+                "height": {
+                    "unit": "m",
+                    "value": 1.72
+                },
+                "weight": {
+                    "unit": "g",
+                    "value": 65000.0
+                },
+                "phone_number": "+33651024955",
+                "sex": false,
+                "age": 5,
+                "address": "17 Chemin de la Capuche Grenoble 38100 France",
+                "profile_picture": "media/8/profile/Riccione FINP.jpg",
+                "profile_picture_id": "fQyw8oDnvW287qhhoVrkmC"
+            },
+            "description": "sdf",
+            "icon": null,
+            "name": "dfgh",
+            "membre_coach": [],
+            "membre_athlete": []
+        }
+    ],
+    "athletes": [
+        {
+            "status": true,
+            "first_name": "Lucas",
+            "last_name": "Damalix",
+            "profile_picture": null,
+            "email": "lucasdamaev@gmail.com",
+            "username": "Terspy",
+            "id": 5
+        },
+        {
+            "status": true,
+            "first_name": "Lucas",
+            "last_name": "Damalix",
+            "profile_picture": "http://localhost:8000/mediafiles/media/2/profile/Riccione FINP.jpg",
+            "email": "terspychore.yt@gmail.com",
+            "username": "terspychore.yt",
+            "id": 2
+        }
+    ]
+}
+```
+
+
 <aside class="success">
 Remember — a happy coach is an authenticated coach!
 </aside>
@@ -3710,6 +3941,355 @@ curl --location --request PUT 'http://localhost:8000/api-club/public-profile/' \
 `PUT /api-club/public-profile/`
 
 Modify the public profile
+
+## Group
+
+Property | Type | Description
+--------- | ----------- | -----------
+owner | Compte | Owner of the group
+name | String | Name of the group
+description | String | Description of the group (optionnal)
+icon | String | Icon of the group (optionnal)
+
+### List all groups
+
+`GET /api-club/group`
+
+This endpoint is used to list all the groups of the club.
+
+> The above command returns JSON structured like this:
+
+```json
+[
+    {
+        "id": 8,
+        "name": "Test",
+        "description": "Yay",
+        "owner": 13,
+        "number_of_athletes": 0,
+        "number_of_coaches": 0
+    },
+    {
+        "id": 6,
+        "name": "Oh dam",
+        "description": "Yay",
+        "owner": 13,
+        "number_of_athletes": 0,
+        "number_of_coaches": 0
+    }
+]
+```
+
+### Add a group
+
+`POST /api-club/group`
+
+This endpoint is used to add a group to the club.
+
+
+```shell
+curl --location --request POST 'http://localhost:8000/api-club/group' \
+--header 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU1MzcyMjAwLCJpYXQiOjE2NTUzNjg2MDAsImp0aSI6IjgzODdlMDVhMTczZDRkZTRiMTEzYTZkNzY5ZDNkZDI0IiwidXNlcl9pZCI6MTN9.hjvQ-lUSW_uCK9V6sdwygLCWJjUy7MmgiQcaFDw7vuA' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "name":"Test",
+    "description":"Yay",
+    "icon":null
+}'
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+    "id": 9,
+    "name": "Test",
+    "description": "Yay",
+    "owner": 13,
+    "number_of_athletes": 0,
+    "number_of_coaches": 0
+}
+```
+
+### Delete a group
+
+`DELETE /api-club/group/<id>`
+
+This endpoint is used to delete a group from the club.
+
+Returns a 204 No Content response if the group is deleted. Otherwise a 404 Not Found response is returned.
+
+### Get a specific group
+
+`GET /api-club/group/<id>`
+
+This endpoint is used to get a specific group.
+
+  
+  ```shell
+curl --location --request GET 'http://localhost:8000/api-club/group/6' \
+--header 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU1MzcyMjAwLCJpYXQiOjE2NTUzNjg2MDAsImp0aSI6IjgzODdlMDVhMTczZDRkZTRiMTEzYTZkNzY5ZDNkZDI0IiwidXNlcl9pZCI6MTN9.hjvQ-lUSW_uCK9V6sdwygLCWJjUy7MmgiQcaFDw7vuA'
+```
+
+> The above command returns JSON structured like this:
+
+  ```json
+{
+    "id": 6,
+    "name": "Oh dam",
+    "description": "Yay",
+    "owner": 13,
+    "number_of_athletes": 0,
+    "number_of_coaches": 0
+}
+```
+
+### Modify a group
+
+`PATCH /api-club/group/<id>`
+
+This endpoint is used to modify a group.
+
+Pass any field that you wanna change in the body
+
+```shell
+curl --location --request PATCH 'http://localhost:8000/api-club/group/6' \
+--header 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU1MzcyMjAwLCJpYXQiOjE2NTUzNjg2MDAsImp0aSI6IjgzODdlMDVhMTczZDRkZTRiMTEzYTZkNzY5ZDNkZDI0IiwidXNlcl9pZCI6MTN9.hjvQ-lUSW_uCK9V6sdwygLCWJjUy7MmgiQcaFDw7vuA' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "name":"Oh dam"
+}'
+```
+
+  > The above command returns JSON structured like this:
+
+  ```json
+{
+    "id": 6,
+    "name": "Oh dam",
+    "description": "Yay",
+    "owner": 13,
+    "number_of_athletes": 0,
+    "number_of_coaches": 0
+}
+```
+
+### Add a group member
+
+`POST /api-club/group-membre/`
+
+Property | Type | Description
+--------- | ----------- | -----------
+group | Integer | Id of the group, must be a group owned by the club
+athlete | Integer | Id of the athlete, must be an athlete member of the club
+coach | Integer | Id of the coach, must be a coach member of the club
+
+This endpoint is used to add a member to a group.
+If the user is a coach, pass a "coach" field in the body.
+Otherwise, pass a "athlete" field in the body.
+Do no set them both in the same request !
+
+Example to add an athlete
+
+  ```shell
+  curl --location --request POST 'http://localhost:8000/api-club/group-membre/' \
+--header 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU1MzcyMjAwLCJpYXQiOjE2NTUzNjg2MDAsImp0aSI6IjgzODdlMDVhMTczZDRkZTRiMTEzYTZkNzY5ZDNkZDI0IiwidXNlcl9pZCI6MTN9.hjvQ-lUSW_uCK9V6sdwygLCWJjUy7MmgiQcaFDw7vuA' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "athlete": 2,
+    "group": 6
+}'
+  ```
+
+### Delete group member
+
+  `DELETE /api-club/group-membre/`
+
+
+Property | Type | Description
+--------- | ----------- | -----------
+group | Integer | Id of the group, must be a group owned by the club
+athlete | Integer | Id of the athlete, must be an athlete member of the club
+coach | Integer | Id of the coach, must be a coach member of the club
+
+This endpoint is used to delete a member from a group.
+If the user is a coach, pass a "coach" field in the body.
+Otherwise, pass a "athlete" field in the body.
+Do no set them both in the same request !
+
+## Get club groups, athletes and coaches
+
+  `GET /api-club/group-athlete-list/`
+
+  This endpoint is used to get the list of groups, athletes and coaches of the club.
+  When the athletes or coaches are not in a group, they are returned in the array of athletes or coaches. Otherwise they are returned in the group they are in.
+
+  ```shell
+  curl --location --request GET 'http://localhost:8000/api-club/group-athlete-list/' \
+--header 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU1MzcyMjAwLCJpYXQiOjE2NTUzNjg2MDAsImp0aSI6IjgzODdlMDVhMTczZDRkZTRiMTEzYTZkNzY5ZDNkZDI0IiwidXNlcl9pZCI6MTN9.hjvQ-lUSW_uCK9V6sdwygLCWJjUy7MmgiQcaFDw7vuA'
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+    "groups": [
+        {
+            "id": 8,
+            "owner": {
+                "club_name": "New club name",
+                "creation_date": "2022-02-23",
+                "phone_number": "+33651024955",
+                "age": 0,
+                "address": "17 Chemin de la Capuche Grenoble 38100 France",
+                "profile_picture": null,
+                "profile_picture_id": null,
+                "type_account": "club"
+            },
+            "description": "Yay",
+            "icon": null,
+            "name": "Test",
+            "membre_coach": [],
+            "membre_athlete": []
+        },
+        {
+            "id": 6,
+            "owner": {
+                "club_name": "New club name",
+                "creation_date": "2022-02-23",
+                "phone_number": "+33651024955",
+                "age": 0,
+                "address": "17 Chemin de la Capuche Grenoble 38100 France",
+                "profile_picture": null,
+                "profile_picture_id": null,
+                "type_account": "club"
+            },
+            "description": "Yay",
+            "icon": null,
+            "name": "Oh dam",
+            "membre_coach": [],
+            "membre_athlete": []
+        }
+    ],
+    "athletes": [
+        {
+            "id": 1,
+            "user": null,
+            "is_athlete": true,
+            "email": "lucasdamalixdev@gmail.com",
+            "is_active": false,
+            "token": "1a91e3cc-50a5-40da-8e40-12d49bb4cd34",
+            "club": 13
+        }
+    ],
+    "coaches": []
+}
+```
+
+
+
+## Get members info
+
+`GET /api-club/members-info/`
+
+Retrieve the count of members available, the count of athletes and the count of coaches
+
+> The above command returns JSON structured like this:
+
+```json
+{
+    "count_members_available": 19,
+    "count_athlete": 1,
+    "count_coach": 0
+}
+```
+
+## Members
+
+Property | Type | Description
+--------- | ----------- | -----------
+club | Club | The club of the member
+user | User | User instance of the member, is null when the member is not active
+is_athlete | Boolean | True if the member is an athlete, false if the member is a coach
+email | String | Email of the member, could be null when the member was linked directly by link
+token | String | Token of the member, could be null when the member was linked directly by link
+
+### Get members
+
+`GET /api-club/members/`
+
+Retrieve all the members of a club, if the user are active, the user is also returned.
+
+### Add a member
+
+  `POST /api-club/members/`
+
+  This endpoint is used to add a member to a club. We need to specify an email address and the type of account (is_athlete)
+
+  ```shell
+  curl --location --request POST 'http://localhost:8000/api-club/members/' \
+--header 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU1MzcyMjAwLCJpYXQiOjE2NTUzNjg2MDAsImp0aSI6IjgzODdlMDVhMTczZDRkZTRiMTEzYTZkNzY5ZDNkZDI0IiwidXNlcl9pZCI6MTN9.hjvQ-lUSW_uCK9V6sdwygLCWJjUy7MmgiQcaFDw7vuA' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "email": "lucasdamalixdev@gmail.com",
+    "is_athlete": false
+}'
+```
+
+> The above command returns JSON structured like this:
+
+  ```json
+{
+    "id": 3,
+    "user": null,
+    "is_athlete": false,
+    "email": "lucasdamalixdev@gmail.com",
+    "is_active": false,
+    "token": "599f227f-a9f8-42c7-a152-63a1eec581d6",
+    "club": 13
+}
+  ```
+
+### Delete member 
+ 
+`DELETE /api-club/members/`
+
+Delete a member of a club (that does not delete the user).
+You must specify the 'member_id'
+
+```shell
+
+curl --location --request DELETE 'http://localhost:8000/api-club/members/' \
+--header 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU1MzcyMjAwLCJpYXQiOjE2NTUzNjg2MDAsImp0aSI6IjgzODdlMDVhMTczZDRkZTRiMTEzYTZkNzY5ZDNkZDI0IiwidXNlcl9pZCI6MTN9.hjvQ-lUSW_uCK9V6sdwygLCWJjUy7MmgiQcaFDw7vuA' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "member_id": 3
+}'
+```
+
+The above command returns a 204 No content if successful.
+
+### Link user to member with a token
+
+This endpoint is used when a user wants to link his account to a member instance after receiving their token.
+The user must be logged as a coach or an athlete. The token must be set in the body.
+
+`POST /api-club/link-member-token/`
+
+```shell
+curl --location --request POST 'http://localhost:8000/api-club/link-member-token/' \
+--header 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU1MzcyMjAwLCJpYXQiOjE2NTUzNjg2MDAsImp0aSI6IjgzODdlMDVhMTczZDRkZTRiMTEzYTZkNzY5ZDNkZDI0IiwidXNlcl9pZCI6MTN9.hjvQ-lUSW_uCK9V6sdwygLCWJjUy7MmgiQcaFDw7vuA' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "token": "599f227f-a9f8-42c7-a152-63a1eec581d6"
+}'
+```
+
+The above command returns a 201 Created if successful.
+
+
+
+
 
 <aside class="success">
 Remember — a happy club is an authenticated club!
