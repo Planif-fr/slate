@@ -386,6 +386,9 @@
                   <li>
                     <a href="#public-profile-coach" class="toc-h2 toc-link" data-title="Public profile Coach">Public profile Coach</a>
                   </li>
+                  <li>
+                    <a href="#group" class="toc-h2 toc-link" data-title="Group">Group</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -410,6 +413,18 @@
               <ul class="toc-list-h2">
                   <li>
                     <a href="#public-profile-club" class="toc-h2 toc-link" data-title="Public profile Club">Public profile Club</a>
+                  </li>
+                  <li>
+                    <a href="#group-2" class="toc-h2 toc-link" data-title="Group">Group</a>
+                  </li>
+                  <li>
+                    <a href="#get-club-groups-athletes-and-coaches" class="toc-h2 toc-link" data-title="Get club groups, athletes and coaches">Get club groups, athletes and coaches</a>
+                  </li>
+                  <li>
+                    <a href="#get-members-info" class="toc-h2 toc-link" data-title="Get members info">Get members info</a>
+                  </li>
+                  <li>
+                    <a href="#members" class="toc-h2 toc-link" data-title="Members">Members</a>
                   </li>
               </ul>
           </li>
@@ -3836,7 +3851,228 @@ Remember — a happy coach is an authenticated coach!
 <p><code>PUT /api-coach/public-profile/</code></p>
 
 <p>Modify the public profile</p>
+<h2 id='group'>Group</h2>
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>owner</td>
+<td>Compte</td>
+<td>Owner of the group</td>
+</tr>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>Name of the group</td>
+</tr>
+<tr>
+<td>description</td>
+<td>String</td>
+<td>Description of the group (optionnal)</td>
+</tr>
+<tr>
+<td>icon</td>
+<td>String</td>
+<td>Icon of the group (optionnal)</td>
+</tr>
+</tbody></table>
+<h3 id='list-all-groups'>List all groups</h3>
+<p><code>GET /api-coach/group</code></p>
 
+<p>This endpoint is used to list all the groups of the coach.</p>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Group 2"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A nice group"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"owner"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"number_of_athletes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"number_of_coaches"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dfgh"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sdf"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"owner"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"number_of_athletes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"number_of_coaches"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div><h3 id='add-a-group'>Add a group</h3>
+<p><code>POST /api-coach/group</code></p>
+
+<p>This endpoint is used to add a group to the coach.</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'http://localhost:8000/api-coach/group'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU1MzcyMjAwLCJpYXQiOjE2NTUzNjg2MDAsImp0aSI6IjgzODdlMDVhMTczZDRkZTRiMTEzYTZkNzY5ZDNkZDI0IiwidXNlcl9pZCI6MTN9.hjvQ-lUSW_uCK9V6sdwygLCWJjUy7MmgiQcaFDw7vuA'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">--data-raw</span> <span class="s1">'{
+    "name":"Test",
+    "description":"Yay",
+    "icon":null
+}'</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Yay"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"owner"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"number_of_athletes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"number_of_coaches"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='delete-a-group'>Delete a group</h3>
+<p><code>DELETE /api-coach/group/&lt;id&gt;</code></p>
+
+<p>This endpoint is used to delete a group from the coach.</p>
+
+<p>Returns a 204 No Content response if the group is deleted. Otherwise a 404 Not Found response is returned.</p>
+<h3 id='get-a-specific-group'>Get a specific group</h3>
+<p><code>GET /api-coach/group/&lt;id&gt;</code></p>
+
+<p>This endpoint is used to get a specific group.</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'http://localhost:8000/api-coach/group/6'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU1MzcyMjAwLCJpYXQiOjE2NTUzNjg2MDAsImp0aSI6IjgzODdlMDVhMTczZDRkZTRiMTEzYTZkNzY5ZDNkZDI0IiwidXNlcl9pZCI6MTN9.hjvQ-lUSW_uCK9V6sdwygLCWJjUy7MmgiQcaFDw7vuA'</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Oh dam"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Yay"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"owner"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"number_of_athletes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"number_of_coaches"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='modify-a-group'>Modify a group</h3>
+<p><code>PATCH /api-coach/group/&lt;id&gt;</code></p>
+
+<p>This endpoint is used to modify a group.</p>
+
+<p>Pass any field that you wanna change in the body</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> PATCH <span class="s1">'http://localhost:8000/api-coach/group/6'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU1MzcyMjAwLCJpYXQiOjE2NTUzNjg2MDAsImp0aSI6IjgzODdlMDVhMTczZDRkZTRiMTEzYTZkNzY5ZDNkZDI0IiwidXNlcl9pZCI6MTN9.hjvQ-lUSW_uCK9V6sdwygLCWJjUy7MmgiQcaFDw7vuA'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">--data-raw</span> <span class="s1">'{
+    "name":"Oh dam"
+}'</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Oh dam"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Yay"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"owner"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"number_of_athletes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"number_of_coaches"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='get-athletes-and-groups'>Get athletes and groups</h3>
+<p><code>GET /api-coach/group-athlete-list/</code></p>
+
+<p>This endpoint is used to get the list of groups, and athletes of the coach.
+  When the athletes are not in a group, they are returned in the array of athletes. Otherwise they are returned in the group they are in.</p>
+
+<p><code>shell
+  curl --location --request GET &#39;http://localhost:8000/api-coach/group-athlete-list/&#39; \
+--header &#39;Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU1MzcyMjAwLCJpYXQiOjE2NTUzNjg2MDAsImp0aSI6IjgzODdlMDVhMTczZDRkZTRiMTEzYTZkNzY5ZDNkZDI0IiwidXNlcl9pZCI6MTN9.hjvQ-lUSW_uCK9V6sdwygLCWJjUy7MmgiQcaFDw7vuA&#39;
+</code></p>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"groups"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"owner"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"utilisateur"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Lucas"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Damalix"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"birth_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-01-10"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"height"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"m"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.72</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="nl">"weight"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"g"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">65000.0</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="nl">"phone_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+33651024955"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"sex"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"age"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"17 Chemin de la Capuche Grenoble 38100 France"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"profile_picture"</span><span class="p">:</span><span class="w"> </span><span class="s2">"media/8/profile/Riccione FINP.jpg"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"profile_picture_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fQyw8oDnvW287qhhoVrkmC"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A nice group"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"icon"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Group 2"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"membre_coach"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+            </span><span class="nl">"membre_athlete"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"owner"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"utilisateur"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Lucas"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Damalix"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"birth_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-01-10"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"height"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"m"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.72</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="nl">"weight"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"g"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">65000.0</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="nl">"phone_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+33651024955"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"sex"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"age"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"17 Chemin de la Capuche Grenoble 38100 France"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"profile_picture"</span><span class="p">:</span><span class="w"> </span><span class="s2">"media/8/profile/Riccione FINP.jpg"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"profile_picture_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fQyw8oDnvW287qhhoVrkmC"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sdf"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"icon"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dfgh"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"membre_coach"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+            </span><span class="nl">"membre_athlete"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"athletes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Lucas"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Damalix"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"profile_picture"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"lucasdamaev@gmail.com"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Terspy"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Lucas"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Damalix"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"profile_picture"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:8000/mediafiles/media/2/profile/Riccione FINP.jpg"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"terspychore.yt@gmail.com"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"terspychore.yt"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
 <aside class="success">
 Remember — a happy coach is an authenticated coach!
 </aside>
@@ -4375,6 +4611,369 @@ Remember — a happy coach is an authenticated coach!
 <p><code>PUT /api-club/public-profile/</code></p>
 
 <p>Modify the public profile</p>
+<h2 id='group-2'>Group</h2>
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>owner</td>
+<td>Compte</td>
+<td>Owner of the group</td>
+</tr>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>Name of the group</td>
+</tr>
+<tr>
+<td>description</td>
+<td>String</td>
+<td>Description of the group (optionnal)</td>
+</tr>
+<tr>
+<td>icon</td>
+<td>String</td>
+<td>Icon of the group (optionnal)</td>
+</tr>
+</tbody></table>
+<h3 id='list-all-groups-2'>List all groups</h3>
+<p><code>GET /api-club/group</code></p>
+
+<p>This endpoint is used to list all the groups of the club.</p>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Yay"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"owner"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"number_of_athletes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"number_of_coaches"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Oh dam"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Yay"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"owner"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"number_of_athletes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"number_of_coaches"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div><h3 id='add-a-group-2'>Add a group</h3>
+<p><code>POST /api-club/group</code></p>
+
+<p>This endpoint is used to add a group to the club.</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'http://localhost:8000/api-club/group'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU1MzcyMjAwLCJpYXQiOjE2NTUzNjg2MDAsImp0aSI6IjgzODdlMDVhMTczZDRkZTRiMTEzYTZkNzY5ZDNkZDI0IiwidXNlcl9pZCI6MTN9.hjvQ-lUSW_uCK9V6sdwygLCWJjUy7MmgiQcaFDw7vuA'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">--data-raw</span> <span class="s1">'{
+    "name":"Test",
+    "description":"Yay",
+    "icon":null
+}'</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Yay"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"owner"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"number_of_athletes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"number_of_coaches"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='delete-a-group-2'>Delete a group</h3>
+<p><code>DELETE /api-club/group/&lt;id&gt;</code></p>
+
+<p>This endpoint is used to delete a group from the club.</p>
+
+<p>Returns a 204 No Content response if the group is deleted. Otherwise a 404 Not Found response is returned.</p>
+<h3 id='get-a-specific-group-2'>Get a specific group</h3>
+<p><code>GET /api-club/group/&lt;id&gt;</code></p>
+
+<p>This endpoint is used to get a specific group.</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'http://localhost:8000/api-club/group/6'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU1MzcyMjAwLCJpYXQiOjE2NTUzNjg2MDAsImp0aSI6IjgzODdlMDVhMTczZDRkZTRiMTEzYTZkNzY5ZDNkZDI0IiwidXNlcl9pZCI6MTN9.hjvQ-lUSW_uCK9V6sdwygLCWJjUy7MmgiQcaFDw7vuA'</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Oh dam"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Yay"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"owner"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"number_of_athletes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"number_of_coaches"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='modify-a-group-2'>Modify a group</h3>
+<p><code>PATCH /api-club/group/&lt;id&gt;</code></p>
+
+<p>This endpoint is used to modify a group.</p>
+
+<p>Pass any field that you wanna change in the body</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> PATCH <span class="s1">'http://localhost:8000/api-club/group/6'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU1MzcyMjAwLCJpYXQiOjE2NTUzNjg2MDAsImp0aSI6IjgzODdlMDVhMTczZDRkZTRiMTEzYTZkNzY5ZDNkZDI0IiwidXNlcl9pZCI6MTN9.hjvQ-lUSW_uCK9V6sdwygLCWJjUy7MmgiQcaFDw7vuA'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">--data-raw</span> <span class="s1">'{
+    "name":"Oh dam"
+}'</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Oh dam"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Yay"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"owner"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"number_of_athletes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"number_of_coaches"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='add-a-group-member'>Add a group member</h3>
+<p><code>POST /api-club/group-membre/</code></p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>group</td>
+<td>Integer</td>
+<td>Id of the group, must be a group owned by the club</td>
+</tr>
+<tr>
+<td>athlete</td>
+<td>Integer</td>
+<td>Id of the athlete, must be an athlete member of the club</td>
+</tr>
+<tr>
+<td>coach</td>
+<td>Integer</td>
+<td>Id of the coach, must be a coach member of the club</td>
+</tr>
+</tbody></table>
+
+<p>This endpoint is used to add a member to a group.
+If the user is a coach, pass a &quot;coach&quot; field in the body.
+Otherwise, pass a &quot;athlete&quot; field in the body.
+Do no set them both in the same request !</p>
+
+<p>Example to add an athlete</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>  curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'http://localhost:8000/api-club/group-membre/'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU1MzcyMjAwLCJpYXQiOjE2NTUzNjg2MDAsImp0aSI6IjgzODdlMDVhMTczZDRkZTRiMTEzYTZkNzY5ZDNkZDI0IiwidXNlcl9pZCI6MTN9.hjvQ-lUSW_uCK9V6sdwygLCWJjUy7MmgiQcaFDw7vuA'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">--data-raw</span> <span class="s1">'{
+    "athlete": 2,
+    "group": 6
+}'</span>
+</code></pre></div><h3 id='delete-group-member'>Delete group member</h3>
+<p><code>DELETE /api-club/group-membre/</code></p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>group</td>
+<td>Integer</td>
+<td>Id of the group, must be a group owned by the club</td>
+</tr>
+<tr>
+<td>athlete</td>
+<td>Integer</td>
+<td>Id of the athlete, must be an athlete member of the club</td>
+</tr>
+<tr>
+<td>coach</td>
+<td>Integer</td>
+<td>Id of the coach, must be a coach member of the club</td>
+</tr>
+</tbody></table>
+
+<p>This endpoint is used to delete a member from a group.
+If the user is a coach, pass a &quot;coach&quot; field in the body.
+Otherwise, pass a &quot;athlete&quot; field in the body.
+Do no set them both in the same request !</p>
+<h2 id='get-club-groups-athletes-and-coaches'>Get club groups, athletes and coaches</h2>
+<p><code>GET /api-club/group-athlete-list/</code></p>
+
+<p>This endpoint is used to get the list of groups, athletes and coaches of the club.
+  When the athletes or coaches are not in a group, they are returned in the array of athletes or coaches. Otherwise they are returned in the group they are in.</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>  curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'http://localhost:8000/api-club/group-athlete-list/'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU1MzcyMjAwLCJpYXQiOjE2NTUzNjg2MDAsImp0aSI6IjgzODdlMDVhMTczZDRkZTRiMTEzYTZkNzY5ZDNkZDI0IiwidXNlcl9pZCI6MTN9.hjvQ-lUSW_uCK9V6sdwygLCWJjUy7MmgiQcaFDw7vuA'</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"groups"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"owner"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"club_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"New club name"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"creation_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-02-23"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"phone_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+33651024955"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"age"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"17 Chemin de la Capuche Grenoble 38100 France"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"profile_picture"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"profile_picture_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"type_account"</span><span class="p">:</span><span class="w"> </span><span class="s2">"club"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Yay"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"icon"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"membre_coach"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+            </span><span class="nl">"membre_athlete"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"owner"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"club_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"New club name"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"creation_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-02-23"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"phone_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+33651024955"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"age"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"17 Chemin de la Capuche Grenoble 38100 France"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"profile_picture"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"profile_picture_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"type_account"</span><span class="p">:</span><span class="w"> </span><span class="s2">"club"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Yay"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"icon"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Oh dam"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"membre_coach"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+            </span><span class="nl">"membre_athlete"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"athletes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"user"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"is_athlete"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"lucasdamalixdev@gmail.com"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"is_active"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1a91e3cc-50a5-40da-8e40-12d49bb4cd34"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"club"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"coaches"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h2 id='get-members-info'>Get members info</h2>
+<p><code>GET /api-club/members-info/</code></p>
+
+<p>Retrieve the count of members available, the count of athletes and the count of coaches</p>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"count_members_available"</span><span class="p">:</span><span class="w"> </span><span class="mi">19</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"count_athlete"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"count_coach"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h2 id='members'>Members</h2>
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>club</td>
+<td>Club</td>
+<td>The club of the member</td>
+</tr>
+<tr>
+<td>user</td>
+<td>User</td>
+<td>User instance of the member, is null when the member is not active</td>
+</tr>
+<tr>
+<td>is_athlete</td>
+<td>Boolean</td>
+<td>True if the member is an athlete, false if the member is a coach</td>
+</tr>
+<tr>
+<td>email</td>
+<td>String</td>
+<td>Email of the member, could be null when the member was linked directly by link</td>
+</tr>
+<tr>
+<td>token</td>
+<td>String</td>
+<td>Token of the member, could be null when the member was linked directly by link</td>
+</tr>
+</tbody></table>
+<h3 id='get-members'>Get members</h3>
+<p><code>GET /api-club/members/</code></p>
+
+<p>Retrieve all the members of a club, if the user are active, the user is also returned.</p>
+<h3 id='add-a-member'>Add a member</h3>
+<p><code>POST /api-club/members/</code></p>
+
+<p>This endpoint is used to add a member to a club. We need to specify an email address and the type of account (is_athlete)</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>  curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'http://localhost:8000/api-club/members/'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU1MzcyMjAwLCJpYXQiOjE2NTUzNjg2MDAsImp0aSI6IjgzODdlMDVhMTczZDRkZTRiMTEzYTZkNzY5ZDNkZDI0IiwidXNlcl9pZCI6MTN9.hjvQ-lUSW_uCK9V6sdwygLCWJjUy7MmgiQcaFDw7vuA'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">--data-raw</span> <span class="s1">'{
+    "email": "lucasdamalixdev@gmail.com",
+    "is_athlete": false
+}'</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"user"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"is_athlete"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"lucasdamalixdev@gmail.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"is_active"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"599f227f-a9f8-42c7-a152-63a1eec581d6"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"club"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='delete-member'>Delete member</h3>
+<p><code>DELETE /api-club/members/</code></p>
+
+<p>Delete a member of a club (that does not delete the user).
+You must specify the &#39;member_id&#39;</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>
+curl <span class="nt">--location</span> <span class="nt">--request</span> DELETE <span class="s1">'http://localhost:8000/api-club/members/'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU1MzcyMjAwLCJpYXQiOjE2NTUzNjg2MDAsImp0aSI6IjgzODdlMDVhMTczZDRkZTRiMTEzYTZkNzY5ZDNkZDI0IiwidXNlcl9pZCI6MTN9.hjvQ-lUSW_uCK9V6sdwygLCWJjUy7MmgiQcaFDw7vuA'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">--data-raw</span> <span class="s1">'{
+    "member_id": 3
+}'</span>
+</code></pre></div>
+<p>The above command returns a 204 No content if successful.</p>
+<h3 id='link-user-to-member-with-a-token'>Link user to member with a token</h3>
+<p>This endpoint is used when a user wants to link his account to a member instance after receiving their token.
+The user must be logged as a coach or an athlete. The token must be set in the body.</p>
+
+<p><code>POST /api-club/link-member-token/</code></p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'http://localhost:8000/api-club/link-member-token/'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU1MzcyMjAwLCJpYXQiOjE2NTUzNjg2MDAsImp0aSI6IjgzODdlMDVhMTczZDRkZTRiMTEzYTZkNzY5ZDNkZDI0IiwidXNlcl9pZCI6MTN9.hjvQ-lUSW_uCK9V6sdwygLCWJjUy7MmgiQcaFDw7vuA'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">--data-raw</span> <span class="s1">'{
+    "token": "599f227f-a9f8-42c7-a152-63a1eec581d6"
+}'</span>
+</code></pre></div>
+<p>The above command returns a 201 Created if successful.</p>
 
 <aside class="success">
 Remember — a happy club is an authenticated club!
