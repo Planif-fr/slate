@@ -3983,12 +3983,9 @@ Remember — a happy coach is an authenticated coach!
 
 <p>This endpoint is used to get the list of groups, and athletes of the coach.
   When the athletes are not in a group, they are returned in the array of athletes. Otherwise they are returned in the group they are in.</p>
-
-<p><code>shell
-  curl --location --request GET &#39;http://localhost:8000/api-coach/group-athlete-list/&#39; \
---header &#39;Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU1MzcyMjAwLCJpYXQiOjE2NTUzNjg2MDAsImp0aSI6IjgzODdlMDVhMTczZDRkZTRiMTEzYTZkNzY5ZDNkZDI0IiwidXNlcl9pZCI6MTN9.hjvQ-lUSW_uCK9V6sdwygLCWJjUy7MmgiQcaFDw7vuA&#39;
-</code></p>
-
+<div class="highlight"><pre class="highlight shell tab-shell"><code>  curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'http://localhost:8000/api-coach/group-athlete-list/'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU1MzcyMjAwLCJpYXQiOjE2NTUzNjg2MDAsImp0aSI6IjgzODdlMDVhMTczZDRkZTRiMTEzYTZkNzY5ZDNkZDI0IiwidXNlcl9pZCI6MTN9.hjvQ-lUSW_uCK9V6sdwygLCWJjUy7MmgiQcaFDw7vuA'</span>
+</code></pre></div>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
