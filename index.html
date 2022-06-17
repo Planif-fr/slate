@@ -375,6 +375,9 @@
                     <a href="#athletes" class="toc-h2 toc-link" data-title="Athletes">Athletes</a>
                   </li>
                   <li>
+                    <a href="#workout" class="toc-h2 toc-link" data-title="Workout">Workout</a>
+                  </li>
+                  <li>
                     <a href="#text-session" class="toc-h2 toc-link" data-title="Text Session">Text Session</a>
                   </li>
                   <li>
@@ -704,367 +707,6 @@ ID | The ID of the kitten to delete
 <td>required (string)</td>
 </tr>
 </tbody></table>
-
-<!-- 
-# Sessions
-
-## Built session
-
-Here is an example of a built session object with Planif session builder. This example contains 3 differents variants of the session.
-
-Property | Description
---------- | -----------
-_id | The ID of the session (ObjectId)
-sport | instance of sport of the session (string)
-title | title of the session (string)
-description | description of the session (string)
-tags | list of tags choose by the creator (Array of string)
-steps | list of steps of the session, null if variants (Array of steps)
-variants | list of variants of the session, empty if only one variant (Array of variants)
-
-> JSON structured like this:
-
-```json
-{
-  "_id":{
-    "$oid":"6225e150d19fffa18fa4139f"
-  },
-  "sport":"RUNNING",
-  "title":"30/30",
-  "description":"Session 30/30 for beginners, intermediates, experts",
-  "steps":null,
-  "variants":[
-    {
-      "name":"Beginner",
-      "steps":[
-        {
-          "intensity":"WARMUP",
-          "targetType":"OPEN",
-          "durationType":"TIME",
-          "durationValue":{
-            "$numberInt":"1200"
-          }
-        },
-        {
-          "repeatType":"REPEAT_UNTIL_STEPS_CMPLT",
-          "repeatValue":{
-            "$numberInt":"2"
-          },
-          "steps":[
-            {
-              "repeatType":"REPEAT_UNTIL_STEPS_CMPLT",
-              "repeatValue":{
-                "$numberInt":"6"
-              },
-              "steps":[
-                {
-                  "intensity":"INTERVAL",
-                  "targetType":"SPEED_LAP",
-                  "durationType":"TIME",
-                  "durationValue":{
-                    "$numberInt":"30"
-                  },
-                  "targetValue":"5"
-                },
-                {
-                  "intensity":"RECOVERY",
-                  "targetType":"OPEN",
-                  "durationType":"TIME",
-                  "durationValue":{
-                    "$numberInt":"30"
-                  }
-                }
-              ]
-            },
-            {
-              "intensity":"COOLDOWN",
-              "targetType":"OPEN",
-              "durationType":"TIME",
-              "durationValue":{
-                "$numberInt":"240"
-              }
-            }
-          ]
-        },
-        {
-          "intensity":"COOLDOWN",
-          "targetType":"OPEN",
-          "durationType":"TIME",
-          "durationValue":{
-            "$numberInt":"360"
-          }
-        }
-      ]
-    },
-    {
-      "name":"Intermediate",
-      "steps":[
-        {
-          "intensity":"WARMUP",
-          "targetType":"OPEN",
-          "durationType":"TIME",
-          "durationValue":{
-            "$numberInt":"1200"
-          }
-        },
-        {
-          "repeatType":"REPEAT_UNTIL_STEPS_CMPLT",
-          "repeatValue":{
-            "$numberInt":"2"
-          },
-          "steps":[
-            {
-              "repeatType":"REPEAT_UNTIL_STEPS_CMPLT",
-              "repeatValue":{
-                "$numberInt":"8"
-              },
-              "steps":[
-                {
-                  "intensity":"INTERVAL",
-                  "targetType":"SPEED_LAP",
-                  "durationType":"TIME",
-                  "durationValue":{
-                    "$numberInt":"30"
-                  },
-                  "targetValue":"5"
-                },
-                {
-                  "intensity":"RECOVERY",
-                  "targetType":"OPEN",
-                  "durationType":"TIME",
-                  "durationValue":{
-                    "$numberInt":"30"
-                  }
-                }
-              ]
-            },
-            {
-              "intensity":"COOLDOWN",
-              "targetType":"OPEN",
-              "durationType":"TIME",
-              "durationValue":{
-                "$numberInt":"240"
-              }
-            }
-          ]
-        },
-        {
-          "intensity":"COOLDOWN",
-          "targetType":"OPEN",
-          "durationType":"TIME",
-          "durationValue":{
-            "$numberInt":"360"
-          }
-        }
-      ]
-    },
-    {
-      "name":"Expert",
-      "steps":[
-        {
-          "intensity":"WARMUP",
-          "targetType":"OPEN",
-          "durationType":"TIME",
-          "durationValue":{
-            "$numberInt":"1800"
-          }
-        },
-        {
-          "repeatType":"REPEAT_UNTIL_STEPS_CMPLT",
-          "repeatValue":{
-            "$numberInt":"2"
-          },
-          "steps":[
-            {
-              "repeatType":"REPEAT_UNTIL_STEPS_CMPLT",
-              "repeatValue":{
-                "$numberInt":"8"
-              },
-              "steps":[
-                {
-                  "intensity":"INTERVAL",
-                  "targetType":"SPEED_LAP",
-                  "durationType":"TIME",
-                  "durationValue":{
-                    "$numberInt":"30"
-                  },
-                  "targetValue":"5"
-                },
-                {
-                  "intensity":"RECOVERY",
-                  "targetType":"OPEN",
-                  "durationType":"TIME",
-                  "durationValue":{
-                    "$numberInt":"30"
-                  }
-                }
-              ]
-            },
-            {
-              "intensity":"COOLDOWN",
-              "targetType":"OPEN",
-              "durationType":"TIME",
-              "durationValue":{
-                "$numberInt":"240"
-              }
-            }
-          ]
-        },
-        {
-          "intensity":"COOLDOWN",
-          "targetType":"OPEN",
-          "durationType":"TIME",
-          "durationValue":{
-            "$numberInt":"360"
-          }
-        }
-      ]
-    }
-  ],
-  "coach_id":{
-    "$numberInt":"4"
-  }
-}
-```
-
-> Simple example with tags
-
-```json
-{
-  "_id":{
-    "$oid":"62261a8b4f3f8e0b136791c7"
-  },
-  "sport":"LAP_SWIMMING",
-  "title":"Swim open water example",
-  "description":"Example with tags",
-  "tags":[
-    "easy swim",
-    "beginner",
-    "intermediate",
-    "open water"
-  ],
-  "steps":[
-    {
-      "intensity":"INTERVAL",
-      "targetType":"OPEN",
-      "durationType":"DISTANCE",
-      "durationValue":{
-        "$numberInt":"5"
-      },
-      "durationValueType":"KM"
-    }
-  ],
-  "variants":[
-    
-  ],
-  "coach_id":{
-    "$numberInt":"4"
-  }
-}
-```
-> Example ramp
-
-```json
-{
-  "_id":{
-    "$oid":"6228c63e06b096526738dae8"
-  },
-  "sport":"CYCLING",
-  "title":"Cycling ramp",
-  "description":null,
-  "tags":[
-    "cycling"
-  ],
-  "steps":[
-    {
-      "intensity":"WARMUP",
-      "targetType":"OPEN",
-      "durationType":"TIME",
-      "durationValue":{
-        "$numberInt":"1200"
-      }
-    },
-    {
-      "repeatValue":{
-        "$numberInt":"4"
-      },
-      "uuid-Comment":"a0612b3ef9024151b3947a5e6ac5da7b",
-      "steps":[
-        {
-          "intensity":"INTERVAL",
-          "targetType":"OPEN",
-          "durationType":"TIME",
-          "durationValue":{
-            "$numberInt":"60"
-          }
-        },
-        {
-          "intensity":"INTERVAL",
-          "targetType":"OPEN",
-          "durationType":"TIME",
-          "durationValue":{
-            "$numberInt":"60"
-          }
-        },
-        {
-          "intensity":"INTERVAL",
-          "targetType":"OPEN",
-          "durationType":"DISTANCE",
-          "durationValueType":"KM",
-          "durationValue":{
-            "$numberInt":"12"
-          }
-        },
-        {
-          "intensity":"INTERVAL",
-          "targetType":"OPEN",
-          "durationType":"TIME",
-          "durationValue":{
-            "$numberInt":"10"
-          }
-        }
-      ]
-    },
-    {
-      "intensity":"COOLDOWN",
-      "targetType":"OPEN",
-      "durationType":"TIME",
-      "durationValue":{
-        "$numberInt":"600"
-      }
-    }
-  ],
-  "variants":[
-    
-  ],
-  "coach_id":{
-    "$numberInt":"4"
-  }
-}
-```
-
-## Text & Image session
-
-Text and image session object
-
-Property | Description
---------- | -----------
-id | The ID of the session (int)
-coach | Coach creator ID (int or Coach model instance)
-title | title of the session (string)
-description | description of the session (string)
-tags | list of tags choose by the creator (Array of string)
-session | content of the session produced by timyMce (html string)
-
-
-
-## Session builder -->
-
-<!-- ****** -->
-
-<!-- SHARED -->
-
-<!-- ****** -->
 <h1 id='shared-rest-api'>Shared REST API</h1><h2 id='sport'>Sport</h2>
 <p><code>reverse URL shared_rest:sport</code></p>
 
@@ -2501,6 +2143,165 @@ session | content of the session produced by timyMce (html string)
 <p><code>GET /api-coach/list-athletes-coach/</code></p>
 
 <p>This endpoint retrieves the athletes of a coach.</p>
+<h2 id='workout'>Workout</h2>
+<p>WORKOUT OBJECT</p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>Id of the workout</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>owner</td>
+<td>Owner of the workout</td>
+<td>Utilisateur</td>
+</tr>
+<tr>
+<td>sport</td>
+<td>Name of the sport</td>
+<td>String</td>
+</tr>
+<tr>
+<td>name</td>
+<td>Name of the workout, max length 100</td>
+<td>String</td>
+</tr>
+<tr>
+<td>description</td>
+<td>Description of the workout (optional)</td>
+<td>String</td>
+</tr>
+<tr>
+<td>estimated_duration</td>
+<td>Estimated duration of the session (optional)</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>estimated_distance</td>
+<td>Estimated distance of the workout, in meters, (optional)</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>creation_date</td>
+<td>Date of the creation of the workout, by default current timestamp, no need to update or post it</td>
+<td>Date</td>
+</tr>
+<tr>
+<td>updated_date</td>
+<td>Date of the last update of the workout, by default current timestamp, no need to update or post it</td>
+<td>Date</td>
+</tr>
+<tr>
+<td>is_public</td>
+<td>Boolean, default to False</td>
+<td>Boolean</td>
+</tr>
+<tr>
+<td>steps</td>
+<td>List of steps of the workout</td>
+<td>List of Step</td>
+</tr>
+</tbody></table>
+
+<p>STEP OBJECT</p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>Id of the step</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>order</td>
+<td>Order of the step</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>notes</td>
+<td>Notes of the steps (optional)</td>
+<td>String</td>
+</tr>
+<tr>
+<td>step_type</td>
+<td>Type of the step, could be &quot;EXERCISE&quot; or &quot;REPETITION&quot;</td>
+<td>String</td>
+</tr>
+</tbody></table>
+
+<p>FOR STEP TYPE &quot;EXERCISE&quot;</p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>duration_type</td>
+<td>Duration type of the step, could be &quot;TIME&quot; or &quot;DISTANCE&quot;, or &quot;NONE&quot;</td>
+<td>String</td>
+</tr>
+<tr>
+<td>duration_value</td>
+<td>Duration value of the step, in seconds or meters, depending on the duration type</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>&lt;!-- duration_value_type</td>
+<td>Duration value type of the step, could be &quot;KM&quot; or &quot;METER&quot;</td>
+<td>String --&gt;</td>
+</tr>
+<tr>
+<td>target_type</td>
+<td>Target type of the step, could be &quot;NONE&quot;, &quot;SPEED&quot;, &quot;DISTANCE&quot;, &quot;HEARTRATE&quot;, &quot;CADENCE&quot;, &quot;POWER&quot;</td>
+<td>String</td>
+</tr>
+<tr>
+<td>target_value</td>
+<td>Target value of the step</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>target_value_type</td>
+<td>Target value type of the step, could be &quot;VALUE&quot; or &quot;PERCENT_OF_MAX&quot;</td>
+<td>String</td>
+</tr>
+</tbody></table>
+
+<p>FOR STEP TYPE &quot;REPETITION&quot;</p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>repeat_type</td>
+<td>Repeat type of the step, could be &quot;UNTIL_COUNT&quot; or &quot;UNTIL_TIME&quot;</td>
+<td>String</td>
+</tr>
+<tr>
+<td>repeat_value</td>
+<td>Repeat value of the step, in seconds or count, depending on the repeat type</td>
+<td>Integer</td>
+</tr>
+</tbody></table>
 <h2 id='text-session'>Text Session</h2>
 <p><code>reverse URL coach_rest:text-session-list</code>
 <code>reverse URL coach_rest:text-session-detail</code></p>
