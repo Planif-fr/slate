@@ -3346,6 +3346,76 @@ Get all the statistics for a given duration
 }
 ```
 
+## Metric
+
+A metric is a value that is measured by the athlete. It is used to track the progress of the athlete and to categorise him in different groups.
+
+Availables metrics name are:
+
+    * `VO2_MAX`
+    * `VMA`
+
+Property | Type | Description
+---------|------|------------
+metric | string | The name of the metric
+value | float | The value of the metric
+### Get athlete metrics and availables ones
+
+`GET /api-athlete/metrics/`
+
+This endpoint returns all the metrics of the athlete in a metric array and the available metrics for the athletes.
+
+> The GET request returns a JSON object with the following structure:
+
+```json
+{
+    "metrics": [
+        {
+            "metric": "VO2_MAX",
+            "value": 1.32
+        }
+    ],
+    "available": [
+        "VMA"
+    ]
+}
+```
+
+### Modify metrics (add, update, delete)
+
+`POST /api-athlete/metrics/`
+
+Here you have to pass a dict of all the metrics of the athlete with the following structure:
+Key = metric name, Value = metric value
+To remove a metric, simply not pass it. All the metrics are removed before the new ones are added.
+
+```shell
+curl --location --request POST 'http://localhost:8000/api-athlete/metrics/' \
+--header 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU1NDYyODkzLCJpYXQiOjE2NTU0NTkyOTMsImp0aSI6ImIzYWM3ZDc3YTllYTRkMTlhNDJiNmZkYzI5NTI5ZTQ0IiwidXNlcl9pZCI6MTV9.ZXpKYXfJlTwSdYrxCISg8tpamcwLXpoBhBt0n-P75qQ' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "VO2_MAX": 1.32,
+    "MAX_HEART_RATE": 190
+}'
+```
+
+> The POST request returns a JSON object with the following structure:
+
+```json
+[
+    {
+        "metric": "VO2_MAX",
+        "value": 1.32
+    },
+    {
+        "metric": "MAX_HEART_RATE",
+        "value": 190.0
+    }
+]
+```
+
+
+
 ## Training Planned
 
 `GET /api-athlete/training-planned/?start_date={start_date}&end_date={end_date}`
