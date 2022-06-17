@@ -293,365 +293,6 @@ Property | Description
 username | required (string)
 password | required (string)
 
-<!-- 
-# Sessions
-
-## Built session
-
-Here is an example of a built session object with Planif session builder. This example contains 3 differents variants of the session.
-
-Property | Description
---------- | -----------
-_id | The ID of the session (ObjectId)
-sport | instance of sport of the session (string)
-title | title of the session (string)
-description | description of the session (string)
-tags | list of tags choose by the creator (Array of string)
-steps | list of steps of the session, null if variants (Array of steps)
-variants | list of variants of the session, empty if only one variant (Array of variants)
-
-> JSON structured like this:
-
-```json
-{
-  "_id":{
-    "$oid":"6225e150d19fffa18fa4139f"
-  },
-  "sport":"RUNNING",
-  "title":"30/30",
-  "description":"Session 30/30 for beginners, intermediates, experts",
-  "steps":null,
-  "variants":[
-    {
-      "name":"Beginner",
-      "steps":[
-        {
-          "intensity":"WARMUP",
-          "targetType":"OPEN",
-          "durationType":"TIME",
-          "durationValue":{
-            "$numberInt":"1200"
-          }
-        },
-        {
-          "repeatType":"REPEAT_UNTIL_STEPS_CMPLT",
-          "repeatValue":{
-            "$numberInt":"2"
-          },
-          "steps":[
-            {
-              "repeatType":"REPEAT_UNTIL_STEPS_CMPLT",
-              "repeatValue":{
-                "$numberInt":"6"
-              },
-              "steps":[
-                {
-                  "intensity":"INTERVAL",
-                  "targetType":"SPEED_LAP",
-                  "durationType":"TIME",
-                  "durationValue":{
-                    "$numberInt":"30"
-                  },
-                  "targetValue":"5"
-                },
-                {
-                  "intensity":"RECOVERY",
-                  "targetType":"OPEN",
-                  "durationType":"TIME",
-                  "durationValue":{
-                    "$numberInt":"30"
-                  }
-                }
-              ]
-            },
-            {
-              "intensity":"COOLDOWN",
-              "targetType":"OPEN",
-              "durationType":"TIME",
-              "durationValue":{
-                "$numberInt":"240"
-              }
-            }
-          ]
-        },
-        {
-          "intensity":"COOLDOWN",
-          "targetType":"OPEN",
-          "durationType":"TIME",
-          "durationValue":{
-            "$numberInt":"360"
-          }
-        }
-      ]
-    },
-    {
-      "name":"Intermediate",
-      "steps":[
-        {
-          "intensity":"WARMUP",
-          "targetType":"OPEN",
-          "durationType":"TIME",
-          "durationValue":{
-            "$numberInt":"1200"
-          }
-        },
-        {
-          "repeatType":"REPEAT_UNTIL_STEPS_CMPLT",
-          "repeatValue":{
-            "$numberInt":"2"
-          },
-          "steps":[
-            {
-              "repeatType":"REPEAT_UNTIL_STEPS_CMPLT",
-              "repeatValue":{
-                "$numberInt":"8"
-              },
-              "steps":[
-                {
-                  "intensity":"INTERVAL",
-                  "targetType":"SPEED_LAP",
-                  "durationType":"TIME",
-                  "durationValue":{
-                    "$numberInt":"30"
-                  },
-                  "targetValue":"5"
-                },
-                {
-                  "intensity":"RECOVERY",
-                  "targetType":"OPEN",
-                  "durationType":"TIME",
-                  "durationValue":{
-                    "$numberInt":"30"
-                  }
-                }
-              ]
-            },
-            {
-              "intensity":"COOLDOWN",
-              "targetType":"OPEN",
-              "durationType":"TIME",
-              "durationValue":{
-                "$numberInt":"240"
-              }
-            }
-          ]
-        },
-        {
-          "intensity":"COOLDOWN",
-          "targetType":"OPEN",
-          "durationType":"TIME",
-          "durationValue":{
-            "$numberInt":"360"
-          }
-        }
-      ]
-    },
-    {
-      "name":"Expert",
-      "steps":[
-        {
-          "intensity":"WARMUP",
-          "targetType":"OPEN",
-          "durationType":"TIME",
-          "durationValue":{
-            "$numberInt":"1800"
-          }
-        },
-        {
-          "repeatType":"REPEAT_UNTIL_STEPS_CMPLT",
-          "repeatValue":{
-            "$numberInt":"2"
-          },
-          "steps":[
-            {
-              "repeatType":"REPEAT_UNTIL_STEPS_CMPLT",
-              "repeatValue":{
-                "$numberInt":"8"
-              },
-              "steps":[
-                {
-                  "intensity":"INTERVAL",
-                  "targetType":"SPEED_LAP",
-                  "durationType":"TIME",
-                  "durationValue":{
-                    "$numberInt":"30"
-                  },
-                  "targetValue":"5"
-                },
-                {
-                  "intensity":"RECOVERY",
-                  "targetType":"OPEN",
-                  "durationType":"TIME",
-                  "durationValue":{
-                    "$numberInt":"30"
-                  }
-                }
-              ]
-            },
-            {
-              "intensity":"COOLDOWN",
-              "targetType":"OPEN",
-              "durationType":"TIME",
-              "durationValue":{
-                "$numberInt":"240"
-              }
-            }
-          ]
-        },
-        {
-          "intensity":"COOLDOWN",
-          "targetType":"OPEN",
-          "durationType":"TIME",
-          "durationValue":{
-            "$numberInt":"360"
-          }
-        }
-      ]
-    }
-  ],
-  "coach_id":{
-    "$numberInt":"4"
-  }
-}
-```
-
-> Simple example with tags
-
-```json
-{
-  "_id":{
-    "$oid":"62261a8b4f3f8e0b136791c7"
-  },
-  "sport":"LAP_SWIMMING",
-  "title":"Swim open water example",
-  "description":"Example with tags",
-  "tags":[
-    "easy swim",
-    "beginner",
-    "intermediate",
-    "open water"
-  ],
-  "steps":[
-    {
-      "intensity":"INTERVAL",
-      "targetType":"OPEN",
-      "durationType":"DISTANCE",
-      "durationValue":{
-        "$numberInt":"5"
-      },
-      "durationValueType":"KM"
-    }
-  ],
-  "variants":[
-    
-  ],
-  "coach_id":{
-    "$numberInt":"4"
-  }
-}
-```
-> Example ramp
-
-```json
-{
-  "_id":{
-    "$oid":"6228c63e06b096526738dae8"
-  },
-  "sport":"CYCLING",
-  "title":"Cycling ramp",
-  "description":null,
-  "tags":[
-    "cycling"
-  ],
-  "steps":[
-    {
-      "intensity":"WARMUP",
-      "targetType":"OPEN",
-      "durationType":"TIME",
-      "durationValue":{
-        "$numberInt":"1200"
-      }
-    },
-    {
-      "repeatValue":{
-        "$numberInt":"4"
-      },
-      "uuid-Comment":"a0612b3ef9024151b3947a5e6ac5da7b",
-      "steps":[
-        {
-          "intensity":"INTERVAL",
-          "targetType":"OPEN",
-          "durationType":"TIME",
-          "durationValue":{
-            "$numberInt":"60"
-          }
-        },
-        {
-          "intensity":"INTERVAL",
-          "targetType":"OPEN",
-          "durationType":"TIME",
-          "durationValue":{
-            "$numberInt":"60"
-          }
-        },
-        {
-          "intensity":"INTERVAL",
-          "targetType":"OPEN",
-          "durationType":"DISTANCE",
-          "durationValueType":"KM",
-          "durationValue":{
-            "$numberInt":"12"
-          }
-        },
-        {
-          "intensity":"INTERVAL",
-          "targetType":"OPEN",
-          "durationType":"TIME",
-          "durationValue":{
-            "$numberInt":"10"
-          }
-        }
-      ]
-    },
-    {
-      "intensity":"COOLDOWN",
-      "targetType":"OPEN",
-      "durationType":"TIME",
-      "durationValue":{
-        "$numberInt":"600"
-      }
-    }
-  ],
-  "variants":[
-    
-  ],
-  "coach_id":{
-    "$numberInt":"4"
-  }
-}
-```
-
-## Text & Image session
-
-Text and image session object
-
-Property | Description
---------- | -----------
-id | The ID of the session (int)
-coach | Coach creator ID (int or Coach model instance)
-title | title of the session (string)
-description | description of the session (string)
-tags | list of tags choose by the creator (Array of string)
-session | content of the session produced by timyMce (html string)
-
-
-
-## Session builder -->
-
-<!-- ****** -->
-<!-- SHARED -->
-<!-- ****** -->
-
 # Shared REST API
 
 ## Sport
@@ -1912,6 +1553,53 @@ profile_picture | upload_id of the profile picture created by filepond_drf, null
 `GET /api-coach/list-athletes-coach/`
 
 This endpoint retrieves the athletes of a coach.
+
+## Workout
+
+
+WORKOUT OBJECT
+
+Property | Description | Type
+--------- | ----------- | -----------
+id | Id of the workout  | Integer
+owner | Owner of the workout| Utilisateur
+sport | Name of the sport | String
+name | Name of the workout, max length 100 | String
+description | Description of the workout (optional)  | String
+estimated_duration | Estimated duration of the session (optional)  | Integer
+estimated_distance | Estimated distance of the workout, in meters, (optional) | Integer
+creation_date | Date of the creation of the workout, by default current timestamp, no need to update or post it | Date
+updated_date | Date of the last update of the workout, by default current timestamp, no need to update or post it | Date
+is_public | Boolean, default to False | Boolean
+steps | List of steps of the workout | List of Step
+
+STEP OBJECT
+
+Property | Description | Type
+--------- | ----------- | -----------
+id | Id of the step  | Integer
+order | Order of the step | Integer
+notes | Notes of the steps (optional) | String
+step_type | Type of the step, could be "EXERCISE" or "REPETITION" | String
+
+FOR STEP TYPE "EXERCISE"
+
+Property | Description | Type
+--------- | ----------- | -----------
+duration_type | Duration type of the step, could be "TIME" or "DISTANCE", or "NONE" | String
+duration_value | Duration value of the step, in seconds or meters, depending on the duration type | Integer
+<!-- duration_value_type | Duration value type of the step, could be "KM" or "METER" | String -->
+target_type | Target type of the step, could be "NONE", "SPEED", "DISTANCE", "HEARTRATE", "CADENCE", "POWER"  | String
+target_value | Target value of the step | Integer
+target_value_type | Target value type of the step, could be "VALUE" or "PERCENT_OF_MAX" | String
+
+FOR STEP TYPE "REPETITION"
+
+Property | Description | Type
+--------- | ----------- | -----------
+repeat_type | Repeat type of the step, could be "UNTIL_COUNT" or "UNTIL_TIME" | String
+repeat_value | Repeat value of the step, in seconds or count, depending on the repeat type | Integer
+
 
 ## Text Session
 
