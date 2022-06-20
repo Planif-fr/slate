@@ -855,6 +855,22 @@ curl --location --request POST 'http://localhost:8000/api-coach/link-athlete-to-
 }'
 ```
 
+### Link multiple athletes to a plan
+
+`POST /api-coach/link-multiple-athletes-to-plan/`
+
+This endpoint is used to link multiple athletes to a training plan. You have to pass the id of the plan and an array of athlete's id . If successful the request will return a 201 Created. Be aware that this request delete all the previous links of the plan.
+
+```shell
+curl --location --request POST 'http://localhost:8000/api-coach/link-multiple-athletes-to-plan/' \
+--header 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU1NzM4NDU0LCJpYXQiOjE2NTU3MzQ4NTQsImp0aSI6ImZjNTJlYjFmZGVkNDRkZmE5NzVjZWM1OGQ3NGE2MmUwIiwidXNlcl9pZCI6MX0.ay4x92TG-NkiQcdgrczZfEafaL8xaT87-IBHYeB7Z_c' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "plan": 2,
+    "athletes": [13,11]
+}'
+```
+
 ### Unlink a plan to an athlete
 
 `DELETE /api-coach/link-athlete-to-plan/`
@@ -1338,6 +1354,176 @@ This endpoint is used to delete a coach skill. You have to pass the id of the sk
 ```shell
 curl --location --request DELETE 'https://dev.planif.fr/api-coach/skill/2' \
 --header 'Authorization: Bearer a7816be6d761730bbca7b3de33d7b76467786b57'
+```
+
+## Session
+
+`reverse URL coach_rest:session`
+
+Property | Description | Type
+--------- | ----------- | -----------
+id | Id of the session  | Integer
+owner | owner of the session  | Utilisateur
+    title | Title of the session  | String
+    description | Description of the session  | String (optional)
+    date | Date of the session  | Date ("Y-m-d")
+    hour | Hour of the session  | Time (optional, "hh:mm") (null if day)
+    day_type | Day type of the session  | String ("MORNING", "AFTERNOON", "EVENING", "ALL_DAY) (null if time is set)
+    localization | Place of the session  | String (optional)
+
+```shell
+curl --location --request GET 'https://dev.planif.fr/api-coach/session' \
+--header 'Authorization: Bearer a7816be6d761730bbca7b3de33d7b76467786b57'
+```
+
+> The GET command returns a list of sessions as JSON structured like this:
+
+```json
+[
+    {
+        "id": 2,
+        "title": "Modified session",
+        "description": "DESCRIII",
+        "date": "2022-06-21",
+        "hour": null,
+        "day_type": "MORNING",
+        "localization": "new location",
+        "owner": 1
+    },
+    {
+        "id": 1,
+        "title": "New session",
+        "description": "DESCRIII",
+        "date": "2022-06-20",
+        "hour": null,
+        "day_type": "ALL_DAY",
+        "localization": "New York swimming pool",
+        "owner": 1
+    },
+    {
+        "id": 4,
+        "title": "New session",
+        "description": "DESCRIII",
+        "date": "2022-06-20",
+        "hour": "12:20:00",
+        "day_type": null,
+        "localization": "New York swimming pool",
+        "owner": 1
+    }
+]
+```
+
+### Get all sessions
+
+`GET /api-coach/session`
+
+This endpoint retrieves the user sessions.
+
+### Create a session
+
+`POST /api-coach/session`
+
+This endpoint is used to create a session associated to the user logged in.
+
+```shell
+curl --location --request POST 'http://localhost:8000/api-coach/session' \
+--header 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU1NzM4NDU0LCJpYXQiOjE2NTU3MzQ4NTQsImp0aSI6ImZjNTJlYjFmZGVkNDRkZmE5NzVjZWM1OGQ3NGE2MmUwIiwidXNlcl9pZCI6MX0.ay4x92TG-NkiQcdgrczZfEafaL8xaT87-IBHYeB7Z_c' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "title":"New session",
+    "description": "DESCRIII",
+    "date":"2022-06-20",
+    "hour":"12:20",
+    "day_type":null,
+    "localization": "New York swimming pool"
+}'
+```
+
+> The POST command returns the created session in JSON structured like this:
+
+```json
+{
+    "id": 4,
+    "title": "New session",
+    "description": "DESCRIII",
+    "date": "2022-06-20",
+    "hour": "12:20:00",
+    "day_type": null,
+    "localization": "New York swimming pool",
+    "owner": 1
+}
+```
+
+### Get a specific session 
+
+`GET /api-coach/session/<id>`
+
+This endpoint is used to get a coach session. You have to pass the id of the session
+
+```shell
+curl --location --request GET 'https://dev.planif.fr/api-coach/session/2' \
+--header 'Authorization: Bearer a7816be6d761730bbca7b3de33d7b76467786b57'
+```
+
+> The GET command returns the target session in JSON structured like this:
+
+```json
+{
+    "id": 2,
+    "title": "New session",
+    "description": "DESCRIII",
+    "date": "2022-06-20",
+    "hour": null,
+    "day_type": "ALL_DAY",
+    "localization": "New York swimming pool",
+    "owner": 1
+}
+```
+
+### Modify a session
+
+`PATCH /api-coach/session/<id>`
+
+This endpoint is used to update a coach session. You have to pass the id of the session in the url and the data you want to modify as params. You can update partially the data.
+
+```shell
+curl --location --request PATCH 'http://localhost:8000/api-coach/session/2' \
+--header 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU1NzM4NDU0LCJpYXQiOjE2NTU3MzQ4NTQsImp0aSI6ImZjNTJlYjFmZGVkNDRkZmE5NzVjZWM1OGQ3NGE2MmUwIiwidXNlcl9pZCI6MX0.ay4x92TG-NkiQcdgrczZfEafaL8xaT87-IBHYeB7Z_c' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "title":"Modified session",
+    "description": "DESCRIII",
+    "date":"2022-06-21",
+    "hour":null,
+    "day_type":"MORNING",
+    "localization": "new location"
+}'
+```
+
+> If successful the PATCH command returns the updated session in JSON structured like this:
+
+```json
+{
+    "id": 2,
+    "title": "Modified session",
+    "description": "DESCRIII",
+    "date": "2022-06-21",
+    "hour": null,
+    "day_type": "MORNING",
+    "localization": "new location",
+    "owner": 1
+}
+```
+
+### Delete a specific session
+
+`DELETE /api-coach/session/<id>`
+
+This endpoint is used to delete a coach session. You have to pass the id of the session. If successful the request will return a 204 No content
+
+```shell
+curl --location --request DELETE 'http://localhost:8000/api-coach/session/3' \
+--header 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU1NzM4NDU0LCJpYXQiOjE2NTU3MzQ4NTQsImp0aSI6ImZjNTJlYjFmZGVkNDRkZmE5NzVjZWM1OGQ3NGE2MmUwIiwidXNlcl9pZCI6MX0.ay4x92TG-NkiQcdgrczZfEafaL8xaT87-IBHYeB7Z_c'
 ```
 
 ## Hashtag
