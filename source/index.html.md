@@ -4163,6 +4163,17 @@ token | String | Token of the member, could be null when the member was linked d
 `GET /api-club/members/`
 
 Retrieve all the members of a club, if the user are active, the user is also returned.
+### Get athlete members
+
+`GET /api-club/members-athlete/`
+
+Retrieve all the athlete members of a club, if the athlete are active, the user is also returned.
+
+### Get coach members
+
+`GET /api-club/members-coach/`
+
+Retrieve all the coach members of a club, if the coach are active, the user is also returned.
 
 ### Add a member
 
