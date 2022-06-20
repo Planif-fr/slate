@@ -366,6 +366,9 @@
                     <a href="#skill" class="toc-h2 toc-link" data-title="Skill">Skill</a>
                   </li>
                   <li>
+                    <a href="#session" class="toc-h2 toc-link" data-title="Session">Session</a>
+                  </li>
+                  <li>
                     <a href="#hashtag" class="toc-h2 toc-link" data-title="Hashtag">Hashtag</a>
                   </li>
                   <li>
@@ -1457,6 +1460,17 @@ ID | The ID of the kitten to delete
     "plan": 2,
     "athlete": 2
 }'</span>
+</code></pre></div><h3 id='link-multiple-athletes-to-a-plan'>Link multiple athletes to a plan</h3>
+<p><code>POST /api-coach/link-multiple-athletes-to-plan/</code></p>
+
+<p>This endpoint is used to link multiple athletes to a training plan. You have to pass the id of the plan and an array of athlete&#39;s id . If successful the request will return a 201 Created. Be aware that this request delete all the previous links of the plan.</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'http://localhost:8000/api-coach/link-multiple-athletes-to-plan/'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU1NzM4NDU0LCJpYXQiOjE2NTU3MzQ4NTQsImp0aSI6ImZjNTJlYjFmZGVkNDRkZmE5NzVjZWM1OGQ3NGE2MmUwIiwidXNlcl9pZCI6MX0.ay4x92TG-NkiQcdgrczZfEafaL8xaT87-IBHYeB7Z_c'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">--data-raw</span> <span class="s1">'{
+    "plan": 2,
+    "athletes": [13,11]
+}'</span>
 </code></pre></div><h3 id='unlink-a-plan-to-an-athlete'>Unlink a plan to an athlete</h3>
 <p><code>DELETE /api-coach/link-athlete-to-plan/</code></p>
 
@@ -1946,6 +1960,183 @@ ID | The ID of the kitten to delete
 <p>This endpoint is used to delete a coach skill. You have to pass the id of the skill. If successful the request will return a 204 No content</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> DELETE <span class="s1">'https://dev.planif.fr/api-coach/skill/2'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Bearer a7816be6d761730bbca7b3de33d7b76467786b57'</span>
+</code></pre></div><h2 id='session'>Session</h2>
+<p><code>reverse URL coach_rest:session</code></p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>Id of the session</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>owner</td>
+<td>owner of the session</td>
+<td>Utilisateur</td>
+</tr>
+<tr>
+<td>title</td>
+<td>Title of the session</td>
+<td>String</td>
+</tr>
+<tr>
+<td>description</td>
+<td>Description of the session</td>
+<td>String (optional)</td>
+</tr>
+<tr>
+<td>date</td>
+<td>Date of the session</td>
+<td>Date (&quot;Y-m-d&quot;)</td>
+</tr>
+<tr>
+<td>hour</td>
+<td>Hour of the session</td>
+<td>Time (optional, &quot;hh:mm&quot;) (null if day)</td>
+</tr>
+<tr>
+<td>day_type</td>
+<td>Day type of the session</td>
+<td>String (&quot;MORNING&quot;, &quot;AFTERNOON&quot;, &quot;EVENING&quot;, &quot;ALL_DAY) (null if time is set)</td>
+</tr>
+<tr>
+<td>localization</td>
+<td>Place of the session</td>
+<td>String (optional)</td>
+</tr>
+</tbody></table>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'https://dev.planif.fr/api-coach/session'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer a7816be6d761730bbca7b3de33d7b76467786b57'</span>
+</code></pre></div>
+<blockquote>
+<p>The GET command returns a list of sessions as JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Modified session"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DESCRIII"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-06-21"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"hour"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"day_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MORNING"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"localization"</span><span class="p">:</span><span class="w"> </span><span class="s2">"new location"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"owner"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"New session"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DESCRIII"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-06-20"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"hour"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"day_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ALL_DAY"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"localization"</span><span class="p">:</span><span class="w"> </span><span class="s2">"New York swimming pool"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"owner"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"New session"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DESCRIII"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-06-20"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"hour"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12:20:00"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"day_type"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"localization"</span><span class="p">:</span><span class="w"> </span><span class="s2">"New York swimming pool"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"owner"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div><h3 id='get-all-sessions'>Get all sessions</h3>
+<p><code>GET /api-coach/session</code></p>
+
+<p>This endpoint retrieves the user sessions.</p>
+<h3 id='create-a-session'>Create a session</h3>
+<p><code>POST /api-coach/session</code></p>
+
+<p>This endpoint is used to create a session associated to the user logged in.</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'http://localhost:8000/api-coach/session'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU1NzM4NDU0LCJpYXQiOjE2NTU3MzQ4NTQsImp0aSI6ImZjNTJlYjFmZGVkNDRkZmE5NzVjZWM1OGQ3NGE2MmUwIiwidXNlcl9pZCI6MX0.ay4x92TG-NkiQcdgrczZfEafaL8xaT87-IBHYeB7Z_c'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">--data-raw</span> <span class="s1">'{
+    "title":"New session",
+    "description": "DESCRIII",
+    "date":"2022-06-20",
+    "hour":"12:20",
+    "day_type":null,
+    "localization": "New York swimming pool"
+}'</span>
+</code></pre></div>
+<blockquote>
+<p>The POST command returns the created session in JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"New session"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DESCRIII"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-06-20"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"hour"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12:20:00"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"day_type"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"localization"</span><span class="p">:</span><span class="w"> </span><span class="s2">"New York swimming pool"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"owner"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='get-a-specific-session'>Get a specific session</h3>
+<p><code>GET /api-coach/session/&lt;id&gt;</code></p>
+
+<p>This endpoint is used to get a coach session. You have to pass the id of the session</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'https://dev.planif.fr/api-coach/session/2'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer a7816be6d761730bbca7b3de33d7b76467786b57'</span>
+</code></pre></div>
+<blockquote>
+<p>The GET command returns the target session in JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"New session"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DESCRIII"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-06-20"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"hour"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"day_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ALL_DAY"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"localization"</span><span class="p">:</span><span class="w"> </span><span class="s2">"New York swimming pool"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"owner"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='modify-a-session'>Modify a session</h3>
+<p><code>PATCH /api-coach/session/&lt;id&gt;</code></p>
+
+<p>This endpoint is used to update a coach session. You have to pass the id of the session in the url and the data you want to modify as params. You can update partially the data.</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> PATCH <span class="s1">'http://localhost:8000/api-coach/session/2'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU1NzM4NDU0LCJpYXQiOjE2NTU3MzQ4NTQsImp0aSI6ImZjNTJlYjFmZGVkNDRkZmE5NzVjZWM1OGQ3NGE2MmUwIiwidXNlcl9pZCI6MX0.ay4x92TG-NkiQcdgrczZfEafaL8xaT87-IBHYeB7Z_c'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">--data-raw</span> <span class="s1">'{
+    "title":"Modified session",
+    "description": "DESCRIII",
+    "date":"2022-06-21",
+    "hour":null,
+    "day_type":"MORNING",
+    "localization": "new location"
+}'</span>
+</code></pre></div>
+<blockquote>
+<p>If successful the PATCH command returns the updated session in JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Modified session"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DESCRIII"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-06-21"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"hour"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"day_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MORNING"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"localization"</span><span class="p">:</span><span class="w"> </span><span class="s2">"new location"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"owner"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='delete-a-specific-session'>Delete a specific session</h3>
+<p><code>DELETE /api-coach/session/&lt;id&gt;</code></p>
+
+<p>This endpoint is used to delete a coach session. You have to pass the id of the session. If successful the request will return a 204 No content</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> DELETE <span class="s1">'http://localhost:8000/api-coach/session/3'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU1NzM4NDU0LCJpYXQiOjE2NTU3MzQ4NTQsImp0aSI6ImZjNTJlYjFmZGVkNDRkZmE5NzVjZWM1OGQ3NGE2MmUwIiwidXNlcl9pZCI6MX0.ay4x92TG-NkiQcdgrczZfEafaL8xaT87-IBHYeB7Z_c'</span>
 </code></pre></div><h2 id='hashtag'>Hashtag</h2>
 <p><code>reverse URL coach_rest:hashtag-coach</code>
 <code>reverse URL coach_rest:hashtag-coach-obj</code></p>
