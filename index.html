@@ -4874,11 +4874,11 @@ If the user is a coach, pass a &quot;coach&quot; field in the body.
 Otherwise, pass a &quot;athlete&quot; field in the body.
 Do no set them both in the same request !</p>
 <h2 id='get-club-groups-athletes-and-coaches'>Get club groups, athletes and coaches</h2>
-<p><code>GET /api-club/group-athlete-list/</code></p>
+<p><code>GET /api-club/group-athlete-coach-list/</code></p>
 
 <p>This endpoint is used to get the list of groups, athletes and coaches of the club.
   When the athletes or coaches are not in a group, they are returned in the array of athletes or coaches. Otherwise they are returned in the group they are in.</p>
-<div class="highlight"><pre class="highlight shell tab-shell"><code>  curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'http://localhost:8000/api-club/group-athlete-list/'</span> <span class="se">\</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>  curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'http://localhost:8000/api-club/group-athlete-coach-list/'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU1MzcyMjAwLCJpYXQiOjE2NTUzNjg2MDAsImp0aSI6IjgzODdlMDVhMTczZDRkZTRiMTEzYTZkNzY5ZDNkZDI0IiwidXNlcl9pZCI6MTN9.hjvQ-lUSW_uCK9V6sdwygLCWJjUy7MmgiQcaFDw7vuA'</span>
 </code></pre></div>
 <blockquote>
