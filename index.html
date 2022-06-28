@@ -1981,6 +1981,11 @@ ID | The ID of the kitten to delete
 <td>Utilisateur</td>
 </tr>
 <tr>
+<td>training_plan</td>
+<td>Training plan of the session</td>
+<td>TrainingPlan (id)</td>
+</tr>
+<tr>
 <td>title</td>
 <td>Title of the session</td>
 <td>String</td>
@@ -2053,11 +2058,43 @@ ID | The ID of the kitten to delete
 <p><code>GET /api-coach/session</code></p>
 
 <p>This endpoint retrieves the user sessions.</p>
-<h3 id='create-a-session'>Create a session</h3>
-<p><code>POST /api-coach/session</code></p>
+<h3 id='get-sessions-by-date-and-plan'>Get sessions by date and plan</h3>
+<p><code>GET /api-coach/session-by-date</code></p>
 
-<p>This endpoint is used to create a session associated to the user logged in.</p>
-<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'http://localhost:8000/api-coach/session'</span> <span class="se">\</span>
+<p>This endpoint retrieves the coach sessions by start date and end date for a training plan. Put the parameter in the url to perform a GET request.</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>start_date</td>
+<td>Start date where the search will be performed</td>
+<td>YYYY-MM-DD</td>
+</tr>
+<tr>
+<td>end_date</td>
+<td>End date where the search will be performed</td>
+<td>YYYY-MM-DD</td>
+</tr>
+<tr>
+<td>training_plan</td>
+<td>Training plan where the search will be performed</td>
+<td>TrainingPlan (id)</td>
+</tr>
+</tbody></table>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>
+<span class="c">### Create a session</span>
+
+<span class="sb">`</span>POST /api-coach/session<span class="sb">`</span>
+
+This endpoint is used to create a session associated to the user logged <span class="k">in</span><span class="nb">.</span>
+
+<span class="sb">```</span>shell
+curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'http://localhost:8000/api-coach/session'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU1NzM4NDU0LCJpYXQiOjE2NTU3MzQ4NTQsImp0aSI6ImZjNTJlYjFmZGVkNDRkZmE5NzVjZWM1OGQ3NGE2MmUwIiwidXNlcl9pZCI6MX0.ay4x92TG-NkiQcdgrczZfEafaL8xaT87-IBHYeB7Z_c'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
 <span class="nt">--data-raw</span> <span class="s1">'{
