@@ -4063,13 +4063,13 @@ Do no set them both in the same request !
 
 ## Get club groups, athletes and coaches
 
-  `GET /api-club/group-athlete-list/`
+  `GET /api-club/group-athlete-coach-list/`
 
   This endpoint is used to get the list of groups, athletes and coaches of the club.
   When the athletes or coaches are not in a group, they are returned in the array of athletes or coaches. Otherwise they are returned in the group they are in.
 
 ```shell
-  curl --location --request GET 'http://localhost:8000/api-club/group-athlete-list/' \
+  curl --location --request GET 'http://localhost:8000/api-club/group-athlete-coach-list/' \
 --header 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU1MzcyMjAwLCJpYXQiOjE2NTUzNjg2MDAsImp0aSI6IjgzODdlMDVhMTczZDRkZTRiMTEzYTZkNzY5ZDNkZDI0IiwidXNlcl9pZCI6MTN9.hjvQ-lUSW_uCK9V6sdwygLCWJjUy7MmgiQcaFDw7vuA'
 ```
 
