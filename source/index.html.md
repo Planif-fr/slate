@@ -1364,6 +1364,7 @@ Property | Description | Type
 --------- | ----------- | -----------
 id | Id of the session  | Integer
 owner | owner of the session  | Utilisateur
+training_plan | Training plan of the session  | TrainingPlan (id)
     title | Title of the session  | String
     description | Description of the session  | String (optional)
     date | Date of the session  | Date ("Y-m-d")
@@ -1418,6 +1419,20 @@ curl --location --request GET 'https://dev.planif.fr/api-coach/session' \
 `GET /api-coach/session`
 
 This endpoint retrieves the user sessions.
+
+### Get sessions by date and plan
+
+`GET /api-coach/session-by-date`
+
+This endpoint retrieves the coach sessions by start date and end date for a training plan. Put the parameter in the url to perform a GET request.
+
+Parameter | Description | Type
+--------- | ----------- | -----------
+start_date | Start date where the search will be performed  | YYYY-MM-DD
+end_date | End date where the search will be performed  | YYYY-MM-DD
+training_plan | Training plan where the search will be performed  | TrainingPlan (id)
+
+```shell
 
 ### Create a session
 
