@@ -1773,6 +1773,10 @@ creation_date | Date of the creation of the workout, by default current timestam
 updated_date | Date of the last update of the workout, by default current timestamp, no need to update or post it | Date
 is_public | Boolean, default to False | Boolean
 steps | List of steps of the workout | List of Step
+text | body of the workout if TextWorkout | String
+
+<aside class="warning">Careful, yoou can only set text or steps, but not both together</aside>
+
 
 STEP OBJECT
 
@@ -1800,6 +1804,26 @@ Property | Description | Type
 --------- | ----------- | -----------
 repeat_type | Repeat type of the step, could be "UNTIL_COUNT" or "UNTIL_TIME" | String
 repeat_value | Repeat value of the step, in seconds or count, depending on the repeat type | Integer
+
+### Get all workouts
+
+`GET /api-shared/workout`
+
+### Create a workout
+
+`POST /api-shared/workout`
+
+### Get a specific workout
+
+`GET /api-shared/workout/<id>`
+
+### Delete a specific workout
+
+`DELETE /api-shared/workout/<id>`
+
+### Modify a specific workout
+
+`PATCH /api-shared/workout/<id>`
 
 
 ## Text Session
