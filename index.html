@@ -421,6 +421,9 @@
             <a href="#club-rest-api" class="toc-h1 toc-link" data-title="Club REST API">Club REST API</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#home-info" class="toc-h2 toc-link" data-title="Home info">Home info</a>
+                  </li>
+                  <li>
                     <a href="#public-profile-club" class="toc-h2 toc-link" data-title="Public profile Club">Public profile Club</a>
                   </li>
                   <li>
@@ -4552,7 +4555,64 @@ To remove a metric, simply not pass it. All the metrics are removed before the n
 <span class="nt">--header</span> <span class="s1">'Authorization: Bearer 7c9aa8c2e995a233520e223d95a584e77636c057'</span>
 </code></pre></div><h1 id='club-rest-api'>Club REST API</h1>
 <aside class="notice">For all the next endpoints, you will need to be authenticated as a Club and sending request containing a Token with such headers <code>Authorization: Bearer <your_token></code>.</aside>
-<h2 id='public-profile-club'>Public profile Club</h2>
+<h2 id='home-info'>Home info</h2>
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>count_members_available</td>
+<td>Integer</td>
+<td>Number of members available for the club</td>
+</tr>
+<tr>
+<td>count_athlete</td>
+<td>Integer</td>
+<td>Number of athletes in the club</td>
+</tr>
+<tr>
+<td>count_coach</td>
+<td>Integer</td>
+<td>Number of coaches in the club</td>
+</tr>
+<tr>
+<td>current_plan</td>
+<td>String</td>
+<td>Current plan of the club</td>
+</tr>
+<tr>
+<td>percentage_activated_athlete</td>
+<td>Percentage</td>
+<td>Percentage of active athletes in the club</td>
+</tr>
+<tr>
+<td>percentage_activated_coach</td>
+<td>Percentage</td>
+<td>Percentage of active coaches in the club</td>
+</tr>
+</tbody></table>
+
+<p><code>GET /api-club/home-info/</code></p>
+
+<p>This endpoint is used to list some nice infos of the club.</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'http://localhost:8000/api-club/home-info/'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU2Nzk0ODc3LCJpYXQiOjE2NTY3OTEyNzcsImp0aSI6IjEzMTE5MjE4YzMwNjRhYWY5MGQ4MDlhYjY0ZTM1YThhIiwidXNlcl9pZCI6M30.-55lnzFV_fh7X3InFtM8Z7Aa8d0eG20ocJY1QbDIIDs'</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"count_members_available"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"count_athlete"</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"count_coach"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"current_plan"</span><span class="p">:</span><span class="w"> </span><span class="s2">"S"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"percentage_activated_athlete"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"percentage_activated_coach"</span><span class="p">:</span><span class="w"> </span><span class="mi">33</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h2 id='public-profile-club'>Public profile Club</h2>
 <p>Endpoint used to retrieve the public profile of a club, and update it.</p>
 
 <table><thead>
