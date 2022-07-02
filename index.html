@@ -2439,7 +2439,14 @@ curl <span class="nt">--location</span> <span class="nt">--request</span> POST <
 <td>List of steps of the workout</td>
 <td>List of Step</td>
 </tr>
+<tr>
+<td>text</td>
+<td>body of the workout if TextWorkout</td>
+<td>String</td>
+</tr>
 </tbody></table>
+
+<aside class="warning">Careful, yoou can only set text or steps, but not both together</aside>
 
 <p>STEP OBJECT</p>
 
@@ -2533,6 +2540,16 @@ curl <span class="nt">--location</span> <span class="nt">--request</span> POST <
 <td>Integer</td>
 </tr>
 </tbody></table>
+<h3 id='get-all-workouts'>Get all workouts</h3>
+<p><code>GET /api-shared/workout</code></p>
+<h3 id='create-a-workout'>Create a workout</h3>
+<p><code>POST /api-shared/workout</code></p>
+<h3 id='get-a-specific-workout'>Get a specific workout</h3>
+<p><code>GET /api-shared/workout/&lt;id&gt;</code></p>
+<h3 id='delete-a-specific-workout'>Delete a specific workout</h3>
+<p><code>DELETE /api-shared/workout/&lt;id&gt;</code></p>
+<h3 id='modify-a-specific-workout'>Modify a specific workout</h3>
+<p><code>PATCH /api-shared/workout/&lt;id&gt;</code></p>
 <h2 id='text-session'>Text Session</h2>
 <p><code>reverse URL coach_rest:text-session-list</code>
 <code>reverse URL coach_rest:text-session-detail</code></p>
