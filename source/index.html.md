@@ -3785,6 +3785,39 @@ curl --location --request DELETE 'https://dev.planif.fr/api-athlete/rate-plan/2'
 
 <aside class="notice">For all the next endpoints, you will need to be authenticated as a Club and sending request containing a Token with such headers <code>Authorization: Bearer <your_token></code>.</aside>
 
+## Home info
+
+Property | Type | Description
+--------- | ----------- | -----------
+count_members_available | Integer |  Number of members available for the club
+count_athlete | Integer | Number of athletes in the club
+count_coach | Integer | Number of coaches in the club
+current_plan | String | Current plan of the club
+percentage_activated_athlete | Percentage | Percentage of active athletes in the club
+percentage_activated_coach | Percentage | Percentage of active coaches in the club
+
+`GET /api-club/home-info/`
+
+This endpoint is used to list some nice infos of the club.
+
+```shell
+curl --location --request GET 'http://localhost:8000/api-club/home-info/' \
+--header 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU2Nzk0ODc3LCJpYXQiOjE2NTY3OTEyNzcsImp0aSI6IjEzMTE5MjE4YzMwNjRhYWY5MGQ4MDlhYjY0ZTM1YThhIiwidXNlcl9pZCI6M30.-55lnzFV_fh7X3InFtM8Z7Aa8d0eG20ocJY1QbDIIDs'
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+    "count_members_available": 6,
+    "count_athlete": 11,
+    "count_coach": 3,
+    "current_plan": "S",
+    "percentage_activated_athlete": 100,
+    "percentage_activated_coach": 33
+}
+```
+
 ## Public profile Club
 
 Endpoint used to retrieve the public profile of a club, and update it.
