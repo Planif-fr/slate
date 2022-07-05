@@ -1791,9 +1791,10 @@ FOR STEP TYPE "EXERCISE"
 
 Property | Description | Type
 --------- | ----------- | -----------
+exercise_type | Exercise type of the step, could be "WARM_UP", "EXERCISE", "COOL_DOWN" or "REST" | String
 duration_type | Duration type of the step, could be "TIME" or "DISTANCE", or "NONE" | String
 duration_value | Duration value of the step, in seconds or meters, depending on the duration type | Integer
-<!-- duration_value_type | Duration value type of the step, could be "KM" or "METER" | String -->
+duration_value_type | Duration value type of the step, could be "KM", "MI", "M", "FT", "YD" or "NM" | String
 target_type | Target type of the step, could be "NONE", "SPEED", "DISTANCE", "HEARTRATE", "CADENCE", "POWER"  | String
 target_value | Target value of the step | Integer
 target_value_type | Target value type of the step, could be "VALUE" or "PERCENT_OF_MAX" | String
