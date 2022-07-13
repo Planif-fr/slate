@@ -1365,12 +1365,21 @@ Property | Description | Type
 id | Id of the session  | Integer
 owner | owner of the session  | Utilisateur
 training_plan | Training plan of the session  | TrainingPlan (id)
-    title | Title of the session  | String
-    description | Description of the session  | String (optional)
-    date | Date of the session  | Date ("Y-m-d")
-    hour | Hour of the session  | Time (optional, "hh:mm") (null if day)
-    day_type | Day type of the session  | String ("MORNING", "AFTERNOON", "EVENING", "ALL_DAY) (null if time is set)
-    localization | Place of the session  | String (optional)
+workouts | Workouts associated with this session  | Dictionary of Workout (key of the dict is the order, value is the workout id)*
+title | Title of the session  | String
+description | Description of the session  | String (optional)
+date | Date of the session  | Date ("Y-m-d")
+hour | Hour of the session  | Time (optional, "hh:mm") (null if day)
+day_type | Day type of the session  | String ("MORNING", "AFTERNOON", "EVENING", "ALL_DAY) (null if time is set)
+localization | Place of the session  | String (optional)
+
+*Example of the workouts dictionary:
+
+{
+    "1": 3,
+    "2": 1,
+    "3": 7
+}
 
 ```shell
 curl --location --request GET 'https://dev.planif.fr/api-coach/session' \
@@ -1382,35 +1391,143 @@ curl --location --request GET 'https://dev.planif.fr/api-coach/session' \
 ```json
 [
     {
-        "id": 2,
-        "title": "Modified session",
-        "description": "DESCRIII",
-        "date": "2022-06-21",
-        "hour": null,
-        "day_type": "MORNING",
-        "localization": "new location",
-        "owner": 1
-    },
-    {
-        "id": 1,
-        "title": "New session",
-        "description": "DESCRIII",
-        "date": "2022-06-20",
-        "hour": null,
-        "day_type": "ALL_DAY",
-        "localization": "New York swimming pool",
-        "owner": 1
-    },
-    {
-        "id": 4,
+        "id": 10,
         "title": "New session",
         "description": "DESCRIII",
         "date": "2022-06-20",
         "hour": "12:20:00",
         "day_type": null,
         "localization": "New York swimming pool",
-        "owner": 1
-    }
+        "owner": 1,
+        "training_plan": 2,
+        "workouts": {
+            "1": {
+                "id": 3,
+                "workout_type": "WORKOUT_STEP",
+                "name": "My first workout",
+                "description": "Is it working ?",
+                "sport": "RUNNING",
+                "estimated_duration": null,
+                "estimated_distance": null,
+                "created_date": "2022-07-02T17:01:47.085964Z",
+                "updated_date": "2022-07-02T17:01:47.085973Z",
+                "is_public": false,
+                "owner": 1,
+                "steps": [
+                    {
+                        "order": 1,
+                        "notes": null,
+                        "step_type": "EXERCISE",
+                        "workout_step": 9,
+                        "exercise_type": null,
+                        "duration_type": "NONE",
+                        "duration_value": null,
+                        "duration_value_type": null,
+                        "target_type": "NONE",
+                        "target_value": null,
+                        "target_value_type": null
+                    }
+                ]
+            },
+            "2": {
+                "id": 1,
+                "workout_type": "WORKOUT_STEP",
+                "name": "My first workout",
+                "description": "Is it working ?",
+                "sport": "RUNNING",
+                "estimated_duration": null,
+                "estimated_distance": null,
+                "created_date": "2022-07-02T16:47:54.458771Z",
+                "updated_date": "2022-07-02T16:47:54.458783Z",
+                "is_public": false,
+                "owner": 1,
+                "steps": [
+                    {
+                        "order": 1,
+                        "notes": null,
+                        "step_type": "EXERCISE",
+                        "workout_step": 1,
+                        "exercise_type": null,
+                        "duration_type": "NONE",
+                        "duration_value": null,
+                        "duration_value_type": null,
+                        "target_type": "NONE",
+                        "target_value": null,
+                        "target_value_type": null
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "id": 11,
+        "title": "New session",
+        "description": "DESCRIII",
+        "date": "2022-06-20",
+        "hour": "12:20:00",
+        "day_type": null,
+        "localization": "New York swimming pool",
+        "owner": 1,
+        "training_plan": 2,
+        "workouts": {
+            "1": {
+                "id": 3,
+                "workout_type": "WORKOUT_STEP",
+                "name": "My first workout",
+                "description": "Is it working ?",
+                "sport": "RUNNING",
+                "estimated_duration": null,
+                "estimated_distance": null,
+                "created_date": "2022-07-02T17:01:47.085964Z",
+                "updated_date": "2022-07-02T17:01:47.085973Z",
+                "is_public": false,
+                "owner": 1,
+                "steps": [
+                    {
+                        "order": 1,
+                        "notes": null,
+                        "step_type": "EXERCISE",
+                        "workout_step": 9,
+                        "exercise_type": null,
+                        "duration_type": "NONE",
+                        "duration_value": null,
+                        "duration_value_type": null,
+                        "target_type": "NONE",
+                        "target_value": null,
+                        "target_value_type": null
+                    }
+                ]
+            },
+            "2": {
+                "id": 1,
+                "workout_type": "WORKOUT_STEP",
+                "name": "My first workout",
+                "description": "Is it working ?",
+                "sport": "RUNNING",
+                "estimated_duration": null,
+                "estimated_distance": null,
+                "created_date": "2022-07-02T16:47:54.458771Z",
+                "updated_date": "2022-07-02T16:47:54.458783Z",
+                "is_public": false,
+                "owner": 1,
+                "steps": [
+                    {
+                        "order": 1,
+                        "notes": null,
+                        "step_type": "EXERCISE",
+                        "workout_step": 1,
+                        "exercise_type": null,
+                        "duration_type": "NONE",
+                        "duration_value": null,
+                        "duration_value_type": null,
+                        "target_type": "NONE",
+                        "target_value": null,
+                        "target_value_type": null
+                    }
+                ]
+            }
+        }
+    },
 ]
 ```
 
@@ -1442,15 +1559,20 @@ This endpoint is used to create a session associated to the user logged in.
 
 ```shell
 curl --location --request POST 'http://localhost:8000/api-coach/session' \
---header 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU1NzM4NDU0LCJpYXQiOjE2NTU3MzQ4NTQsImp0aSI6ImZjNTJlYjFmZGVkNDRkZmE5NzVjZWM1OGQ3NGE2MmUwIiwidXNlcl9pZCI6MX0.ay4x92TG-NkiQcdgrczZfEafaL8xaT87-IBHYeB7Z_c' \
+--header 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU3NjcwOTI0LCJpYXQiOjE2NTc2NjczMjQsImp0aSI6IjU4NWE5ZmUxNDc2YzQwMWVhNDhlODIxZDMwMDdmZWM3IiwidXNlcl9pZCI6MX0.q5-1wsKb4ve3hBAX6A7QmeJlZXHdibUzBLIcEK9qaRk' \
 --header 'Content-Type: application/json' \
 --data-raw '{
+    "training_plan": 2,
     "title":"New session",
     "description": "DESCRIII",
     "date":"2022-06-20",
     "hour":"12:20",
     "day_type":null,
-    "localization": "New York swimming pool"
+    "localization": "New York swimming pool",
+    "workouts": {
+        "1": 3,
+        "2": 1
+    }
 }'
 ```
 
@@ -1458,14 +1580,29 @@ curl --location --request POST 'http://localhost:8000/api-coach/session' \
 
 ```json
 {
-    "id": 4,
+    "id": 11,
+    "workouts": [
+        {
+            "id": 3,
+            "order": 1,
+            "session": 11,
+            "workout": 3
+        },
+        {
+            "id": 4,
+            "order": 2,
+            "session": 11,
+            "workout": 1
+        }
+    ],
     "title": "New session",
     "description": "DESCRIII",
     "date": "2022-06-20",
     "hour": "12:20:00",
     "day_type": null,
     "localization": "New York swimming pool",
-    "owner": 1
+    "owner": 1,
+    "training_plan": 2
 }
 ```
 
@@ -1484,14 +1621,73 @@ curl --location --request GET 'https://dev.planif.fr/api-coach/session/2' \
 
 ```json
 {
-    "id": 2,
+    "id": 11,
     "title": "New session",
     "description": "DESCRIII",
     "date": "2022-06-20",
-    "hour": null,
-    "day_type": "ALL_DAY",
+    "hour": "12:20:00",
+    "day_type": null,
     "localization": "New York swimming pool",
-    "owner": 1
+    "owner": 1,
+    "training_plan": 2,
+    "workouts": {
+        "1": {
+            "id": 3,
+            "workout_type": "WORKOUT_STEP",
+            "name": "My first workout",
+            "description": "Is it working ?",
+            "sport": "RUNNING",
+            "estimated_duration": null,
+            "estimated_distance": null,
+            "created_date": "2022-07-02T17:01:47.085964Z",
+            "updated_date": "2022-07-02T17:01:47.085973Z",
+            "is_public": false,
+            "owner": 1,
+            "steps": [
+                {
+                    "order": 1,
+                    "notes": null,
+                    "step_type": "EXERCISE",
+                    "workout_step": 9,
+                    "exercise_type": null,
+                    "duration_type": "NONE",
+                    "duration_value": null,
+                    "duration_value_type": null,
+                    "target_type": "NONE",
+                    "target_value": null,
+                    "target_value_type": null
+                }
+            ]
+        },
+        "2": {
+            "id": 1,
+            "workout_type": "WORKOUT_STEP",
+            "name": "My first workout",
+            "description": "Is it working ?",
+            "sport": "RUNNING",
+            "estimated_duration": null,
+            "estimated_distance": null,
+            "created_date": "2022-07-02T16:47:54.458771Z",
+            "updated_date": "2022-07-02T16:47:54.458783Z",
+            "is_public": false,
+            "owner": 1,
+            "steps": [
+                {
+                    "order": 1,
+                    "notes": null,
+                    "step_type": "EXERCISE",
+                    "workout_step": 1,
+                    "exercise_type": null,
+                    "duration_type": "NONE",
+                    "duration_value": null,
+                    "duration_value_type": null,
+                    "target_type": "NONE",
+                    "target_value": null,
+                    "target_value_type": null
+                }
+            ]
+        }
+    }
 }
 ```
 
@@ -1503,7 +1699,7 @@ This endpoint is used to update a coach session. You have to pass the id of the 
 
 ```shell
 curl --location --request PATCH 'http://localhost:8000/api-coach/session/2' \
---header 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU1NzM4NDU0LCJpYXQiOjE2NTU3MzQ4NTQsImp0aSI6ImZjNTJlYjFmZGVkNDRkZmE5NzVjZWM1OGQ3NGE2MmUwIiwidXNlcl9pZCI6MX0.ay4x92TG-NkiQcdgrczZfEafaL8xaT87-IBHYeB7Z_c' \
+--header 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU3NjcwOTI0LCJpYXQiOjE2NTc2NjczMjQsImp0aSI6IjU4NWE5ZmUxNDc2YzQwMWVhNDhlODIxZDMwMDdmZWM3IiwidXNlcl9pZCI6MX0.q5-1wsKb4ve3hBAX6A7QmeJlZXHdibUzBLIcEK9qaRk' \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "title":"Modified session",
@@ -1511,7 +1707,11 @@ curl --location --request PATCH 'http://localhost:8000/api-coach/session/2' \
     "date":"2022-06-21",
     "hour":null,
     "day_type":"MORNING",
-    "localization": "new location"
+    "localization": "new location",
+    "training_plan": 4,
+    "workouts": {
+        "1": 3
+    }
 }'
 ```
 
@@ -1526,7 +1726,38 @@ curl --location --request PATCH 'http://localhost:8000/api-coach/session/2' \
     "hour": null,
     "day_type": "MORNING",
     "localization": "new location",
-    "owner": 1
+    "owner": 1,
+    "training_plan": 4,
+    "workouts": {
+        "1": {
+            "id": 3,
+            "workout_type": "WORKOUT_STEP",
+            "name": "My first workout",
+            "description": "Is it working ?",
+            "sport": "RUNNING",
+            "estimated_duration": null,
+            "estimated_distance": null,
+            "created_date": "2022-07-02T17:01:47.085964Z",
+            "updated_date": "2022-07-02T17:01:47.085973Z",
+            "is_public": false,
+            "owner": 1,
+            "steps": [
+                {
+                    "order": 1,
+                    "notes": null,
+                    "step_type": "EXERCISE",
+                    "workout_step": 9,
+                    "exercise_type": null,
+                    "duration_type": "NONE",
+                    "duration_value": null,
+                    "duration_value_type": null,
+                    "target_type": "NONE",
+                    "target_value": null,
+                    "target_value_type": null
+                }
+            ]
+        }
+    }
 }
 ```
 
