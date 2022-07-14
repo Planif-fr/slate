@@ -294,6 +294,56 @@ username | required (string)
 password | required (string)
 
 # Shared REST API
+## Public Training Plans
+
+`GET /api-shared/public-training-plan/`
+
+This endpoint retrieves all the public training plans available on Planif.
+
+Property | Description | Type
+--------- | ----------- | -----------
+name | Name of the plan  | String
+description | Description of the plan  | String
+coach | Coach owner of the plan (same attribute as profile coach)  | Coach
+price | Price of the plan in Eur | Float
+rate | Avg rating of the plan  | Float
+is_static | True if the plan is static, false if dynamic  | Bool
+duration | Duration of the plan in week (only if the plan is static)  | Float
+
+```shell
+curl --location --request GET 'http://localhost:8000/api-shared/public-training-plan/'
+```
+
+> The GET command returns a list of all public training plans like this :
+
+```json
+[
+    {
+        "id": 4,
+        "name": "Test",
+        "coach": {
+            "first_name": "first",
+            "last_name": "last",
+            "birth_date": null,
+            "height": null,
+            "weight": null,
+            "phone_number": null,
+            "sex": null,
+            "age": null,
+            "address": null,
+            "profile_picture": null,
+            "profile_picture_id": null,
+            "type_account": "coach"
+        },
+        "description": "tets",
+        "is_public": 4,
+        "duration": null,
+        "price": null,
+        "rate": null,
+        "is_static": false
+    }
+]
+```
 
 ## Sport
 
