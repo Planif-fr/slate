@@ -331,6 +331,9 @@
             <a href="#shared-rest-api" class="toc-h1 toc-link" data-title="Shared REST API">Shared REST API</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#public-training-plans" class="toc-h2 toc-link" data-title="Public Training Plans">Public Training Plans</a>
+                  </li>
+                  <li>
                     <a href="#sport" class="toc-h2 toc-link" data-title="Sport">Sport</a>
                   </li>
                   <li>
@@ -716,7 +719,86 @@ ID | The ID of the kitten to delete
 <td>required (string)</td>
 </tr>
 </tbody></table>
-<h1 id='shared-rest-api'>Shared REST API</h1><h2 id='sport'>Sport</h2>
+<h1 id='shared-rest-api'>Shared REST API</h1><h2 id='public-training-plans'>Public Training Plans</h2>
+<p><code>GET /api-shared/public-training-plan/</code></p>
+
+<p>This endpoint retrieves all the public training plans available on Planif.</p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>Name of the plan</td>
+<td>String</td>
+</tr>
+<tr>
+<td>description</td>
+<td>Description of the plan</td>
+<td>String</td>
+</tr>
+<tr>
+<td>coach</td>
+<td>Coach owner of the plan (same attribute as profile coach)</td>
+<td>Coach</td>
+</tr>
+<tr>
+<td>price</td>
+<td>Price of the plan in Eur</td>
+<td>Float</td>
+</tr>
+<tr>
+<td>rate</td>
+<td>Avg rating of the plan</td>
+<td>Float</td>
+</tr>
+<tr>
+<td>is_static</td>
+<td>True if the plan is static, false if dynamic</td>
+<td>Bool</td>
+</tr>
+<tr>
+<td>duration</td>
+<td>Duration of the plan in week (only if the plan is static)</td>
+<td>Float</td>
+</tr>
+</tbody></table>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'http://localhost:8000/api-shared/public-training-plan/'</span>
+</code></pre></div>
+<blockquote>
+<p>The GET command returns a list of all public training plans like this :</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"coach"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"first"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"last"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"birth_date"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"height"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"weight"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"phone_number"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"sex"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"age"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"profile_picture"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"profile_picture_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"type_account"</span><span class="p">:</span><span class="w"> </span><span class="s2">"coach"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tets"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"is_public"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"duration"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"rate"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"is_static"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div><h2 id='sport'>Sport</h2>
 <p><code>reverse URL shared_rest:sport</code></p>
 
 <table><thead>
