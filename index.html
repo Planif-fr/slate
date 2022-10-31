@@ -334,6 +334,9 @@
                     <a href="#public-training-plans" class="toc-h2 toc-link" data-title="Public Training Plans">Public Training Plans</a>
                   </li>
                   <li>
+                    <a href="#activity-comment" class="toc-h2 toc-link" data-title="Activity Comment">Activity Comment</a>
+                  </li>
+                  <li>
                     <a href="#sport" class="toc-h2 toc-link" data-title="Sport">Sport</a>
                   </li>
                   <li>
@@ -798,7 +801,169 @@ ID | The ID of the kitten to delete
         </span><span class="nl">"is_static"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
     </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
-</span></code></pre></div><h2 id='sport'>Sport</h2>
+</span></code></pre></div><h2 id='activity-comment'>Activity Comment</h2>
+<p>This endpoint retrieves all the public training plans available on Planif.</p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>activity</td>
+<td>Activity to comment</td>
+<td>Activity</td>
+</tr>
+<tr>
+<td>comment</td>
+<td>Comment content</td>
+<td>String</td>
+</tr>
+<tr>
+<td>published_at</td>
+<td>Date of the comment</td>
+<td>Date</td>
+</tr>
+<tr>
+<td>updated_at</td>
+<td>Date of the last update</td>
+<td>Date</td>
+</tr>
+<tr>
+<td>publisher</td>
+<td>The user that commented the activity</td>
+<td>Utilisateur</td>
+</tr>
+</tbody></table>
+
+<p><code>GET /api-shared/activity-comment?activity={id}</code></p>
+
+<blockquote>
+<p>The GET endpoint returns a list of all comments on the activity:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"publisher"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Apollo"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Douze"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"birth_date"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"height"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"weight"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"phone_number"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"sex"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"age"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"profile_picture"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"profile_picture_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"type_account"</span><span class="p">:</span><span class="w"> </span><span class="s2">"coach"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nl">"comment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This a new comment"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"published_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-10-31T17:39:18.918501Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-10-31T17:39:18.918521Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"activity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6064c9dc-dfb9-4afd-beb9-6619578d57f0"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"publisher"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Apollo"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Douze"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"birth_date"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"height"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"weight"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"phone_number"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"sex"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"age"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"profile_picture"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"profile_picture_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"type_account"</span><span class="p">:</span><span class="w"> </span><span class="s2">"coach"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nl">"comment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This a comment"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"published_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-10-31T17:37:22.209936Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-10-31T17:37:22.209947Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"activity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6064c9dc-dfb9-4afd-beb9-6619578d57f0"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<p><code>POST /api-shared/activity-comment</code></p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'http://localhost:8000/api-shared/activity-comment'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY3NTk3NzE5LCJpYXQiOjE2NjcyMzc3MTksImp0aSI6IjJhNmQ2NDg4N2I3MjQ5NDk5NGRmNzFjZWE3ZDdhYmQyIiwidXNlcl9pZCI6NH0.ioiDE5cqIvq6tphikaCDXkAbFSdbreePYYfQDURKbyc'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">--data-raw</span> <span class="s1">'{
+    "activity": "6064c9dc-dfb9-4afd-beb9-6619578d57f0",
+    "comment": "This a comment"
+}'</span>
+</code></pre></div>
+<blockquote>
+<p>The POST endpoint returns create a comment and return it</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"publisher"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Apollo"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Douze"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"birth_date"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"height"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"weight"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"phone_number"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"sex"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"age"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"profile_picture"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"profile_picture_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"type_account"</span><span class="p">:</span><span class="w"> </span><span class="s2">"coach"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"comment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This a comment"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"published_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-10-31T17:37:22.209936Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-10-31T17:37:22.209947Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"activity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6064c9dc-dfb9-4afd-beb9-6619578d57f0"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p><code>PATCH /api-shared/activity-comment/{id}</code></p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> PATCH <span class="s1">'http://localhost:8000/api-shared/activity-comment/1'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY3NTk3NzE5LCJpYXQiOjE2NjcyMzc3MTksImp0aSI6IjJhNmQ2NDg4N2I3MjQ5NDk5NGRmNzFjZWE3ZDdhYmQyIiwidXNlcl9pZCI6NH0.ioiDE5cqIvq6tphikaCDXkAbFSdbreePYYfQDURKbyc'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">--data-raw</span> <span class="s1">'{
+    "comment": "This an edited comment"
+}'</span>
+</code></pre></div>
+<blockquote>
+<p>The PATCH endpoint returns the edited comment</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"publisher"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Apollo"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Douze"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"birth_date"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"height"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"weight"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"phone_number"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"sex"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"age"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"profile_picture"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"profile_picture_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"type_account"</span><span class="p">:</span><span class="w"> </span><span class="s2">"coach"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"comment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This an edited comment"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"published_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-10-31T17:37:22.209936Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-10-31T17:41:20.781439Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"activity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6064c9dc-dfb9-4afd-beb9-6619578d57f0"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p><code>DELETE /api-shared/activity-comment/{id}</code></p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> DELETE <span class="s1">'http://localhost:8000/api-shared/activity-comment/1'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY3NTk3NzE5LCJpYXQiOjE2NjcyMzc3MTksImp0aSI6IjJhNmQ2NDg4N2I3MjQ5NDk5NGRmNzFjZWE3ZDdhYmQyIiwidXNlcl9pZCI6NH0.ioiDE5cqIvq6tphikaCDXkAbFSdbreePYYfQDURKbyc'</span> <span class="se">\</span>
+<span class="nt">--data-raw</span> <span class="s1">''</span>
+</code></pre></div>
+<blockquote>
+<p>The DELETE endpoint returns nothing</p>
+</blockquote>
+<h2 id='sport'>Sport</h2>
 <p><code>reverse URL shared_rest:sport</code></p>
 
 <table><thead>
