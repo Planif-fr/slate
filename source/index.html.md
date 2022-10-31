@@ -344,6 +344,154 @@ curl --location --request GET 'http://localhost:8000/api-shared/public-training-
     }
 ]
 ```
+## Activity Comment
+
+This endpoint retrieves all the public training plans available on Planif.
+
+Property | Description | Type
+--------- | ----------- | -----------
+activity | Activity to comment | Activity
+comment | Comment content | String
+published_at | Date of the comment | Date
+updated_at | Date of the last update | Date
+publisher | The user that commented the activity  | Utilisateur
+
+
+`GET /api-shared/activity-comment?activity={id}`
+
+> The GET endpoint returns a list of all comments on the activity:
+
+```json
+[
+    {
+        "id": 2,
+        "publisher": {
+            "first_name": "Apollo",
+            "last_name": "Douze",
+            "birth_date": null,
+            "height": null,
+            "weight": null,
+            "phone_number": null,
+            "sex": null,
+            "age": null,
+            "address": null,
+            "profile_picture": null,
+            "profile_picture_id": null,
+            "type_account": "coach"
+        },
+        "comment": "This a new comment",
+        "published_at": "2022-10-31T17:39:18.918501Z",
+        "updated_at": "2022-10-31T17:39:18.918521Z",
+        "activity": "6064c9dc-dfb9-4afd-beb9-6619578d57f0"
+    },
+    {
+        "id": 1,
+        "publisher": {
+            "first_name": "Apollo",
+            "last_name": "Douze",
+            "birth_date": null,
+            "height": null,
+            "weight": null,
+            "phone_number": null,
+            "sex": null,
+            "age": null,
+            "address": null,
+            "profile_picture": null,
+            "profile_picture_id": null,
+            "type_account": "coach"
+        },
+        "comment": "This a comment",
+        "published_at": "2022-10-31T17:37:22.209936Z",
+        "updated_at": "2022-10-31T17:37:22.209947Z",
+        "activity": "6064c9dc-dfb9-4afd-beb9-6619578d57f0"
+    }
+]
+```
+
+`POST /api-shared/activity-comment`
+
+```shell
+curl --location --request POST 'http://localhost:8000/api-shared/activity-comment' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY3NTk3NzE5LCJpYXQiOjE2NjcyMzc3MTksImp0aSI6IjJhNmQ2NDg4N2I3MjQ5NDk5NGRmNzFjZWE3ZDdhYmQyIiwidXNlcl9pZCI6NH0.ioiDE5cqIvq6tphikaCDXkAbFSdbreePYYfQDURKbyc' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "activity": "6064c9dc-dfb9-4afd-beb9-6619578d57f0",
+    "comment": "This a comment"
+}'
+```
+
+> The POST endpoint returns create a comment and return it
+
+```json
+{
+    "id": 1,
+    "publisher": {
+        "first_name": "Apollo",
+        "last_name": "Douze",
+        "birth_date": null,
+        "height": null,
+        "weight": null,
+        "phone_number": null,
+        "sex": null,
+        "age": null,
+        "address": null,
+        "profile_picture": null,
+        "profile_picture_id": null,
+        "type_account": "coach"
+    },
+    "comment": "This a comment",
+    "published_at": "2022-10-31T17:37:22.209936Z",
+    "updated_at": "2022-10-31T17:37:22.209947Z",
+    "activity": "6064c9dc-dfb9-4afd-beb9-6619578d57f0"
+}
+```
+
+`PATCH /api-shared/activity-comment/{id}`
+
+```shell
+curl --location --request PATCH 'http://localhost:8000/api-shared/activity-comment/1' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY3NTk3NzE5LCJpYXQiOjE2NjcyMzc3MTksImp0aSI6IjJhNmQ2NDg4N2I3MjQ5NDk5NGRmNzFjZWE3ZDdhYmQyIiwidXNlcl9pZCI6NH0.ioiDE5cqIvq6tphikaCDXkAbFSdbreePYYfQDURKbyc' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "comment": "This an edited comment"
+}'
+```
+
+> The PATCH endpoint returns the edited comment
+
+```json
+{
+    "id": 1,
+    "publisher": {
+        "first_name": "Apollo",
+        "last_name": "Douze",
+        "birth_date": null,
+        "height": null,
+        "weight": null,
+        "phone_number": null,
+        "sex": null,
+        "age": null,
+        "address": null,
+        "profile_picture": null,
+        "profile_picture_id": null,
+        "type_account": "coach"
+    },
+    "comment": "This an edited comment",
+    "published_at": "2022-10-31T17:37:22.209936Z",
+    "updated_at": "2022-10-31T17:41:20.781439Z",
+    "activity": "6064c9dc-dfb9-4afd-beb9-6619578d57f0"
+}
+```
+
+`DELETE /api-shared/activity-comment/{id}`
+
+```shell
+curl --location --request DELETE 'http://localhost:8000/api-shared/activity-comment/1' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY3NTk3NzE5LCJpYXQiOjE2NjcyMzc3MTksImp0aSI6IjJhNmQ2NDg4N2I3MjQ5NDk5NGRmNzFjZWE3ZDdhYmQyIiwidXNlcl9pZCI6NH0.ioiDE5cqIvq6tphikaCDXkAbFSdbreePYYfQDURKbyc' \
+--data-raw ''
+```
+
+> The DELETE endpoint returns nothing
 
 ## Sport
 
